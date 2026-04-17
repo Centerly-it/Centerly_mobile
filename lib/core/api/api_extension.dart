@@ -10,7 +10,7 @@ import '../common/custom_exception.dart';
 
 Future<Result<T>> executeApi<T>(Future<T> Function() apiCall) async {
   try {
-    var result = await apiCall.call();
+    final result = await apiCall.call();
     return Success(result);
   } on TimeoutException catch (_) {
     return Fail(NoInternetError());
@@ -23,17 +23,17 @@ Future<Result<T>> executeApi<T>(Future<T> Function() apiCall) async {
       if (data is String) {
         final decoded = json.decode(data);
         if (decoded is Map<String, dynamic>) {
-          message = decoded['message'] ?? "The server returned an error";
+          message = decoded['message'] ?? 'The server returned an error';
         } else {
-          message = "The server returned an error";
+          message = 'The server returned an error';
         }
       } else if (data is Map<String, dynamic>) {
-        message = data['message'] ?? "The server returned an error";
+        message = data['message'] ?? 'The server returned an error';
       } else {
-        message = "The server returned an error";
+        message = 'The server returned an error';
       }
     } catch (_) {
-      message = "The server returned an error";
+      message = 'The server returned an error';
     }
 
     log('$message');

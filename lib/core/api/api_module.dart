@@ -6,7 +6,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 abstract class DioModule {
   @lazySingleton
   Dio providerDio() {
-    Dio dio = Dio();
+    final Dio dio = Dio();
     dio.interceptors.add(
       PrettyDioLogger(
         responseBody: true,
