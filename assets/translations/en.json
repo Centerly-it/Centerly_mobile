@@ -1,5 +1,19 @@
 {
   "app_name": "Centrally",
   "welcome": "Welcome",
-  "onboarding_title": "Discover our world"
+  "onboarding_title": "Discover our world",
+  "skip": "Skip",
+  "next": "Next",
+  "login": "Login",
+  "register": "Create Account",
+  
+  "onboarding_title_1": "Your day at a glance",
+  "onboarding_desc_1": "Open Centerly and see everything for today — classes, attendance, and payments in one place.",
+
+  "onboarding_title_2": "All students in one place",
+  "onboarding_desc_2": "Track attendance, progress, and full student records — no papers or WhatsApp groups.",
+
+  "onboarding_title_3": "Know your numbers clearly",
+  "onboarding_desc_3": "View expected, collected, and remaining payments for each month — send reminders in one tap."
+
 }
