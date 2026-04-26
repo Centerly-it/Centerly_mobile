@@ -3,4 +3,7 @@ class RoutesManager {
   static const String onboardingName = 'onboarding';
   static const String loginPath = '/login';
   static const String loginName = 'login';
+  static const String registerPath = '/register';
+  static const String registerName = 'register';
+  
 }
