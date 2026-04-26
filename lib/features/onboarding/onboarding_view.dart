@@ -31,7 +31,6 @@ class _OnboardingViewState extends State<OnboardingView> {
     FlutterNativeSplash.remove();
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,14 +38,10 @@ class _OnboardingViewState extends State<OnboardingView> {
       body: SafeArea(
         child: Column(
           children: [
-            
             Align(
               alignment: AlignmentDirectional.topEnd,
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12.0,
-                  vertical: 8.0,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 child: TextButton(
                   onPressed: () {
                     context.pushReplacement(RoutesManager.loginPath);
@@ -59,7 +54,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                         style: const TextStyle(
                           fontFamily: "cairo",
                           color: ColorManager.grey,
-                          fontSize: 14,
+                          fontSize: FontSize.s14,
                         ),
                       ),
                       const SizedBox(width: 6),
@@ -73,46 +68,43 @@ class _OnboardingViewState extends State<OnboardingView> {
                 ),
               ),
             ),
-
-           
             Expanded(
               child: PageView.builder(
                 controller: _controller,
                 itemCount: onboardingList.length,
-                onPageChanged: (index) =>
-                    setState(() => currentIndex = index),
-                   itemBuilder: (context, index) {
+                onPageChanged: (index) {
+                  setState(() => currentIndex = index);
+                },
+                itemBuilder: (context, index) {
                   final item = onboardingList[index];
 
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Center(
-                          child: Image.asset(
-                            item.image,
-                            height: MediaQuery.of(context).size.height * 0.32,
-                            fit: BoxFit.contain,
-                          ),
+                        Image.asset(
+                          item.image,
+                          height: MediaQuery.of(context).size.height * 0.32,
+                          fit: BoxFit.contain,
                         ),
-
                         const SizedBox(height: 40),
-
-                        Text(
-                          item.title.tr(),
-                          textAlign: TextAlign.right,
-                          style: const TextStyle(
-                            fontFamily: "cairo",
-                            fontSize: FontSize.s24,
-                            fontWeight: FontWeight.w700,
-                            color: ColorManager.darkText,
+                        SizedBox(
+                          width: double.infinity,
+                          child: Text(
+                            item.title.tr(),
+                            textAlign: TextAlign.right,
+                            style: const TextStyle(
+                              fontFamily: "cairo",
+                              fontSize: FontSize.s24,
+                              fontWeight: FontWeight.w700,
+                              color: ColorManager.darkText,
+                            ),
                           ),
                         ),
-
                         const SizedBox(height: 12),
-
-                        Flexible(
+                        SizedBox(
+                          width: double.infinity,
                           child: Text(
                             item.description.tr(),
                             textAlign: TextAlign.right,
@@ -125,9 +117,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                             ),
                           ),
                         ),
-
                         const SizedBox(height: 30),
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: List.generate(
@@ -141,13 +131,8 @@ class _OnboardingViewState extends State<OnboardingView> {
                 },
               ),
             ),
-
-            
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 20.0,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               child: Column(
                 children: [
                   SizedBox(
@@ -184,7 +169,6 @@ class _OnboardingViewState extends State<OnboardingView> {
                       ),
                     ),
                   ),
-
                   if (currentIndex == onboardingList.length - 1) ...[
                     const SizedBox(height: 12),
                     SizedBox(
@@ -192,7 +176,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                       height: 58,
                       child: OutlinedButton(
                         onPressed: () {
-                         context.go(RoutesManager.registerPath);
+                          context.go(RoutesManager.registerPath);
                         },
                         style: OutlinedButton.styleFrom(
                           side: const BorderSide(
