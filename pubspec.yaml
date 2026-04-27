@@ -22,6 +22,7 @@ dependencies:
   flutter_bloc: ^9.1.1
   flutter_native_splash: ^2.4.7
   flutter_secure_storage: ^10.0.0
+  flutter_svg: ^2.2.4
   freezed_annotation: ^3.1.0
   get_it: ^9.2.1
   go_router: ^17.2.1
@@ -51,6 +52,7 @@ flutter:
     - assets/images/
     - assets/fonts/
     - assets/translations/
+    - assets/icons/
 
   fonts:
     - family: Cairo
