@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: RoutesManager.onboardingPath,
+    initialLocation: RoutesManager.loginPath,
     errorBuilder: (context, state) => Scaffold(
       appBar: AppBar(title: const Text('No Router Found')),
       body: const Center(child: Text('No Router Found')),
