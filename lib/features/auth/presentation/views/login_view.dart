@@ -36,6 +36,7 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidht = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: ColorManager.whiteColor,
       body: SafeArea(
@@ -51,7 +52,7 @@ class _LoginViewState extends State<LoginView> {
                   AssetsManager.centerlyLogo,
                   height: screenHeight * 0.35,
                   width: screenWidht * 0.5,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                 ),
 
                 Text(
