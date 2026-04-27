@@ -3,6 +3,7 @@ import 'package:centrally/core/res/color_manager.dart';
 import 'package:centrally/core/res/style_manager.dart';
 import 'package:centrally/core/utils/validator.dart';
 import 'package:centrally/core/widgets/custom_text_feild.dart';
+import 'package:centrally/features/auth/presentation/widgets/auth_rich_text.dart';
 import 'package:centrally/features/auth/presentation/widgets/forgot_password_remember_me.dart';
 import 'package:centrally/features/auth/presentation/widgets/primary_button.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -157,6 +158,12 @@ class _LoginViewState extends State<LoginView> {
                       if (!mounted) return;
                       setState(() => loading = false);
                     }
+                  },
+                ),
+                SizedBox(height: screenHeight * 0.012),
+                AuthRichText(
+                  onTap: () {
+                    //go to sign up screen
                   },
                 ),
               ],
