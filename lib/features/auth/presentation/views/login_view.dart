@@ -3,6 +3,7 @@ import 'package:centrally/core/res/color_manager.dart';
 import 'package:centrally/core/res/style_manager.dart';
 import 'package:centrally/core/utils/validator.dart';
 import 'package:centrally/core/widgets/custom_text_feild.dart';
+import 'package:centrally/features/auth/presentation/widgets/forgot_password_remember_me.dart';
 import 'package:centrally/features/auth/presentation/widgets/primary_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +50,7 @@ class _LoginViewState extends State<LoginView> {
                   AssetsManager.centerlyLogo,
                   height: screenHeight * 0.35,
                   width: screenWidht * 0.5,
+                  fit: BoxFit.cover,
                 ),
 
                 Text(
@@ -134,6 +136,12 @@ class _LoginViewState extends State<LoginView> {
                       ),
                     ),
                   ),
+                ),
+                SizedBox(height: screenHeight * 0.013),
+                ForgotPasswordAndRememberMe(
+                  onPressed: () {
+                    // TODO: navigate to ForgotPasswordScreen
+                  },
                 ),
                 SizedBox(height: screenHeight * 0.05),
                 PrimaryButton(
