@@ -3,13 +3,13 @@ class OnboardingModel {
   final String title;
   final String description;
 
-  OnboardingModel({
+   const OnboardingModel({
     required this.image,
     required this.title,
     required this.description,
   });
 }
-List<OnboardingModel> onboardingList = [
+ const List<OnboardingModel> onboardingList = [
   OnboardingModel(
     image: "assets/images/onboarding4.png",
     title: "onboarding_title_1",

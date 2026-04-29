@@ -31,6 +31,11 @@ class _OnboardingViewState extends State<OnboardingView> {
     FlutterNativeSplash.remove();
   }
 
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,7 +115,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                             textAlign: TextAlign.right,
                             style: const TextStyle(
                               fontFamily: "cairo",
-                              fontSize: 16,
+                              fontSize: FontSize.s16,
                               fontWeight: FontWeight.w400,
                               color: ColorManager.bodyText,
                               height: 1.7,
