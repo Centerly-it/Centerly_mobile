@@ -31,6 +31,7 @@ class _OnboardingViewState extends State<OnboardingView> {
     FlutterNativeSplash.remove();
   }
 
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
@@ -39,7 +40,7 @@ class _OnboardingViewState extends State<OnboardingView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorManager.white,
       body: SafeArea(
         child: Column(
           children: [
@@ -58,7 +59,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                         StringsManager.skip.tr(),
                         style: const TextStyle(
                           fontFamily: "cairo",
-                          color: ColorManager.grey,
+                          color: ColorManager.grey500,
                           fontSize: FontSize.s14,
                         ),
                       ),
@@ -103,7 +104,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                               fontFamily: "cairo",
                               fontSize: FontSize.s24,
                               fontWeight: FontWeight.w700,
-                              color: ColorManager.darkText,
+                              color: ColorManager.textPrimary,
                             ),
                           ),
                         ),
@@ -117,7 +118,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                               fontFamily: "cairo",
                               fontSize: FontSize.s16,
                               fontWeight: FontWeight.w400,
-                              color: ColorManager.bodyText,
+                              color: ColorManager.textSecondary,
                               height: 1.7,
                             ),
                           ),
@@ -155,7 +156,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorManager.primary_blue,
+                        backgroundColor: ColorManager.primary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -185,7 +186,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                         },
                         style: OutlinedButton.styleFrom(
                           side: const BorderSide(
-                            color: ColorManager.primary_blue,
+                            color: ColorManager.primary,
                           ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -195,7 +196,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                           StringsManager.register.tr(),
                           style: const TextStyle(
                             fontFamily: "cairo",
-                            color: ColorManager.primary_blue,
+                            color: ColorManager.primary,
                             fontSize: FontSize.s18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -221,8 +222,8 @@ class _OnboardingViewState extends State<OnboardingView> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: currentIndex == index
-            ? ColorManager.primary_blue
-            : ColorManager.lightGrey,
+            ? ColorManager.primary
+            : ColorManager.grey300,
       ),
     );
   }
