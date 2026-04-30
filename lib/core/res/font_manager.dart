@@ -8,7 +8,9 @@ class FontWeightManager {
   static FontWeight semiBold = FontWeight.w600;
 }
 
-class FontFamily {}
+class FontFamily {
+  static const String cairo = 'Cairo';
+}
 
 class FontSize {
   static const double s12 = 12.0;
