@@ -1,78 +1,66 @@
-// here we will manage the theme of the app and also we will manage the dark and light theme of the app
-import 'package:centrally/core/res/app_constants.dart';
-import 'package:centrally/core/res/color_manager.dart';
-import 'package:centrally/core/res/font_manager.dart';
 import 'package:flutter/material.dart';
+import 'color_manager.dart';
+import 'font_manager.dart';
 
-class StyleManager {
-  static TextStyle head3Bold(BuildContext context) {
-    return TextStyle(
-      fontSize: StyleManager().getResponsiveFontSize(
-        context: context,
-        fontSize: FontSize.s20,
-      ),
-      fontWeight: FontWeightManager.bold,
-      color: ColorManager.darkText,
-      fontFamily: AppConstants.fontFamilyName,
+// Base style
+TextStyle _style(double size, FontWeight weight, Color color) => TextStyle(
+      fontFamily: FontFamily.cairo,
+      fontSize: size,
+      fontWeight: weight,
+      color: color,
     );
+
+class AppTextStyles {
+  // ========================
+  // 🎨 Design System
+  // ========================
+
+  // Display
+  static TextStyle displayLarge(BuildContext context) =>
+      _responsive(context, 32, FontWeightManager.bold, ColorManager.textPrimary);
+
+  static TextStyle displayMedium(BuildContext context) =>
+      _responsive(context, 28, FontWeightManager.bold, ColorManager.textPrimary);
+
+  // Headline
+  static TextStyle headlineLarge(BuildContext context) =>
+      _responsive(context, 24, FontWeightManager.bold, ColorManager.textPrimary);
+
+  static TextStyle headlineMedium(BuildContext context) =>
+      _responsive(context, 20, FontWeightManager.semiBold, ColorManager.textPrimary);
+
+  static TextStyle headlineSmall(BuildContext context) =>
+      _responsive(context, 18, FontWeightManager.semiBold, ColorManager.textPrimary);
+
+  // Body
+  static TextStyle bodyLarge(BuildContext context) =>
+      _responsive(context, 16, FontWeightManager.regular, ColorManager.textPrimary);
+
+  static TextStyle bodyMedium(BuildContext context) =>
+      _responsive(context, 14, FontWeightManager.regular, ColorManager.textPrimary);
+
+  static TextStyle bodySmall(BuildContext context) =>
+      _responsive(context, 12, FontWeightManager.regular, ColorManager.textSecondary);
+
+  // ========================
+  // ⚙️ Responsive Logic (بتاعك)
+  // ========================
+
+  static TextStyle _responsive(
+    BuildContext context,
+    double fontSize,
+    FontWeight weight,
+    Color color,
+  ) {
+    final size = _getResponsiveFontSize(context, fontSize);
+    return _style(size, weight, color);
   }
 
-  static TextStyle head4Meduim(BuildContext context) {
-    return TextStyle(
-      fontSize: StyleManager().getResponsiveFontSize(
-        context: context,
-        fontSize: FontSize.s18,
-      ),
-      fontWeight: FontWeightManager.medium,
-      color: ColorManager.whiteTextColor,
-      fontFamily: AppConstants.fontFamilyName,
-    );
-  }
-
-  static TextStyle bodyRegular(BuildContext context) {
-    return TextStyle(
-      fontSize: StyleManager().getResponsiveFontSize(
-        context: context,
-        fontSize: FontSize.s16,
-      ),
-      fontWeight: FontWeightManager.regular,
-      color: ColorManager.bodyText,
-      fontFamily: AppConstants.fontFamilyName,
-    );
-  }
-
-  static TextStyle bodyMeduim(BuildContext context) {
-    return TextStyle(
-      fontSize: StyleManager().getResponsiveFontSize(
-        context: context,
-        fontSize: FontSize.s14,
-      ),
-      fontWeight: FontWeightManager.medium,
-      color: ColorManager.greyLabelColor,
-      fontFamily: AppConstants.fontFamilyName,
-    );
-  }
-
-  static TextStyle bodySemiBold(BuildContext context) {
-    return TextStyle(
-      fontSize: StyleManager().getResponsiveFontSize(
-        context: context,
-        fontSize: FontSize.s14,
-      ),
-      fontWeight: FontWeightManager.semiBold,
-      color: ColorManager.primaryBlue,
-      fontFamily: AppConstants.fontFamilyName,
-    );
-  }
-
-  double getResponsiveFontSize({
-    required BuildContext context,
-    required double fontSize,
-  }) {
+  static double _getResponsiveFontSize(BuildContext context, double fontSize) {
     double width = MediaQuery.of(context).size.width;
     Orientation orientation = MediaQuery.of(context).orientation;
 
-    double scaleFactor = getScaleFactor(context);
+    double scaleFactor = _getScaleFactor(context);
     double responsiveFontSize = fontSize * scaleFactor;
 
     double lowerLimit;
@@ -105,7 +93,7 @@ class StyleManager {
     return responsiveFontSize.clamp(lowerLimit, upperLimit);
   }
 
-  double getScaleFactor(BuildContext context) {
+  static double _getScaleFactor(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
 
     if (width < SizeConfig.tablet) {
