@@ -1,5 +1,34 @@
 {
   "app_name": "سنترلي",
   "welcome": "مرحباً بك في التطبيق",
-  "onboarding_title": "اكتشف عالمنا"
+
+  "onboarding_skip": "تخطى «",
+  "onboarding_next": "التالي",
+  "onboarding_login": "تسجيل الدخول",
+  "onboarding_signup": "إنشاء حساب",
+
+  "onboarding_1_title": "يومك في لمحة",
+  "onboarding_1_body": "افتح Centerly واطلع على كلّ ما ينتظرك اليوم — الحصص، الحضور، والمدفوعات — في لحظة واحدة.",
+
+  "onboarding_2_title": "كل الطلاب في مكان واحد",
+  "onboarding_2_body": "سجّل الحضور، تابع المستوى، واطلع على السجلّ الكامل لكل طالب — دون ورق أو مجموعات واتساب.",
+
+  "onboarding_3_title": "اعرف أرقامك بدقّة",
+  "onboarding_3_body": "اطلع على المبالغ المتوقعة والمحصّلة والمتبقية لكلّ شهر — وأرسل تذكيرًا بنقرة واحدة.",
+
+  "login_welcome_title": "مرحبًا بعودتك",
+  "login_welcome_subtitle": "سجّل دخولك لمتابعة يومك في Centerly",
+  "login_email_label": "البريد الإلكتروني",
+  "login_email_hint": "example@email.com",
+  "login_password_label": "كلمة المرور",
+  "login_remember_me": "تذكرني",
+  "login_forgot_password": "نسيت كلمة المرور؟",
+  "login_submit": "تسجيل الدخول",
+  "login_no_account": "ستنر جديد؟",
+  "login_create_account": "أنشئ حساب",
+
+  "validation_email_required": "البريد الإلكتروني مطلوب",
+  "validation_email_invalid": "صيغة البريد غير صحيحة",
+  "validation_password_required": "كلمة المرور مطلوبة",
+  "validation_password_min": "كلمة المرور 8 أحرف على الأقل"
 }
