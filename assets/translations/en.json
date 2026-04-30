@@ -1,5 +1,27 @@
 {
   "app_name": "Centrally",
   "welcome": "Welcome",
-  "onboarding_title": "Discover our world"
+  "onboarding_title": "Discover our world",
+  "welcome_back": "Welcome Back",
+  "login_subtitle": "Log in to continue your day on Centerly",
+  "identifier_label": "Email ",
+  "identifier_hint": "example@email.com ",
+  "password": "Password",
+  "password_hint":"sL(45)@h",
+  "show_password": "Show password",
+  "hide_password": "Hide password",
+  "remember_me": "Remember me",
+  "forgot_password": "Forgot password?",
+  "login_button": "Log In",
+  "no_account": "New center?",
+  "register_link": "Create an account",
+  "identifier_required": "Please enter your email or phone number",
+  "identifier_invalid": "Please enter a valid email or phone number",
+  "password_required": "Please enter your password",
+  "password_short": "Password must be at least 6 characters",
+  "password_uppercase": "Must contain at least one uppercase letter",
+"password_lowercase": "Must contain at least one lowercase letter",
+"password_number": "Must contain at least one number",
+"password_special": "Must contain at least one special character"
+
 }

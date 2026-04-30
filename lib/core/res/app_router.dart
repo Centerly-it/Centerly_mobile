@@ -40,11 +40,13 @@ class AppRouter {
     final isAuthenticated = token != null && token.isNotEmpty;
     final isSplash = state.matchedLocation == RoutesManager.splashPath;
 
-    // Always allow splash to handle its own navigation logic
     if (isSplash) return null;
 
-    // Unauthenticated users can only access public routes
-    const publicRoutes = [RoutesManager.onboardingPath, RoutesManager.loginPath];
+    const publicRoutes = [
+      RoutesManager.onboardingPath,
+      RoutesManager.loginPath,
+    ];
+
     if (!isAuthenticated && !publicRoutes.contains(state.matchedLocation)) {
       return RoutesManager.loginPath;
     }

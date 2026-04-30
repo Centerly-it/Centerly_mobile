@@ -1,5 +1,28 @@
 {
   "app_name": "سنترلي",
   "welcome": "مرحباً بك في التطبيق",
-  "onboarding_title": "اكتشف عالمنا"
+  "onboarding_title": "اكتشف عالمنا",
+   "welcome_back":"مرحبًا بعودتك",
+    "login_subtitle": "سجل دخولك لمتابعة يومك في Centerly",
+    "identifier_label": "البريد الإلكتروني   ",
+    "identifier_hint": "example@email.com ",
+    "password": "كلمة المرور",
+    "password_hint":"sL(45)@h",
+    "show_password": "إظهار كلمة المرور",
+    "hide_password": "إخفاء كلمة المرور",
+    "remember_me": "تذكرني",
+    "forgot_password": "نسيت كلمة المرور؟",
+    "login_button": "تسجيل الدخول",
+    "no_account": "سنتر جديد؟",
+    "register_link": "إنشئ حساب",
+    "identifier_required": "الرجاء إدخال البريد الإلكتروني أو رقم الهاتف",
+    "identifier_invalid": "الرجاء إدخال بريد إلكتروني أو رقم هاتف صحيح",
+    "password_required": "الرجاء إدخال كلمة المرور",
+    "password_short": "كلمة المرور يجب أن تكون 6 أحرف على الأقل",
+  "password_uppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
+  "password_lowercase": "يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل",
+  "password_number": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
+  "password_special": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل"
 }
+
+
