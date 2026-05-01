@@ -4,10 +4,10 @@ flutter_native_splash:
   web: false
 
   color: "#ffffff"
-  image: assets/images/icon.png
+  image: assets/images/splash_icon.png
 
   android_12:
-    image: assets/images/icon_12.png
+    image: assets/images/splash_icon_for_android_12.png
     color: "#ffffff"
 
   fullscreen: true

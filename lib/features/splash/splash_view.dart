@@ -21,34 +21,41 @@ class _SplashViewState extends State<SplashView> {
   }
 
   Future<void> _initialize() async {
-    await Future.wait([
-      Future.delayed(const Duration(milliseconds: 1500)),
-      _prefetchAppState(),
-    ]);
-
-    FlutterNativeSplash.remove();
-
-    if (!mounted) return;
-
-    final token = CacheService.getData(key: CacheConstants.userToken) as String?;
-    if (token != null && token.isNotEmpty) {
-      context.goNamed(RoutesManager.onboardingName); // replace with home once built
-    } else {
-      context.goNamed(RoutesManager.onboardingName);
+    try {
+      await Future.wait([
+        Future.delayed(const Duration(milliseconds: 1500)),
+        _prefetchAppState(),
+      ]);
+    } catch (_) {
+      // Swallow prefetch errors — app must always navigate forward.
+    } finally {
+      FlutterNativeSplash.remove();
     }
+
+    _navigate();
   }
 
   Future<void> _prefetchAppState() async {
-    // Placeholder for remote config / feature flags / auth validation.
+    // TODO: Load remote config / feature flags / validate auth token.
+  }
+
+  void _navigate() {
+    if (!mounted) return;
+
+    final token =
+        CacheService.getData(key: CacheConstants.userToken) as String?;
+    final isAuthenticated = token != null && token.isNotEmpty;
+
+    context.goNamed(
+      isAuthenticated ? RoutesManager.homeName : RoutesManager.onboardingName,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorManager.white,
-      body: Center(
-        child: Image.asset(AssetsManager.logoAppIcon, width: 120),
-      ),
+      body: Center(child: Image.asset(AssetsManager.logoAppIcon, width: 120)),
     );
   }
 }
