@@ -9,4 +9,7 @@ class RoutesManager {
 
   static const String loginPath = '/login';
   static const String loginName = 'login';
+
+  static const String homePath = '/home';
+  static const String homeName = 'home';
 }
