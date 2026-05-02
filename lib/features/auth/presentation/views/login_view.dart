@@ -1,8 +1,10 @@
 import 'package:centrally/core/res/color_manager.dart';
 import 'package:centrally/core/res/values_manager.dart';
+import 'package:centrally/core/utils/validation.dart';
 import 'package:centrally/features/auth/presentation/widgets/brand_logo.dart';
 import 'package:centrally/features/auth/presentation/widgets/email_feild.dart';
 import 'package:centrally/features/auth/presentation/widgets/password_field.dart';
+import 'package:centrally/features/auth/presentation/widgets/password_requirements.dart';
 import 'package:centrally/features/auth/presentation/widgets/remember_forgor_row.dart';
 import 'package:centrally/features/auth/presentation/widgets/sign_up_row.dart';
 import 'package:centrally/features/auth/presentation/widgets/submit_button.dart';
@@ -21,7 +23,22 @@ class _LoginViewState extends State<LoginView> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _rememberMe = false;
+  String password = '';
   bool _obscurePassword = true;
+  late PasswordValidationState passwordState;
+
+  @override
+  void initState() {
+    super.initState();
+
+    passwordState = const PasswordValidationState(
+      hasMinLength: false,
+      hasUppercase: false,
+      hasLowercase: false,
+      hasNumber: false,
+      hasSpecial: false,
+    );
+  }
 
   @override
   void dispose() {
@@ -60,7 +77,20 @@ class _LoginViewState extends State<LoginView> {
                   obscure: _obscurePassword,
                   onToggleObscure: () =>
                       setState(() => _obscurePassword = !_obscurePassword),
+
+                  onChanged: (value) {
+                    setState(() {
+                      password = value;
+                      passwordState = AuthValidator.validatePasswordLive(value);
+                    });
+                  },
                 ),
+                const SizedBox(height: AppSize.s8),
+                if (password.isNotEmpty)
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    child: PasswordRequirements(state: passwordState),
+                  ),
                 const SizedBox(height: AppSize.s12),
                 RememberForgotRow(
                   rememberMe: _rememberMe,

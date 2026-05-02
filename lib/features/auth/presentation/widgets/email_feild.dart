@@ -2,10 +2,13 @@
 // Email field
 // ---------------------------------------------------------------------------
 
+import 'package:centrally/core/func/extensions.dart';
 import 'package:centrally/core/res/color_manager.dart';
 import 'package:centrally/core/res/strings_manager.dart';
 import 'package:centrally/core/res/style_manager.dart';
 import 'package:centrally/core/res/values_manager.dart';
+import 'package:centrally/core/utils/validation.dart';
+import 'package:centrally/core/widgets/custom_text_field.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -17,43 +20,22 @@ class EmailField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           StringsManager.loginEmailLabel.tr(),
           style: AppTextStyles.titleSmall,
         ),
-        const SizedBox(height: AppSize.s8),
-        TextFormField(
+        SizedBox(height: context.screenHeight * 0.01), //AppSize.s8
+        CustomTextFormField(
           controller: controller,
-          keyboardType: TextInputType.emailAddress,
-          textAlign: TextAlign.left,
-          decoration: InputDecoration(
-            hintText: StringsManager.loginEmailHint.tr(),
-            suffixIcon: Container(
-              margin: const EdgeInsets.all(AppSize.s10),
-              padding: const EdgeInsets.all(AppSize.s8),
-              decoration: BoxDecoration(
-                color: ColorManager.grey100,
-                borderRadius: BorderRadius.circular(AppSize.s8),
-              ),
-              child: const Icon(
-                Icons.email_outlined,
-                color: ColorManager.grey500,
-                size: AppSize.s18,
-              ),
-            ),
+          hintText: StringsManager.loginEmailHint.tr(),
+          prefixIcon: const Icon(
+            Icons.email_outlined,
+            color: ColorManager.grey500,
+            size: AppSize.s24,
           ),
-          validator: (v) {
-            if (v == null || v.trim().isEmpty) {
-              return StringsManager.validationEmailRequired.tr();
-            }
-            final emailRegex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
-            if (!emailRegex.hasMatch(v.trim())) {
-              return StringsManager.validationEmailInvalid.tr();
-            }
-            return null;
-          },
+          validator: (value) => AuthValidator.validateEmail(value),
         ),
       ],
     );

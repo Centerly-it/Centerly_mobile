@@ -31,6 +31,16 @@ class StringsManager {
   // Validation
   static const String validationEmailRequired = 'validation_email_required';
   static const String validationEmailInvalid = 'validation_email_invalid';
-  static const String validationPasswordRequired = 'validation_password_required';
+  static const String validationPhoneRequired = 'validation_phone_required';
+  static const String validationPhoneInvalid = 'validation_phone_invalid';
+  static const String validationPasswordRequired =
+      'validation_password_required';
   static const String validationPasswordMin = 'validation_password_min';
+
+  //Password State
+  static const String passwordMin = 'password_min';
+  static const String passwordUpperCase = 'password_uppercase';
+  static const String paswordLowerCase = 'password_lowercase';
+  static const String passwordNumber = 'password_number';
+  static const String passwordSpecial = 'password_special';
 }
