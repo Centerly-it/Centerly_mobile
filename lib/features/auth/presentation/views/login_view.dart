@@ -93,6 +93,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
                 const SizedBox(height: AppSize.s12),
                 RememberForgotRow(
+                  onPressed: () {},
                   rememberMe: _rememberMe,
                   onRememberChanged: (v) =>
                       setState(() => _rememberMe = v ?? false),
@@ -100,7 +101,7 @@ class _LoginViewState extends State<LoginView> {
                 const SizedBox(height: AppSize.s32),
                 SubmitButton(onPressed: _submit),
                 const SizedBox(height: AppSize.s20),
-                const SignUpRow(),
+                SignUpRow(onTap: () {}),
               ],
             ),
           ),

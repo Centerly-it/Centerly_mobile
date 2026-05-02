@@ -14,37 +14,20 @@ class RememberForgotRow extends StatelessWidget {
     required this.rememberMe,
     required this.onRememberChanged,
     super.key,
+    required this.onPressed,
   });
 
   final bool rememberMe;
   final ValueChanged<bool?> onRememberChanged;
+  final Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        TextButton(
-          onPressed: () {},
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.zero,
-            minimumSize: Size.zero,
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          ),
-          child: Text(
-            StringsManager.loginForgotPassword.tr(),
-            style: AppTextStyles.labelSmall.copyWith(
-              color: ColorManager.primary,
-            ),
-          ),
-        ),
         Row(
           children: [
-            Text(
-              StringsManager.loginRememberMe.tr(),
-              style: AppTextStyles.labelSmall,
-            ),
-            const SizedBox(width: AppSize.s8),
             SizedBox(
               width: AppSize.s20,
               height: AppSize.s20,
@@ -58,7 +41,26 @@ class RememberForgotRow extends StatelessWidget {
                 side: const BorderSide(color: ColorManager.border),
               ),
             ),
+            const SizedBox(width: AppSize.s8),
+            Text(
+              StringsManager.loginRememberMe.tr(),
+              style: AppTextStyles.labelSmall,
+            ),
           ],
+        ),
+        TextButton(
+          onPressed: onPressed,
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.zero,
+            minimumSize: Size.zero,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          ),
+          child: Text(
+            StringsManager.loginForgotPassword.tr(),
+            style: AppTextStyles.labelSmall.copyWith(
+              color: ColorManager.primary,
+            ),
+          ),
         ),
       ],
     );
