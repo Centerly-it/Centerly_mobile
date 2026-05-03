@@ -4,6 +4,7 @@
 
 import 'package:centrally/core/func/extensions.dart';
 import 'package:centrally/core/res/assets_manager.dart';
+import 'package:centrally/core/res/values_manager.dart';
 import 'package:flutter/material.dart';
 
 class BrandLogo extends StatelessWidget {
@@ -18,7 +19,8 @@ class BrandLogo extends StatelessWidget {
         AssetsManager.logoAppIcon,
         width: logoWidth,
         height: logoHeight,
-        errorBuilder: (_, __, _) => const SizedBox(width: 120, height: 120),
+        errorBuilder: (_, __, _) =>
+            const SizedBox(width: AppSize.s120, height: AppSize.s120),
       ),
     );
   }

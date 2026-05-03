@@ -60,10 +60,10 @@ class SubmitButton extends StatelessWidget {
           child: isLoading
               ? const SizedBox(
                   key: ValueKey(StringsManager.loader),
-                  width: 20,
-                  height: 20,
+                  width: AppSize.s20,
+                  height: AppSize.s20,
                   child: CircularProgressIndicator(
-                    strokeWidth: 2,
+                    strokeWidth: AppSize.s2,
                     color: Colors.white,
                   ),
                 )
