@@ -1,5 +1,11 @@
 {
   "app_name": "Centrally",
   "welcome": "Welcome",
-  "onboarding_title": "Discover our world"
+  "onboarding_title": "Discover our world",
+
+  "password_min": "At least 8 characters",
+  "password_uppercase": "Contains uppercase letter",
+  "password_lowercase": "Contains lowercase letter",
+  "password_number": "Contains a number",
+  "password_special": "Contains a special character"
 }
