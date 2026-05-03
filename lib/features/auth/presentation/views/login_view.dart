@@ -4,7 +4,6 @@ import 'package:centrally/core/utils/validation.dart';
 import 'package:centrally/features/auth/presentation/widgets/brand_logo.dart';
 import 'package:centrally/features/auth/presentation/widgets/email_feild.dart';
 import 'package:centrally/features/auth/presentation/widgets/password_field.dart';
-import 'package:centrally/features/auth/presentation/widgets/password_requirements.dart';
 import 'package:centrally/features/auth/presentation/widgets/remember_forgor_row.dart';
 import 'package:centrally/features/auth/presentation/widgets/sign_up_row.dart';
 import 'package:centrally/features/auth/presentation/widgets/submit_button.dart';
@@ -25,20 +24,7 @@ class _LoginViewState extends State<LoginView> {
   bool _rememberMe = false;
   String password = '';
   bool _obscurePassword = true;
-  late PasswordValidationState passwordState;
-
-  @override
-  void initState() {
-    super.initState();
-
-    passwordState = const PasswordValidationState(
-      hasMinLength: false,
-      hasUppercase: false,
-      hasLowercase: false,
-      hasNumber: false,
-      hasSpecial: false,
-    );
-  }
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -47,9 +33,15 @@ class _LoginViewState extends State<LoginView> {
     super.dispose();
   }
 
-  void _submit() {
+  void _submit() async {
     if (_formKey.currentState?.validate() ?? false) {
       // TODO: dispatch login cubit event
+
+      setState(() => _isLoading = true);
+
+      await Future.delayed(const Duration(seconds: 2)); // simulate API
+
+      setState(() => _isLoading = false);
     }
   }
 
@@ -78,19 +70,13 @@ class _LoginViewState extends State<LoginView> {
                   onToggleObscure: () =>
                       setState(() => _obscurePassword = !_obscurePassword),
 
-                  onChanged: (value) {
-                    setState(() {
-                      password = value;
-                      passwordState = AuthValidator.validatePasswordLive(value);
-                    });
-                  },
+                  // onChanged: (value) {
+                  //   setState(() {
+                  //     password = value;
+                  //   });
+                  // },
                 ),
-                const SizedBox(height: AppSize.s8),
-                if (password.isNotEmpty)
-                  AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
-                    child: PasswordRequirements(state: passwordState),
-                  ),
+
                 const SizedBox(height: AppSize.s12),
                 RememberForgotRow(
                   onPressed: () {},
@@ -99,7 +85,7 @@ class _LoginViewState extends State<LoginView> {
                       setState(() => _rememberMe = v ?? false),
                 ),
                 const SizedBox(height: AppSize.s32),
-                SubmitButton(onPressed: _submit),
+                SubmitButton(onPressed: _submit, isLoading: _isLoading),
                 const SizedBox(height: AppSize.s20),
                 SignUpRow(onTap: () {}),
               ],

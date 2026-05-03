@@ -46,15 +46,16 @@ class PasswordField extends StatelessWidget {
             size: AppSize.s24,
           ),
           suffixIcon: IconButton(
+            onPressed: onToggleObscure,
             icon: Icon(
               obscure
-                  ? Icons.visibility_outlined
-                  : Icons.visibility_off_outlined,
+                  ? Icons.visibility_off_outlined
+                  : Icons.visibility_outlined,
               color: ColorManager.grey500,
               size: AppSize.s24,
             ),
-            onPressed: onToggleObscure,
           ),
+
           validator: (value) => AuthValidator.validatePassword(value),
         ),
       ],

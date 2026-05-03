@@ -43,4 +43,5 @@ class StringsManager {
   static const String paswordLowerCase = 'password_lowercase';
   static const String passwordNumber = 'password_number';
   static const String passwordSpecial = 'password_special';
+  static const String loader = 'loader';
 }
