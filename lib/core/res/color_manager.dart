@@ -6,13 +6,15 @@ class ColorManager {
   // Primary palette
   static const Color primary = Color(0xFF246EFA);
   static const Color primaryLight = Color(0xFF7FAAFC);
+  static const Color primaryBright = Color(0xFFE9F1FF);
   static const Color primaryDark = Color(0xFF1558D6);
 
   // Neutral
   static const Color white = Color(0xFFFFFFFF);
-  static const Color background = Color(0xFFF9FAFB);
+  static const Color background = Color(0xFFFAFAFA);
   static const Color surface = Color(0xFFFFFFFF);
   static const Color grey100 = Color(0xFFF3F4F6);
+  static const Color grey200 = Color(0xFFF5F5F7);
   static const Color grey300 = Color(0xFFD1D5DB);
   static const Color grey500 = Color(0xFF6B7280);
   static const Color grey700 = Color(0xFF374151);

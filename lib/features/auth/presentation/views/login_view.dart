@@ -1,10 +1,12 @@
 import 'package:centrally/core/res/assets_manager.dart';
 import 'package:centrally/core/res/color_manager.dart';
+import 'package:centrally/core/res/routes_manager.dart';
 import 'package:centrally/core/res/strings_manager.dart';
 import 'package:centrally/core/res/style_manager.dart';
 import 'package:centrally/core/res/values_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -140,7 +142,10 @@ class _EmailField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text(StringsManager.loginEmailLabel.tr(), style: AppTextStyles.titleSmall),
+        Text(
+          StringsManager.loginEmailLabel.tr(),
+          style: AppTextStyles.titleSmall,
+        ),
         const SizedBox(height: AppSize.s8),
         TextFormField(
           controller: controller,
@@ -198,7 +203,10 @@ class _PasswordField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text(StringsManager.loginPasswordLabel.tr(), style: AppTextStyles.titleSmall),
+        Text(
+          StringsManager.loginPasswordLabel.tr(),
+          style: AppTextStyles.titleSmall,
+        ),
         const SizedBox(height: AppSize.s8),
         TextFormField(
           controller: controller,
@@ -271,12 +279,17 @@ class _RememberForgotRow extends StatelessWidget {
           ),
           child: Text(
             StringsManager.loginForgotPassword.tr(),
-            style: AppTextStyles.labelSmall.copyWith(color: ColorManager.primary),
+            style: AppTextStyles.labelSmall.copyWith(
+              color: ColorManager.primary,
+            ),
           ),
         ),
         Row(
           children: [
-            Text(StringsManager.loginRememberMe.tr(), style: AppTextStyles.labelSmall),
+            Text(
+              StringsManager.loginRememberMe.tr(),
+              style: AppTextStyles.labelSmall,
+            ),
             const SizedBox(width: AppSize.s8),
             SizedBox(
               width: AppSize.s20,
@@ -335,7 +348,9 @@ class _SignUpRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            context.goNamed(RoutesManager.createCenterName);
+          },
           style: TextButton.styleFrom(
             padding: EdgeInsets.zero,
             minimumSize: Size.zero,
@@ -343,13 +358,17 @@ class _SignUpRow extends StatelessWidget {
           ),
           child: Text(
             StringsManager.loginCreateAccount.tr(),
-            style: AppTextStyles.labelLarge.copyWith(color: ColorManager.primary),
+            style: AppTextStyles.labelLarge.copyWith(
+              color: ColorManager.primary,
+            ),
           ),
         ),
         const SizedBox(width: AppSize.s5),
         Text(
           StringsManager.loginNoAccount.tr(),
-          style: AppTextStyles.labelLarge.copyWith(color: ColorManager.textSecondary),
+          style: AppTextStyles.labelLarge.copyWith(
+            color: ColorManager.textSecondary,
+          ),
         ),
       ],
     );
