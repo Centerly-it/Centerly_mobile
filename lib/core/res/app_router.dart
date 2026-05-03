@@ -1,6 +1,9 @@
 import 'package:centrally/core/res/routes_manager.dart';
 import 'package:centrally/core/utils/cached_data_shared_preferences.dart';
+import 'package:centrally/features/auth/presentation/views/create_admin_view.dart';
+import 'package:centrally/features/auth/presentation/views/create_center_view.dart';
 import 'package:centrally/features/auth/presentation/views/login_view.dart';
+import 'package:centrally/features/auth/presentation/views/register_success_view.dart';
 import 'package:centrally/features/onboarding/onboarding_view.dart';
 import 'package:centrally/features/splash/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +34,21 @@ class AppRouter {
         path: RoutesManager.loginPath,
         name: RoutesManager.loginName,
         builder: (context, state) => const LoginView(),
+      ),
+      GoRoute(
+        path: RoutesManager.createCenterPath,
+        name: RoutesManager.createCenterName,
+        builder: (context, state) => const CreateCenterView(),
+      ),
+      GoRoute(
+        path: RoutesManager.createAdminPath,
+        name: RoutesManager.createAdminName,
+        builder: (context, state) => const CreateAdminView(),
+      ),
+      GoRoute(
+        path: RoutesManager.registerSuccessPath,
+        name: RoutesManager.registerSuccessName,
+        builder: (context, state) => const RegisterSuccessView(),
       ),
     ],
   );

@@ -1,5 +1,52 @@
 {
   "app_name": "Centrally",
   "welcome": "Welcome",
-  "onboarding_title": "Discover our world"
+  "onboarding_title": "Discover our world",
+  "validation_email_required": "Email is required",
+  "validation_email_invalid": "Invalid email format",
+  "validation_password_required": "Password is required",
+  "validation_password_min": "Password must be at least 8 characters",
+
+  "create_center_title": "Create Your Center",
+  "create_center_subtitle": "Start by adding center details",
+  "center_name_label": "Center Name",
+  "center_name_hint": "Al-Tafawuq Center",
+  "center_address_label": "Address",
+  "center_address_hint": "Enter center address",
+  "center_phone_label": "Phone",
+  "center_phone_hint": "+02",
+  "next_button": "Next",
+
+  "create_admin_title": "Admin Account Details",
+  "create_admin_subtitle": "Create admin account to start with Centerly",
+  "admin_name_label": "Full Name",
+  "admin_name_hint": "Hadeel Youssef",
+  "admin_email_label": "Email",
+  "admin_email_hint": "hadeel@gmail.com",
+  "admin_password_label": "Password",
+  "admin_password_hint": "•••••••••",
+  "admin_confirm_password_label": "Confirm Password",
+  "password_min_length": "At least 8 characters",
+  "password_number": "Add a number",
+  "password_uppercase": "Add an uppercase letter",
+  "create_account_button": "Create Account",
+  "notice_info":"You can edit this information later from the settings.",
+  "have_account": "Have an account?",
+  "login_action": "Login",
+  "terms_agreement": "By tapping login, you agree to the \nTerms of Service and",
+  "privacy_policy": "Privacy Policy",
+
+  "register_success_title": "Center created successfully",
+  "register_success_subtitle": "Welcome to Centerly, your educational center is ready to manage. We've equipped your workspace with everything you need.",
+  "you_can_now":"You can now:",
+ "add_students_and_teachers":"Add students and teachers",
+ "track_attendance_easily":"Track attendance easily",
+ "track_payments_and_reports":"Track payments and reports",
+
+"go_to_dashboard": "Go to Dashboard",
+
+  "validation_required": "Required",
+  "validation_numbers_only": "Numbers only",
+  "validation_password_mismatch": "Passwords do not match",
+  "validation_password_conditions": "Please meet password conditions"
 }
