@@ -8,12 +8,7 @@ import 'package:flutter/material.dart';
 /// Generic error state widget — displayed when a screen fails to load data.
 /// Provides a retry button for the future backend integration phase.
 class AppErrorState extends StatelessWidget {
-  const AppErrorState({
-    super.key,
-    this.title,
-    this.subtitle,
-    this.onRetry,
-  });
+  const AppErrorState({super.key, this.title, this.subtitle, this.onRetry});
 
   final String? title;
   final String? subtitle;
@@ -26,10 +21,10 @@ class AppErrorState extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          CircleAvatar(
+          const CircleAvatar(
             radius: AppSize.s40,
             backgroundColor: ColorManager.errorLight,
-            child: const Icon(
+            child: Icon(
               Icons.wifi_off_outlined,
               color: ColorManager.error,
               size: AppSize.s40,

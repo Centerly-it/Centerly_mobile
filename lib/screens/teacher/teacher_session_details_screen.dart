@@ -56,19 +56,18 @@ class _TeacherSessionDetailsScreenState
 
   void _openAttendanceSheet() {
     if (widget.role == UserRole.secretary) {
-      Navigator.of(context).push(
-        MaterialPageRoute<void>(
-          builder: (_) => SecretaryAttendanceSheetScreen(
-            session: widget.session,
-          ),
-        ),
-      ).then((_) => setState(() {}));
+      Navigator.of(context)
+          .push(
+            MaterialPageRoute<void>(
+              builder: (_) =>
+                  SecretaryAttendanceSheetScreen(session: widget.session),
+            ),
+          )
+          .then((_) => setState(() {}));
     } else {
       Navigator.of(context).push(
         MaterialPageRoute<void>(
-          builder: (_) => TeacherAttendanceSheetScreen(
-            session: widget.session,
-          ),
+          builder: (_) => TeacherAttendanceSheetScreen(session: widget.session),
         ),
       );
     }
@@ -76,8 +75,9 @@ class _TeacherSessionDetailsScreenState
 
   @override
   Widget build(BuildContext context) {
-    final allAttendance =
-        CenterlyMockData.attendanceForSession(widget.session.id);
+    final allAttendance = CenterlyMockData.attendanceForSession(
+      widget.session.id,
+    );
     final present = allAttendance
         .where((a) => a.status == AttendanceStatus.present)
         .toList();
@@ -106,9 +106,7 @@ class _TeacherSessionDetailsScreenState
         children: [
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppPadding.p16,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
               child: Column(
                 children: [
                   const SizedBox(height: AppSize.s8),
@@ -315,10 +313,7 @@ class _StatCard extends StatelessWidget {
 // ── Student attendance list ───────────────────────────────────────────────────
 
 class _StudentAttendanceList extends StatelessWidget {
-  const _StudentAttendanceList({
-    required this.items,
-    required this.emptyLabel,
-  });
+  const _StudentAttendanceList({required this.items, required this.emptyLabel});
 
   final List<Attendance> items;
   final String emptyLabel;
@@ -362,10 +357,7 @@ class _StudentAttendanceList extends StatelessWidget {
 // ── Bottom action buttons ─────────────────────────────────────────────────────
 
 class _BottomActions extends StatelessWidget {
-  const _BottomActions({
-    required this.onOpenSheet,
-    required this.onCancel,
-  });
+  const _BottomActions({required this.onOpenSheet, required this.onCancel});
 
   final VoidCallback onOpenSheet;
   final VoidCallback onCancel;
@@ -469,101 +461,97 @@ class _CancelSessionSheetState extends State<_CancelSessionSheet> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            StringsManager.cancelSessionTitle.tr(),
-            style: AppTextStyles.headlineSmall,
-          ),
-          const SizedBox(height: AppSize.s20),
-          _CancelReason(
-            value: 'low_attendance',
-            groupValue: _reason,
-            label: StringsManager.cancelLowAttendance.tr(),
-            icon: Icons.people_outline,
-            iconColor: ColorManager.warning,
-            onChanged: (v) => setState(() => _reason = v),
-          ),
-          _CancelReason(
-            value: 'technical_issue',
-            groupValue: _reason,
-            label: StringsManager.cancelTechnicalIssue.tr(),
-            icon: Icons.block_outlined,
-            iconColor: ColorManager.error,
-            onChanged: (v) => setState(() => _reason = v),
-          ),
-          _CancelReason(
-            value: 'other',
-            groupValue: _reason,
-            label: StringsManager.cancelOther.tr(),
-            icon: Icons.chat_bubble_outline,
-            iconColor: ColorManager.primary,
-            onChanged: (v) => setState(() => _reason = v),
-          ),
-          if (_reason == 'other') ...[
-            const SizedBox(height: AppSize.s8),
-            TextField(
-              controller: _textController,
-              maxLines: 3,
-              decoration: InputDecoration(
-                hintText: StringsManager.cancelReasonHint.tr(),
-                fillColor: ColorManager.grey200,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AppRadius.r8),
-                  borderSide: BorderSide.none,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AppRadius.r8),
-                  borderSide: BorderSide.none,
-                ),
+      children: [
+        Text(
+          StringsManager.cancelSessionTitle.tr(),
+          style: AppTextStyles.headlineSmall,
+        ),
+        const SizedBox(height: AppSize.s20),
+        _CancelReason(
+          value: 'low_attendance',
+          groupValue: _reason,
+          label: StringsManager.cancelLowAttendance.tr(),
+          icon: Icons.people_outline,
+          iconColor: ColorManager.warning,
+          onChanged: (v) => setState(() => _reason = v),
+        ),
+        _CancelReason(
+          value: 'technical_issue',
+          groupValue: _reason,
+          label: StringsManager.cancelTechnicalIssue.tr(),
+          icon: Icons.block_outlined,
+          iconColor: ColorManager.error,
+          onChanged: (v) => setState(() => _reason = v),
+        ),
+        _CancelReason(
+          value: 'other',
+          groupValue: _reason,
+          label: StringsManager.cancelOther.tr(),
+          icon: Icons.chat_bubble_outline,
+          iconColor: ColorManager.primary,
+          onChanged: (v) => setState(() => _reason = v),
+        ),
+        if (_reason == 'other') ...[
+          const SizedBox(height: AppSize.s8),
+          TextField(
+            controller: _textController,
+            maxLines: 3,
+            decoration: InputDecoration(
+              hintText: StringsManager.cancelReasonHint.tr(),
+              fillColor: ColorManager.grey200,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(AppRadius.r8),
+                borderSide: BorderSide.none,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(AppRadius.r8),
+                borderSide: BorderSide.none,
               ),
             ),
-          ],
-          if (_error != null) ...[
-            const SizedBox(height: AppSize.s8),
-            Text(
-              _error!,
-              style: AppTextStyles.labelSmall.copyWith(
-                color: ColorManager.error,
-              ),
-            ),
-          ],
-          const SizedBox(height: AppSize.s20),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton(
-              onPressed: _submit,
-              style: FilledButton.styleFrom(
-                backgroundColor: ColorManager.error,
-              ),
-              child: Text(StringsManager.cancelSubmit.tr()),
-            ),
-          ),
-          const SizedBox(height: AppSize.s10),
-          SizedBox(
-            width: double.infinity,
-            child: OutlinedButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text(StringsManager.cancelBack.tr()),
-            ),
-          ),
-          const SizedBox(height: AppSize.s12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.check_circle_outline,
-                size: AppSize.s14,
-                color: ColorManager.grey500,
-              ),
-              const SizedBox(width: AppSize.s4),
-              Text(
-                StringsManager.cancelNotifyNote.tr(),
-                style: AppTextStyles.labelSmall,
-              ),
-            ],
           ),
         ],
-      );
+        if (_error != null) ...[
+          const SizedBox(height: AppSize.s8),
+          Text(
+            _error!,
+            style: AppTextStyles.labelSmall.copyWith(color: ColorManager.error),
+          ),
+        ],
+        const SizedBox(height: AppSize.s20),
+        SizedBox(
+          width: double.infinity,
+          child: FilledButton(
+            onPressed: _submit,
+            style: FilledButton.styleFrom(backgroundColor: ColorManager.error),
+            child: Text(StringsManager.cancelSubmit.tr()),
+          ),
+        ),
+        const SizedBox(height: AppSize.s10),
+        SizedBox(
+          width: double.infinity,
+          child: OutlinedButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(StringsManager.cancelBack.tr()),
+          ),
+        ),
+        const SizedBox(height: AppSize.s12),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.check_circle_outline,
+              size: AppSize.s14,
+              color: ColorManager.grey500,
+            ),
+            const SizedBox(width: AppSize.s4),
+            Text(
+              StringsManager.cancelNotifyNote.tr(),
+              style: AppTextStyles.labelSmall,
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }
 
@@ -608,9 +596,7 @@ class _CancelReason extends StatelessWidget {
                 onChanged: onChanged,
               ),
               const SizedBox(width: AppSize.s8),
-              Expanded(
-                child: Text(label, style: AppTextStyles.titleSmall),
-              ),
+              Expanded(child: Text(label, style: AppTextStyles.titleSmall)),
               Icon(icon, color: iconColor, size: AppSize.s24),
             ],
           ),

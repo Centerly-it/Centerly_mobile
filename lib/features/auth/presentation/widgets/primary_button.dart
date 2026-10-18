@@ -1,4 +1,4 @@
-﻿import 'package:centrally/core/theme/color_manager.dart';
+import 'package:centrally/core/theme/color_manager.dart';
 import 'package:centrally/core/theme/style_manager.dart';
 import 'package:centrally/core/theme/values_manager.dart';
 import 'package:flutter/material.dart';
@@ -29,9 +29,7 @@ class PrimaryButton extends StatelessWidget {
         ),
         child: Text(
           buttonLabel,
-          style: AppTextStyles.titleMedium.copyWith(
-            color: ColorManager.white,
-          ),
+          style: AppTextStyles.titleMedium.copyWith(color: ColorManager.white),
         ),
       ),
     );

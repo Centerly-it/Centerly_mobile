@@ -31,9 +31,9 @@ class AppSessionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final group = CenterlyMockData.groupById(session.groupId);
-    final presentCount = CenterlyMockData.attendanceForSession(session.id)
-        .where((item) => item.status == AttendanceStatus.present)
-        .length;
+    final presentCount = CenterlyMockData.attendanceForSession(
+      session.id,
+    ).where((item) => item.status == AttendanceStatus.present).length;
 
     return InkWell(
       onTap: onTap,
@@ -49,8 +49,9 @@ class AppSessionCard extends StatelessWidget {
                 width: AppSize.s48,
                 padding: const EdgeInsets.symmetric(vertical: AppPadding.p8),
                 decoration: BoxDecoration(
-                  color:
-                      highlight ? ColorManager.primary : ColorManager.grey200,
+                  color: highlight
+                      ? ColorManager.primary
+                      : ColorManager.grey200,
                   borderRadius: BorderRadius.circular(AppRadius.r8),
                 ),
                 child: Text(
@@ -84,9 +85,7 @@ class AppSessionCard extends StatelessWidget {
             ),
             Text(
               StringsManager.sessionDurationLabel.tr(
-                namedArgs: {
-                  'count': '${session.expectedStudentsCount ~/ 10}',
-                },
+                namedArgs: {'count': '${session.expectedStudentsCount ~/ 10}'},
               ),
               style: AppTextStyles.labelLarge.copyWith(
                 color: ColorManager.primary,

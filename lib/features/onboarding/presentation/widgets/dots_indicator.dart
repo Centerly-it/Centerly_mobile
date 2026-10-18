@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:centrally/core/theme/color_manager.dart';
 import 'package:centrally/core/theme/values_manager.dart';
 
@@ -16,13 +16,12 @@ class DotsIndicator extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: List.generate(count, (i) {
           return DotItem(isActive: i == current);
-        }
-        ),
+        }),
       ),
     );
-
   }
 }
+
 class DotItem extends StatelessWidget {
   final bool isActive;
 
@@ -31,7 +30,7 @@ class DotItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 300), 
+      duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
       margin: const EdgeInsets.symmetric(horizontal: AppSize.s5),
       width: isActive ? AppSize.s24 : AppSize.s8,

@@ -94,9 +94,7 @@ class _TeacherMySecretaryScreenState extends State<TeacherMySecretaryScreen> {
       );
     });
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(StringsManager.secretaryRemovalSuccess.tr()),
-      ),
+      SnackBar(content: Text(StringsManager.secretaryRemovalSuccess.tr())),
     );
   }
 }
@@ -236,9 +234,7 @@ class _SecretaryCard extends StatelessWidget {
           ),
           FilledButton(
             onPressed: () => Navigator.of(context).pop(true),
-            style: FilledButton.styleFrom(
-              backgroundColor: ColorManager.error,
-            ),
+            style: FilledButton.styleFrom(backgroundColor: ColorManager.error),
             child: Text(StringsManager.secretaryConfirmAction.tr()),
           ),
         ],

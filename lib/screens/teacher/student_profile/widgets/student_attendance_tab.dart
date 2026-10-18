@@ -21,12 +21,16 @@ class StudentAttendanceTab extends StatelessWidget {
         .where((a) => a.studentId == student.id)
         .toList();
 
-    final presentCount =
-        records.where((a) => a.status == AttendanceStatus.present).length;
-    final absentCount =
-        records.where((a) => a.status == AttendanceStatus.absent).length;
+    final presentCount = records
+        .where((a) => a.status == AttendanceStatus.present)
+        .length;
+    final absentCount = records
+        .where((a) => a.status == AttendanceStatus.absent)
+        .length;
     final total = records.length;
-    final attendanceRate = total == 0 ? 0 : (presentCount / total * 100).toInt();
+    final attendanceRate = total == 0
+        ? 0
+        : (presentCount / total * 100).toInt();
 
     return ListView(
       padding: const EdgeInsets.symmetric(vertical: AppPadding.p12),
@@ -78,9 +82,7 @@ class StudentAttendanceTab extends StatelessWidget {
           title: StringsManager.profileAttendanceLogTitle.tr(),
           child: records.isEmpty
               ? Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: AppPadding.p20,
-                  ),
+                  padding: const EdgeInsets.symmetric(vertical: AppPadding.p20),
                   child: Text(
                     StringsManager.profileNoAttendance.tr(),
                     style: AppTextStyles.bodySmall,
@@ -256,10 +258,7 @@ class _AttendanceRow extends StatelessWidget {
         children: [
           Expanded(
             flex: 2,
-            child: Text(
-              dayKey.tr(),
-              style: AppTextStyles.titleSmall,
-            ),
+            child: Text(dayKey.tr(), style: AppTextStyles.titleSmall),
           ),
           Expanded(
             flex: 3,
@@ -303,28 +302,29 @@ class _AttendanceRow extends StatelessWidget {
   }
 }
 
-(String, Color, IconData) _statusInfo(AttendanceStatus status) => switch (status) {
-  AttendanceStatus.present => (
-    StringsManager.attendancePresent.tr(),
-    ColorManager.success,
-    Icons.check_circle_outline,
-  ),
-  AttendanceStatus.absent => (
-    StringsManager.attendanceAbsent.tr(),
-    ColorManager.error,
-    Icons.cancel_outlined,
-  ),
-  AttendanceStatus.excused => (
-    StringsManager.attendanceExcused.tr(),
-    ColorManager.warning,
-    Icons.info_outline,
-  ),
-  AttendanceStatus.notMarked => (
-    StringsManager.attendanceNotMarked.tr(),
-    ColorManager.grey500,
-    Icons.help_outline,
-  ),
-};
+(String, Color, IconData) _statusInfo(AttendanceStatus status) =>
+    switch (status) {
+      AttendanceStatus.present => (
+        StringsManager.attendancePresent.tr(),
+        ColorManager.success,
+        Icons.check_circle_outline,
+      ),
+      AttendanceStatus.absent => (
+        StringsManager.attendanceAbsent.tr(),
+        ColorManager.error,
+        Icons.cancel_outlined,
+      ),
+      AttendanceStatus.excused => (
+        StringsManager.attendanceExcused.tr(),
+        ColorManager.warning,
+        Icons.info_outline,
+      ),
+      AttendanceStatus.notMarked => (
+        StringsManager.attendanceNotMarked.tr(),
+        ColorManager.grey500,
+        Icons.help_outline,
+      ),
+    };
 
 String _dayKey(int weekday) => switch (weekday) {
   1 => StringsManager.dayMonday,

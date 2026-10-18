@@ -34,17 +34,19 @@ class _TeacherAttendanceSheetScreenState
 
   @override
   Widget build(BuildContext context) {
-    final allRecords =
-        CenterlyMockData.attendanceForSession(widget.session.id);
+    final allRecords = CenterlyMockData.attendanceForSession(widget.session.id);
 
     final counts = {
       null: allRecords.length,
-      AttendanceStatus.present:
-          allRecords.where((a) => a.status == AttendanceStatus.present).length,
-      AttendanceStatus.absent:
-          allRecords.where((a) => a.status == AttendanceStatus.absent).length,
-      AttendanceStatus.excused:
-          allRecords.where((a) => a.status == AttendanceStatus.excused).length,
+      AttendanceStatus.present: allRecords
+          .where((a) => a.status == AttendanceStatus.present)
+          .length,
+      AttendanceStatus.absent: allRecords
+          .where((a) => a.status == AttendanceStatus.absent)
+          .length,
+      AttendanceStatus.excused: allRecords
+          .where((a) => a.status == AttendanceStatus.excused)
+          .length,
     };
 
     final filtered = allRecords.where((item) {
@@ -113,9 +115,8 @@ class _TeacherAttendanceSheetScreenState
                           },
                         ),
                         selected: _filter == AttendanceStatus.present,
-                        onTap: () => setState(
-                          () => _filter = AttendanceStatus.present,
-                        ),
+                        onTap: () =>
+                            setState(() => _filter = AttendanceStatus.present),
                       ),
                       const SizedBox(width: AppSize.s8),
                       _FilterChip(
@@ -125,9 +126,8 @@ class _TeacherAttendanceSheetScreenState
                           },
                         ),
                         selected: _filter == AttendanceStatus.absent,
-                        onTap: () => setState(
-                          () => _filter = AttendanceStatus.absent,
-                        ),
+                        onTap: () =>
+                            setState(() => _filter = AttendanceStatus.absent),
                       ),
                       const SizedBox(width: AppSize.s8),
                       _FilterChip(
@@ -137,9 +137,8 @@ class _TeacherAttendanceSheetScreenState
                           },
                         ),
                         selected: _filter == AttendanceStatus.excused,
-                        onTap: () => setState(
-                          () => _filter = AttendanceStatus.excused,
-                        ),
+                        onTap: () =>
+                            setState(() => _filter = AttendanceStatus.excused),
                       ),
                     ],
                   ),
@@ -166,9 +165,8 @@ class _TeacherAttendanceSheetScreenState
                         );
                         Navigator.of(context).push(
                           MaterialPageRoute<void>(
-                            builder: (_) => TeacherStudentProfileScreen(
-                              student: student,
-                            ),
+                            builder: (_) =>
+                                TeacherStudentProfileScreen(student: student),
                           ),
                         );
                       },

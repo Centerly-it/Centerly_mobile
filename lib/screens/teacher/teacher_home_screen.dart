@@ -25,10 +25,14 @@ class TeacherHomeScreen extends StatelessWidget {
         .where((s) => s.date.day == 14 && s.date.month == 4)
         .toList();
 
-    final totalExpected = CenterlyMockData.invoices
-        .fold<double>(0, (sum, inv) => sum + inv.amount);
-    final totalCollected = CenterlyMockData.invoices
-        .fold<double>(0, (sum, inv) => sum + inv.paidAmount);
+    final totalExpected = CenterlyMockData.invoices.fold<double>(
+      0,
+      (sum, inv) => sum + inv.amount,
+    );
+    final totalCollected = CenterlyMockData.invoices.fold<double>(
+      0,
+      (sum, inv) => sum + inv.paidAmount,
+    );
     final totalDue = totalExpected - totalCollected;
 
     return Scaffold(
@@ -53,9 +57,8 @@ class TeacherHomeScreen extends StatelessWidget {
                     session: session,
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute<void>(
-                        builder: (_) => TeacherSessionDetailsScreen(
-                          session: session,
-                        ),
+                        builder: (_) =>
+                            TeacherSessionDetailsScreen(session: session),
                       ),
                     ),
                   ),
@@ -110,7 +113,7 @@ class _HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       automaticallyImplyLeading: false,
-      expandedHeight: AppSize.s100,
+      expandedHeight: AppSize.s100 + AppSize.s16,
       pinned: true,
       backgroundColor: ColorManager.primary,
       flexibleSpace: FlexibleSpaceBar(
@@ -136,24 +139,30 @@ class _HomeAppBar extends StatelessWidget {
                   size: AppSize.s24,
                 ),
               ),
-              const Spacer(),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    StringsManager.homeGreeting.tr(namedArgs: {'name': 'علي'}),
-                    style: AppTextStyles.titleMedium.copyWith(
-                      color: ColorManager.white,
+              const SizedBox(width: AppSize.s12),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      StringsManager.homeGreeting.tr(
+                        namedArgs: {'name': 'علي'},
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.titleMedium.copyWith(
+                        color: ColorManager.white,
+                      ),
                     ),
-                  ),
-                  Text(
-                    '14 ${StringsManager.monthApril.tr()} 2026',
-                    style: AppTextStyles.labelSmall.copyWith(
-                      color: ColorManager.white.withAlpha(200),
+                    Text(
+                      '14 ${StringsManager.monthApril.tr()} 2026',
+                      style: AppTextStyles.labelSmall.copyWith(
+                        color: ColorManager.white.withAlpha(200),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               const SizedBox(width: AppSize.s12),
               const StudentAvatar(radius: AppSize.s20),
@@ -199,10 +208,7 @@ class _StatsRow extends StatelessWidget {
 // ── Home Session Card with status chip ───────────────────────────────────────
 
 class _HomeSessionCard extends StatelessWidget {
-  const _HomeSessionCard({
-    required this.session,
-    required this.onTap,
-  });
+  const _HomeSessionCard({required this.session, required this.onTap});
 
   final Session session;
   final VoidCallback onTap;
@@ -227,9 +233,12 @@ class _HomeSessionCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        '${group.name} - ${group.subjectName}',
-                        style: AppTextStyles.titleSmall,
+                      Expanded(
+                        child: Text(
+                          '${group.name} - ${group.subjectName}',
+                          style: AppTextStyles.titleSmall,
+                          textAlign: TextAlign.end,
+                        ),
                       ),
                       const SizedBox(width: AppSize.s6),
                       Text(
@@ -264,7 +273,6 @@ class _HomeSessionCard extends StatelessWidget {
     );
   }
 }
-
 
 // ── Finance Card ─────────────────────────────────────────────────────────────
 
@@ -331,13 +339,14 @@ class _FinanceCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSize.s16),
-          Row(
+          Wrap(
+            spacing: AppSize.s12,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               FilledButton(
                 onPressed: () {},
                 child: Text(StringsManager.homeViewList.tr()),
               ),
-              const Spacer(),
               Text(
                 '8',
                 style: AppTextStyles.headlineSmall.copyWith(
@@ -386,10 +395,7 @@ class _MoneyTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          title,
-          style: AppTextStyles.labelSmall,
-        ),
+        Text(title, style: AppTextStyles.labelSmall),
         const SizedBox(height: AppSize.s4),
         Text(
           _formatMoney(value),

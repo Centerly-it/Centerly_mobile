@@ -328,7 +328,8 @@ class CenterlyMockData {
     ),
   ];
 
-  static Group groupById(String id) => groups.firstWhere((group) => group.id == id);
+  static Group groupById(String id) =>
+      groups.firstWhere((group) => group.id == id);
 
   static Student studentById(String id) =>
       students.firstWhere((student) => student.id == id);

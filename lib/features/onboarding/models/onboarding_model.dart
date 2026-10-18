@@ -1,4 +1,4 @@
-﻿import 'package:centrally/core/constants/assets_manager.dart';
+import 'package:centrally/core/constants/assets_manager.dart';
 import 'package:centrally/core/constants/strings_manager.dart';
 
 class OnboardingPageData {
@@ -13,7 +13,7 @@ class OnboardingPageData {
   final String bodyKey;
 }
 
- const List<OnboardingPageData> onboardingPages = [
+const List<OnboardingPageData> onboardingPages = [
   OnboardingPageData(
     illustration: AssetsManager.onboarding1,
     titleKey: StringsManager.onboarding1Title,

@@ -4,7 +4,6 @@ import 'package:centrally/core/theme/style_manager.dart';
 import 'package:centrally/core/theme/values_manager.dart';
 import 'package:centrally/core/widgets/app_empty_state.dart';
 import 'package:centrally/core/widgets/app_session_card.dart';
-import 'package:centrally/mock_data/centerly_mock_data.dart';
 import 'package:centrally/models/centerly_models.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -31,10 +30,12 @@ class TeacherPage extends StatelessWidget {
       backgroundColor: ColorManager.background,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor:
-            blueHeader ? ColorManager.primary : ColorManager.background,
-        foregroundColor:
-            blueHeader ? ColorManager.white : ColorManager.textPrimary,
+        backgroundColor: blueHeader
+            ? ColorManager.primary
+            : ColorManager.background,
+        foregroundColor: blueHeader
+            ? ColorManager.white
+            : ColorManager.textPrimary,
         title: Text(title),
         actions: actions,
       ),
@@ -210,11 +211,7 @@ class TeacherSessionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppSessionCard(
-      session: session,
-      onTap: onTap,
-      highlight: highlight,
-    );
+    return AppSessionCard(session: session, onTap: onTap, highlight: highlight);
   }
 }
 

@@ -48,27 +48,29 @@ class _CreateInvoicePaymentScreenState extends State<CreateInvoicePaymentScreen>
     _tabController = TabController(
       length: 2,
       vsync: this,
-      initialIndex:
-          widget.initialMode == InvoicePaymentMode.createInvoice ? 0 : 1,
+      initialIndex: widget.initialMode == InvoicePaymentMode.createInvoice
+          ? 0
+          : 1,
     );
 
-    _invoiceStudentId = widget.preselectedStudentId ??
+    _invoiceStudentId =
+        widget.preselectedStudentId ??
         (CenterlyMockData.students.isNotEmpty
             ? CenterlyMockData.students.first.id
             : null);
     _amountController = TextEditingController(text: '400');
-    _invoiceNumberController =
-        TextEditingController(text: '#${Random().nextInt(9000) + 1000}');
+    _invoiceNumberController = TextEditingController(
+      text: '#${Random().nextInt(9000) + 1000}',
+    );
 
     final dueInvoices = CenterlyMockData.invoices
         .where((i) => i.status == InvoiceStatus.due)
         .toList();
-    _selectedInvoiceId =
-        dueInvoices.isNotEmpty ? dueInvoices.first.id : null;
+    _selectedInvoiceId = dueInvoices.isNotEmpty ? dueInvoices.first.id : null;
     _paymentAmountController = TextEditingController(
       text: dueInvoices.isNotEmpty
           ? (dueInvoices.first.amount - dueInvoices.first.paidAmount)
-              .toStringAsFixed(0)
+                .toStringAsFixed(0)
           : '400',
     );
   }
@@ -113,8 +115,9 @@ class _CreateInvoicePaymentScreenState extends State<CreateInvoicePaymentScreen>
     if (!_paymentFormKey.currentState!.validate()) return;
     if (_selectedInvoiceId == null) return;
 
-    final index = CenterlyMockData.invoices
-        .indexWhere((i) => i.id == _selectedInvoiceId);
+    final index = CenterlyMockData.invoices.indexWhere(
+      (i) => i.id == _selectedInvoiceId,
+    );
     if (index != -1) {
       final inv = CenterlyMockData.invoices[index];
       final paidAmt =
@@ -176,10 +179,7 @@ class _CreateInvoicePaymentScreenState extends State<CreateInvoicePaymentScreen>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [
-          _buildCreateInvoiceTab(),
-          _buildRecordPaymentTab(),
-        ],
+        children: [_buildCreateInvoiceTab(), _buildRecordPaymentTab()],
       ),
     );
   }
@@ -358,11 +358,11 @@ class _CreateInvoicePaymentScreenState extends State<CreateInvoicePaymentScreen>
                 if (val != null) {
                   setState(() {
                     _selectedInvoiceId = val;
-                    final selected =
-                        dueInvoices.firstWhere((i) => i.id == val);
+                    final selected = dueInvoices.firstWhere((i) => i.id == val);
                     _paymentAmountController.text =
-                        (selected.amount - selected.paidAmount)
-                            .toStringAsFixed(0);
+                        (selected.amount - selected.paidAmount).toStringAsFixed(
+                          0,
+                        );
                   });
                 }
               },

@@ -35,10 +35,12 @@ class _AddEditStudentScreenState extends State<AddEditStudentScreen> {
     final student = widget.student;
     _nameController = TextEditingController(text: student?.name ?? '');
     _phoneController = TextEditingController(text: student?.phone ?? '');
-    _guardianPhoneController =
-        TextEditingController(text: student?.guardianPhone ?? '');
+    _guardianPhoneController = TextEditingController(
+      text: student?.guardianPhone ?? '',
+    );
     _levelTagController = TextEditingController(text: student?.levelTag ?? '');
-    _selectedGroupId = student?.groupId ??
+    _selectedGroupId =
+        student?.groupId ??
         (CenterlyMockData.groups.isNotEmpty
             ? CenterlyMockData.groups.first.id
             : null);
@@ -59,8 +61,9 @@ class _AddEditStudentScreenState extends State<AddEditStudentScreen> {
     if (_selectedGroupId == null) return;
 
     if (_isEditing) {
-      final index = CenterlyMockData.students
-          .indexWhere((s) => s.id == widget.student!.id);
+      final index = CenterlyMockData.students.indexWhere(
+        (s) => s.id == widget.student!.id,
+      );
       if (index != -1) {
         CenterlyMockData.students[index] = Student(
           id: widget.student!.id,
@@ -234,10 +237,7 @@ class _AddEditStudentScreenState extends State<AddEditStudentScreen> {
                   children: [
                     const Icon(Icons.qr_code, color: ColorManager.primary),
                     const SizedBox(width: AppSize.s10),
-                    Text(
-                      '#$_qrCode',
-                      style: AppTextStyles.titleMedium,
-                    ),
+                    Text('#$_qrCode', style: AppTextStyles.titleMedium),
                     const Spacer(),
                     IconButton(
                       icon: const Icon(
@@ -246,8 +246,7 @@ class _AddEditStudentScreenState extends State<AddEditStudentScreen> {
                       ),
                       onPressed: () {
                         setState(() {
-                          _qrCode =
-                              '${Random().nextInt(90000) + 10000}';
+                          _qrCode = '${Random().nextInt(90000) + 10000}';
                         });
                       },
                     ),

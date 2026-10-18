@@ -50,9 +50,7 @@ class AppQrWidget extends StatelessWidget {
             border: Border.all(color: ColorManager.divider),
             borderRadius: BorderRadius.circular(AppRadius.r8),
           ),
-          child: CustomPaint(
-            painter: _QrPainter(value: value),
-          ),
+          child: CustomPaint(painter: _QrPainter(value: value)),
         ),
         if (showIdBadge) ...[
           const SizedBox(height: AppSize.s8),

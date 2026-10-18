@@ -162,20 +162,24 @@ class _SecretaryAttendanceSheetScreenState
   @override
   Widget build(BuildContext context) {
     // Get all students for this group to ensure everyone is listed
-    final groupStudents =
-        CenterlyMockData.studentsForGroup(widget.session.groupId);
-    final allRecords =
-        CenterlyMockData.attendanceForSession(widget.session.id);
+    final groupStudents = CenterlyMockData.studentsForGroup(
+      widget.session.groupId,
+    );
+    final allRecords = CenterlyMockData.attendanceForSession(widget.session.id);
 
     final counts = {
       null: groupStudents.length,
-      AttendanceStatus.present:
-          allRecords.where((a) => a.status == AttendanceStatus.present).length,
-      AttendanceStatus.absent:
-          allRecords.where((a) => a.status == AttendanceStatus.absent).length,
-      AttendanceStatus.excused:
-          allRecords.where((a) => a.status == AttendanceStatus.excused).length,
-      AttendanceStatus.notMarked: groupStudents.length -
+      AttendanceStatus.present: allRecords
+          .where((a) => a.status == AttendanceStatus.present)
+          .length,
+      AttendanceStatus.absent: allRecords
+          .where((a) => a.status == AttendanceStatus.absent)
+          .length,
+      AttendanceStatus.excused: allRecords
+          .where((a) => a.status == AttendanceStatus.excused)
+          .length,
+      AttendanceStatus.notMarked:
+          groupStudents.length -
           allRecords
               .where((a) => a.status != AttendanceStatus.notMarked)
               .length,
@@ -196,7 +200,8 @@ class _SecretaryAttendanceSheetScreenState
       );
 
       final matchesFilter = _filter == null || record.status == _filter;
-      final matchesQuery = _query.isEmpty ||
+      final matchesQuery =
+          _query.isEmpty ||
           student.name.contains(_query.trim()) ||
           student.qrCodeValue.contains(_query.trim());
       return matchesFilter && matchesQuery;
@@ -224,7 +229,10 @@ class _SecretaryAttendanceSheetScreenState
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.qr_code_scanner, color: ColorManager.primary),
+            icon: const Icon(
+              Icons.qr_code_scanner,
+              color: ColorManager.primary,
+            ),
             tooltip: StringsManager.secretaryScanQr.tr(),
             onPressed: _openQrScannerDialog,
           ),
@@ -254,9 +262,7 @@ class _SecretaryAttendanceSheetScreenState
             child: Row(
               children: [
                 Icon(
-                  _isLocked
-                      ? Icons.lock_outline
-                      : Icons.timer_outlined,
+                  _isLocked ? Icons.lock_outline : Icons.timer_outlined,
                   color: _isLocked ? ColorManager.error : ColorManager.primary,
                   size: AppSize.s20,
                 ),
@@ -335,9 +341,8 @@ class _SecretaryAttendanceSheetScreenState
                           },
                         ),
                         selected: _filter == AttendanceStatus.present,
-                        onTap: () => setState(
-                          () => _filter = AttendanceStatus.present,
-                        ),
+                        onTap: () =>
+                            setState(() => _filter = AttendanceStatus.present),
                       ),
                       const SizedBox(width: AppSize.s8),
                       _FilterChip(
@@ -347,9 +352,8 @@ class _SecretaryAttendanceSheetScreenState
                           },
                         ),
                         selected: _filter == AttendanceStatus.absent,
-                        onTap: () => setState(
-                          () => _filter = AttendanceStatus.absent,
-                        ),
+                        onTap: () =>
+                            setState(() => _filter = AttendanceStatus.absent),
                       ),
                       const SizedBox(width: AppSize.s8),
                       _FilterChip(
@@ -359,9 +363,8 @@ class _SecretaryAttendanceSheetScreenState
                           },
                         ),
                         selected: _filter == AttendanceStatus.excused,
-                        onTap: () => setState(
-                          () => _filter = AttendanceStatus.excused,
-                        ),
+                        onTap: () =>
+                            setState(() => _filter = AttendanceStatus.excused),
                       ),
                     ],
                   ),

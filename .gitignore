@@ -32,6 +32,12 @@ migrate_working_dir/
 .pub/
 /build/
 /coverage/
+**/node_modules/
+.env*
+!.env.example
+supabase/.temp/
+supabase/.branches/
+android/.kotlin/
 
 # Symbolication related
 app.*.symbols

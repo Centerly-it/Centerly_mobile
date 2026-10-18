@@ -14,13 +14,13 @@ class MyBlocObserver extends BlocObserver {
   @override
   void onEvent(Bloc<dynamic, dynamic> bloc, Object? event) {
     super.onEvent(bloc, event);
-    log('onEvent: ${bloc.runtimeType} → $event', name: 'BlocObserver');
+    log('onEvent: ${bloc.runtimeType}', name: 'BlocObserver');
   }
 
   @override
   void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
     super.onChange(bloc, change);
-    log('onChange: ${bloc.runtimeType}\n  $change', name: 'BlocObserver');
+    log('onChange: ${bloc.runtimeType}', name: 'BlocObserver');
   }
 
   @override
@@ -29,18 +29,13 @@ class MyBlocObserver extends BlocObserver {
     Transition<dynamic, dynamic> transition,
   ) {
     super.onTransition(bloc, transition);
-    log('onTransition: ${bloc.runtimeType}\n  $transition', name: 'BlocObserver');
+    log('onTransition: ${bloc.runtimeType}', name: 'BlocObserver');
   }
 
   @override
   void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
     super.onError(bloc, error, stackTrace);
-    log(
-      'onError: ${bloc.runtimeType}\n  $error',
-      name: 'BlocObserver',
-      error: error,
-      stackTrace: stackTrace,
-    );
+    log('onError: ${bloc.runtimeType}', name: 'BlocObserver');
   }
 
   @override

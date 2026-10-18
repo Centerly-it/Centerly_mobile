@@ -26,10 +26,7 @@ class _MainShellViewState extends State<MainShellView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: _index,
-        children: _buildPages(),
-      ),
+      body: IndexedStack(index: _index, children: _buildPages()),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _index,
         onDestinationSelected: (value) => setState(() => _index = value),
@@ -85,9 +82,8 @@ NavigationDestination _navItem({
   required IconData icon,
   required IconData selectedIcon,
   required String label,
-}) =>
-    NavigationDestination(
-      icon: Icon(icon),
-      selectedIcon: Icon(selectedIcon, color: ColorManager.primary),
-      label: label,
-    );
+}) => NavigationDestination(
+  icon: Icon(icon),
+  selectedIcon: Icon(selectedIcon, color: ColorManager.primary),
+  label: label,
+);

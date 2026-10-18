@@ -1,0 +1,81 @@
+import { PGlite } from '@electric-sql/pglite';
+import { readFile, readdir } from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import { testSchedule } from './schedule.mjs';
+import { testSecurity } from './security.mjs';
+
+const db = new PGlite();
+await db.exec(`create role anon; create role authenticated;
+  create schema auth; create table auth.users(id uuid primary key);
+  create function auth.uid() returns uuid language sql stable as
+  $$ select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid $$;
+  grant usage on schema auth to authenticated; grant execute on function auth.uid() to authenticated;`);
+for (const name of (await readdir(new URL('../migrations/', import.meta.url))).sort()) {
+  try { await db.exec(await readFile(new URL('../migrations/' + name, import.meta.url), 'utf8')); }
+  catch (error) { console.error('Migration failed:', name, error.message); process.exit(1); }
+}
+await db.exec(await readFile(new URL('./fixtures.sql', import.meta.url), 'utf8'));
+let count = 0;
+const scalar = async sql => Object.values((await db.query(sql)).rows[0])[0];
+const actor = async id => {
+  await db.exec('reset role');
+  await db.query("select set_config('request.jwt.claim.sub',$1,false)", [id]);
+  await db.exec('set role authenticated');
+};
+const denied = async (sql, message) => {
+  await assert.rejects(db.query(sql), error => !message || error.message.includes(message)); count++;
+};
+const eq = async (sql, expected) => { assert.equal(await scalar(sql), expected); count++; };
+const t1='10000000-0000-0000-0000-000000000001', t2='10000000-0000-0000-0000-000000000002';
+const s1='20000000-0000-0000-0000-000000000001', s2='20000000-0000-0000-0000-000000000002';
+const student='30000000-0000-0000-0000-000000000001', session='50000000-0000-0000-0000-000000000001';
+await actor(t1);
+await eq('select count(*)::int from public.students',1);
+await denied(`insert into public.students(teacher_id,full_name) values('${t1}','forbidden')`);
+await denied(`select public.set_attendance('${session}','${student}','present')`,'FORBIDDEN_ROLE');
+await denied(`select public.create_invoice('${student}',100,current_date,'teacher')`,'FORBIDDEN_ROLE');
+await actor(t2); await eq(`select count(*)::int from public.students where id='${student}'`,0);
+await denied(`select public.cancel_session('${session}','cross tenant')`,'NOT_FOUND');
+await actor(s2);
+await denied(`insert into public.group_enrollments(teacher_id,group_id,student_id) values('${t2}','40000000-0000-0000-0000-000000000002','${student}')`);
+await actor(s1);
+await eq(`select count(*)::int from public.attendance where status='not_marked'`,1);
+await db.query(`select public.set_attendance('${session}','${student}','present')`);
+await db.query(`select public.finalize_attendance('${session}')`);
+await denied(`select public.set_attendance('${session}','${student}','absent')`,'ATTENDANCE_CORRECTION_REASON_REQUIRED');
+await db.query(`select public.set_attendance('${session}','${student}','absent','corrected register')`);
+await eq('select count(*)::int from public.attendance_change_log',2);
+await denied(`select public.save_teacher_note('${student}','forbidden')`,'FORBIDDEN_ROLE');
+const invoice=await scalar(`select public.create_invoice('${student}',100,current_date,'INV-1')`);
+const key='60000000-0000-0000-0000-000000000001';
+const payment=await scalar(`select public.record_payment('${invoice}',40,'cash','${key}')`);
+await eq(`select public.record_payment('${invoice}',40,'cash','${key}')`,payment);
+await denied(`select public.record_payment('${invoice}',41,'cash','${key}')`,'CONFLICT');
+await denied(`select public.record_payment('${invoice}',61,'cash',gen_random_uuid())`,'CONFLICT');
+await eq(`select status from public.invoices where id='${invoice}'`,'partially_paid');
+await db.query(`select public.record_payment('${invoice}',60,'transfer',gen_random_uuid())`);
+await eq(`select status from public.invoices where id='${invoice}'`,'paid');
+await db.query(`select public.reverse_payment('${payment}','correction')`);
+await eq(`select status from public.invoices where id='${invoice}'`,'partially_paid');
+await eq(`select count(*)::int from public.payments`,3);
+await denied(`update public.payments set amount_egp=1`);
+await actor(t1);
+const note=await scalar(`select public.save_teacher_note('${student}','note')::text`);
+await denied(`select public.save_teacher_note('${student}','lost update')`,'CONFLICT');
+await db.query(`select public.save_teacher_note('${student}','revision','${note}')`);
+await db.query(`select public.request_secretary_removal('${s1}')`);
+await db.query(`select public.request_secretary_removal('${s1}')`);
+await eq('select count(*)::int from public.secretary_removal_requests',1);
+await eq(`select status from public.secretaries where id='${s1}'`,'active');
+count+=await testSchedule(db,actor,t1,s1,student,session);
+count+=await testSecurity(db,actor,t1,t2,s1,student);
+await db.exec('reset role');
+await db.query(`update public.teachers set subscription_status='inactive' where id='${t1}'`);
+await actor(s1); await eq('select count(*)::int from public.students',0);
+await denied('select public.get_current_profile()','SUBSCRIPTION_INACTIVE');
+await db.exec('reset role'); await db.query(`update public.teachers set subscription_status='active' where id='${t1}'`);
+await db.query(`update public.secretaries set status='inactive' where id='${s1}'`);
+await actor(s1); await eq('select count(*)::int from public.students',0);
+await actor(''); await denied('select public.get_current_profile()','AUTH_REQUIRED');
+console.log(`PASS: ${count} PostgreSQL authorization/business assertions; all migrations applied.`);
+await db.close();

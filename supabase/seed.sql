@@ -1,0 +1,4 @@
+-- Intentionally no hosted Auth accounts, passwords or real student information.
+-- Deterministic two-tenant fixtures are in tests/fixtures.sql and are loaded by
+-- tests/run.mjs into an ephemeral PostgreSQL database only.
+-- Full Supabase Auth seeds require trusted local provisioning tooling (pending).

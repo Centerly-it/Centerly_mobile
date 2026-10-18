@@ -1,0 +1,92 @@
+# Shared backend contract — v6.1 draft implementation
+
+Canonical source: this repository's `supabase/migrations`, by explicit owner
+override on 2026-10-18. No hosted deployment or compatibility SHA is claimed.
+Transfer the same versioned migrations and Supabase migration history to the
+future Secretary repo; never create/reapply a duplicate schema. Both clients
+must pin the same deployed migration version before integrating live data.
+
+## Identity, authorization and provisioning
+
+Supabase Auth owns email/password and auth UUIDs. `teachers.id` is the tenant;
+`secretaries.id` references an Auth user and has exactly one `teacher_id`.
+Teachers and secretaries have independent live account status; teacher
+subscription must also be active. No role comes from editable user metadata.
+No public registration/provisioning RPC. Trusted administrators create Auth users
+then insert role records with privileged tooling outside both apps. Disable
+Supabase public signup in project configuration before pilot; this is not a SQL
+setting. Unprovisioned Auth users have no business access.
+
+All tenant tables ENABLE and FORCE RLS. Anonymous has no table/function grants.
+Authenticated users read their tenant only; notifications additionally require
+matching recipient. Secretary-only INSERT/UPDATE: grade levels, groups, students,
+enrollments, exams, assignments. No client DELETE. All other writes use RPCs.
+Account/profile, subscription and seat changes are trusted-admin-only.
+RPC definer helpers have empty search paths, qualified relations and explicit
+EXECUTE grants; migration owner must retain BYPASSRLS for identity lookup.
+
+## Tables
+
+`teachers`, `secretaries`, `grade_levels`, `groups`, `students`,
+`group_enrollments`, `group_schedules`, `sessions`, `attendance`, `exams`,
+`assignments`, `invoices`, `payments`, `teacher_notes`, `notifications`,
+`secretary_removal_requests`, `attendance_change_log`, `audit_events`.
+Exact columns, constraints and enum-like CHECK values are migration-defined.
+Composite FKs enforce same-tenant references. Business history is archived,
+never client-deleted. Update/remove operational tables with care: historical
+schedule version editing, enrollment capacity enforcement and provisioning seat
+validation still require dedicated acceptance tests and RPC extensions.
+
+## Implemented RPCs (PostgREST named arguments match SQL)
+
+| Function | Arguments | Return / authorization |
+|---|---|---|
+| get_current_profile | none | JSON id, teacher_id, role; active actor |
+| list_students | p_search text=null, p_group_id uuid=null, p_cursor uuid=null, p_limit int=30 | student rows; UUID ascending cursor; max 100 |
+| list_sessions | p_from date, p_to date, p_group_id uuid=null | session rows ordered start/id; inclusive range <=62 days |
+| get_teacher_dashboard | p_date date | JSON counts, today's sessions, daily collected and all outstanding; teacher |
+| add_schedule | p_group_id uuid, p_weekday int, p_start time, p_end time, p_from date, p_to date=null | schedule UUID; secretary |
+| generate_sessions | p_from date, p_to date | inserted count; secretary, inclusive <=62 days |
+| set_attendance | p_session_id uuid, p_student_id uuid, p_status text, p_reason text=null | attendance UUID; secretary |
+| finalize_attendance | p_session_id uuid | void; secretary, repeat safe |
+| cancel_session | p_session_id uuid, p_reason text | void; either role, session not ended |
+| create_invoice | p_student_id uuid, p_amount numeric, p_due_on date, p_invoice_number text, p_group_id uuid=null | UUID; secretary |
+| record_payment | p_invoice_id uuid, p_amount numeric, p_method text, p_idempotency_key uuid | UUID; secretary, idempotent exact replay |
+| reverse_payment | p_payment_id uuid, p_reason text | reversal UUID; secretary, repeat returns same UUID |
+| save_teacher_note | p_student_id uuid, p_content text, p_expected_updated_at timestamptz=null | updated timestamp; teacher, optimistic conflict |
+| request_secretary_removal | p_secretary_id uuid | request UUID; teacher, pending duplicate returns same request |
+| mark_notification_read | p_id uuid | void; matching recipient |
+| get_daily_collections | p_date date, p_secretary_id uuid=null | JSON net EGP; either role |
+
+## Calculation and workflow rules
+
+EGP uses numeric(12,2), never binary floats. Payments >0, two decimal places,
+cash/transfer/other. Net paid = collections minus reversal rows. Outstanding =
+invoice amount minus net paid, excluding void invoices. No overpayment. Due /
+partially_paid / paid derives transactionally from ledger. Money rows and audit
+logs reject UPDATE/DELETE even for accidental privileged SQL. Invoice void and
+full student-profile read RPC are not yet implemented; no client should assume them.
+
+Dates use Africa/Cairo server conversion including DST; instants are timestamptz.
+Daily reports use inclusive local midnight / exclusive next local midnight.
+Weekday is PostgreSQL Sunday=0. End time earlier than start means next-day end.
+Existing generated occurrences are never overwritten. No background job required.
+Manual attendance has no time cutoff, leaves not_marked intact and audits actor/time.
+Corrections after finalization require nonblank reason; cancelled sessions retain
+marks but reject further marking. Attendance ratios must exclude not_marked from
+the marked denominator and show pending separately; no ratio RPC yet.
+
+## Errors and verification limits
+
+RPC business failures use SQLSTATE P0001 with stable MESSAGE: AUTH_REQUIRED,
+ACCOUNT_INACTIVE, SUBSCRIPTION_INACTIVE, FORBIDDEN_ROLE,
+NOT_FOUND, VALIDATION_ERROR, CONFLICT, ALREADY_CANCELLED,
+ATTENDANCE_CORRECTION_REASON_REQUIRED. Constraint/RLS failures can use native
+SQLSTATE 23503/23505/23514/42501. Clients must map to localized errors and suppress
+SQL details. Unprovisioned users receive ACCOUNT_INACTIVE without tenant access.
+
+Run `npm ci --prefix supabase/tests`, then `node supabase/tests/run.mjs`.
+Tests apply all migrations to embedded PostgreSQL with synthetic Auth schema.
+They are not hosted REST/Auth or concurrent-transaction proof. Before live data:
+run Supabase integration and race tests, review definer privileges, configure
+signup denial, provisioning, backups/restore, monitoring and explicit deployment approval.

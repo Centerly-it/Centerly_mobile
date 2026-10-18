@@ -23,41 +23,46 @@ class _SecretaryFinanceScreenState extends State<SecretaryFinanceScreen> {
   void _openCreateInvoice() {
     Navigator.of(context)
         .push(
-      MaterialPageRoute<void>(
-        builder: (_) => const CreateInvoicePaymentScreen(
-          initialMode: InvoicePaymentMode.createInvoice,
-        ),
-      ),
-    )
+          MaterialPageRoute<void>(
+            builder: (_) => const CreateInvoicePaymentScreen(
+              initialMode: InvoicePaymentMode.createInvoice,
+            ),
+          ),
+        )
         .then((_) => setState(() {}));
   }
 
   void _openRecordPayment({String? preselectedStudentId}) {
     Navigator.of(context)
         .push(
-      MaterialPageRoute<void>(
-        builder: (_) => CreateInvoicePaymentScreen(
-          initialMode: InvoicePaymentMode.recordPayment,
-          preselectedStudentId: preselectedStudentId,
-        ),
-      ),
-    )
+          MaterialPageRoute<void>(
+            builder: (_) => CreateInvoicePaymentScreen(
+              initialMode: InvoicePaymentMode.recordPayment,
+              preselectedStudentId: preselectedStudentId,
+            ),
+          ),
+        )
         .then((_) => setState(() {}));
   }
 
   @override
   Widget build(BuildContext context) {
     final allInvoices = CenterlyMockData.invoices;
-    final totalExpected =
-        allInvoices.fold<double>(0, (sum, inv) => sum + inv.amount);
-    final totalCollected =
-        allInvoices.fold<double>(0, (sum, inv) => sum + inv.paidAmount);
+    final totalExpected = allInvoices.fold<double>(
+      0,
+      (sum, inv) => sum + inv.amount,
+    );
+    final totalCollected = allInvoices.fold<double>(
+      0,
+      (sum, inv) => sum + inv.paidAmount,
+    );
     final totalDue = totalExpected - totalCollected;
 
     final filtered = allInvoices.where((inv) {
       final student = CenterlyMockData.studentById(inv.studentId);
       final matchesFilter = _filter == null || inv.status == _filter;
-      final matchesQuery = _query.isEmpty ||
+      final matchesQuery =
+          _query.isEmpty ||
           student.name.contains(_query.trim()) ||
           inv.invoiceNumber.contains(_query.trim());
       return matchesFilter && matchesQuery;
@@ -174,8 +179,7 @@ class _SecretaryFinanceScreenState extends State<SecretaryFinanceScreen> {
                 _FilterChip(
                   label: StringsManager.financeFilterPaid.tr(),
                   selected: _filter == InvoiceStatus.paid,
-                  onTap: () =>
-                      setState(() => _filter = InvoiceStatus.paid),
+                  onTap: () => setState(() => _filter = InvoiceStatus.paid),
                 ),
                 const SizedBox(width: AppSize.s8),
                 _FilterChip(
@@ -204,8 +208,9 @@ class _SecretaryFinanceScreenState extends State<SecretaryFinanceScreen> {
                         const SizedBox(height: AppSize.s10),
                     itemBuilder: (context, index) {
                       final invoice = filtered[index];
-                      final student =
-                          CenterlyMockData.studentById(invoice.studentId);
+                      final student = CenterlyMockData.studentById(
+                        invoice.studentId,
+                      );
                       final isPaid = invoice.status == InvoiceStatus.paid;
 
                       return Container(

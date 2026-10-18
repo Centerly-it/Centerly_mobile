@@ -1,4 +1,4 @@
-﻿import 'package:centrally/core/theme/color_manager.dart';
+import 'package:centrally/core/theme/color_manager.dart';
 import 'package:centrally/core/theme/font_manager.dart';
 import 'package:flutter/material.dart';
 
@@ -8,12 +8,12 @@ TextStyle _style(
   Color color, [
   double? height,
 ]) => TextStyle(
-      fontFamily: FontFamily.cairo,
-      fontSize: size,
-      fontWeight: weight,
-      color: color,
-      height: height,
-    );
+  fontFamily: FontFamily.cairo,
+  fontSize: size,
+  fontWeight: weight,
+  color: color,
+  height: height,
+);
 
 class AppTextStyles {
   AppTextStyles._();

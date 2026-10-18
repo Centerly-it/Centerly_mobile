@@ -21,10 +21,14 @@ class StudentPaymentsTab extends StatelessWidget {
         .where((inv) => inv.studentId == student.id)
         .toList();
 
-    final totalExpected =
-        invoices.fold<double>(0, (sum, inv) => sum + inv.amount);
-    final totalPaid =
-        invoices.fold<double>(0, (sum, inv) => sum + inv.paidAmount);
+    final totalExpected = invoices.fold<double>(
+      0,
+      (sum, inv) => sum + inv.amount,
+    );
+    final totalPaid = invoices.fold<double>(
+      0,
+      (sum, inv) => sum + inv.paidAmount,
+    );
     final totalDue = totalExpected - totalPaid;
 
     return ListView(
@@ -70,9 +74,7 @@ class StudentPaymentsTab extends StatelessWidget {
           title: StringsManager.profileInvoicesTitle.tr(),
           child: invoices.isEmpty
               ? Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: AppPadding.p20,
-                  ),
+                  padding: const EdgeInsets.symmetric(vertical: AppPadding.p20),
                   child: Text(
                     StringsManager.profileNoInvoices.tr(),
                     style: AppTextStyles.bodySmall,
@@ -135,9 +137,7 @@ class _SectionCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: AppSize.s10),
-                Expanded(
-                  child: Text(title, style: AppTextStyles.titleMedium),
-                ),
+                Expanded(child: Text(title, style: AppTextStyles.titleMedium)),
               ],
             ),
           ),
@@ -254,8 +254,9 @@ class _InvoiceRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final isPaid = invoice.status == InvoiceStatus.paid;
     final color = isPaid ? ColorManager.success : ColorManager.error;
-    final label =
-        isPaid ? StringsManager.invoicePaid.tr() : StringsManager.invoiceDue.tr();
+    final label = isPaid
+        ? StringsManager.invoicePaid.tr()
+        : StringsManager.invoiceDue.tr();
     final icon = isPaid ? Icons.check_circle_outline : Icons.cancel_outlined;
 
     return Padding(
@@ -267,10 +268,7 @@ class _InvoiceRow extends StatelessWidget {
         children: [
           Expanded(
             flex: 2,
-            child: Text(
-              invoice.invoiceNumber,
-              style: AppTextStyles.bodySmall,
-            ),
+            child: Text(invoice.invoiceNumber, style: AppTextStyles.bodySmall),
           ),
           Expanded(
             flex: 2,

@@ -1,4 +1,4 @@
-﻿import 'package:centrally/core/theme/color_manager.dart';
+import 'package:centrally/core/theme/color_manager.dart';
 import 'package:centrally/core/constants/icons_manager.dart';
 import 'package:centrally/core/constants/strings_manager.dart';
 import 'package:centrally/core/theme/style_manager.dart';
@@ -40,10 +40,7 @@ class _PasswordTitledTextFieldState extends State<PasswordTitledTextField> {
   OutlineInputBorder _border({Color? color, double width = 1}) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppRadius.r12),
-      borderSide: BorderSide(
-        color: color ?? ColorManager.border,
-        width: width,
-      ),
+      borderSide: BorderSide(color: color ?? ColorManager.border, width: width),
     );
   }
 
@@ -55,69 +52,68 @@ class _PasswordTitledTextFieldState extends State<PasswordTitledTextField> {
         Text(widget.title, style: AppTextStyles.titleSmall),
         const SizedBox(height: AppSize.s8),
         TextFormField(
-            controller: widget.controller,
-            obscureText: obscurePassword,
-            textAlign: TextAlign.start,
-            style: Theme.of(context).textTheme.bodyMedium,
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: ColorManager.grey100,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: AppPadding.p16,
-                vertical: AppPadding.p14,
-              ),
-              hintText: widget.hint,
-              hintStyle: AppTextStyles.bodyMedium.copyWith(
-                color: ColorManager.grey500,
-              ),
-              border: _border(),
-              enabledBorder: _border(),
-              focusedBorder: _border(color: ColorManager.primary, width: 1.5),
-              errorBorder: _border(color: ColorManager.error),
-              focusedErrorBorder:
-                  _border(color: ColorManager.error, width: 1.5),
-              prefixIcon: Padding(
-                padding: const EdgeInsets.all(AppPadding.p12),
-                child: SvgPicture.asset(
-                  widget.icon,
-                  colorFilter: const ColorFilter.mode(
-                    ColorManager.grey500,
-                    BlendMode.srcIn,
-                  ),
-                ),
-              ),
-              suffixIcon: IconButton(
-                onPressed: _togglePasswordVisibility,
-                icon: SvgPicture.asset(
-                  obscurePassword
-                      ? IconsManager.eyeVisibleIcon
-                      : IconsManager.eyeInvisibleIcon,
-                  colorFilter: const ColorFilter.mode(
-                    ColorManager.grey500,
-                    BlendMode.srcIn,
-                  ),
+          controller: widget.controller,
+          obscureText: obscurePassword,
+          textAlign: TextAlign.start,
+          style: Theme.of(context).textTheme.bodyMedium,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: ColorManager.grey100,
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: AppPadding.p16,
+              vertical: AppPadding.p14,
+            ),
+            hintText: widget.hint,
+            hintStyle: AppTextStyles.bodyMedium.copyWith(
+              color: ColorManager.grey500,
+            ),
+            border: _border(),
+            enabledBorder: _border(),
+            focusedBorder: _border(color: ColorManager.primary, width: 1.5),
+            errorBorder: _border(color: ColorManager.error),
+            focusedErrorBorder: _border(color: ColorManager.error, width: 1.5),
+            prefixIcon: Padding(
+              padding: const EdgeInsets.all(AppPadding.p12),
+              child: SvgPicture.asset(
+                widget.icon,
+                colorFilter: const ColorFilter.mode(
+                  ColorManager.grey500,
+                  BlendMode.srcIn,
                 ),
               ),
             ),
-            validator: (v) {
-              if (v == null || v.trim().isEmpty) {
-                return StringsManager.validationRequired.tr();
+            suffixIcon: IconButton(
+              onPressed: _togglePasswordVisibility,
+              icon: SvgPicture.asset(
+                obscurePassword
+                    ? IconsManager.eyeVisibleIcon
+                    : IconsManager.eyeInvisibleIcon,
+                colorFilter: const ColorFilter.mode(
+                  ColorManager.grey500,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
+          ),
+          validator: (v) {
+            if (v == null || v.trim().isEmpty) {
+              return StringsManager.validationRequired.tr();
+            }
+            if (widget.isPassword) {
+              final hasMinLength = v.length >= 8;
+              final hasNumber = v.contains(RegExp(r'[0-9]'));
+              final hasUppercase = v.contains(RegExp(r'[A-Z]'));
+              if (!hasMinLength || !hasNumber || !hasUppercase) {
+                return StringsManager.validationPasswordConditions.tr();
               }
-              if (widget.isPassword) {
-                final hasMinLength = v.length >= 8;
-                final hasNumber = v.contains(RegExp(r'[0-9]'));
-                final hasUppercase = v.contains(RegExp(r'[A-Z]'));
-                if (!hasMinLength || !hasNumber || !hasUppercase) {
-                  return StringsManager.validationPasswordConditions.tr();
-                }
-              }
-              if (widget.isConfirmPassword &&
-                  widget.matchController != null &&
-                  v != widget.matchController!.text) {
-                return StringsManager.validationPasswordMismatch.tr();
-              }
-              return null;
-            },
+            }
+            if (widget.isConfirmPassword &&
+                widget.matchController != null &&
+                v != widget.matchController!.text) {
+              return StringsManager.validationPasswordMismatch.tr();
+            }
+            return null;
+          },
         ),
         const SizedBox(height: AppSize.s8),
         if (widget.showValidationChecks)

@@ -1,4 +1,4 @@
-﻿import 'package:centrally/core/theme/color_manager.dart';
+import 'package:centrally/core/theme/color_manager.dart';
 import 'package:centrally/core/constants/strings_manager.dart';
 import 'package:centrally/core/theme/style_manager.dart';
 import 'package:centrally/core/theme/values_manager.dart';
@@ -22,10 +22,7 @@ class TitledTextField extends StatelessWidget {
   OutlineInputBorder _border({Color? color, double width = 1}) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppRadius.r12),
-      borderSide: BorderSide(
-        color: color ?? ColorManager.border,
-        width: width,
-      ),
+      borderSide: BorderSide(color: color ?? ColorManager.border, width: width),
     );
   }
 
@@ -56,8 +53,7 @@ class TitledTextField extends StatelessWidget {
             enabledBorder: _border(),
             focusedBorder: _border(color: ColorManager.primary, width: 1.5),
             errorBorder: _border(color: ColorManager.error),
-            focusedErrorBorder:
-                _border(color: ColorManager.error, width: 1.5),
+            focusedErrorBorder: _border(color: ColorManager.error, width: 1.5),
             prefixIcon: Padding(
               padding: const EdgeInsets.all(AppPadding.p12),
               child: SvgPicture.asset(

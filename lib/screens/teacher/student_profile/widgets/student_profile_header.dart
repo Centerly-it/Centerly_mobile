@@ -73,11 +73,7 @@ class StudentProfileHeader extends StatelessWidget {
 }
 
 class _StatusChip extends StatelessWidget {
-  const _StatusChip({
-    required this.label,
-    required this.color,
-    this.icon,
-  });
+  const _StatusChip({required this.label, required this.color, this.icon});
 
   final String label;
   final Color color;
@@ -98,10 +94,7 @@ class _StatusChip extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            label,
-            style: AppTextStyles.labelSmall.copyWith(color: color),
-          ),
+          Text(label, style: AppTextStyles.labelSmall.copyWith(color: color)),
           if (icon != null) ...[
             const SizedBox(width: AppSize.s6),
             Icon(icon, size: AppSize.s14, color: color),

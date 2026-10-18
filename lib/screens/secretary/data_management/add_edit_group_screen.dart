@@ -32,10 +32,12 @@ class _AddEditGroupScreenState extends State<AddEditGroupScreen> {
     final group = widget.group;
     _nameController = TextEditingController(text: group?.name ?? '');
     _subjectController = TextEditingController(text: group?.subjectName ?? '');
-    _capacityController =
-        TextEditingController(text: group?.capacity.toString() ?? '30');
-    _scheduleController =
-        TextEditingController(text: group?.scheduleLabel ?? 'السبت - الثلاثاء');
+    _capacityController = TextEditingController(
+      text: group?.capacity.toString() ?? '30',
+    );
+    _scheduleController = TextEditingController(
+      text: group?.scheduleLabel ?? 'السبت - الثلاثاء',
+    );
     _selectedGradeLevel = group?.gradeLevelName ?? 'الصف الأول الثانوي';
   }
 
@@ -54,8 +56,9 @@ class _AddEditGroupScreenState extends State<AddEditGroupScreen> {
     final capacity = int.tryParse(_capacityController.text.trim()) ?? 30;
 
     if (_isEditing) {
-      final index =
-          CenterlyMockData.groups.indexWhere((g) => g.id == widget.group!.id);
+      final index = CenterlyMockData.groups.indexWhere(
+        (g) => g.id == widget.group!.id,
+      );
       if (index != -1) {
         CenterlyMockData.groups[index] = Group(
           id: widget.group!.id,

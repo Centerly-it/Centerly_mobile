@@ -51,9 +51,7 @@ class StudentAcademicTab extends StatelessWidget {
           icon: Icons.assignment_outlined,
           title: StringsManager.profileAssignmentsTitle.tr(),
           child: assignments.isEmpty
-              ? _EmptyTableRow(
-                  label: StringsManager.profileNoAssignments.tr(),
-                )
+              ? _EmptyTableRow(label: StringsManager.profileNoAssignments.tr())
               : Column(
                   children: [
                     _TableHeader(
@@ -113,9 +111,7 @@ class _SectionCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: AppSize.s10),
-                Expanded(
-                  child: Text(title, style: AppTextStyles.titleMedium),
-                ),
+                Expanded(child: Text(title, style: AppTextStyles.titleMedium)),
               ],
             ),
           ),
@@ -143,10 +139,7 @@ class _TableHeader extends StatelessWidget {
         children: [
           Expanded(
             flex: 3,
-            child: Text(
-              columns[0],
-              style: AppTextStyles.labelSmall,
-            ),
+            child: Text(columns[0], style: AppTextStyles.labelSmall),
           ),
           Expanded(
             flex: 2,

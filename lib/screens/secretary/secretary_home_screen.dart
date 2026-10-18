@@ -33,8 +33,10 @@ class _SecretaryHomeScreenState extends State<SecretaryHomeScreen> {
       orElse: () => todaySessions.first,
     );
 
-    final totalCollected = CenterlyMockData.invoices
-        .fold<double>(0, (sum, inv) => sum + inv.paidAmount);
+    final totalCollected = CenterlyMockData.invoices.fold<double>(
+      0,
+      (sum, inv) => sum + inv.paidAmount,
+    );
 
     return Scaffold(
       backgroundColor: ColorManager.background,
@@ -91,8 +93,7 @@ class _SecretaryHomeScreenState extends State<SecretaryHomeScreen> {
                   onEnterGrades: () => Navigator.of(context)
                       .push(
                         MaterialPageRoute<void>(
-                          builder: (_) =>
-                              const EnterGradesAssignmentsScreen(),
+                          builder: (_) => const EnterGradesAssignmentsScreen(),
                         ),
                       )
                       .then((_) => setState(() {})),
@@ -135,16 +136,14 @@ class _SecretaryHomeScreenState extends State<SecretaryHomeScreen> {
                     session: session,
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute<void>(
-                        builder: (_) => TeacherSessionDetailsScreen(
-                          session: session,
-                        ),
+                        builder: (_) =>
+                            TeacherSessionDetailsScreen(session: session),
                       ),
                     ),
                     onAttendanceTap: () => Navigator.of(context).push(
                       MaterialPageRoute<void>(
-                        builder: (_) => SecretaryAttendanceSheetScreen(
-                          session: session,
-                        ),
+                        builder: (_) =>
+                            SecretaryAttendanceSheetScreen(session: session),
                       ),
                     ),
                   ),
@@ -407,12 +406,7 @@ class _QuickActionButton extends StatelessWidget {
               child: Icon(icon, color: color, size: AppSize.s20),
             ),
             const SizedBox(width: AppSize.s10),
-            Expanded(
-              child: Text(
-                label,
-                style: AppTextStyles.labelLarge,
-              ),
-            ),
+            Expanded(child: Text(label, style: AppTextStyles.labelLarge)),
           ],
         ),
       ),

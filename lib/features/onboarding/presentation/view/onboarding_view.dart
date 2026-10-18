@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:centrally/core/theme/color_manager.dart';
 import 'package:centrally/core/router/routes_manager.dart';
@@ -8,8 +8,6 @@ import 'package:centrally/features/onboarding/presentation/widgets/skip_row.dart
 import 'package:centrally/features/onboarding/presentation/widgets/dots_indicator.dart';
 import 'package:centrally/features/onboarding/presentation/widgets/onboarding_page.dart';
 import 'package:centrally/features/onboarding/presentation/widgets/onboarding_buttons.dart';
-
-
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
@@ -51,12 +49,13 @@ class _OnboardingViewState extends State<OnboardingView> {
             Expanded(
               child: PageView.builder(
                 controller: _controller,
-                  physics: _isLastPage
-                      ? const NeverScrollableScrollPhysics()
-                      : const BouncingScrollPhysics(),
+                physics: _isLastPage
+                    ? const NeverScrollableScrollPhysics()
+                    : const BouncingScrollPhysics(),
                 onPageChanged: (i) => setState(() => _currentPage = i),
                 itemCount: onboardingPages.length,
-                itemBuilder: (_, i) =>OnboardingPage(model: onboardingPages[i])
+                itemBuilder: (_, i) =>
+                    OnboardingPage(model: onboardingPages[i]),
               ),
             ),
             DotsIndicator(count: onboardingPages.length, current: _currentPage),

@@ -12,10 +12,7 @@ import 'package:flutter/material.dart';
 /// Sessions screen — 3 views: Day / Week / Month
 /// Matches Figma exactly for all three views.
 class TeacherSessionsScreen extends StatefulWidget {
-  const TeacherSessionsScreen({
-    this.role = UserRole.teacher,
-    super.key,
-  });
+  const TeacherSessionsScreen({this.role = UserRole.teacher, super.key});
 
   final UserRole role;
 
@@ -88,10 +85,8 @@ class _TeacherSessionsScreenState extends State<TeacherSessionsScreen> {
   void _openDetails(Session session) {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
-        builder: (_) => TeacherSessionDetailsScreen(
-          session: session,
-          role: widget.role,
-        ),
+        builder: (_) =>
+            TeacherSessionDetailsScreen(session: session, role: widget.role),
       ),
     );
   }
@@ -357,11 +352,41 @@ class _MonthView extends StatelessWidget {
   final ValueChanged<Session> onSessionTap;
 
   static const _calendarDays = [
-    29, 30, 31, 1, 2, 3, 4,
-    5, 6, 7, 8, 9, 10, 11,
-    12, 13, 14, 15, 16, 17, 18,
-    19, 20, 21, 22, 23, 24, 25,
-    26, 27, 28, 29, 30, 1, 2,
+    29,
+    30,
+    31,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    1,
+    2,
   ];
   static const _aprilStart = 3;
   static const _aprilEnd = 32;
@@ -380,10 +405,7 @@ class _MonthView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Icon(Icons.chevron_left, color: ColorManager.grey500),
-            Text(
-              '$monthName 2026',
-              style: AppTextStyles.titleSmall,
-            ),
+            Text('$monthName 2026', style: AppTextStyles.titleSmall),
             const Icon(Icons.chevron_right, color: ColorManager.grey500),
           ],
         ),
@@ -425,7 +447,9 @@ class _MonthView extends StatelessWidget {
             final isCancelled = inApril && _cancelledDays.contains(day);
 
             return GestureDetector(
-              onTap: inApril ? () => onDateChanged(DateTime(2026, 4, day)) : null,
+              onTap: inApril
+                  ? () => onDateChanged(DateTime(2026, 4, day))
+                  : null,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

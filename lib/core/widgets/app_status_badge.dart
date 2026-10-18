@@ -9,26 +9,20 @@ import 'package:flutter/material.dart';
 /// Unified status badge for attendance, invoice, and session statuses.
 /// Replaces all private _StatusChip / _StatusBadge widgets across screens.
 class AppStatusBadge extends StatelessWidget {
-  const AppStatusBadge.attendance({
-    required AttendanceStatus status,
-    super.key,
-  })  : _attendanceStatus = status,
-        _invoiceStatus = null,
-        _sessionStatus = null;
+  const AppStatusBadge.attendance({required AttendanceStatus status, super.key})
+    : _attendanceStatus = status,
+      _invoiceStatus = null,
+      _sessionStatus = null;
 
-  const AppStatusBadge.invoice({
-    required InvoiceStatus status,
-    super.key,
-  })  : _attendanceStatus = null,
-        _invoiceStatus = status,
-        _sessionStatus = null;
+  const AppStatusBadge.invoice({required InvoiceStatus status, super.key})
+    : _attendanceStatus = null,
+      _invoiceStatus = status,
+      _sessionStatus = null;
 
-  const AppStatusBadge.session({
-    required SessionStatus status,
-    super.key,
-  })  : _attendanceStatus = null,
-        _invoiceStatus = null,
-        _sessionStatus = status;
+  const AppStatusBadge.session({required SessionStatus status, super.key})
+    : _attendanceStatus = null,
+      _invoiceStatus = null,
+      _sessionStatus = status;
 
   final AttendanceStatus? _attendanceStatus;
   final InvoiceStatus? _invoiceStatus;
@@ -55,7 +49,7 @@ class AppStatusBadge extends StatelessWidget {
 
   (String, Color) _resolve() {
     if (_attendanceStatus != null) {
-      return switch (_attendanceStatus!) {
+      return switch (_attendanceStatus) {
         AttendanceStatus.present => (
           StringsManager.attendancePresent.tr(),
           ColorManager.success,
@@ -75,7 +69,7 @@ class AppStatusBadge extends StatelessWidget {
       };
     }
     if (_invoiceStatus != null) {
-      return switch (_invoiceStatus!) {
+      return switch (_invoiceStatus) {
         InvoiceStatus.paid => (
           StringsManager.invoicePaid.tr(),
           ColorManager.success,

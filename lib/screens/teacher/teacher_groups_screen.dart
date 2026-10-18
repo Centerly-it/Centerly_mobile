@@ -17,10 +17,7 @@ import 'package:flutter/material.dart';
 /// - Grade level header with left blue border accent
 /// - Group cards: name + schedule + capacity + next session grey bar
 class TeacherGroupsScreen extends StatefulWidget {
-  const TeacherGroupsScreen({
-    this.role = UserRole.teacher,
-    super.key,
-  });
+  const TeacherGroupsScreen({this.role = UserRole.teacher, super.key});
 
   final UserRole role;
 
@@ -71,11 +68,13 @@ class _TeacherGroupsScreenState extends State<TeacherGroupsScreen> {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => GroupEnrollmentScreen(group: group),
-                    ),
-                  ).then((_) => setState(() {}));
+                  Navigator.of(context)
+                      .push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => GroupEnrollmentScreen(group: group),
+                        ),
+                      )
+                      .then((_) => setState(() {}));
                 },
               ),
               ListTile(
@@ -89,13 +88,15 @@ class _TeacherGroupsScreenState extends State<TeacherGroupsScreen> {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => EnterGradesAssignmentsScreen(
-                        preselectedGroupId: group.id,
-                      ),
-                    ),
-                  ).then((_) => setState(() {}));
+                  Navigator.of(context)
+                      .push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => EnterGradesAssignmentsScreen(
+                            preselectedGroupId: group.id,
+                          ),
+                        ),
+                      )
+                      .then((_) => setState(() {}));
                 },
               ),
               ListTile(
@@ -109,11 +110,13 @@ class _TeacherGroupsScreenState extends State<TeacherGroupsScreen> {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => AddEditGroupScreen(group: group),
-                    ),
-                  ).then((_) => setState(() {}));
+                  Navigator.of(context)
+                      .push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => AddEditGroupScreen(group: group),
+                        ),
+                      )
+                      .then((_) => setState(() {}));
                 },
               ),
             ],
@@ -126,8 +129,8 @@ class _TeacherGroupsScreenState extends State<TeacherGroupsScreen> {
   @override
   Widget build(BuildContext context) {
     final filteredGroups = CenterlyMockData.groups.where((g) {
-      final text =
-          '${g.name} ${g.subjectName} ${g.gradeLevelName}'.toLowerCase();
+      final text = '${g.name} ${g.subjectName} ${g.gradeLevelName}'
+          .toLowerCase();
       return text.contains(_query.trim().toLowerCase());
     }).toList();
 
@@ -224,9 +227,7 @@ class _GradeLevelHeader extends StatelessWidget {
     return IntrinsicHeight(
       child: Row(
         children: [
-          Expanded(
-            child: Text(label, style: AppTextStyles.titleMedium),
-          ),
+          Expanded(child: Text(label, style: AppTextStyles.titleMedium)),
           Container(
             width: AppSize.s4,
             decoration: const BoxDecoration(
@@ -282,7 +283,10 @@ class _GroupCard extends StatelessWidget {
                 color: ColorManager.grey200,
                 borderRadius: BorderRadius.circular(AppRadius.r8),
               ),
-              child: Row(
+              child: Wrap(
+                spacing: AppSize.s6,
+                runSpacing: AppSize.s6,
+                crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   Text(
                     StringsManager.groupsNextSession.tr(),
@@ -290,7 +294,6 @@ class _GroupCard extends StatelessWidget {
                       color: ColorManager.primary,
                     ),
                   ),
-                  const Spacer(),
                   const Icon(
                     Icons.calendar_today_outlined,
                     size: AppSize.s16,

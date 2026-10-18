@@ -39,13 +39,15 @@ class _EnterGradesAssignmentsScreenState
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
-    _selectedGroupId = widget.preselectedGroupId ??
+    _selectedGroupId =
+        widget.preselectedGroupId ??
         (CenterlyMockData.groups.isNotEmpty
             ? CenterlyMockData.groups.first.id
             : 'group-1');
     _examTitleController = TextEditingController(text: 'اختبار شهر أبريل');
-    _assignmentTitleController =
-        TextEditingController(text: 'واجب الدرس الثالث');
+    _assignmentTitleController = TextEditingController(
+      text: 'واجب الدرس الثالث',
+    );
     _initStudentControllers();
   }
 
@@ -72,7 +74,7 @@ class _EnterGradesAssignmentsScreenState
     for (final student in _groupStudents) {
       final score =
           int.tryParse(_scoreControllers[student.id]?.text.trim() ?? '85') ??
-              85;
+          85;
       CenterlyMockData.exams.add(
         Exam(
           id: 'exam-${DateTime.now().millisecondsSinceEpoch}-${student.id}',
@@ -187,9 +189,7 @@ class _EnterGradesAssignmentsScreenState
                         items: CenterlyMockData.groups.map((group) {
                           return DropdownMenuItem<String>(
                             value: group.id,
-                            child: Text(
-                              '${group.name} - ${group.subjectName}',
-                            ),
+                            child: Text('${group.name} - ${group.subjectName}'),
                           );
                         }).toList(),
                         onChanged: (val) {
@@ -210,10 +210,7 @@ class _EnterGradesAssignmentsScreenState
           Expanded(
             child: TabBarView(
               controller: _tabController,
-              children: [
-                _buildExamsTab(),
-                _buildAssignmentsTab(),
-              ],
+              children: [_buildExamsTab(), _buildAssignmentsTab()],
             ),
           ),
         ],
@@ -260,10 +257,7 @@ class _EnterGradesAssignmentsScreenState
                 const StudentAvatar(radius: AppSize.s18),
                 const SizedBox(width: AppSize.s10),
                 Expanded(
-                  child: Text(
-                    student.name,
-                    style: AppTextStyles.titleSmall,
-                  ),
+                  child: Text(student.name, style: AppTextStyles.titleSmall),
                 ),
                 SizedBox(
                   width: AppSize.s80,
@@ -339,13 +333,11 @@ class _EnterGradesAssignmentsScreenState
                 const StudentAvatar(radius: AppSize.s18),
                 const SizedBox(width: AppSize.s10),
                 Expanded(
-                  child: Text(
-                    student.name,
-                    style: AppTextStyles.titleSmall,
-                  ),
+                  child: Text(student.name, style: AppTextStyles.titleSmall),
                 ),
                 DropdownButton<AssignmentStatus>(
-                  value: _assignmentStatuses[student.id] ??
+                  value:
+                      _assignmentStatuses[student.id] ??
                       AssignmentStatus.submitted,
                   underline: const SizedBox.shrink(),
                   items: [

@@ -34,8 +34,9 @@ class _GroupEnrollmentScreenState extends State<GroupEnrollmentScreen> {
 
   void _addStudentToGroup(Student student) {
     setState(() {
-      final index =
-          CenterlyMockData.students.indexWhere((s) => s.id == student.id);
+      final index = CenterlyMockData.students.indexWhere(
+        (s) => s.id == student.id,
+      );
       if (index != -1) {
         CenterlyMockData.students[index] = Student(
           id: student.id,
@@ -59,8 +60,9 @@ class _GroupEnrollmentScreenState extends State<GroupEnrollmentScreen> {
 
   void _removeStudentFromGroup(Student student) {
     setState(() {
-      final index =
-          CenterlyMockData.students.indexWhere((s) => s.id == student.id);
+      final index = CenterlyMockData.students.indexWhere(
+        (s) => s.id == student.id,
+      );
       if (index != -1) {
         // Change group or clear group
         CenterlyMockData.students[index] = Student(
@@ -117,9 +119,7 @@ class _GroupEnrollmentScreenState extends State<GroupEnrollmentScreen> {
               const SizedBox(height: AppSize.s16),
               if (availableStudents.isEmpty)
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: AppPadding.p24,
-                  ),
+                  padding: const EdgeInsets.symmetric(vertical: AppPadding.p24),
                   child: Center(
                     child: Text(
                       'جميع الطلاب مقيدون بالفعل في هذه المجموعة',
@@ -140,8 +140,10 @@ class _GroupEnrollmentScreenState extends State<GroupEnrollmentScreen> {
                       return ListTile(
                         contentPadding: EdgeInsets.zero,
                         leading: const StudentAvatar(radius: AppSize.s20),
-                        title:
-                            Text(student.name, style: AppTextStyles.titleSmall),
+                        title: Text(
+                          student.name,
+                          style: AppTextStyles.titleSmall,
+                        ),
                         subtitle: Text(
                           student.phone,
                           style: AppTextStyles.labelSmall,
@@ -268,10 +270,9 @@ class _GroupEnrollmentScreenState extends State<GroupEnrollmentScreen> {
                                 Icons.remove_circle_outline,
                                 color: ColorManager.error,
                               ),
-                              tooltip:
-                                  StringsManager.dataMgmtRemoveStudent.tr(),
-                              onPressed: () =>
-                                  _removeStudentFromGroup(student),
+                              tooltip: StringsManager.dataMgmtRemoveStudent
+                                  .tr(),
+                              onPressed: () => _removeStudentFromGroup(student),
                             ),
                           ],
                         ),

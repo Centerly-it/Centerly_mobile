@@ -36,11 +36,14 @@ class StringsManager {
   static const String validationEmailInvalid = 'validation_email_invalid';
   static const String validationPhoneRequired = 'validation_phone_required';
   static const String validationPhoneInvalid = 'validation_phone_invalid';
-  static const String validationPasswordRequired = 'validation_password_required';
+  static const String validationPasswordRequired =
+      'validation_password_required';
   static const String validationPasswordMin = 'validation_password_min';
   static const String validationNumbersOnly = 'validation_numbers_only';
-  static const String validationPasswordMismatch = 'validation_password_mismatch';
-  static const String validationPasswordConditions = 'validation_password_conditions';
+  static const String validationPasswordMismatch =
+      'validation_password_mismatch';
+  static const String validationPasswordConditions =
+      'validation_password_conditions';
 
   // Create Center
   static const String createCenterTitle = 'create_center_title';
@@ -63,7 +66,8 @@ class StringsManager {
   static const String adminEmailHint = 'admin_email_hint';
   static const String adminPasswordLabel = 'admin_password_label';
   static const String adminPasswordHint = 'admin_password_hint';
-  static const String adminConfirmPasswordLabel = 'admin_confirm_password_label';
+  static const String adminConfirmPasswordLabel =
+      'admin_confirm_password_label';
   static const String createAccountButton = 'create_account_button';
   static const String haveAccount = 'have_account';
   static const String loginAction = 'login_action';
@@ -142,7 +146,8 @@ class StringsManager {
   static const String sessionsEmptyTitle = 'sessions_empty_title';
   static const String sessionsEmptySubtitle = 'sessions_empty_subtitle';
   static const String sessionsNoSessionsTitle = 'sessions_no_sessions_title';
-  static const String sessionsNoSessionsSubtitle = 'sessions_no_sessions_subtitle';
+  static const String sessionsNoSessionsSubtitle =
+      'sessions_no_sessions_subtitle';
   static const String sessionsMonthSummary = 'sessions_month_summary';
   static const String sessionsLegendDone = 'sessions_legend_done';
   static const String sessionsLegendAvailable = 'sessions_legend_available';
@@ -233,8 +238,10 @@ class StringsManager {
   static const String profileLevel = 'profile_level';
 
   // Student Attendance Tab
-  static const String profileAttendanceSummaryTitle = 'profile_attendance_summary_title';
-  static const String profileAttendanceLogTitle = 'profile_attendance_log_title';
+  static const String profileAttendanceSummaryTitle =
+      'profile_attendance_summary_title';
+  static const String profileAttendanceLogTitle =
+      'profile_attendance_log_title';
   static const String profileStatAbsent = 'profile_stat_absent';
   static const String profileStatPresent = 'profile_stat_present';
   static const String profileStatRate = 'profile_stat_rate';
@@ -258,7 +265,8 @@ class StringsManager {
   static const String assignmentPending = 'assignment_pending';
 
   // Student Payments Tab
-  static const String profilePaymentsSummaryTitle = 'profile_payments_summary_title';
+  static const String profilePaymentsSummaryTitle =
+      'profile_payments_summary_title';
   static const String profileInvoicesTitle = 'profile_invoices_title';
   static const String profileStatRemaining = 'profile_stat_remaining';
   static const String profileStatCollected = 'profile_stat_collected';
@@ -268,7 +276,8 @@ class StringsManager {
   static const String profileColAmount = 'profile_col_amount';
   static const String profileColDueDate = 'profile_col_due_date';
   static const String profileCurrency = 'profile_currency';
-  static const String profileAmountWithCurrency = 'profile_amount_with_currency';
+  static const String profileAmountWithCurrency =
+      'profile_amount_with_currency';
   static const String invoicePaid = 'invoice_paid';
   static const String invoiceDue = 'invoice_due';
 
@@ -281,8 +290,10 @@ class StringsManager {
   static const String secretaryStatusInactive = 'secretary_status_inactive';
   static const String secretaryRequestRemoval = 'secretary_request_removal';
   static const String secretaryRemovalPending = 'secretary_removal_pending';
-  static const String secretaryRemovalConfirmTitle = 'secretary_removal_confirm_title';
-  static const String secretaryRemovalConfirmMessage = 'secretary_removal_confirm_message';
+  static const String secretaryRemovalConfirmTitle =
+      'secretary_removal_confirm_title';
+  static const String secretaryRemovalConfirmMessage =
+      'secretary_removal_confirm_message';
   static const String secretaryConfirmAction = 'secretary_confirm_action';
   static const String secretaryCancelAction = 'secretary_cancel_action';
   static const String secretaryRemovalSuccess = 'secretary_removal_success';
@@ -290,31 +301,45 @@ class StringsManager {
   // Finance
   static const String financeTitle = 'finance_title';
   static const String financeComingSoon = 'finance_coming_soon';
-  static const String financeComingSoonSubtitle = 'finance_coming_soon_subtitle';
+  static const String financeComingSoonSubtitle =
+      'finance_coming_soon_subtitle';
 
   // Phase 3 — Secretary Dashboard & Operations
   static const String secretaryDashboardTitle = 'secretary_dashboard_title';
-  static const String secretaryLiveAttendanceBanner = 'secretary_live_attendance_banner';
-  static const String secretaryAttendanceWindowRemaining = 'secretary_attendance_window_remaining';
-  static const String secretaryAttendanceWindowClosed = 'secretary_attendance_window_closed';
-  static const String secretaryRecordAttendanceNow = 'secretary_record_attendance_now';
+  static const String secretaryLiveAttendanceBanner =
+      'secretary_live_attendance_banner';
+  static const String secretaryAttendanceWindowRemaining =
+      'secretary_attendance_window_remaining';
+  static const String secretaryAttendanceWindowClosed =
+      'secretary_attendance_window_closed';
+  static const String secretaryRecordAttendanceNow =
+      'secretary_record_attendance_now';
   static const String secretaryQuickActions = 'secretary_quick_actions';
-  static const String secretaryActionAddStudent = 'secretary_action_add_student';
+  static const String secretaryActionAddStudent =
+      'secretary_action_add_student';
   static const String secretaryActionAddGroup = 'secretary_action_add_group';
-  static const String secretaryActionRecordPayment = 'secretary_action_record_payment';
-  static const String secretaryActionEnterGrades = 'secretary_action_enter_grades';
-  static const String secretaryTodaySessionsTitle = 'secretary_today_sessions_title';
-  static const String secretaryActiveStudentsStat = 'secretary_active_students_stat';
-  static const String secretaryCollectedTodayStat = 'secretary_collected_today_stat';
-  static const String secretaryAttendanceSheetTitle = 'secretary_attendance_sheet_title';
+  static const String secretaryActionRecordPayment =
+      'secretary_action_record_payment';
+  static const String secretaryActionEnterGrades =
+      'secretary_action_enter_grades';
+  static const String secretaryTodaySessionsTitle =
+      'secretary_today_sessions_title';
+  static const String secretaryActiveStudentsStat =
+      'secretary_active_students_stat';
+  static const String secretaryCollectedTodayStat =
+      'secretary_collected_today_stat';
+  static const String secretaryAttendanceSheetTitle =
+      'secretary_attendance_sheet_title';
   static const String secretarySearchQrHint = 'secretary_search_qr_hint';
   static const String secretaryMarkPresent = 'secretary_mark_present';
   static const String secretaryMarkAbsent = 'secretary_mark_absent';
   static const String secretaryMarkExcused = 'secretary_mark_excused';
   static const String secretaryMarkNotMarked = 'secretary_mark_not_marked';
   static const String secretaryScanQr = 'secretary_scan_qr';
-  static const String secretaryAttendanceLockedMsg = 'secretary_attendance_locked_msg';
-  static const String secretaryTakeAttendanceBtn = 'secretary_take_attendance_btn';
+  static const String secretaryAttendanceLockedMsg =
+      'secretary_attendance_locked_msg';
+  static const String secretaryTakeAttendanceBtn =
+      'secretary_take_attendance_btn';
 
   // Phase 3 — Data Management
   static const String dataMgmtAddStudentTitle = 'data_mgmt_add_student_title';
@@ -354,10 +379,13 @@ class StringsManager {
   static const String dataMgmtRemoveStudent = 'data_mgmt_remove_student';
   static const String dataMgmtStudentEnrolled = 'data_mgmt_student_enrolled';
   static const String dataMgmtStudentRemoved = 'data_mgmt_student_removed';
-  static const String dataMgmtNoEnrolledStudents = 'data_mgmt_no_enrolled_students';
+  static const String dataMgmtNoEnrolledStudents =
+      'data_mgmt_no_enrolled_students';
 
-  static const String dataMgmtCreateInvoiceTitle = 'data_mgmt_create_invoice_title';
-  static const String dataMgmtRecordPaymentTitle = 'data_mgmt_record_payment_title';
+  static const String dataMgmtCreateInvoiceTitle =
+      'data_mgmt_create_invoice_title';
+  static const String dataMgmtRecordPaymentTitle =
+      'data_mgmt_record_payment_title';
   static const String dataMgmtSelectStudent = 'data_mgmt_select_student';
   static const String dataMgmtInvoiceNumber = 'data_mgmt_invoice_number';
   static const String dataMgmtAmount = 'data_mgmt_amount';
@@ -370,13 +398,15 @@ class StringsManager {
   static const String dataMgmtPaymentSaved = 'data_mgmt_payment_saved';
   static const String dataMgmtNoDueInvoices = 'data_mgmt_no_due_invoices';
 
-  static const String dataMgmtGradesAssignmentsTitle = 'data_mgmt_grades_assignments_title';
+  static const String dataMgmtGradesAssignmentsTitle =
+      'data_mgmt_grades_assignments_title';
   static const String dataMgmtTabExams = 'data_mgmt_tab_exams';
   static const String dataMgmtTabAssignments = 'data_mgmt_tab_assignments';
   static const String dataMgmtExamTitle = 'data_mgmt_exam_title';
   static const String dataMgmtExamTitleHint = 'data_mgmt_exam_title_hint';
   static const String dataMgmtAssignmentTitle = 'data_mgmt_assignment_title';
-  static const String dataMgmtAssignmentTitleHint = 'data_mgmt_assignment_title_hint';
+  static const String dataMgmtAssignmentTitleHint =
+      'data_mgmt_assignment_title_hint';
   static const String dataMgmtScoreHint = 'data_mgmt_score_hint';
   static const String dataMgmtSaveAll = 'data_mgmt_save_all';
   static const String dataMgmtGradesSaved = 'data_mgmt_grades_saved';

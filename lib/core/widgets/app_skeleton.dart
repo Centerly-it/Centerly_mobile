@@ -35,11 +35,7 @@ class AppSkeleton extends StatelessWidget {
 
 /// A card-shaped skeleton placeholder — mimics a content card.
 class AppSkeletonCard extends StatelessWidget {
-  const AppSkeletonCard({
-    super.key,
-    this.height = AppSize.s80,
-    this.lines = 2,
-  });
+  const AppSkeletonCard({super.key, this.height = AppSize.s80, this.lines = 2});
 
   final double height;
   final int lines;
