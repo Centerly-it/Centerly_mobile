@@ -1,13 +1,17 @@
-import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../../core/api/teacher_read_client.dart';
+import '../../../core/errors/backend_failure.dart';
+import '../domain/dashboard_summary.dart';
 
 class DashboardRepository {
-  const DashboardRepository(this.client);
-  final SupabaseClient client;
-  Future<Map<String, dynamic>> load() async {
+  const DashboardRepository(this.api);
+  final TeacherReadClient api;
+  Future<DashboardSummary> load() async {
     // Cairo date defaults on the server; device timezone/clock does not decide it.
-    final data = await client
-        .rpc('get_teacher_dashboard')
-        .timeout(const Duration(seconds: 15));
-    return Map<String, dynamic>.from(data as Map);
+    final data = await api.read(TeacherRead.dashboard);
+    try {
+      return DashboardSummary.fromJson(Map<String, dynamic>.from(data as Map));
+    } catch (_) {
+      throw const BackendFailure('SERVICE_UNAVAILABLE');
+    }
   }
 }

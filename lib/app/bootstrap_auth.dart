@@ -8,6 +8,9 @@ import '../features/auth/data/repo_impl/supabase_teacher_auth.dart';
 import '../features/auth/domain/repo/teacher_auth_repository.dart';
 import '../features/auth/presentation/view_models/auth_session_cubit.dart';
 import '../features/dashboard/data/dashboard_repository.dart';
+import '../core/api/teacher_read_client.dart';
+import '../features/students/data/student_repository.dart';
+import '../features/sessions/data/session_repository.dart';
 
 Future<void> bootstrapAuth() async {
   final config = AppConfig.fromEnvironment();
@@ -50,9 +53,16 @@ Future<void> bootstrapAuth() async {
         Supabase.instance.client,
         storage.removePersistedSession,
       );
-      getIt.registerSingleton<DashboardRepository>(
-        DashboardRepository(Supabase.instance.client),
+      final readApi = TeacherReadClient(
+        Supabase.instance.client,
+        onAccessDenied: () => getIt<AuthSessionCubit>().restore(),
       );
+      getIt.registerSingleton<TeacherReadClient>(readApi);
+      getIt.registerSingleton<DashboardRepository>(
+        DashboardRepository(readApi),
+      );
+      getIt.registerSingleton<StudentRepository>(StudentRepository(readApi));
+      getIt.registerSingleton<SessionRepository>(SessionRepository(readApi));
     } catch (_) {
       /* Fail closed; configuration/login screen remains usable. */
     }

@@ -1,6 +1,6 @@
 # Centerly implementation progress
 
-Updated: 2026-10-18 (Africa/Cairo). Continuing from e1312a2.
+Updated: 2026-10-19 (Africa/Cairo). Continuing from e1312a2.
 Current phase: T0 baseline completion / T1 live Supabase authentication.
 Development backend is deployed with explicit owner approval; not production ready.
 
@@ -10,11 +10,11 @@ Development backend is deployed with explicit owner approval; not production rea
 |---|---|---|
 | T-001 | DONE | Original audit and screen map retained |
 | T-002 | DONE | ADR-001, actual Arabic home/groups/sessions captures, visual comparison in VISUAL_PRESERVATION.md; original Figma PNGs preserved |
-| T-003 | IN_PROGRESS | Pinned setup, GitHub CI, codegen, env example, format/analyzer/tests, debug/profile builds; final clean-checkout replay pending |
+| T-003 | DONE | All 12 documented checks passed on clean checkout of 3f6f16b, including debug/profile builds; CI configured |
 | T-010 | DONE (owner override) | Canonical schema here, nine hosted versions verified, deployed hashes pinned, shared contracts and typed auth profile tested |
-| T-011 | IN_PROGRESS | Real SDK auth, secure storage, guards, logout/refresh/role checks implemented; native verification and approved support channel pending |
+| T-011 | IN_PROGRESS | Real SDK auth, secure storage, guards, logout/refresh/role checks implemented; native Windows verification passed; configured support channel pending |
 | T-012 | NOT_STARTED | Existing design reused; full live shell/accessibility QA pending |
-| T-013 | IN_PROGRESS | Auth repository and initial dashboard RPC repository; full typed operational models/pagination/error handling pending |
+| T-013 | IN_PROGRESS | Typed auth/dashboard/student/session RPC repositories, bounded pagination and sanitized retry/error handling tested; caching and remaining operational models pending |
 | T-020..T-024 | NOT_COMPLETE | Initial live count/financial read surface only; full dashboard and schedule/attendance modules pending |
 | T-030..T-034 | NOT_STARTED | Live student/academic/attendance/finance/notes |
 | T-040..T-042 | NOT_STARTED | Live secretaries/notifications and design polish |
@@ -57,19 +57,17 @@ Development backend is deployed with explicit owner approval; not production rea
 ## Actual verification so far
 
 - pub get and codegen: PASS; analyzer: PASS (no issues).
-- Debug APK with public hosted config: PASS; profile APK: PASS (before removal of
-  unused Firebase packages; final clean-checkout rebuild pending).
+- Debug APK with public hosted config: PASS; debug/profile builds on clean checkout: PASS.
 - Local PostgreSQL/PGlite: 64 authorization/business assertions PASS.
 - Independent PostgreSQL 17.10 connections: 11 race assertions PASS.
 - Hosted Auth/REST/RPC: 36 fixture-only assertions PASS (including real concurrent
   payment/cancellation calls, tenant denial and inactive access).
 - Actual hosted Dart SDK: teacher login/profile/refresh/logout, secretary rejection
   and invalid credentials PASS. Local unit tests cover secure storage, stale results,
-  duplicate taps, errors and profile validation. Final baseline suite rerun pending.
-- Native Windows attempt first stalled on unused Firebase SDK download; retried
-  after removing unused packages. Android device disconnected; no Android device
+  duplicate taps, errors and profile validation. Final baseline suite: 25 PASS; one opt-in hosted test skipped in default run (passed separately).
+- Native Windows login, secure persistence, restore and logout: PASS after removing unused Firebase packages. Android device disconnected; no Android device
   installation or iOS native verification claimed.
-- Remote GitHub CI has not been pushed or executed; clean-checkout local replay pending.
+- Clean checkout of 3f6f16b: all 12 documented commands PASS. Remote GitHub CI execution remains pending push.
 
 ## Files and decisions
 
@@ -83,8 +81,7 @@ are now immutable and hash-checked. No further schema changes are approved impli
 
 ## Exact next task / blockers
 
-Finish T-003 clean-checkout verification and native T-011 test; obtain real support
-URL (question pending). Then finish T-013 typed repositories and T-012 live shell
+Obtain real support URL (question pending). Finish T-013 caching/contracts and T-012 live shell
 using retained design before implementing full T-020 dashboard/schedule modules.
 Backups/restore, remaining backend operational contracts, Android/iOS device QA,
 release signing and Secretary cross-app acceptance remain open release gates.
