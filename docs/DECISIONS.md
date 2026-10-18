@@ -31,3 +31,13 @@ reason. Payments use positive decimal EGP entries; reversal rows subtract from
 balance and preserve original entries. Invoice-row locks prevent overpayment;
 advisory key locks serialize tenant idempotency across invoice IDs. Session
 generation is bounded, on demand and idempotent; existing occurrences are preserved.
+
+## ADR-005 — Supabase session ownership and unused Firebase dependencies
+
+2026-10-18. Production auth now uses Supabase SDK and a dedicated session Cubit,
+with secure platform storage and live database role/tenant checks. Cached REST
+tokens and role query parameters are never authoritative. The old REST adapters
+remain unreachable from production navigation pending incremental cleanup.
+No Firebase imports or initialization exist in lib/. Remove unused firebase_core
+and firebase_messaging dependencies; push is deferred and these packages forced
+a large unrelated Windows SDK download during native auth verification.

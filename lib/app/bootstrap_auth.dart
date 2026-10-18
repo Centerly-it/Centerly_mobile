@@ -1,0 +1,64 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import '../core/auth/secure_auth_storage.dart';
+import '../core/config/app_config.dart';
+import '../core/di/di.dart';
+import '../core/utils/cached_data_shared_preferences.dart';
+import '../features/auth/data/repo_impl/supabase_teacher_auth.dart';
+import '../features/auth/domain/repo/teacher_auth_repository.dart';
+import '../features/auth/presentation/view_models/auth_session_cubit.dart';
+import '../features/dashboard/data/dashboard_repository.dart';
+
+Future<void> bootstrapAuth() async {
+  final config = AppConfig.fromEnvironment();
+  getIt.registerSingleton<AppConfig>(config);
+  // Remove prototype auth and obsolete REST tokens, never import them into Supabase.
+  for (final key in [
+    CacheConstants.userToken,
+    CacheConstants.refreshToken,
+    CacheConstants.role,
+    CacheConstants.userEmail,
+  ]) {
+    await CacheService.deleteItem(key: key);
+  }
+  const secure = FlutterSecureStorage();
+  for (final key in [
+    'USER_TOKEN',
+    'ACCESS_TOKEN',
+    'REFRESH_TOKEN',
+    'USER_ROLE',
+    'TEACHER_ID',
+  ]) {
+    await secure.delete(key: key);
+  }
+  TeacherAuthRepository repository = const UnconfiguredTeacherAuth();
+  if (config.isConfigured && config.isValid) {
+    final storage = SecureAuthStorage(
+      'centerly-${Uri.parse(config.url).host}-session',
+    );
+    try {
+      await Supabase.initialize(
+        url: config.url,
+        publishableKey: config.publishableKey,
+        debug: false,
+        authOptions: FlutterAuthClientOptions(
+          localStorage: storage,
+          detectSessionInUri: false,
+        ),
+      );
+      repository = SupabaseTeacherAuth(
+        Supabase.instance.client,
+        storage.removePersistedSession,
+      );
+      getIt.registerSingleton<DashboardRepository>(
+        DashboardRepository(Supabase.instance.client),
+      );
+    } catch (_) {
+      /* Fail closed; configuration/login screen remains usable. */
+    }
+  }
+  getIt.registerSingleton<TeacherAuthRepository>(repository);
+  final session = AuthSessionCubit(repository);
+  getIt.registerSingleton<AuthSessionCubit>(session);
+  await session.restore();
+}

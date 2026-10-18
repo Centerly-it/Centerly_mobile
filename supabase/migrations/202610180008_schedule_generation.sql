@@ -34,7 +34,15 @@ begin
   return v_id;
 end $$;
 -- Explicit allowlist: new functions default to no client EXECUTE privileges.
-revoke all on all functions in schema public from public, anon, authenticated;
+-- Scope this to Centerly RPCs; never revoke unrelated hosted platform functions.
+revoke all on function public.get_current_profile(),
+  public.set_attendance(uuid,uuid,text,text), public.finalize_attendance(uuid),
+  public.cancel_session(uuid,text), public.create_invoice(uuid,numeric,date,text,uuid),
+  public.record_payment(uuid,numeric,text,uuid), public.reverse_payment(uuid,text),
+  public.save_teacher_note(uuid,text,timestamptz), public.request_secretary_removal(uuid),
+  public.mark_notification_read(uuid), public.get_daily_collections(date,uuid),
+  public.generate_sessions(date,date), public.add_schedule(uuid,integer,time,time,date,date)
+  from public, anon, authenticated;
 revoke all on all functions in schema private from public, anon, authenticated;
 grant execute on function private.tenant_id(), private.actor_role() to authenticated;
 grant execute on function public.get_current_profile(),

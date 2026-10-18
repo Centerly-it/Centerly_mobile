@@ -1,12 +1,11 @@
-﻿import 'dart:async';
+import 'app/bootstrap_auth.dart';
+import 'app/session_lifecycle.dart';
 
 import 'package:bloc/bloc.dart';
-import 'package:centrally/core/api/auth_event_bus.dart';
 import 'package:centrally/core/di/di.dart';
 import 'package:centrally/core/constants/app_constants.dart';
 import 'package:centrally/core/router/app_router.dart';
 import 'package:centrally/core/constants/strings_manager.dart';
-import 'package:centrally/core/router/routes_manager.dart';
 import 'package:centrally/core/theme/theme_manager.dart';
 import 'package:centrally/core/utils/cached_data_shared_preferences.dart';
 import 'package:centrally/core/utils/my_bloc_observer.dart';
@@ -14,7 +13,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:go_router/go_router.dart';
 
 Future<void> main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +24,7 @@ Future<void> main() async {
   ]);
 
   configureDependencies();
+  await bootstrapAuth();
   Bloc.observer = const MyBlocObserver();
 
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -49,37 +48,11 @@ Future<void> main() async {
   );
 }
 
-class Centrally extends StatefulWidget {
+class Centrally extends StatelessWidget {
   const Centrally({super.key});
-
   @override
-  State<Centrally> createState() => _CentrallyState();
-}
-
-class _CentrallyState extends State<Centrally> {
-  late final StreamSubscription<AuthEvent> _authSubscription;
-
-  @override
-  void initState() {
-    super.initState();
-    _authSubscription = getIt<AuthEventBus>().stream.listen((event) {
-      if (event == AuthEvent.logout && mounted) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (mounted) context.go(RoutesManager.loginPath);
-        });
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _authSubscription.cancel();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
+  Widget build(BuildContext context) => SessionLifecycle(
+    child: MaterialApp.router(
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => StringsManager.appName.tr(),
       routerConfig: AppRouter.router,
@@ -87,6 +60,6 @@ class _CentrallyState extends State<Centrally> {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       theme: AppTheme.light,
-    );
-  }
+    ),
+  );
 }

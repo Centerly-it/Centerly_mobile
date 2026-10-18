@@ -1,7 +1,8 @@
-# Shared backend contract — v6.1 draft implementation
+# Shared backend contract — v6.1 development deployment
 
 Canonical source: this repository's `supabase/migrations`, by explicit owner
-override on 2026-10-18. No hosted deployment or compatibility SHA is claimed.
+override on 2026-10-18. Nine migrations are deployed to centerly-dev after explicit
+owner approval; supabase/schema-manifest.json pins their hashes. See BACKEND_COMPAT.md.
 Transfer the same versioned migrations and Supabase migration history to the
 future Secretary repo; never create/reapply a duplicate schema. Both clients
 must pin the same deployed migration version before integrating live data.
@@ -44,7 +45,7 @@ validation still require dedicated acceptance tests and RPC extensions.
 | get_current_profile | none | JSON id, teacher_id, role; active actor |
 | list_students | p_search text=null, p_group_id uuid=null, p_cursor uuid=null, p_limit int=30 | student rows; UUID ascending cursor; max 100 |
 | list_sessions | p_from date, p_to date, p_group_id uuid=null | session rows ordered start/id; inclusive range <=62 days |
-| get_teacher_dashboard | p_date date | JSON counts, today's sessions, daily collected and all outstanding; teacher |
+| get_teacher_dashboard | p_date date=server Cairo today | JSON counts, today's sessions, daily collected and all outstanding; teacher |
 | add_schedule | p_group_id uuid, p_weekday int, p_start time, p_end time, p_from date, p_to date=null | schedule UUID; secretary |
 | generate_sessions | p_from date, p_to date | inserted count; secretary, inclusive <=62 days |
 | set_attendance | p_session_id uuid, p_student_id uuid, p_status text, p_reason text=null | attendance UUID; secretary |
@@ -87,6 +88,7 @@ SQL details. Unprovisioned users receive ACCOUNT_INACTIVE without tenant access.
 
 Run `npm ci --prefix supabase/tests`, then `node supabase/tests/run.mjs`.
 Tests apply all migrations to embedded PostgreSQL with synthetic Auth schema.
-They are not hosted REST/Auth or concurrent-transaction proof. Before live data:
-run Supabase integration and race tests, review definer privileges, configure
-signup denial, provisioning, backups/restore, monitoring and explicit deployment approval.
+Native PostgreSQL 17 also runs 11 independent-connection race assertions. Approved
+hosted fixtures passed 36 Auth/REST/RPC assertions and the Dart SDK auth integration
+test. Public signup is disabled; email login remains enabled. Production still
+requires backups/restore, monitoring and the remaining release gates in BACKEND_REVIEW.md.

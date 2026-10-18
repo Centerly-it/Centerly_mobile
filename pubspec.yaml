@@ -1,4 +1,4 @@
-﻿name: centrally
+name: centrally
 description: "A new Flutter project."
 
 publish_to: "none"
@@ -15,8 +15,6 @@ dependencies:
   dio: ^5.9.2
   easy_localization: ^3.0.8
   equatable: ^2.0.8
-  firebase_core: ^4.7.0
-  firebase_messaging: ^16.2.0
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
@@ -34,6 +32,7 @@ dependencies:
   sentry_flutter: ^9.18.0
   shared_preferences: ^2.5.5
   shimmer: ^3.0.0
+  supabase_flutter: ^2.18.3
   url_launcher: ^6.3.2
 
 dev_dependencies:
@@ -42,7 +41,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: ^3.2.5
+  http: ^1.6.0
   injectable_generator: ^2.12.1
+  integration_test:
+    sdk: flutter
   json_serializable: ^6.13.1
   lints: ^6.1.0
 

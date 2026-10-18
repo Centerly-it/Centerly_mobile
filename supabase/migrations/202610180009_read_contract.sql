@@ -17,7 +17,7 @@ declare v_tenant uuid:=private.require_actor(); begin
     and s.local_date between p_from and p_to and (p_group_id is null or s.group_id=p_group_id)
     order by s.starts_at,s.id;
 end $$;
-create function public.get_teacher_dashboard(p_date date) returns jsonb
+create function public.get_teacher_dashboard(p_date date default (now() at time zone 'Africa/Cairo')::date) returns jsonb
 language plpgsql stable security definer set search_path='' as $$
 declare v_tenant uuid:=private.require_actor('teacher'); begin
   if p_date is null then raise exception 'VALIDATION_ERROR'; end if;

@@ -1,7 +1,6 @@
 {
   "app_name": "سنترلي",
   "welcome": "مرحباً بك في التطبيق",
-
   "onboarding_skip": "تخطى «",
   "onboarding_next": "التالي",
   "onboarding_login": "تسجيل الدخول",
@@ -12,7 +11,6 @@
   "onboarding_2_body": "سجّل الحضور، تابع المستوى، واطلع على السجلّ الكامل لكل طالب — دون ورق أو مجموعات واتساب.",
   "onboarding_3_title": "اعرف أرقامك بدقّة",
   "onboarding_3_body": "اطلع على المبالغ المتوقعة والمحصّلة والمتبقية لكلّ شهر — وأرسل تذكيرًا بنقرة واحدة.",
-
   "login_welcome_title": "مرحبًا بعودتك",
   "login_welcome_subtitle": "سجّل دخولك لمتابعة يومك في Centerly",
   "login_email_label": "البريد الإلكتروني",
@@ -25,7 +23,6 @@
   "login_create_account": "تواصل معنا",
   "login_contact_whatsapp": "واتساب",
   "login_contact_call": "اتصال",
-
   "validation_required": "مطلوب",
   "validation_email_required": "البريد الإلكتروني مطلوب",
   "validation_email_invalid": "صيغة البريد غير صحيحة",
@@ -36,7 +33,6 @@
   "validation_numbers_only": "أرقام فقط",
   "validation_password_mismatch": "كلمة المرور غير متطابقة",
   "validation_password_conditions": "يرجى استيفاء شروط كلمة المرور",
-
   "create_center_title": "إنشاء مركزك التعليمي",
   "create_center_subtitle": "ابدأ بإضافة بيانات المركز",
   "center_name_label": "إسم المركز",
@@ -47,7 +43,6 @@
   "center_phone_hint": "+02",
   "next_button": "التالي",
   "notice_info": "يمكنك تعديل هذه البيانات لاحقًا من الإعدادات",
-
   "create_admin_title": "بيانات حساب المدير",
   "create_admin_subtitle": "أنشئ حساب المدير للبدء في Centerly",
   "admin_name_label": "الاسم بالكامل",
@@ -67,7 +62,6 @@
   "login_action": "سجل الدخول",
   "terms_agreement": "عند الضغط على تسجيل الدخول فإنك توافق على \nشروط الخدمة و",
   "privacy_policy": "سياسة الخصوصية",
-
   "register_success_title": "تم إنشاء المركز بنجاح",
   "register_success_subtitle": "مرحبًا بك في Centerly، مركزك التعليمي جاهز للإدارة.",
   "you_can_now": "يمكنك الآن:",
@@ -75,17 +69,13 @@
   "track_attendance_easily": "تسجيل الحضور بسهولة",
   "track_payments_and_reports": "تتبع المدفوعات والتقارير",
   "go_to_dashboard": "الانتقال إلى لوحة التحكم",
-
   "loader": "جاري التحميل...",
-
   "action_back": "رجوع",
   "action_logout": "تسجيل الخروج",
-
   "nav_home": "الرئيسية",
   "nav_sessions": "الحصص",
   "nav_groups": "المجموعات",
   "nav_finance": "المالية",
-
   "home_greeting": "صباح الخير، {name}",
   "home_sessions_today": "حصص اليوم",
   "home_working_hours_today": "ساعات عمل اليوم",
@@ -101,19 +91,16 @@
   "home_my_team": "فريق العمل",
   "home_manage_secretaries": "إدارة السكرتارية",
   "home_team_subtitle": "عرض وإدارة أفراد طاقم العمل",
-
   "status_completed": "تمت",
   "status_ongoing": "الآن",
   "status_upcoming": "قادم",
   "status_cancelled": "ملغية",
-
   "groups_title": "المجموعات",
   "groups_search_hint": "ابحث عن مجموعة أو طالب",
   "groups_empty_title": "لا توجد مجموعات",
   "groups_empty_subtitle": "لم نجد نتيجة مطابقة لبحثك.",
   "groups_next_session": "الحصة القادمة",
   "groups_students_label": "طالب",
-
   "sessions_title": "الحصص",
   "sessions_day": "اليوم",
   "sessions_week": "الأسبوع",
@@ -132,7 +119,6 @@
   "sessions_legend_done": "حصص انتهت",
   "sessions_legend_available": "حصص متاحة",
   "sessions_legend_cancelled": "حصص ملغية",
-
   "day_monday": "الإثنين",
   "day_tuesday": "الثلاثاء",
   "day_wednesday": "الأربعاء",
@@ -140,7 +126,6 @@
   "day_friday": "الجمعة",
   "day_saturday": "السبت",
   "day_sunday": "الأحد",
-
   "month_january": "يناير",
   "month_february": "فبراير",
   "month_march": "مارس",
@@ -153,7 +138,6 @@
   "month_october": "أكتوبر",
   "month_november": "نوفمبر",
   "month_december": "ديسمبر",
-
   "session_details_title": "تفاصيل الحصة",
   "session_stat_present": "حاضر",
   "session_stat_expected": "الطلاب المتوقعين",
@@ -165,7 +149,6 @@
   "session_empty_present": "لا يوجد حاضرون",
   "session_empty_absent": "لا يوجد غائبون",
   "session_duration_label": "{count}ث",
-
   "cancel_session_title": "سبب إلغاء الحصة",
   "cancel_low_attendance": "عدد الطلاب قليل",
   "cancel_technical_issue": "عطل فني",
@@ -177,7 +160,6 @@
   "cancel_back": "رجوع",
   "cancel_notify_note": "سيتم إرسال السبب إلى السكرتيرة تلقائيًا",
   "cancel_success_message": "تم إرسال طلب إلغاء الحصة",
-
   "attendance_title": "كشف الحضور",
   "attendance_view_only": "للعرض فقط",
   "attendance_filter_all": "الكل {count}",
@@ -188,18 +170,15 @@
   "attendance_empty_title": "هذا الطالب غير موجود",
   "attendance_empty_subtitle": "جرّب اسمًا آخر أو غيّر الفلتر.",
   "attendance_secretary_banner": "يتولى السكرتير تسجيل الحضور",
-
   "attendance_present": "حاضر",
   "attendance_absent": "غائب",
   "attendance_excused": "معتذر",
   "attendance_not_marked": "لم يُسجل",
-
   "profile_title": "ملف الطالب",
   "profile_tab_info": "بيانات الطالب",
   "profile_tab_attendance": "الحضور",
   "profile_tab_academic": "أكاديميًا",
   "profile_tab_payments": "المدفوعات",
-
   "profile_contact_title": "معلومات التواصل",
   "profile_student_phone": "هاتف الطالب",
   "profile_guardian_phone": "هاتف ولي الأمر",
@@ -212,7 +191,6 @@
   "profile_attendance_paid": "الحساب مدفوع",
   "profile_attendance_rate": "نسبة الحضور {rate}%",
   "profile_level": "المستوى {level}",
-
   "profile_attendance_summary_title": "ملخص الحضور",
   "profile_attendance_log_title": "سجل الحضور",
   "profile_stat_absent": "غاب",
@@ -224,7 +202,6 @@
   "profile_col_status": "الحالة",
   "profile_col_date": "التاريخ",
   "profile_col_day": "اليوم",
-
   "profile_exams_title": "الاختبارات",
   "profile_assignments_title": "الواجبات",
   "profile_col_exam": "الاختبار",
@@ -235,7 +212,6 @@
   "assignment_submitted": "تم التسليم",
   "assignment_late": "متأخر",
   "assignment_pending": "لم يُسلَّم",
-
   "profile_payments_summary_title": "ملخص المدفوعات",
   "profile_invoices_title": "سجل الفواتير",
   "profile_stat_remaining": "المتبقي",
@@ -249,7 +225,6 @@
   "profile_amount_with_currency": "{amount} جنيه",
   "invoice_paid": "مدفوع",
   "invoice_due": "مستحق",
-
   "secretary_title": "السكرتارية",
   "secretary_search_hint": "ابحث عن سكرتير",
   "secretary_empty_title": "لا يوجد سكرتارية",
@@ -263,11 +238,9 @@
   "secretary_confirm_action": "تأكيد الطلب",
   "secretary_cancel_action": "إلغاء",
   "secretary_removal_success": "تم إرسال طلب إزالة السكرتير للإدارة",
-
   "finance_title": "المالية",
   "finance_coming_soon": "شاشة المالية",
   "finance_coming_soon_subtitle": "ستكون متاحة في المرحلة القادمة",
-
   "secretary_dashboard_title": "لوحة تحكم السكرتارية",
   "secretary_live_attendance_banner": "تسجيل حضور جاري الآن",
   "secretary_attendance_window_remaining": "متبقي {time} على إغلاق تسجيل الحضور",
@@ -290,7 +263,6 @@
   "secretary_scan_qr": "مسح كود QR",
   "secretary_attendance_locked_msg": "انتهت فترة الـ 30 دقيقة المسموح بها لتسجيل الحضور لهذه الحصة، وأصبحت للقراءة فقط.",
   "secretary_take_attendance_btn": "تسجيل الحضور",
-
   "data_mgmt_add_student_title": "إضافة طالب جديد",
   "data_mgmt_edit_student_title": "تعديل بيانات الطالب",
   "data_mgmt_student_name": "اسم الطالب",
@@ -305,7 +277,6 @@
   "data_mgmt_qr_code": "كود QR",
   "data_mgmt_save_student": "حفظ الطالب",
   "data_mgmt_student_saved": "تم حفظ بيانات الطالب بنجاح",
-
   "data_mgmt_add_group_title": "إضافة مجموعة جديدة",
   "data_mgmt_edit_group_title": "تعديل المجموعة",
   "data_mgmt_group_name": "اسم المجموعة",
@@ -321,7 +292,6 @@
   "data_mgmt_end_time": "وقت الانتهاء",
   "data_mgmt_save_group": "حفظ المجموعة",
   "data_mgmt_group_saved": "تم حفظ المجموعة بنجاح",
-
   "data_mgmt_enrollment_title": "إدارة طلاب المجموعة",
   "data_mgmt_enroll_student": "إضافة طالب للمجموعة",
   "data_mgmt_enrolled_students": "الطلاب المقيدون بالمجموعة ({count})",
@@ -329,7 +299,6 @@
   "data_mgmt_student_enrolled": "تمت إضافة الطالب للمجموعة بنجاح",
   "data_mgmt_student_removed": "تمت إزالة الطالب من المجموعة",
   "data_mgmt_no_enrolled_students": "لا يوجد طلاب مقيدون في هذه المجموعة حاليًا",
-
   "data_mgmt_create_invoice_title": "إنشاء فاتورة جديدة",
   "data_mgmt_record_payment_title": "تسجيل استلام دفعة",
   "data_mgmt_select_student": "اختر الطالب",
@@ -343,7 +312,6 @@
   "data_mgmt_invoice_saved": "تم إصدار الفاتورة بنجاح",
   "data_mgmt_payment_saved": "تم تسجيل الدفعة بنجاح",
   "data_mgmt_no_due_invoices": "لا توجد فواتير مستحقة الدفع",
-
   "data_mgmt_grades_assignments_title": "رصد الدرجات والواجبات",
   "data_mgmt_tab_exams": "الاختبارات",
   "data_mgmt_tab_assignments": "الواجبات",
@@ -354,15 +322,35 @@
   "data_mgmt_score_hint": "الدرجة %",
   "data_mgmt_save_all": "حفظ الرصد",
   "data_mgmt_grades_saved": "تم حفظ الدرجات والواجبات بنجاح",
-
   "finance_filter_all": "الكل",
   "finance_filter_paid": "تم التحصيل",
   "finance_filter_due": "المستحقة",
   "finance_create_invoice_btn": "إصدار فاتورة",
   "finance_record_payment_btn": "تسجيل دفعة",
-
   "loading_data": "جاري تحميل البيانات...",
   "error_title": "حدث خطأ",
   "error_subtitle": "تعذّر تحميل البيانات. تحقق من اتصالك بالإنترنت.",
-  "retry_button": "إعادة المحاولة"
+  "retry_button": "إعادة المحاولة",
+  "auth_teacher_only": "تسجيل دخول حساب المدرس",
+  "auth_contact_support": "تواصل مع سنترلي / مساعدة كلمة المرور",
+  "auth_support_unavailable": "وسيلة التواصل غير مُهيأة أو تعذّر فتحها.",
+  "auth_error_NOT_CONFIGURED": "إعدادات الاتصال غير مُهيأة. تواصل مع سنترلي.",
+  "auth_error_FORBIDDEN_ROLE": "هذا التطبيق مخصص لحسابات المدرسين.",
+  "auth_error_TENANT_SCOPE": "تعذّر التحقق من الحساب. تواصل مع سنترلي.",
+  "auth_error_ACCOUNT_INACTIVE": "حسابك غير نشط. تواصل مع سنترلي.",
+  "auth_error_SUBSCRIPTION_INACTIVE": "اشتراكك غير نشط. تواصل مع سنترلي.",
+  "auth_error_AUTH_REQUIRED": "يرجى تسجيل الدخول مجددًا.",
+  "auth_error_INVALID_CREDENTIALS": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+  "auth_error_RATE_LIMITED": "محاولات كثيرة. يرجى المحاولة لاحقًا.",
+  "auth_error_NETWORK_ERROR": "تعذّر الاتصال. تحقق من الشبكة وحاول مجددًا.",
+  "auth_error_SERVICE_UNAVAILABLE": "الخدمة غير متاحة. يرجى المحاولة مجددًا.",
+  "auth_logout": "تسجيل الخروج",
+  "auth_validating": "جارٍ التحقق من صلاحية الحساب…",
+  "workspace_pending": "جارٍ ربط هذا القسم ببيانات حسابك.",
+  "workspace_title": "حساب المدرس",
+  "route_not_found": "الصفحة غير موجودة",
+  "live_total_students": "إجمالي الطلاب",
+  "live_total_groups": "إجمالي المجموعات",
+  "live_collected": "المحصّل اليوم (ج.م)",
+  "live_outstanding": "الرصيد المستحق (ج.م)"
 }

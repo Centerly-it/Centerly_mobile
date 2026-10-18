@@ -1,7 +1,6 @@
 {
   "app_name": "Centrally",
   "welcome": "Welcome",
-
   "onboarding_skip": "Skip",
   "onboarding_next": "Next",
   "onboarding_login": "Login",
@@ -12,7 +11,6 @@
   "onboarding_2_body": "Track attendance, monitor progress, and view full student history — no papers or WhatsApp groups.",
   "onboarding_3_title": "Know your numbers accurately",
   "onboarding_3_body": "Track expected, collected, and remaining payments each month — and send reminders with one click.",
-
   "login_welcome_title": "Welcome back",
   "login_welcome_subtitle": "Log in to continue your day with Centerly",
   "login_email_label": "Email",
@@ -25,7 +23,6 @@
   "login_create_account": "Contact Us",
   "login_contact_whatsapp": "WhatsApp",
   "login_contact_call": "Call",
-
   "validation_required": "Required",
   "validation_email_required": "Email is required",
   "validation_email_invalid": "Invalid email format",
@@ -36,7 +33,6 @@
   "validation_numbers_only": "Numbers only",
   "validation_password_mismatch": "Passwords do not match",
   "validation_password_conditions": "Please meet password conditions",
-
   "create_center_title": "Create Your Center",
   "create_center_subtitle": "Start by adding center details",
   "center_name_label": "Center Name",
@@ -47,7 +43,6 @@
   "center_phone_hint": "+02",
   "next_button": "Next",
   "notice_info": "You can edit this information later from the settings.",
-
   "create_admin_title": "Admin Account Details",
   "create_admin_subtitle": "Create admin account to start with Centerly",
   "admin_name_label": "Full Name",
@@ -67,7 +62,6 @@
   "login_action": "Login",
   "terms_agreement": "By tapping login, you agree to the \nTerms of Service and",
   "privacy_policy": "Privacy Policy",
-
   "register_success_title": "Center created successfully",
   "register_success_subtitle": "Welcome to Centerly, your educational center is ready to manage.",
   "you_can_now": "You can now:",
@@ -75,17 +69,13 @@
   "track_attendance_easily": "Track attendance easily",
   "track_payments_and_reports": "Track payments and reports",
   "go_to_dashboard": "Go to Dashboard",
-
   "loader": "Loading...",
-
   "action_back": "Back",
   "action_logout": "Logout",
-
   "nav_home": "Home",
   "nav_sessions": "Sessions",
   "nav_groups": "Groups",
   "nav_finance": "Finance",
-
   "home_greeting": "Good morning, {name}",
   "home_sessions_today": "Today's Sessions",
   "home_working_hours_today": "Today's Work Hours",
@@ -101,19 +91,16 @@
   "home_my_team": "My Team",
   "home_manage_secretaries": "Manage Secretaries",
   "home_team_subtitle": "View and manage staff members",
-
   "status_completed": "Done",
   "status_ongoing": "Now",
   "status_upcoming": "Upcoming",
   "status_cancelled": "Cancelled",
-
   "groups_title": "Groups",
   "groups_search_hint": "Search for a group or student",
   "groups_empty_title": "No Groups Found",
   "groups_empty_subtitle": "No results match your search.",
   "groups_next_session": "Next Session",
   "groups_students_label": "students",
-
   "sessions_title": "Sessions",
   "sessions_day": "Day",
   "sessions_week": "Week",
@@ -132,7 +119,6 @@
   "sessions_legend_done": "Completed",
   "sessions_legend_available": "Available",
   "sessions_legend_cancelled": "Cancelled",
-
   "day_monday": "Mon",
   "day_tuesday": "Tue",
   "day_wednesday": "Wed",
@@ -140,7 +126,6 @@
   "day_friday": "Fri",
   "day_saturday": "Sat",
   "day_sunday": "Sun",
-
   "month_january": "January",
   "month_february": "February",
   "month_march": "March",
@@ -153,7 +138,6 @@
   "month_october": "October",
   "month_november": "November",
   "month_december": "December",
-
   "session_details_title": "Session Details",
   "session_stat_present": "Present",
   "session_stat_expected": "Expected Students",
@@ -165,7 +149,6 @@
   "session_empty_present": "No students present",
   "session_empty_absent": "No absent students",
   "session_duration_label": "{count}G",
-
   "cancel_session_title": "Session Cancellation Reason",
   "cancel_low_attendance": "Low student attendance",
   "cancel_technical_issue": "Technical issue",
@@ -177,7 +160,6 @@
   "cancel_back": "Back",
   "cancel_notify_note": "The reason will be sent to the secretary automatically",
   "cancel_success_message": "Session cancellation request sent",
-
   "attendance_title": "Attendance Sheet",
   "attendance_view_only": "View Only",
   "attendance_filter_all": "All {count}",
@@ -188,18 +170,15 @@
   "attendance_empty_title": "Student not found",
   "attendance_empty_subtitle": "Try a different name or change the filter.",
   "attendance_secretary_banner": "The secretary handles attendance recording",
-
   "attendance_present": "Present",
   "attendance_absent": "Absent",
   "attendance_excused": "Excused",
   "attendance_not_marked": "Not Marked",
-
   "profile_title": "Student Profile",
   "profile_tab_info": "Student Info",
   "profile_tab_attendance": "Attendance",
   "profile_tab_academic": "Academic",
   "profile_tab_payments": "Payments",
-
   "profile_contact_title": "Contact Information",
   "profile_student_phone": "Student Phone",
   "profile_guardian_phone": "Guardian Phone",
@@ -212,7 +191,6 @@
   "profile_attendance_paid": "Account Paid",
   "profile_attendance_rate": "Attendance Rate {rate}%",
   "profile_level": "Level {level}",
-
   "profile_attendance_summary_title": "Attendance Summary",
   "profile_attendance_log_title": "Attendance Log",
   "profile_stat_absent": "Absent",
@@ -224,7 +202,6 @@
   "profile_col_status": "Status",
   "profile_col_date": "Date",
   "profile_col_day": "Day",
-
   "profile_exams_title": "Exams",
   "profile_assignments_title": "Assignments",
   "profile_col_exam": "Exam",
@@ -235,7 +212,6 @@
   "assignment_submitted": "Submitted",
   "assignment_late": "Late",
   "assignment_pending": "Not Submitted",
-
   "profile_payments_summary_title": "Payments Summary",
   "profile_invoices_title": "Invoice Log",
   "profile_stat_remaining": "Remaining",
@@ -249,7 +225,6 @@
   "profile_amount_with_currency": "{amount} EGP",
   "invoice_paid": "Paid",
   "invoice_due": "Due",
-
   "secretary_title": "Secretaries",
   "secretary_search_hint": "Search for a secretary",
   "secretary_empty_title": "No Secretaries",
@@ -263,11 +238,9 @@
   "secretary_confirm_action": "Confirm Request",
   "secretary_cancel_action": "Cancel",
   "secretary_removal_success": "Secretary removal request sent to admin",
-
   "finance_title": "Finance",
   "finance_coming_soon": "Finance Screen",
   "finance_coming_soon_subtitle": "Will be available in the next phase",
-
   "secretary_dashboard_title": "Secretary Dashboard",
   "secretary_live_attendance_banner": "Live Attendance Session",
   "secretary_attendance_window_remaining": "{time} remaining to record attendance",
@@ -290,7 +263,6 @@
   "secretary_scan_qr": "Scan QR",
   "secretary_attendance_locked_msg": "The 30-minute attendance window for this session has closed, sheet is now read-only.",
   "secretary_take_attendance_btn": "Take Attendance",
-
   "data_mgmt_add_student_title": "Add New Student",
   "data_mgmt_edit_student_title": "Edit Student",
   "data_mgmt_student_name": "Student Name",
@@ -305,7 +277,6 @@
   "data_mgmt_qr_code": "QR Code",
   "data_mgmt_save_student": "Save Student",
   "data_mgmt_student_saved": "Student saved successfully",
-
   "data_mgmt_add_group_title": "Add New Group",
   "data_mgmt_edit_group_title": "Edit Group",
   "data_mgmt_group_name": "Group Name",
@@ -321,7 +292,6 @@
   "data_mgmt_end_time": "End Time",
   "data_mgmt_save_group": "Save Group",
   "data_mgmt_group_saved": "Group saved successfully",
-
   "data_mgmt_enrollment_title": "Group Enrollments",
   "data_mgmt_enroll_student": "Add Student to Group",
   "data_mgmt_enrolled_students": "Enrolled Students ({count})",
@@ -329,7 +299,6 @@
   "data_mgmt_student_enrolled": "Student added to group successfully",
   "data_mgmt_student_removed": "Student removed from group",
   "data_mgmt_no_enrolled_students": "No students are currently enrolled in this group",
-
   "data_mgmt_create_invoice_title": "Create New Invoice",
   "data_mgmt_record_payment_title": "Record Payment",
   "data_mgmt_select_student": "Select Student",
@@ -343,7 +312,6 @@
   "data_mgmt_invoice_saved": "Invoice issued successfully",
   "data_mgmt_payment_saved": "Payment recorded successfully",
   "data_mgmt_no_due_invoices": "No due invoices to pay",
-
   "data_mgmt_grades_assignments_title": "Grades & Homework Status",
   "data_mgmt_tab_exams": "Exams",
   "data_mgmt_tab_assignments": "Homework",
@@ -354,15 +322,35 @@
   "data_mgmt_score_hint": "Score %",
   "data_mgmt_save_all": "Save All",
   "data_mgmt_grades_saved": "Grades and homework saved successfully",
-
   "finance_filter_all": "All",
   "finance_filter_paid": "Collected",
   "finance_filter_due": "Due",
   "finance_create_invoice_btn": "Issue Invoice",
   "finance_record_payment_btn": "Record Payment",
-
   "loading_data": "Loading data...",
   "error_title": "Something went wrong",
   "error_subtitle": "Failed to load data. Check your internet connection.",
-  "retry_button": "Try Again"
+  "retry_button": "Try Again",
+  "auth_teacher_only": "Teacher account sign-in",
+  "auth_contact_support": "Contact Centerly / password help",
+  "auth_support_unavailable": "Support contact is not configured or could not be opened.",
+  "auth_error_NOT_CONFIGURED": "Connection settings are not configured. Contact Centerly.",
+  "auth_error_FORBIDDEN_ROLE": "This app is for teacher accounts.",
+  "auth_error_TENANT_SCOPE": "Account validation failed. Contact Centerly.",
+  "auth_error_ACCOUNT_INACTIVE": "Your account is inactive. Contact Centerly.",
+  "auth_error_SUBSCRIPTION_INACTIVE": "Your subscription is inactive. Contact Centerly.",
+  "auth_error_AUTH_REQUIRED": "Please sign in again.",
+  "auth_error_INVALID_CREDENTIALS": "Email or password is incorrect.",
+  "auth_error_RATE_LIMITED": "Too many attempts. Please try again later.",
+  "auth_error_NETWORK_ERROR": "Connection failed. Check your network and try again.",
+  "auth_error_SERVICE_UNAVAILABLE": "The service is unavailable. Please try again.",
+  "auth_logout": "Sign out",
+  "auth_validating": "Checking account access…",
+  "workspace_pending": "This section is being connected to your account.",
+  "workspace_title": "Teacher workspace",
+  "route_not_found": "Page not found",
+  "live_total_students": "Total students",
+  "live_total_groups": "Total groups",
+  "live_collected": "Collected today (EGP)",
+  "live_outstanding": "Outstanding balance (EGP)"
 }

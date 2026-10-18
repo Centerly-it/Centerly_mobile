@@ -1,0 +1,43 @@
+{
+  "projectRef": "yfeubomyglmhuwizaqoj",
+  "environment": "development",
+  "lastMigration": "202610180009",
+  "migrations": [
+    {
+      "file": "202610180001_identity.sql",
+      "sha256": "fa4fe6f808b040f910a209736fb16664ede828978b8ffe3ce7f83f14f5cfcef8"
+    },
+    {
+      "file": "202610180002_students_groups.sql",
+      "sha256": "0ede19e0c2e36b1283a82d26474a86ec87cfe9c39e9eec038a4566381065177d"
+    },
+    {
+      "file": "202610180003_records.sql",
+      "sha256": "f5d28f86306f6d6de6cd35db1cbbc113cedcb99c89e79a6fcc252aca1de8ad66"
+    },
+    {
+      "file": "202610180004_authorization.sql",
+      "sha256": "63906dd09f663d694016e9543e271ba1d2fac037277b12c69418c2b5b89a71a6"
+    },
+    {
+      "file": "202610180005_attendance.sql",
+      "sha256": "c4fd4cc06302ea030a3afdd82a35e67f44b58dc684e49157f9c84455232d267d"
+    },
+    {
+      "file": "202610180006_finance.sql",
+      "sha256": "1828a9f0f4de8501c1ecda1ee9c2eb7576ec58b3dfdb7e723d86f39e9c3400f6"
+    },
+    {
+      "file": "202610180007_teacher_actions.sql",
+      "sha256": "f7048938c77b8cd17e89060948ef5e8dc263ef1b8df6bc57db1d5cbfc57527d7"
+    },
+    {
+      "file": "202610180008_schedule_generation.sql",
+      "sha256": "b288c204f2dab34d4855c1ff5ba24c2e4cd1232528730f97ed9d71e836f5b8e1"
+    },
+    {
+      "file": "202610180009_read_contract.sql",
+      "sha256": "b03c5b4fff1455b6e1fe50ce63edc173e7a74c9f785f87eec1e44a609d53047c"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+# Local development only; never push this entire file to hosted environments.
+project_id = "Centerly_mobile"
+[api]
+enabled = true
+port = 54321
+schemas = ["public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 100
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 17
+[db.migrations]
+enabled = true
+[db.seed]
+enabled = false
+sql_paths = []
+[studio]
+enabled = true
+port = 54323
+[auth]
+enabled = true
+site_url = "http://localhost:3000"
+enable_signup = false
+minimum_password_length = 12
+[auth.email]
+# Keep the email/password provider enabled; global auth.enable_signup denies signup.
+enable_signup = true
+enable_confirmations = true

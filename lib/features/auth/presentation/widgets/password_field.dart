@@ -1,4 +1,4 @@
-﻿// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
 // Password field
 // ---------------------------------------------------------------------------
 
@@ -18,12 +18,14 @@ class PasswordField extends StatelessWidget {
     required this.onToggleObscure,
     super.key,
     this.onChanged,
+    this.loginOnly = false,
   });
 
   final TextEditingController controller;
   final bool obscure;
   final VoidCallback onToggleObscure;
   final Function(String)? onChanged;
+  final bool loginOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,11 @@ class PasswordField extends StatelessWidget {
             ),
           ),
           autofillHints: const [AutofillHints.password],
-          validator: (value) => AuthValidator.validatePassword(value),
+          validator: (value) => loginOnly
+              ? ((value == null || value.isEmpty)
+                    ? StringsManager.validationPasswordRequired.tr()
+                    : null)
+              : AuthValidator.validatePassword(value),
         ),
       ],
     );
