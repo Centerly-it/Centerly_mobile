@@ -1,5 +1,154 @@
 # Centerly implementation progress
 
+## Teacher MVP completion — 2026-10-19 (current milestone)
+
+This milestone supersedes the historical audit and intermediate task tables below.
+Owner authorized implementation and explicitly approved the exact seven-file
+completion package; approval does not include production, account/Auth changes or
+publication. Existing design/assets and unrelated platform edits preserved.
+
+- Approved/deployed 202610190004..010 to centerly-dev only. Immediately before
+  deployment all twelve remote bodies and seven package hashes matched; dry run
+  listed exactly those seven files. No seeds/roles/vault/backfill or existing
+  migration edits. Postflight matched all nineteen bodies, 12 function metadata/
+  grants/search paths, six indexes and two enabled triggers. Nineteen hashes pinned.
+  Exact review/pins: docs/TEACHER_COMPLETION_CHANGE_REVIEW.md and
+  supabase/completion-package-manifest.json. Sanitized verification JSON retained.
+- Backend suite: local business 90 PASS; races 11 PASS; session detail 33 PASS;
+  profile 21 PASS; completion 98 PASS; added integrity 22 PASS; SQL tokenizer 1 PASS.
+  Integrity coverage includes simultaneous payment/reversal replay, exactly-one
+  payment/removal notifications, competing note versions and Cairo DST boundary.
+- Real hosted SDK login/restore/refresh/logout, secretary rejection and invalid
+  password PASS. New hosted completion suite 98 PASS through real Auth/REST/RPC:
+  both-tenant/secretary/anonymous checks; duplicate/reversed payment events; in-tx
+  visibility and rollback of payment/event/invoice effects; null versus zero scores;
+  pending then finalized correction after thirty days; note conflict/content restore;
+  duplicate removal request, handled notification without deactivation; read marking
+  and cancellation race. Only approved synthetic fixtures changed. No account/Auth
+  configuration changes, provisioning or password resets. Test records remain for QA.
+- Completion gate activated only after those backend checks. All core destinations
+  now use deployed reads: profile/memberships, exams/assignments, student attendance,
+  detailed global/student finance, notes, secretaries/removal and notifications.
+  Finance placeholder replaced in the configured MVP. Dashboard/calendar derive
+  status from server time; ended sessions hide cancellation. Secretaries remain
+  read-only except removal requests; Teacher cannot write operations/finance.
+- Regression additions: 14 AR/EN 320px/200% completion-page cases, note duplicate/
+  conflict/ambiguous-write tests, real hosted native navigation test. Note reload
+  failures preserve drafts and require reconciliation. Background account/token
+  validation preserves nested navigation/drafts; startup/resume checks still gate,
+  and failed account checks sign out. Tests cover nested navigation and deactivation.
+- CI now includes profile/completion/integrity SQL suites. SDK/lock mismatch traced
+  to five Flutter-pinned packages: existing Windows resolutions match 3.44.2; no
+  dependency upgrade or unrelated lock edits. Enforced pub get PASS with existing
+  lock bytes unchanged. Final analyzer clean; 82 Flutter tests PASS, one hosted
+  opt-in skipped in default run (passed separately); format and whitespace PASS.
+  Native Windows real hosted core navigation PASS, and separate actual secure
+  persistence/restore/logout PASS. These are native reads/auth, not Android or full
+  native UI mutation acceptance. Earlier test-harness failures (wrong fixture ID,
+  ambiguous calendar icon, English-only back tooltip, CLI result format/last-row
+  assumptions) were corrected and final runs passed; no SQL changes were needed.
+- TEACHER MVP READY FOR OWNER DEVELOPMENT TESTING: final configured debug APK
+  compiled after fixes; ZIP integrity and scan for all synthetic passwords/env
+  files PASS. SHA256 9d058ca18d6f0a694bcc1169975922af081c793e454693fa81918296a7f780b7.
+  Artifact: build/app/outputs/flutter-apk/app-debug.apk (170553861 bytes),
+  Android >=7.0/API24, ARM64/ARMv7/x86_64, com.example.centrally 1.0.0+1 debug key.
+  No core placeholders in this configured build. No physical-device installation,
+  Android performance/storage verification, release signing or pilot claim.
+- Support URL remains empty/configurable. No Android device/emulator is available;
+  Windows native testing is supplementary, not Android acceptance. Cached Android
+  SDK compiles despite some outstanding licenses for future SDK installs. Kotlin
+  plugin warnings concern future Flutter versions, not this successful build.
+- Next handoff: docs/SECRETARY_HANDOFF.md (canonical nineteen-version transfer,
+  permissions, environment, exact money/manual attendance and remaining cross-app
+  matrix). docs/TEACHER_MVP_TESTING.md contains install/manual steps. Pilot gates
+  remain physical device/security/performance/accessibility/update/signing, real
+  app identity/privacy/support, backup restore/monitoring and Secretary acceptance.
+
+| Current IDs | Testing handoff status | Remaining acceptance |
+|---|---|---|
+| T-010/013 | Nineteen-version contract pinned; remaining typed reads/actions active | React shared pin and cross-app matrix |
+| T-011/012 | Real Auth/native storage and AR/EN adaptive shell verified locally | Support URL; Android restore/accessibility/device QA |
+| T-020..024 | Live overview/groups/calendar/detail/manual attendance/cancel flows wired | Owner Android QA; Secretary reception/correction matrix |
+| T-030..034 | Live profile/memberships/academics/student attendance/finance/notes wired | Owner Android edge cases and cross-app reconciliation |
+| T-040/041 | Own secretary/removal and real notifications/read marking wired | Operator/Secretary joint acceptance |
+| T-042/050..054 | Automated suites and testing APK delivered; pilot acceptance open | Physical security/performance, signing/update, monitoring/restore, cross-app sign-off |
+
+Exact next eligible task: begin the Secretary React app against this canonical
+shared schema, using docs/SECRETARY_HANDOFF.md. Do not replay migrations or infer
+pilot readiness; future hosted contract changes require separate owner review.
+
+## Historical checkout audit — 2026-10-19, Windows
+
+This section supersedes conflicting older status entries below. Audit only: no
+implementation, deployment, Auth setting changes, password resets or hosted
+fixture mutations. Only this ledger was edited; owner lockfile changes retained.
+
+- HEAD `effcd270618f91f2e103e150f4c870d4402e097f`, branch
+  `codex/teacher-auth-foundation`. Successful origin fetch: HEAD and remote branch
+  match (0 ahead/0 behind), newer than de42879. Pre-existing sole modification:
+  pubspec.lock downgrades intl, matcher, meta, test_api and vector_math relative
+  to committed resolutions. No reset/merge/dependency installation performed.
+- Rules, root plan, contract, roadmap and latest reviews/verification JSON read.
+  Historical task table is stale: full profile code is wired; academics, student
+  attendance, finance, notes, secretaries and notifications now have local code,
+  rather than being NOT_STARTED. This does not make them hosted-complete.
+- Production auth uses real Supabase SDK, secure session storage, live teacher/
+  tenant validation and logout/refresh. Dashboard, group search/filter/pages,
+  day/week/month sessions, reasoned cancellation, read-only session attendance,
+  student directory and contact/membership profiles have live RPC/UI paths.
+  Current audit did not perform a password-based Flutter/device end-to-end flow.
+- Completion UI/models/repositories exist for academics, student attendance trends,
+  exact-decimal finance, optimistic notes, secretary removal requests and recipient
+  notifications. Entry points are gated by CENTERLY_COMPLETION_CONTRACTS (false
+  by default and absent from local runtime config); Finance remains a placeholder
+  in a normal build. New calendar/server-time path is gated too. Legacy mock/demo
+  screens remain in source, outside the production router. No entire feature is
+  newly accepted on the strength of mocks or SQL tests.
+- Fresh authenticated, read-only hosted inventory: all twelve migration SQL bodies
+  match local pinned history through 202610190003; 18 tables, 30 policies, no table
+  lacking forced RLS, no anonymous Centerly RPC execute or unsafe definer search
+  paths; four expected synthetic Auth users; platform helper retained. Separate
+  read-only query confirms all seven completion public reads are absent remotely.
+  Seven proposals 202610190004..010 remain under proposals/teacher_completion;
+  none is a managed/deployed migration. Manifest's '0 pending' refers only to
+  managed migrations, not these proposals. Completion package is not activated.
+  Public Auth settings returned HTTP 200: email provider enabled and public signup
+  disabled. This is fresh connectivity evidence, not a password-login test.
+- Tools present: Flutter 3.44.2/Dart 3.12.2, Node 24.12.0, Java 17, Android SDK 36,
+  Visual Studio Windows tooling, cached Supabase CLI 2.121.0. CLI authentication
+  works and ignored project-ref matches expected development project.
+  .env.local.json, .env.development-accounts.json and .env.native-auth.json exist
+  and parse; public runtime URL/key present, support URL empty. No secret values
+  printed; none of these files tracked. Password validity not tested this audit.
+  Older Mac-specific missing-credential/tool-version statements are historical.
+- Fresh checks: analyzer clean; Flutter suite 64 PASS / 1 opt-in hosted SKIP;
+  format check lib/test/integration_test 261 files unchanged; SQL suite 90 PASS;
+  native PostgreSQL concurrency 11 PASS; session-detail 33 PASS; student-profile
+  21 PASS; completion-package 98 PASS on disposable local DB only; 12 manifest
+  hashes unchanged; git diff whitespace check clean before ledger edit.
+  Raw CLI preflight included a diagnostic prefix; extracted JSON validated
+  successfully against all twelve exact SQL bodies. Evidence logs in ignored
+  .buildlog/audit_*; no sensitive payloads included in this ledger.
+- Not rerun: hosted password SDK/native integration, hosted mutation/fixture tests,
+  APK/profile/release builds, codegen, clean-checkout replay, remote CI, visual
+  captures or physical-device acceptance. Earlier Windows native auth and hosted
+  36-case results, later Mac debug APKs and deployment role checks are historical.
+  CI currently targets PRs/main pushes and omits the completion-package suite.
+- flutter doctor: Android licenses outstanding; only Windows/Chrome/Edge detected,
+  no physical Android device. iOS requires a Mac. Committed lockfile/current SDK
+  compatibility needs an explicit review; existing release uses debug signing and
+  com.example.centrally. No signed pilot or device-ready artifact certified here.
+- Next eligible implementation slice (only after audit authorization): T-010/013
+  completion-package review/compatibility pin and missing feature regression tests,
+  preparing one concrete deployment review; do not enable the gate before explicit
+  hosted approval and postflight verification. Then T-030..034/T-040..041 acceptance.
+  Inputs: real support URL, completion-package approval before deployment, Android
+  license acceptance/device, later app identity/signing/privacy/recovery ownership
+  and Secretary environment. Credentials/access are present, not a current blocker.
+  Pilot gates remain real two-tenant password/UI/cross-app tests, pending/cancelled/
+  correction/ledger cases, device accessibility/performance/storage, signing,
+  monitoring and an encrypted backup with successful restore drill.
+
 Updated: 2026-10-19 (Africa/Cairo). Session detail deployment and Flutter activation after 66ee032.
 Current phase: T2 live session detail/read-only attendance; T-030 profile contract proposal.
 Development backend is deployed with explicit owner approval; not production ready.
@@ -176,7 +325,7 @@ are documented in VISUAL_PRESERVATION.md. No hosted backend mutation/deployment 
   docs/TEACHER_READ_CHANGE_REVIEW.md before hosted deployment. No hosted state was
   contacted or changed in this slice. Support URL remains pending and configurable.
 
-## Task ledger
+## Historical task ledger (superseded by current milestone above)
 
 | ID | Status | Evidence / remaining acceptance |
 |---|---|---|

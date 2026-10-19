@@ -13,16 +13,21 @@ class SessionLifecycle extends StatefulWidget {
 class _SessionLifecycleState extends State<SessionLifecycle>
     with WidgetsBindingObserver {
   Timer? _timer;
-  void _check() {
+  void _check({bool background = false}) {
     final session = getIt<AuthSessionCubit>();
-    if (session.state.isAuthenticated) unawaited(session.restore());
+    if (session.state.isAuthenticated) {
+      unawaited(session.restore(background: background));
+    }
   }
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _timer = Timer.periodic(const Duration(minutes: 1), (_) => _check());
+    _timer = Timer.periodic(
+      const Duration(minutes: 1),
+      (_) => _check(background: true),
+    );
   }
 
   @override

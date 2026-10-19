@@ -69,4 +69,20 @@ void main() {
     await login;
     expect(cubit.state.isAuthenticated, isFalse);
   });
+  test(
+    'periodic validation preserves authenticated UI but deactivation fails closed',
+    () async {
+      repo.saved = profile;
+      await cubit.restore();
+      repo.pending = Completer<TeacherProfile?>();
+      final validation = cubit.restore(background: true);
+      expect(cubit.state.isAuthenticated, isTrue);
+      repo.pending!.complete(profile);
+      await validation;
+      repo.failure = const TeacherAuthFailure('ACCOUNT_INACTIVE');
+      await cubit.restore(background: true);
+      expect(cubit.state.isAuthenticated, isFalse);
+      expect(cubit.state.errorCode, 'ACCOUNT_INACTIVE');
+    },
+  );
 }

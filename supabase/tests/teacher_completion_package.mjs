@@ -41,5 +41,5 @@ try {
  for(const [q,args] of queries) await deny(call(a,q,args),/ACCOUNT_INACTIVE/);
  await pg.admin.query("update public.teachers set status='active',subscription_status='inactive' where id=$1",[ids.teacher]);
  for(const [q,args] of queries) await deny(call(a,q,args),/SUBSCRIPTION_INACTIVE/);
- console.log(`PASS: ${checks} completion-package assertions; all proposals local only.`);
+ console.log(`PASS: ${checks} completion-package assertions on disposable local PostgreSQL.`);
 } finally {await c.pg.close();}

@@ -1,4 +1,5 @@
 import '../../../core/api/teacher_read_client.dart';
+import '../../../core/data/completion_contracts.dart';
 import '../../../core/errors/backend_failure.dart';
 import '../domain/dashboard_summary.dart';
 
@@ -17,7 +18,9 @@ class DashboardRepository {
       final json = Map<String, dynamic>.from(data as Map);
       final summary = DashboardSummary.fromJson(json);
       final named = await api.read(
-        TeacherRead.namedSessions,
+        CompletionContracts.enabled
+            ? TeacherRead.calendar
+            : TeacherRead.namedSessions,
         refresh: refresh,
         params: {
           'p_from': summary.localDate,
@@ -25,13 +28,18 @@ class DashboardRepository {
           'p_group_id': null,
         },
       );
-      final names = {for (final row in named as List) row['id']: row};
+      final rows = CompletionContracts.enabled
+          ? (named as Map)['sessions']
+          : named;
+      final names = {for (final row in rows as List) row['id']: row};
       json['today_sessions'] = [
         for (final row in json['today_sessions'] as List)
           {
             ...Map<String, dynamic>.from(row as Map),
             'group_name': names[row['id']]['group_name'] as String,
             'subject_name': names[row['id']]['subject_name'] as String,
+            if (CompletionContracts.enabled)
+              'status': names[row['id']]['status'] as String,
           },
       ];
       checkSession();

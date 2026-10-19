@@ -1,6 +1,9 @@
-/// Build-time activation only after the completion package is approved/deployed.
-/// Defaults false. Does not bypass database permissions or select another backend.
+/// Approved package through 202610190010 deployed and verified on centerly-dev.
+/// Override false only when targeting a backend without these pinned contracts.
 class CompletionContracts {
   CompletionContracts._();
-  static const enabled = bool.fromEnvironment('CENTERLY_COMPLETION_CONTRACTS');
+  static const enabled = bool.fromEnvironment(
+    'CENTERLY_COMPLETION_CONTRACTS',
+    defaultValue: true,
+  );
 }

@@ -1,7 +1,7 @@
 # Shared backend contract — v6.1 development deployment
 
 Canonical source: this repository's `supabase/migrations`, by explicit owner
-override on 2026-10-18. Twelve migrations are deployed to centerly-dev after explicit
+override on 2026-10-18. Nineteen migrations are deployed to centerly-dev after explicit
 owner approval; supabase/schema-manifest.json pins their hashes. See BACKEND_COMPAT.md.
 Transfer the same versioned migrations and Supabase migration history to the
 future Secretary repo; never create/reapply a duplicate schema. Both clients
@@ -65,8 +65,8 @@ EGP uses numeric(12,2), never binary floats. Payments >0, two decimal places,
 cash/transfer/other. Net paid = collections minus reversal rows. Outstanding =
 invoice amount minus net paid, excluding void invoices. No overpayment. Due /
 partially_paid / paid derives transactionally from ledger. Money rows and audit
-logs reject UPDATE/DELETE even for accidental privileged SQL. Invoice void and
-full student-profile read RPC are not yet implemented; no client should assume them.
+logs reject UPDATE/DELETE even for accidental privileged SQL. The invoice-void
+workflow is not yet implemented. The scoped profile read is described below.
 
 Dates use Africa/Cairo server conversion including DST; instants are timestamptz.
 Daily reports use inclusive local midnight / exclusive next local midnight.
@@ -129,5 +129,31 @@ inactive enrollment and group archive metadata), membership_count, accurate
 next_cursor and synced_at. Other-tenant/archived students return NOT_FOUND.
 See STUDENT_PROFILE_CHANGE_REVIEW.md for evidence and acceptance limits.
 
-The remaining completion package is local-only and needs one separate approval;
-its functions are not callable hosted contracts yet.
+The seven-file completion package 202610190004..010 was separately approved and
+deployed on 2026-10-19; all nineteen exact remote SQL bodies and grants verified.
+Hosted synthetic Auth/REST/workflow tests passed 98 assertions without account/Auth
+changes. Completion reads/event triggers are live; Flutter gate defaults enabled.
+
+## Completion read contracts (deployed)
+
+All seven reads require an active teacher/subscription. Secretary/anonymous denied;
+tenant is resolved server-side. JSON monetary values below are decimal strings.
+Reports: p_from/p_to inclusive dates, <=366 days; p_cursor UUID=null and p_limit=30
+(1..100), UUID ascending pages with rows/total_count/next_cursor/synced_at.
+
+| RPC | Named arguments beyond common report/page inputs | Response notes |
+|---|---|---|
+| get_teacher_student_academics | p_id uuid, p_kind exams/assignments, p_group_id uuid=null | Missing score stays null; distribution/count/average summary |
+| get_teacher_student_attendance | p_id uuid, p_group_id uuid=null, p_status text=null | Cancelled history retained; cancelled/pending excluded from marked denominator |
+| get_teacher_finance | p_kind invoices/payments='invoices', p_student_id/p_group_id/p_secretary_id uuid=null | Invoice totals by due date; net collections by Cairo receipt date; collector affects collections only |
+| get_teacher_student_note | p_id uuid; no report/page inputs | note=null or content/updated_at; preserve exact timestamp for save_teacher_note optimistic version |
+| list_teacher_secretaries | page inputs only | Own status/contact/latest removal request; no deactivation |
+| list_teacher_notifications | page inputs only | Own recipient rows, unread_count; payload ID allowlist only |
+| get_teacher_calendar | p_from/p_to inclusive <=62 days, p_group_id uuid=null; no page inputs | sessions, server_date, synced_at; status derived from server time, cancelled preserved |
+
+Private helpers cannot be executed by clients. Six history indexes support reports.
+Future payment/reversal INSERTs notify the owning teacher exactly once per ledger
+row; replay creates no second row/event. Pending->handled removal transition notifies
+the teacher; status-only handling never deactivates a secretary. No backfill, push or
+cron. Trigger failure rolls back the corresponding business transaction. Existing
+cancellation notifications, note writes, mark-read and removal request RPCs unchanged.

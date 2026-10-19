@@ -1,0 +1,35 @@
+{
+  "projectRef": "yfeubomyglmhuwizaqoj",
+  "baselineLastMigration": "202610190003",
+  "normalization": "UTF-8 SQL with LF line endings",
+  "migrations": [
+    {
+      "file": "202610190004_teacher_read_helpers.sql",
+      "sha256": "5de720f00f265769fcf58f67ba6644c10b740d54499b27ab4ce5c7c72826fadb"
+    },
+    {
+      "file": "202610190005_teacher_academics.sql",
+      "sha256": "cfbf4289a59cd0be201350a41a0b1e9bdc82d14b554d66d9e48a5c434885e1d6"
+    },
+    {
+      "file": "202610190006_teacher_student_attendance.sql",
+      "sha256": "7d89703812852eeab26e9a72238f4e918a37f97a351d3319962243b37e25813d"
+    },
+    {
+      "file": "202610190007_teacher_finance.sql",
+      "sha256": "e1b5255ef353e58d56fb53a01270297028c36535d680e1bb58e610271515a83f"
+    },
+    {
+      "file": "202610190008_teacher_people_events.sql",
+      "sha256": "7fc3629a20a59ece96af8b6d5a2ecdc245538c18164df3e770070326920e4b64"
+    },
+    {
+      "file": "202610190009_teacher_calendar.sql",
+      "sha256": "c8ae664ccb31dd439068927ac2cd761dcd8a6fa7965ca7914ddb7aa986b8a503"
+    },
+    {
+      "file": "202610190010_teacher_event_producers.sql",
+      "sha256": "988718aa10559528fda4b47f55a8803059492c4177257bbc2007973214dc02b0"
+    }
+  ]
+}

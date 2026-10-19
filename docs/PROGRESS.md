@@ -1,5 +1,16 @@
 # Progress pointer
 
+Current milestone: Teacher completion package approved/deployed through
+202610190010 (nineteen exact remote SQL bodies verified); hosted synthetic
+completion suite 98 PASS. Completion gate enabled; core feature screens wired.
+Final 82 Flutter tests PASS, analyzer clean, real hosted SDK and Windows native
+navigation/secure-session tests PASS. Configured Android debug APK built and scanned;
+owner testing milestone reached. Android physical/pilot/Secretary acceptance open.
+See the current milestone at the top of IMPLEMENTATION_PROGRESS.md for final
+Flutter/native/APK results. SECRETARY_HANDOFF.md defines the next application's
+shared backend setup and separate cross-app/pilot acceptance. Historical entries
+below retain their original approval/access limits and are superseded by this pin.
+
 The session ledger is [IMPLEMENTATION_PROGRESS.md](../IMPLEMENTATION_PROGRESS.md).
 Read it with agent_rules.md, CENTERLY_TEACHER_IMPLEMENTATION_PLAN.md and
 docs/DECISIONS.md at the start of every session. The owner explicitly authorized

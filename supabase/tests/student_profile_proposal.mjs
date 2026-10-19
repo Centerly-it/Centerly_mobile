@@ -39,5 +39,5 @@ try {
     has_function_privilege('authenticated',oid,'EXECUTE') as auth
     from pg_proc where oid='public.get_teacher_student_profile(uuid,uuid,integer)'::regprocedure`)).rows[0];
   eq(metadata,{prosecdef:true,proconfig:['search_path=""'],anon:false,auth:true});
-  console.log(`PASS: ${count} local student-profile proposal assertions. Not deployed.`);
+ console.log(`PASS: ${count} local student-profile assertions on disposable PostgreSQL.`);
 } finally {await pg.close();}

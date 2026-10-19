@@ -11,9 +11,9 @@ export function cli(args) {
   // Commands are internal constants plus a validated ref/path, never user SQL text.
   if(process.platform!=='win32') throw new Error('Use the documented Windows operator workflow');
   const quote=value=>`'${String(value).replaceAll("'","''")}'`;
-  const command='& npx.cmd '+['--yes','supabase','--agent','no',...args].map(quote).join(' ')+'; exit $LASTEXITCODE';
+  const command='& npx.cmd '+['--offline','supabase','--agent','no',...args].map(quote).join(' ')+'; exit $LASTEXITCODE';
   try { return execFileSync('powershell.exe',['-NoProfile','-NonInteractive','-Command',command],
-    {encoding:'utf8',stdio:['ignore','pipe','pipe']}); }
+    {encoding:'utf8',stdio:['ignore','pipe','pipe'],timeout:120000}); }
   catch { throw new Error('Trusted Supabase CLI operation failed; inspect CLI access separately.'); }
 }
 export function keys() {
@@ -24,16 +24,16 @@ export function keys() {
   return {publicKey,adminKey}; // Process memory only; never log this result.
 }
 export async function api(path,{key,token,method='GET',body}={}) {
-  const response=await fetch(url+path,{method,headers:{apikey:key,
+  const response=await fetch(url+path,{method,signal:AbortSignal.timeout(30000),headers:{apikey:key,
     Authorization:`Bearer ${token ?? key}`,'Content-Type':'application/json'},
     body:body===undefined?undefined:JSON.stringify(body)});
   const data=await response.json().catch(()=>null);
   return {status:response.status,ok:response.ok,data};
 }
-export async function querySql(sql) {
+export async function querySql(sql,{output}={}) {
   const path=resolve(`supabase/.temp/approved_fixture_${randomUUID()}.sql`);
   await writeFile(path,sql);
-  return cli(['db','query','--linked','--file',path]);
+  return cli(['db','query','--linked','--file',path,...(output?['--output',output]:[])]);
 }
 export function restrictSecretFile(path) {
   if(process.platform==='win32') {

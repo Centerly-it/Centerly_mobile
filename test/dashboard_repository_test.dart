@@ -35,13 +35,16 @@ void main() {
                     },
                   ],
                 }
-              : [
-                  {
-                    'id': 'session',
-                    'group_name': 'أولى ثانوي',
-                    'subject_name': 'الرياضيات',
-                  },
-                ],
+              : {
+                  'sessions': [
+                    {
+                      'id': 'session',
+                      'group_name': 'أولى ثانوي',
+                      'subject_name': 'الرياضيات',
+                      'status': 'completed',
+                    },
+                  ],
+                },
         ),
       );
       final summary = await DashboardRepository(

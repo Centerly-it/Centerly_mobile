@@ -76,6 +76,9 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byType(StudentDirectory), findsOneWidget);
       expect(find.text('طالب تجريبي private'), findsOneWidget);
+      await session.restore(background: true);
+      await tester.pumpAndSettle();
+      expect(find.byType(StudentDirectory), findsOneWidget);
       await session.logout();
       await tester.pumpAndSettle();
       expect(find.byType(LoginView), findsOneWidget);

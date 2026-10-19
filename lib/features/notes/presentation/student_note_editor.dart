@@ -29,8 +29,10 @@ class StudentNoteEditor extends ChangeNotifier {
       text.text = note.content;
       mustReload = false;
       failed = false;
-    } catch (_) {
+    } catch (e) {
       failed = true;
+      error = e is BackendFailure ? e.code : 'SERVICE_UNAVAILABLE';
+      mustReload = saved != null;
     } finally {
       busy = false;
       _emit();

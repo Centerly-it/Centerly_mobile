@@ -9,7 +9,7 @@ class AuthSessionCubit extends Cubit<AuthSessionState> {
     : super(const AuthSessionState(AuthSessionStatus.checking)) {
     _subscription = repository.changes.listen(
       (_) {
-        if (!_busy) unawaited(restore());
+        if (!_busy) unawaited(restore(background: true));
       },
       onError: (_) {
         if (!_busy) _signedOut('NETWORK_ERROR');
@@ -20,15 +20,22 @@ class AuthSessionCubit extends Cubit<AuthSessionState> {
   late final StreamSubscription<void> _subscription;
   bool _busy = false;
   int _generation = 0;
-  Future<void> restore() async {
+  Future<void> restore({bool background = false}) async {
     if (_busy || isClosed) return;
     _busy = true;
     final generation = ++_generation;
-    // Immediately gate cached screens while the live account is being checked.
-    emit(const AuthSessionState(AuthSessionStatus.checking));
+    final previous = state.profile;
+    // Foreground/resume checks gate immediately. A successful periodic/token check
+    // preserves nested navigation and unsaved drafts; any failure still signs out.
+    if (!background || !state.isAuthenticated) {
+      emit(const AuthSessionState(AuthSessionStatus.checking));
+    }
     try {
       final profile = await repository.restore();
       if (isClosed || generation != _generation) return;
+      if (previous != null && profile != null && previous.id != profile.id) {
+        emit(const AuthSessionState(AuthSessionStatus.checking));
+      }
       emit(
         AuthSessionState(
           profile == null

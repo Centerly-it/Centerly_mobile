@@ -88,3 +88,25 @@ failures, instead of disabling validation. Preserve app ID/signing behavior.
 This changes local/CI Android tooling only; no backend or client data contract.
 Do not infer APK success from configuration or dependency downloads; record the
 actual final build result and keep historical pinned-SDK checks separate.
+
+## ADR-010 — Activate the approved shared Teacher completion contracts
+
+2026-10-19. Owner approved exactly seven SHA256-pinned additive migrations through
+202610190010 on centerly-dev. Preserve the twelve prior files; transfer all nineteen
+IDs/history intact when Secretary becomes canonical. New reads remain teacher-only;
+Secretary uses existing RLS/operational RPCs, never broadens grants for reuse.
+New payment/removal triggers affect both future clients' writes transactionally,
+with no backfill or push. Nineteen remote bodies/metadata and 98 hosted synthetic
+assertions passed before enabling the Flutter gate. Schema changes still need
+separate approval; device/pilot/cross-app acceptance is not inferred from deployment.
+
+## ADR-011 — Preserve drafts on successful background account validation
+
+2026-10-19. The existing one-minute check redirected through the checking route,
+discarding nested screens and unsaved notes even for an unchanged valid teacher.
+Periodic/token checks now keep authenticated navigation while awaiting the live
+profile; any validation failure signs out and clears sensitive caches. Identity
+changes gate the prior UI. Startup/resume and access-denial checks still gate
+immediately. All RPC/RLS live actor checks remain authoritative; no stale offline
+data fallback or persistent business cache is introduced. Regression tests cover
+in-flight validation, deactivation and nested navigation retention/logout removal.

@@ -32,23 +32,26 @@ class SessionReadFixture {
       return jsonResponse(request, null);
     }
     ranges.add(jsonDecode(request.body) as Map);
+    final rows = ranges.last['p_from'] != ranges.last['p_to']
+        ? []
+        : [
+            {
+              'group_name': 'Group A',
+              'subject_name': 'Math',
+              'id': 'one',
+              'group_id': 'group',
+              'local_date': '2026-07-01',
+              'starts_at': '2026-07-01T21:00:00Z',
+              'ends_at': '2026-07-01T22:00:00Z',
+              'status': cancelled ? 'cancelled' : 'upcoming',
+              'attendance_finalized_at': null,
+            },
+          ];
     return jsonResponse(
       request,
-      ranges.last['p_from'] != ranges.last['p_to']
-          ? []
-          : [
-              {
-                'group_name': 'Group A',
-                'subject_name': 'Math',
-                'id': 'one',
-                'group_id': 'group',
-                'local_date': '2026-07-01',
-                'starts_at': '2026-07-01T21:00:00Z',
-                'ends_at': '2026-07-01T22:00:00Z',
-                'status': cancelled ? 'cancelled' : 'upcoming',
-                'attendance_finalized_at': null,
-              },
-            ],
+      request.url.path.endsWith('get_teacher_calendar')
+          ? {'sessions': rows}
+          : rows,
     );
   });
 }

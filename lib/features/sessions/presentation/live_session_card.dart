@@ -54,7 +54,8 @@ class LiveSessionCard extends StatelessWidget {
           ),
           if (onChanged != null &&
               session.groupName != null &&
-              session.status != SessionStatus.cancelled)
+              session.status != SessionStatus.cancelled &&
+              session.status != SessionStatus.completed)
             TextButton(
               onPressed: () async {
                 final changed = await showDialog<bool>(

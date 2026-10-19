@@ -8,8 +8,10 @@ export async function completionContext() {
  const pg=await startPostgres();
  try {
   if (!await access(new URL('../migrations/202610190003_student_profile.sql',import.meta.url)).then(()=>true,()=>false)) await pg.admin.query(await readFile(new URL('../proposals/202610190003_student_profile.sql',import.meta.url),'utf8'));
-  for(const file of (await readdir(new URL('../proposals/teacher_completion/',import.meta.url))).filter(f=>f.endsWith('.sql')).sort())
-   await pg.admin.query(await readFile(new URL('../proposals/teacher_completion/'+file,import.meta.url),'utf8'));
+  for(const file of (await readdir(new URL('../proposals/teacher_completion/',import.meta.url))).filter(f=>f.endsWith('.sql')).sort()) {
+   if(!await access(new URL('../migrations/'+file,import.meta.url)).then(()=>true,()=>false))
+    await pg.admin.query(await readFile(new URL('../proposals/teacher_completion/'+file,import.meta.url),'utf8'));
+  }
   const a=await pg.connect(ids.teacher),b=await pg.connect(ids.other),s=await pg.connect(ids.secretary);
   const date=(await pg.admin.query("select (now() at time zone 'Africa/Cairo')::date::text as d")).rows[0].d;
   const call=async(client,sql,args=[])=>(await client.query('select '+sql+' as value',args)).rows[0].value;
