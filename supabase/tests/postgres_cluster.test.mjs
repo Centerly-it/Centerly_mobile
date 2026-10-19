@@ -5,6 +5,7 @@ import {mkdtemp,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join,relative,resolve} from 'node:path';
 import {bootCluster} from './postgres_cluster.mjs';
+import {startPostgres} from './postgres.mjs';
 
 test('failed native startup reports PostgreSQL diagnostics without its password',async()=>{
  const directory=await mkdtemp(join(tmpdir(),'centerly-pg-test-'));
@@ -23,4 +24,13 @@ test('failed native startup reports PostgreSQL diagnostics without its password'
   assert.ok(child.startsWith('centerly-pg-test-')&&!child.includes('..'));
   await rm(target,{recursive:true,force:true,maxRetries:30,retryDelay:100});
  }
+});
+
+test('native database uses UTF8 and round-trips Arabic independent of OS code page',async()=>{
+ const pg=await startPostgres();
+ try {
+  const value='طالب تجريبي 😀';
+  const result=await pg.admin.query("select current_setting('server_encoding') as encoding,$1::text as value",[value]);
+  assert.deepEqual(result.rows,[{encoding:'UTF8',value}]);
+ } finally {await pg.close();}
 });

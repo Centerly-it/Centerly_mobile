@@ -7,7 +7,8 @@ export async function bootCluster({databaseDir,password,port}) {
  const messages=[];
  const log=message=>{messages.push(String(message));if(messages.length>25)messages.shift();};
  const server=new EmbeddedPostgres({databaseDir,user:'postgres',password,port,
-  persistent:true,postgresFlags:['-h','127.0.0.1'],onLog:log,onError:log});
+  persistent:true,initdbFlags:['--encoding=UTF8'],
+  postgresFlags:['-h','127.0.0.1'],onLog:log,onError:log});
  const diagnostic=error=>[error?.message,...messages].filter(Boolean).join('\n')
   .replaceAll(password,'[REDACTED]').slice(-6000);
  // pg_ctl starts PostgreSQL with a restricted Windows token. Direct postgres.exe

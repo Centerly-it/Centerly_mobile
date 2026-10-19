@@ -15,7 +15,11 @@ and password redaction; tests/SQL assertions are not weakened or skipped. Other
 platforms keep the existing native start. Added a real invalid-port startup test
 for clear redacted failures. No Flutter, hosted schema/data or Auth changes.
 Local native suites passed 11/33/21/98/22 assertions with the new controller;
-current GitHub verification is pending the repair push. Pilot gates unchanged.
+GitHub run 39299955574 confirmed startup/concurrency/detail/profile now pass, then
+exposed host-default WIN1252 encoding rejecting Arabic completion fixtures. initdb
+now explicitly selects UTF8; a real Arabic/emoji round-trip/server-encoding test
+guards independence from the Windows code page. Full remote rerun pending.
+Pilot gates unchanged; no application or hosted backend changes.
 
 ## Teacher MVP completion — 2026-10-19 (current milestone)
 
