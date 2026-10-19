@@ -31,7 +31,7 @@ leaving the five pre-existing SDK lock resolutions uncommitted.
 
 ## 2026-10-19 approved deployment and next eligible read workflows
 
-Implementation commit: recorded below after local checkpoint.
+Implementation commit: `18213b5` (approved deployment, production activation, directory/roster and next local proposal).
 
 | Task | Status | Evidence / changed areas | Next / acceptance limits |
 |---|---|---|---|

@@ -1,6 +1,6 @@
 # Centerly implementation progress
 
-Updated: 2026-10-19 (Africa/Cairo). Approved read deployment and production activation; commits recorded in docs/PROGRESS.md.
+Updated: 2026-10-19 (Africa/Cairo). Approved read deployment and production activation at 18213b5; documentation checkpoint follows.
 Current phase: T2 live overview/groups/sessions; T-030 directory/roster slice.
 Development backend is deployed with explicit owner approval; not production ready.
 
