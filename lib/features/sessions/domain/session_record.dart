@@ -17,6 +17,23 @@ class SessionRecord {
   final DateTime startsAt, endsAt;
   final DateTime? finalizedAt;
   final SessionStatus status;
+  SessionRecord atServerTime(DateTime now) => SessionRecord(
+    id: id,
+    groupId: groupId,
+    localDate: localDate,
+    startsAt: startsAt,
+    endsAt: endsAt,
+    groupName: groupName,
+    subjectName: subjectName,
+    finalizedAt: finalizedAt,
+    status: status == SessionStatus.cancelled
+        ? status
+        : now.isBefore(startsAt)
+        ? SessionStatus.upcoming
+        : now.isBefore(endsAt)
+        ? SessionStatus.ongoing
+        : SessionStatus.completed,
+  );
   factory SessionRecord.fromJson(Map<String, dynamic> json) {
     final id = json['id'], group = json['group_id'], date = json['local_date'];
     if (id is! String ||

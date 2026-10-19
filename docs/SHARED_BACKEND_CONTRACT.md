@@ -1,7 +1,7 @@
 # Shared backend contract — v6.1 development deployment
 
 Canonical source: this repository's `supabase/migrations`, by explicit owner
-override on 2026-10-18. Ten migrations are deployed to centerly-dev after explicit
+override on 2026-10-18. Twelve migrations are deployed to centerly-dev after explicit
 owner approval; supabase/schema-manifest.json pins their hashes. See BACKEND_COMPAT.md.
 Transfer the same versioned migrations and Supabase migration history to the
 future Secretary repo; never create/reapply a duplicate schema. Both clients
@@ -122,5 +122,12 @@ Missing attendance is not inferred; cancelled history remains readable. Teacher
 attendance is read only. All eleven deployed hashes are pinned. See
 [actual verification and limits](SESSION_DETAIL_CHANGE_REVIEW.md).
 
-A separate student-profile proposal is local only, outside managed migrations;
-it is not a callable hosted contract. No further deployment is authorized.
+The separately approved `202610190003_student_profile.sql` is deployed and pinned:
+`get_teacher_student_profile(p_id uuid,p_cursor uuid=null,p_limit integer=30)`
+returns student contacts/timestamps and bounded membership history (including
+inactive enrollment and group archive metadata), membership_count, accurate
+next_cursor and synced_at. Other-tenant/archived students return NOT_FOUND.
+See STUDENT_PROFILE_CHANGE_REVIEW.md for evidence and acceptance limits.
+
+The remaining completion package is local-only and needs one separate approval;
+its functions are not callable hosted contracts yet.

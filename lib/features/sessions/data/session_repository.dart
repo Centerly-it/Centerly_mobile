@@ -1,4 +1,5 @@
 import '../../../core/api/teacher_read_client.dart';
+import '../../../core/data/completion_contracts.dart';
 import '../../../core/errors/backend_failure.dart';
 import '../domain/session_record.dart';
 
@@ -27,16 +28,20 @@ class SessionRepository {
       throw const BackendFailure('VALIDATION_ERROR');
     }
     final data = await api.read(
-      TeacherRead.namedSessions,
+      CompletionContracts.enabled
+          ? TeacherRead.calendar
+          : TeacherRead.namedSessions,
       refresh: refresh,
       params: {'p_from': from, 'p_to': to, 'p_group_id': groupId},
     );
     try {
       return List.unmodifiable(
-        (data as List).map(
-          (row) =>
-              SessionRecord.fromJson(Map<String, dynamic>.from(row as Map)),
-        ),
+        ((CompletionContracts.enabled ? (data as Map)['sessions'] : data)
+                as List)
+            .map(
+              (row) =>
+                  SessionRecord.fromJson(Map<String, dynamic>.from(row as Map)),
+            ),
       );
     } catch (_) {
       throw const BackendFailure('SERVICE_UNAVAILABLE');

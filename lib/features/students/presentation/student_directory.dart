@@ -10,6 +10,7 @@ import '../data/student_repository.dart';
 import 'student_browse_cubit.dart';
 import 'student_browse_state.dart';
 import 'student_read_card.dart';
+import 'student_profile_page.dart';
 
 class StudentDirectory extends StatelessWidget {
   const StudentDirectory({this.groupId, this.groupName, super.key});
@@ -53,7 +54,17 @@ class _StudentDirectoryBody extends StatelessWidget {
                           padding: const EdgeInsets.all(AppPadding.p16),
                           children: [
                             for (final student in state.students)
-                              StudentReadCard(student: student),
+                              StudentReadCard(
+                                student: student,
+                                onOpen: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute<void>(
+                                    builder: (_) => StudentProfilePage(
+                                      studentId: student.id,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             if (state.error != null)
                               AppErrorState(
                                 onRetry: state.students.isEmpty

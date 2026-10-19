@@ -312,3 +312,22 @@ Continued T-030: bounded read-only profile/membership proposal prepared outside
 managed migrations; 21 disposable PostgreSQL assertions PASS. Not deployed or
 called by production. Next activation needs explicit reviewed approval; academic,
 student attendance/finance/notes and later modules remain incomplete.
+
+
+## Completion-path and approved profile milestone — 2026-10-19
+
+Remaining checklist, implementation/acceptance estimates and separate owner-test/
+pilot definitions: docs/TEACHER_COMPLETION_ROADMAP.md. Review all T-001..054 gates;
+existing mock screens remain excluded. Plan range: 21–37 engineering days of
+implementation plus 14–23 acceptance days, external waiting/Secretary work extra.
+
+Owner separately approved only 202610190003_student_profile. Eleven-version
+hash/remote SQL preflight and only-this-version dry run passed; deployed with vault
+skipped and no seeds/roles. Twelve-version postflight passed; exact approved SHA
+760740f7d4ea2c59cbaa645619fcf8f22375d73eadd115c12277c4ff3ce291e5 pinned.
+Read-only existing-fixture SQL checks passed contacts/membership counts/scope,
+tenant/secretary/anonymous/missing denial and grants/search_path. No fixture writes,
+Auth/account changes or other migration deployed. Password SDK/UI remains pending.
+Profile/membership Flutter integration is being tested; not marked fully accepted.
+Remaining reads and event producers are being consolidated into one local package;
+all unapproved production entry points default disabled until approved deployment.

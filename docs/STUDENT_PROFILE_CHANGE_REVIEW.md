@@ -1,7 +1,13 @@
-# Student profile read — proposal only
+# Student profile read — approved and deployed
 
-Not deployed or copied to managed migrations. Hosted history remains eleven
-versions through 202610190002; no other deployment has been approved.
+Owner separately approved exactly this migration. Deployed 2026-10-19 after all
+eleven baseline hashes/remote SQL bodies matched and dry run listed only this
+version, with vault skipped and no seeds/roles. All twelve postflight SQL bodies
+matched; hash pinned. No fixture/Auth changes or other deployment occurred.
+[Read-only hosted results](STUDENT_PROFILE_VERIFICATION.json): contact/membership
+matching, tenant/missing/secretary/anonymous denial and hardened grants/search_path
+passed using existing synthetic accounts. Positive multi-page/archive/inactive
+cases remain local evidence. Password SDK/Flutter acceptance remains pending.
 Proposal: `supabase/proposals/202610190003_student_profile.sql`.
 SHA256: `760740f7d4ea2c59cbaa645619fcf8f22375d73eadd115c12277c4ff3ce291e5`.
 
@@ -23,7 +29,7 @@ native PostgreSQL: contacts/missing values, teacher/secretary/tenant boundaries,
 limits, pagination end, historical membership/archive metadata, archived-student
 and inactive teacher denial, grants/search_path. No hosted access in this test.
 
-After separate approval: verify all eleven pinned hashes/remote SQL bodies, copy
+Original activation procedure (historical): verify all eleven pinned hashes/remote SQL bodies, copy
 exact proposal bytes, dry-run only the approved version with vault/seeds/roles
 skipped, deploy and verify read-only existing-fixture behavior before pinning and
 wiring profile UI. Do not mutate hosted fixtures or reset passwords. Password-based

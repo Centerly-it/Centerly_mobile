@@ -34,7 +34,9 @@ class SessionDetail {
         .toList();
     if (rows.length > count) throw const FormatException('Invalid page');
     return SessionDetail(
-      session: SessionRecord.fromJson(session),
+      session: SessionRecord.fromJson(
+        session,
+      ).atServerTime(DateTime.parse(json['synced_at'] as String)),
       counts: AttendanceCounts.fromJson(
         Map<String, dynamic>.from(json['attendance_counts'] as Map),
       ),

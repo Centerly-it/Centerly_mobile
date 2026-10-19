@@ -1,11 +1,11 @@
 // Disposable local PostgreSQL only; no hosted configuration or business writes.
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
+import {readFile,access} from 'node:fs/promises';
 import {startPostgres} from './postgres.mjs';
 const pg=await startPostgres(); let count=0;
 const eq=(a,b)=>{assert.deepEqual(a,b);count++;};
 try {
-  await pg.admin.query(await readFile(new URL('../proposals/202610190003_student_profile.sql',import.meta.url),'utf8'));
+  if (!await access(new URL('../migrations/202610190003_student_profile.sql',import.meta.url)).then(()=>true,()=>false)) await pg.admin.query(await readFile(new URL('../proposals/202610190003_student_profile.sql',import.meta.url),'utf8'));
   const teacher='10000000-0000-0000-0000-000000000001',other='10000000-0000-0000-0000-000000000002';
   const student='30000000-0000-0000-0000-000000000001',secretary='20000000-0000-0000-0000-000000000001';
   const a=await pg.connect(teacher),b=await pg.connect(other),s=await pg.connect(secretary);

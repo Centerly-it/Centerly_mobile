@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../core/theme/color_manager.dart';
+import '../../core/data/completion_contracts.dart';
+import '../../features/finances/presentation/live_finance.dart';
 import '../../core/theme/values_manager.dart';
 import 'widgets/workspace_actions.dart';
 import '../../features/dashboard/presentation/live_dashboard.dart';
@@ -43,6 +45,8 @@ class _TeacherWorkspaceState extends State<TeacherWorkspace> {
           ? const LiveSessions()
           : _index == 2
           ? const LiveGroups()
+          : CompletionContracts.enabled
+          ? const LiveFinance()
           : SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(AppPadding.p24),
