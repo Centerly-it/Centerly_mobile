@@ -92,3 +92,18 @@ Native PostgreSQL 17 also runs 11 independent-connection race assertions. Approv
 hosted fixtures passed 36 Auth/REST/RPC assertions and the Dart SDK auth integration
 test. Public signup is disabled; email login remains enabled. Production still
 requires backups/restore, monitoring and the remaining release gates in BACKEND_REVIEW.md.
+
+## Pending read extension (not hosted)
+
+`202610190001_teacher_browse.sql` proposes teacher-only `get_teacher_overview(p_date)`
+(existing dashboard plus explicit manual attendance counts) and bounded
+`list_teacher_groups(p_search,p_grade_level_id,p_cursor,p_limit)` with grade,
+student count, roster and schedule previews, plus `list_teacher_sessions(p_from,
+p_to,p_group_id)` adding group/subject identity to bounded session reads. Existing production calls still use
+001..009. See [review](TEACHER_READ_CHANGE_REVIEW.md); deployment needs explicit
+owner approval, remote preflight and postflight. No new version is pinned as deployed.
+
+Client read cache is bounded memory only (64 responses, 30 seconds), keyed by SDK
+identity/endpoint/parameters; no persistent student or finance cache. Validation,
+logout and mutations invalidate it. Session/token changes reject late responses.
+Refresh bypasses cache; offline failures never fall back to stale sensitive data.

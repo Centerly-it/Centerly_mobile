@@ -1,3 +1,4 @@
+import 'package:intl/date_symbol_data_local.dart';
 import 'app/bootstrap_auth.dart';
 import 'app/session_lifecycle.dart';
 
@@ -21,6 +22,7 @@ Future<void> main() async {
   await Future.wait([
     CacheService.cacheInitialization(),
     EasyLocalization.ensureInitialized(),
+    initializeDateFormatting(),
   ]);
 
   configureDependencies();

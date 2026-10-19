@@ -13,7 +13,7 @@ SupabaseClient readFixture(
 );
 http.Response jsonResponse(
   http.Request request,
-  Object data, {
+  Object? data, {
   int status = 200,
 }) => http.Response(
   jsonEncode(data),

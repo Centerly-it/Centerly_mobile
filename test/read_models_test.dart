@@ -12,6 +12,7 @@ void main() {
     'dashboard requires server metrics and preserves decimal display values',
     () {
       final data = {
+        'today_sessions': [],
         'total_students': 2,
         'total_groups': 1,
         'date': '2026-10-18',

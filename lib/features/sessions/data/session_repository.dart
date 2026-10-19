@@ -9,6 +9,7 @@ class SessionRepository {
     required String from,
     required String to,
     String? groupId,
+    bool refresh = false,
   }) async {
     DateTime? calendarDate(String value) {
       if (!RegExp(r'^\d{4}-\d{2}-\d{2}$').hasMatch(value)) return null;
@@ -27,6 +28,7 @@ class SessionRepository {
     }
     final data = await api.read(
       TeacherRead.sessions,
+      refresh: refresh,
       params: {'p_from': from, 'p_to': to, 'p_group_id': groupId},
     );
     try {

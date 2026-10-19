@@ -9,8 +9,11 @@ class SessionRecord {
     required this.endsAt,
     required this.status,
     this.finalizedAt,
+    this.groupName,
+    this.subjectName,
   });
   final String id, groupId, localDate;
+  final String? groupName, subjectName;
   final DateTime startsAt, endsAt;
   final DateTime? finalizedAt;
   final SessionStatus status;
@@ -30,6 +33,8 @@ class SessionRecord {
     return SessionRecord(
       id: id,
       groupId: group,
+      groupName: json['group_name'] as String?,
+      subjectName: json['subject_name'] as String?,
       localDate: date,
       startsAt: start,
       endsAt: end,

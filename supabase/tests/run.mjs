@@ -2,6 +2,7 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFile, readdir } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import { testSchedule } from './schedule.mjs';
+import { testTeacherBrowse } from './teacher_browse.mjs';
 import { testSecurity } from './security.mjs';
 
 const db = new PGlite();
@@ -29,6 +30,7 @@ const eq = async (sql, expected) => { assert.equal(await scalar(sql), expected);
 const t1='10000000-0000-0000-0000-000000000001', t2='10000000-0000-0000-0000-000000000002';
 const s1='20000000-0000-0000-0000-000000000001', s2='20000000-0000-0000-0000-000000000002';
 const student='30000000-0000-0000-0000-000000000001', session='50000000-0000-0000-0000-000000000001';
+count+=await testTeacherBrowse(db,actor,t1,t2,s1);
 await actor(t1);
 await eq('select count(*)::int from public.students',1);
 await denied(`insert into public.students(teacher_id,full_name) values('${t1}','forbidden')`);

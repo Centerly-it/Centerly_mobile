@@ -70,5 +70,11 @@ Future<void> bootstrapAuth() async {
   getIt.registerSingleton<TeacherAuthRepository>(repository);
   final session = AuthSessionCubit(repository);
   getIt.registerSingleton<AuthSessionCubit>(session);
+  session.stream.listen((state) {
+    // Also invalidates in-flight responses before account revalidation starts.
+    if (!state.isAuthenticated && getIt.isRegistered<TeacherReadClient>()) {
+      getIt<TeacherReadClient>().invalidate();
+    }
+  });
   await session.restore();
 }

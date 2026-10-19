@@ -1,3 +1,6 @@
+import '../../sessions/domain/session_record.dart';
+import '../../../models/centerly_models.dart';
+
 class DashboardSummary {
   const DashboardSummary({
     required this.students,
@@ -5,8 +8,13 @@ class DashboardSummary {
     required this.collectedEgp,
     required this.outstandingEgp,
     required this.localDate,
+    this.sessions = const [],
   });
   final int students, groups;
+  final List<SessionRecord> sessions;
+  int get scheduledMinutes => sessions
+      .where((s) => s.status != SessionStatus.cancelled)
+      .fold(0, (total, s) => total + s.endsAt.difference(s.startsAt).inMinutes);
   final String collectedEgp, outstandingEgp, localDate;
   factory DashboardSummary.fromJson(Map<String, dynamic> data) {
     final students = data['total_students'], groups = data['total_groups'];
@@ -35,6 +43,12 @@ class DashboardSummary {
       students: students,
       groups: groups,
       localDate: date,
+      sessions: List.unmodifiable(
+        (data['today_sessions'] as List).map(
+          (row) =>
+              SessionRecord.fromJson(Map<String, dynamic>.from(row as Map)),
+        ),
+      ),
       collectedEgp: amount('collected_egp'),
       outstandingEgp: amount('outstanding_egp'),
     );

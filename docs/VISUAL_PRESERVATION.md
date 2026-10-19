@@ -25,3 +25,20 @@ registration and fake success. Production workspace uses live reads and explicit
 pending states instead of exposing prototype financial operations. This is a
 product/security correction, not a new visual identity; full live screen fidelity
 remains T-012/T-042. Do not mark those later tasks complete based on this ADR.
+
+## Production workspace accessibility slice — 2026-10-19
+
+Captured actual production TeacherWorkspace with synthetic RPC transport fixtures,
+real Cairo and Material fonts, Arabic/English at 320x844 and 430x844, text scale 2:
+`docs/screenshots/live-shell/`. Reproduce with:
+`flutter test --no-pub test/live_workspace_test.dart --dart-define=CAPTURE_LIVE=true`.
+These are test fixtures, not real tenant data or proof of hosted end-to-end behavior.
+
+Inspected ar-320-scale2 against `figma_screens/داشبورد الأستاذ.png`. Font/palette/card
+borders and spacing come from the existing design system; wrapped metrics remain
+readable without a RenderFlex overflow. The live workspace is still a simplified
+vertical aggregate composition: personalized blue greeting header, compact paired
+stats, named session cards, detailed financial composition and notifications are
+not yet equivalent to Figma. Do not mark T-012/T-042 visually complete. Test captures
+currently cover scaled layout; 100% fidelity matrix and physical-device TalkBack/
+safe-area acceptance remain open. No approved Figma reference was overwritten.

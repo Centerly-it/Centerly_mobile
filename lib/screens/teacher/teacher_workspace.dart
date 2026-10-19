@@ -5,6 +5,7 @@ import '../../core/theme/color_manager.dart';
 import '../../core/theme/values_manager.dart';
 import '../../features/auth/presentation/view_models/auth_session_cubit.dart';
 import '../../features/dashboard/presentation/live_dashboard.dart';
+import '../../features/sessions/presentation/live_sessions.dart';
 
 /// Production entry: no prototype mock screens or secretary operations.
 class TeacherWorkspace extends StatefulWidget {
@@ -27,18 +28,27 @@ class _TeacherWorkspaceState extends State<TeacherWorkspace> {
         ),
       ],
     ),
-    body: _index == 0
-        ? const LiveDashboard()
-        : Center(
-            child: Padding(
-              padding: const EdgeInsets.all(AppPadding.p24),
-              child: Text(
-                'workspace_pending'.tr(),
-                textAlign: TextAlign.center,
+    body: SafeArea(
+      top: false,
+      child: _index == 0
+          ? const LiveDashboard()
+          : _index == 1
+          ? const LiveSessions()
+          : SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(AppPadding.p24),
+                child: Text(
+                  'workspace_pending'.tr(),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
-          ),
+    ),
     bottomNavigationBar: NavigationBar(
+      height:
+          AppSize.s80 +
+          MediaQuery.textScalerOf(context).scale(AppSize.s24) -
+          AppSize.s24,
       selectedIndex: _index,
       onDestinationSelected: (value) => setState(() => _index = value),
       backgroundColor: ColorManager.surface,

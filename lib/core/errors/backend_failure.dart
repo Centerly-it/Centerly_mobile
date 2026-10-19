@@ -9,6 +9,8 @@ class BackendFailure implements Exception {
     'AUTH_REQUIRED',
     'ACCOUNT_INACTIVE',
     'SUBSCRIPTION_INACTIVE',
+    'FORBIDDEN_ROLE',
+    'TENANT_SCOPE',
   }.contains(code);
   @override
   String toString() => code;

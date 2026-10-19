@@ -41,3 +41,25 @@ remain unreachable from production navigation pending incremental cleanup.
 No Firebase imports or initialization exist in lib/. Remove unused firebase_core
 and firebase_messaging dependencies; push is deferred and these packages forced
 a large unrelated Windows SDK download during native auth verification.
+
+## ADR-006 — Bounded session-scoped reads and Cairo display
+
+2026-10-19. Cache approved read RPC responses in memory for at most 30 seconds/64
+entries, not in SharedPreferences or exports. Invalidate on account checks, logout
+and mutations; discard responses across generation/user/token changes. This uses
+logical cancellation because Supabase RPC futures do not expose transport cancel
+handles. Refresh bypasses cache. Mutations are not retried automatically.
+Use the timezone package's IANA Africa/Cairo rules for displaying instants; use
+server dashboard dates to initialize browsing, not the device's current calendar.
+Keep invoice arithmetic on the backend. No shared schema or attendance behavior
+change results from these client choices. UI reuses Cairo/theme/core cards; complete
+Figma composition and physical-device accessibility remain separate acceptance.
+
+## ADR-007 — Additive read contracts require hosted approval
+
+2026-10-19. Existing deployed contracts lack group summaries, named session identity and
+dashboard manual attendance counts. Prepare an additive migration rather than unrestricted client
+reads or editing the immutable nine versions. The three new teacher-only reads are
+locally verified and remain undeployed; no production call depends on them yet.
+Review is docs/TEACHER_READ_CHANGE_REVIEW.md. Future React clients can reuse these
+contracts after approval/version pinning; no duplicate backend or write grants.

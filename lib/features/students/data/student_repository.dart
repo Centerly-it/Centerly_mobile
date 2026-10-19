@@ -10,12 +10,14 @@ class StudentRepository {
     String? groupId,
     String? cursor,
     int limit = 30,
+    bool refresh = false,
   }) async {
     if (limit < 1 || limit > 100 || (search?.length ?? 0) > 200) {
       throw const BackendFailure('VALIDATION_ERROR');
     }
     final data = await api.read(
       TeacherRead.students,
+      refresh: refresh,
       params: {
         'p_search': search?.trim(),
         'p_group_id': groupId,
