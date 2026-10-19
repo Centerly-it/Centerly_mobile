@@ -18,7 +18,17 @@ Local native suites passed 11/33/21/98/22 assertions with the new controller;
 GitHub run 39299955574 confirmed startup/concurrency/detail/profile now pass, then
 exposed host-default WIN1252 encoding rejecting Arabic completion fixtures. initdb
 now explicitly selects UTF8; a real Arabic/emoji round-trip/server-encoding test
-guards independence from the Windows code page. Full remote rerun pending.
+guards independence from the Windows code page.
+
+Full GitHub verification PASS: run 39301090510 for repair commit 060d32f,
+https://github.com/Centerly-it/Centerly_mobile/actions/runs/39301090510.
+All 28 steps succeeded: enforced lock/codegen/drift/format/analyzer/Flutter tests,
+SQL/manifest/native startup/Unicode/concurrency/detail/profile/completion/integrity,
+debug and profile APK builds, artifact upload and cache/cleanup. The tested source
+was a fresh Windows runner with pinned Flutter 3.44.2 and Node 22; hosted opt-in Auth
+is still excluded from credential-free CI (its earlier real tests remain separate).
+The final verification-record commit changes only this Markdown file and skips a
+redundant CI run; no test or application change bypasses verification.
 Pilot gates unchanged; no application or hosted backend changes.
 
 ## Teacher MVP completion — 2026-10-19 (current milestone)
