@@ -1,5 +1,22 @@
 # Centerly implementation progress
 
+## GitHub CI repair — 2026-10-19
+
+Main run 39293622024 passed lockfile/codegen/format/analyzer/Flutter tests, SQL and
+manifest checks, then failed in native PostgreSQL startup during concurrency tests
+with an undefined rejection. The pinned embedded-postgres start() drops stderr and
+rejects without an Error when postgres.exe exits before readiness. Local Windows
+uses a different privilege environment from the hosted Windows runner.
+
+Disposable Windows clusters now start/stop with the same pinned PG17 pg_ctl, which
+supports restricted Windows tokens. Controller output goes to temporary files to
+avoid inherited-pipe EOF hangs. Startup has bounded waits, stderr/server diagnostics
+and password redaction; tests/SQL assertions are not weakened or skipped. Other
+platforms keep the existing native start. Added a real invalid-port startup test
+for clear redacted failures. No Flutter, hosted schema/data or Auth changes.
+Local native suites passed 11/33/21/98/22 assertions with the new controller;
+current GitHub verification is pending the repair push. Pilot gates unchanged.
+
 ## Teacher MVP completion — 2026-10-19 (current milestone)
 
 This milestone supersedes the historical audit and intermediate task tables below.

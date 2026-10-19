@@ -1,4 +1,4 @@
-import EmbeddedPostgres from 'embedded-postgres';
+import {bootCluster} from './postgres_cluster.mjs';
 import { Client } from 'pg';
 import { randomBytes } from 'node:crypto';
 import { mkdtemp, readFile, readdir, rm } from 'node:fs/promises';
@@ -9,10 +9,7 @@ export async function startPostgres() {
   const password=randomBytes(24).toString('hex');
   const databaseDir=await mkdtemp(join(tmpdir(),'centerly-pg-'));
   const port=55439;
-  const server=new EmbeddedPostgres({databaseDir,user:'postgres',password,port,
-    persistent:true,postgresFlags:['-h','127.0.0.1'],onLog:()=>{},onError:()=>{}});
-  await server.initialise();
-  await server.start();
+  const server=await bootCluster({databaseDir,password,port});
   const clients=[];
   const connect=async actor=>{
     const c=new Client({host:'127.0.0.1',port,user:'postgres',password,database:'postgres'});

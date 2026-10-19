@@ -34,6 +34,7 @@ jobs:
       - run: npm ci --prefix supabase/tests
       - run: node supabase/tests/run.mjs
       - run: node supabase/tests/check_manifest.mjs
+      - run: node --test supabase/tests/postgres_cluster.test.mjs
       - run: node supabase/tests/concurrency.mjs
       - run: node supabase/tests/session_detail_proposal.mjs
       - run: node supabase/tests/student_profile_proposal.mjs
