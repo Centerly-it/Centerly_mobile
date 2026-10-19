@@ -386,5 +386,20 @@
   "live_view_students": "عرض طلاب المجموعة",
   "live_work_duration": "ساعات العمل المجدولة",
   "live_finance_snapshot": "ملخص المدفوعات",
-  "live_attendance_summary": "ملخص الحضور اليدوي"
+  "live_attendance_summary": "ملخص الحضور اليدوي",
+  "detail_synced": "آخر مزامنة (القاهرة): {}",
+  "detail_manual_read_only": "الحضور يدوي، وعرض المعلم للقراءة فقط. السجلات غير الموجودة لا تُحسب غيابًا أو غير مسجلة.",
+  "detail_finalized": "تم الاعتماد يدويًا (القاهرة): {}",
+  "detail_cancel_history": "حصة ملغاة — سجل الحضور محفوظ",
+  "detail_not_recorded": "غير مسجل",
+  "detail_actor": "سُجل بواسطة: {}",
+  "detail_marked": "وقت التسجيل (القاهرة): {}",
+  "detail_updated": "آخر تحديث (القاهرة): {}",
+  "detail_all": "كل السجلات",
+  "detail_filtered_count": "السجلات المطابقة: {}",
+  "detail_empty_title": "لا توجد سجلات حضور",
+  "detail_empty_records": "لا توجد سجلات حضور محفوظة لهذه الحصة.",
+  "detail_empty_filter": "لا يوجد طلاب مسجلون بهذه الحالة.",
+  "detail_more": "تحميل المزيد",
+  "detail_refresh": "تحديث الحضور"
 }

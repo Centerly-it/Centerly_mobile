@@ -7,8 +7,14 @@ import '../../sessions/presentation/live_session_card.dart';
 import '../domain/dashboard_summary.dart';
 
 class DashboardContent extends StatelessWidget {
-  const DashboardContent({required this.data, required this.onDate, super.key});
+  const DashboardContent({
+    required this.data,
+    required this.onDate,
+    this.onChanged,
+    super.key,
+  });
   final DashboardSummary data;
+  final VoidCallback? onChanged;
   final ValueChanged<DateTime> onDate;
   @override
   Widget build(BuildContext context) => ListView(
@@ -48,7 +54,8 @@ class DashboardContent extends StatelessWidget {
           title: 'sessions_no_sessions_title'.tr(),
           subtitle: 'sessions_no_sessions_subtitle'.tr(),
         ),
-      for (final session in data.sessions) LiveSessionCard(session: session),
+      for (final session in data.sessions)
+        LiveSessionCard(session: session, onChanged: onChanged),
       const SizedBox(height: AppSize.s24),
       Text(
         'live_finance_snapshot'.tr(),

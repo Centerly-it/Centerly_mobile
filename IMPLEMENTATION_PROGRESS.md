@@ -1,7 +1,7 @@
 # Centerly implementation progress
 
-Updated: 2026-10-19 (Africa/Cairo). Approved read deployment and production activation at 18213b5; documentation checkpoint follows.
-Current phase: T2 live overview/groups/sessions; T-030 directory/roster slice.
+Updated: 2026-10-19 (Africa/Cairo). Session detail deployment and Flutter activation after 66ee032.
+Current phase: T2 live session detail/read-only attendance; T-030 profile contract proposal.
 Development backend is deployed with explicit owner approval; not production ready.
 
 ## Approved read deployment and activation — 2026-10-19
@@ -190,8 +190,8 @@ are documented in VISUAL_PRESERVATION.md. No hosted backend mutation/deployment 
 | T-020 | IN_PROGRESS | Live date-filtered metrics, scheduled minutes, session cards, refresh; attendance-count contract proposed locally, hosted fixture/UI reconciliation pending |
 | T-021 | IN_PROGRESS | Approved RPC deployed; production search/grade filtering/cursor pagination/previews wired; hosted SQL isolation passes, full Flutter/scale-device acceptance remains |
 | T-022 | IN_PROGRESS | Production day/week/month sessions wired to deployed RPC; server initial date, Cairo DST display, ranges/empty-state tests pass; hosted/web/device acceptance pending |
-| T-023 | IN_PROGRESS (local proposal) | Session-detail/attendance read proposed outside managed migrations; 31 isolated tests pass; separate hosted approval and Flutter UI still required |
-| T-024 | IN_PROGRESS | Reason/confirmation, duplicate guard, secure RPC, no automatic mutation retry, cache invalidation and refreshed status tested with synthetic transport; production action now uses named-session contract; actor/history display and hosted acceptance remain |
+| T-023 | IMPLEMENTED / acceptance pending | Deployed typed detail, all four read-only status filters, bounded pages, finalized/sync/marker metadata and correction refresh; local UI/race/SQL tests pass; password-hosted Flutter/device and cross-app acceptance remain |
+| T-024 | IN_PROGRESS | Reason/confirmation, duplicate guard, secure RPC, no automatic mutation retry, cache invalidation and refreshed status tested with synthetic transport; production action now uses named-session contract; actor/reason/time history now wired; hosted Flutter/cross-app acceptance remain |
 | T-030 | IN_PROGRESS | Production server-search directory and group roster with read-only contacts, bounded pagination and logout guard tested; full profile/membership and hosted Flutter acceptance remain |
 | T-031..T-034 | NOT_STARTED | Live academic/attendance/finance history and notes require remaining read contracts/UI |
 | T-040..T-042 | NOT_STARTED | Live secretaries/notifications and design polish |
@@ -256,25 +256,59 @@ test auth/visual helpers and integration_test/auth_session_test.dart.
 The two original migration fixes occurred before first deployment; deployed files
 are now immutable and hash-checked. No further schema changes are approved implicitly.
 
-## Next contract prepared locally — T-023 (not deployed)
-
-`supabase/proposals/202610190002_session_detail.sql` adds a bounded teacher-only
-session/attendance read with counts, manual finalization, cancellation/marker names
-and server sync time. It is outside managed migrations and has no production UI
-consumer. Native disposable PostgreSQL verification: 31 assertions PASS. Managed
-manifest remains ten unchanged / zero pending. Separate review/approval is needed
-before any hosted deployment: docs/SESSION_DETAIL_CHANGE_REVIEW.md. This local
-proposal is not a completed end-to-end attendance feature.
-
 ## Exact next task / blockers
 
-Read deployment 202610190001 is approved, deployed, verified and pinned. Existing
-RPC-backed overview/groups/sessions/directory/rosters are wired. Next: reviewable
-the separately reviewed session-detail proposal, then the remaining student-profile
-read contract and T-023/T-030..034 workflows. No additional migration was deployed. Named-session status currently displays
-the stored backend status; full temporal-status/clock-skew acceptance is still open.
-No additional hosted migrations are approved. Missing original development
-credentials block password-based hosted Flutter acceptance, not local feature work
-or read-only operator SQL verification. Support remains configurable/pending.
-Physical TalkBack/safe-area and Figma fidelity, backup/restore, monitoring, target
-device QA, release signing and Secretary cross-app acceptance remain pilot gates.
+T-023/T-024 detail and read-only attendance are wired against approved deployed
+202610190002. Password-hosted Flutter/device acceptance remains open; SQL checks
+are not substitutes. Next eligible T-030 profile contract is prepared locally in
+`supabase/proposals/202610190003_student_profile.sql`, with review in
+`docs/STUDENT_PROFILE_CHANGE_REVIEW.md`. It is not a managed migration and requires
+separate explicit approval before hosted activation. No other deployment is authorized.
+Support remains configurable/pending. Existing uncommitted SDK/iOS/config work
+and the user-added root plan are preserved. Physical TalkBack/safe-area/Figma QA,
+backup/restore, monitoring, device/signing and Secretary acceptance remain pilot gates.
+
+## Approved session-detail deployment — 2026-10-19
+
+Deployed only `202610190002_session_detail.sql`, exact reviewed SHA256
+`7a93684737cab4be2b9b0a281c000c139271770532131533f92c54615f7d8273`.
+Preflight matched all ten pinned local hashes and remote SQL bodies; dry run listed
+only this version (no seeds/roles, vault skipped). Postflight matched all eleven
+remote SQL bodies and expected 18 tables/30 policies/four synthetic accounts.
+Read-only SQL role checks passed: teacher reads, other-tenant NOT_FOUND, both
+secretaries FORBIDDEN_ROLE, anonymous execution denial, missing-session NOT_FOUND,
+unprovisioned ACCOUNT_INACTIVE. Function is definer with empty search_path,
+authenticated grant, no PUBLIC/anon grant. No fixture/Auth configuration changes.
+Existing teacher fixtures: two sessions; counts and bounded first pages agree with
+persisted rows. Zero positive not_marked/cancelled-history rows; multi-page and
+positive pending/cancelled-history cases remain local-only. Existing inactive
+account fixtures unavailable: positive inactive/subscription denial tested locally,
+not claimed hosted. Password-based Auth/SDK acceptance still awaits credentials.
+Hash pinned. Flutter T-023/T-024 integration is in progress; deployment alone does
+not complete these tasks.
+
+
+## T-023/T-024 Flutter milestone — 2026-10-19
+
+Production dashboard and session cards open the real typed detail contract. The
+Teacher UI provides all/present/absent/excused/not_marked filters, bounded cursor
+pages, manual finalization and last-sync timestamps, student/marker/update data,
+and cancellation reason/actor/time. No attendance edit/finalize or automatic
+absence controls exist. Missing rows are explained separately from not_marked.
+Refresh resets accumulated pages and shows corrections after finalization; late
+filters, duplicate pages and access revalidation fail safely. Existing cancellation
+reason/confirmation/conflict reconciliation remains; ended detail actions use server
+sync time. Return from detail refreshes parent aggregates/list. Backend notification
+creation has local coverage; Secretary reception is not claimed verified.
+
+Fresh checks: analyzer PASS; final combined Flutter suite 59 PASS/1 hosted opt-in SKIP.
+Local SQL: 90 business assertions PASS; session detail 33 PASS; independent native
+concurrency 11 PASS; tokenizer 1 PASS; eleven immutable hashes/zero pending PASS.
+Configured debug APK compiled successfully (assembleDebug completed), SHA256
+`98604e1fadbb13a08fb820df8a2a491bf218c14580833108c6aa1adf93c23316`.
+No device installation/iOS/release build or current remote CI run claimed.
+
+Continued T-030: bounded read-only profile/membership proposal prepared outside
+managed migrations; 21 disposable PostgreSQL assertions PASS. Not deployed or
+called by production. Next activation needs explicit reviewed approval; academic,
+student attendance/finance/notes and later modules remain incomplete.

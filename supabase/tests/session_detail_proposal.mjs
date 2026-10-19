@@ -1,12 +1,11 @@
 // Isolated native PostgreSQL only. Never uses hosted config/credentials or CLI.
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
 import {startPostgres} from './postgres.mjs';
 const pg=await startPostgres();
 let count=0;
 const eq=(actual,expected)=>{assert.deepEqual(actual,expected);count++;};
 try {
-  await pg.admin.query(await readFile(new URL('../proposals/202610190002_session_detail.sql',import.meta.url),'utf8'));
+  // startPostgres applies the immutable managed migration, including session detail.
   const teacher='10000000-0000-0000-0000-000000000001',other='10000000-0000-0000-0000-000000000002';
   const secretary='20000000-0000-0000-0000-000000000001',session='50000000-0000-0000-0000-000000000001';
   const a=await pg.connect(teacher),b=await pg.connect(other),s=await pg.connect(secretary);
@@ -57,5 +56,9 @@ try {
       current_date,now(),now()+interval '1 hour')`);
   const empty=await detail(a,['50000000-0000-0000-0000-000000000099',null,null,30]);
   eq(empty.attendance,[]);eq(empty.attendance_counts,{present:0,absent:0,excused:0,not_marked:0});
+  await pg.admin.query(`update public.teachers set status='inactive' where id='${teacher}'`);
+  await assert.rejects(detail(),/ACCOUNT_INACTIVE/);count++;
+  await pg.admin.query(`update public.teachers set status='active',subscription_status='inactive' where id='${teacher}'`);
+  await assert.rejects(detail(),/SUBSCRIPTION_INACTIVE/);count++;
   console.log(`PASS: ${count} isolated session-detail proposal assertions; no hosted access; only disposable local data.`);
 } finally {await pg.close();}

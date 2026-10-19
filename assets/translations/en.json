@@ -386,5 +386,20 @@
   "live_view_students": "View group students",
   "live_work_duration": "Scheduled work hours",
   "live_finance_snapshot": "Financial summary",
-  "live_attendance_summary": "Manual attendance summary"
+  "live_attendance_summary": "Manual attendance summary",
+  "detail_synced": "Last synced (Cairo): {}",
+  "detail_manual_read_only": "Manual attendance. Teacher view is read only. Missing records are not counted as absent or not marked.",
+  "detail_finalized": "Manually finalized (Cairo): {}",
+  "detail_cancel_history": "Cancelled session — attendance history retained",
+  "detail_not_recorded": "Not recorded",
+  "detail_actor": "Recorded by: {}",
+  "detail_marked": "Marked (Cairo): {}",
+  "detail_updated": "Updated (Cairo): {}",
+  "detail_all": "All records",
+  "detail_filtered_count": "Matching records: {}",
+  "detail_empty_title": "No attendance records",
+  "detail_empty_records": "No persisted attendance records exist for this session.",
+  "detail_empty_filter": "No recorded students match this status.",
+  "detail_more": "Load more",
+  "detail_refresh": "Refresh attendance"
 }

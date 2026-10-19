@@ -11,6 +11,7 @@ enum TeacherRead {
   groups,
   overview,
   namedSessions,
+  sessionDetail,
 }
 
 class TeacherReadClient {
@@ -27,6 +28,7 @@ class TeacherReadClient {
     TeacherRead.groups: 'list_teacher_groups',
     TeacherRead.overview: 'get_teacher_overview',
     TeacherRead.namedSessions: 'list_teacher_sessions',
+    TeacherRead.sessionDetail: 'get_teacher_session_detail',
   };
   void Function() sessionGuard() {
     final generation = cache.generation;

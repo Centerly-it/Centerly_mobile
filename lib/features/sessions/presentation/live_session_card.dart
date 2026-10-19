@@ -7,15 +7,18 @@ import '../../../screens/teacher/teacher_shared.dart';
 import '../domain/session_record.dart';
 import '../../../models/centerly_models.dart';
 import 'cancel_session_dialog.dart';
+import 'session_detail_page.dart';
 
 class LiveSessionCard extends StatelessWidget {
   const LiveSessionCard({
     required this.session,
     this.onTap,
     this.onChanged,
+    this.showDetails = true,
     super.key,
   });
   final SessionRecord session;
+  final bool showDetails;
   final VoidCallback? onTap;
   final VoidCallback? onChanged;
   @override
@@ -67,9 +70,14 @@ class LiveSessionCard extends StatelessWidget {
               },
               child: Text('session_cancel_button'.tr()),
             ),
-          if (onTap != null)
+          if (showDetails)
             TextButton(
-              onPressed: onTap,
+              onPressed:
+                  onTap ??
+                  () async {
+                    await SessionDetailPage.open(context, session.id);
+                    if (context.mounted) onChanged?.call();
+                  },
               child: Text('session_details_title'.tr()),
             ),
         ],

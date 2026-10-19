@@ -68,3 +68,30 @@ Next local slice: T-023 session-detail read proposal is prepared outside the man
 migrations directory. 31 disposable native PostgreSQL assertions PASS; separate
 approval required before hosted changes/UI activation. Review:
 docs/SESSION_DETAIL_CHANGE_REVIEW.md. Managed history remains ten / zero pending.
+
+
+### 2026-10-19 — approved session detail deployment and Flutter activation
+
+Only 202610190002 deployed, exact reviewed bytes. Ten baseline local hashes and
+remote SQL bodies matched; dry run only the approved version, no seeds/roles,
+vault skipped. Eleven-version postflight matched, hash pinned. Hosted read-only
+checks passed teacher/tenant/both-secretary/anonymous authorization, empty search
+path/grants, existing persisted counts and bounded reads; anonymous REST 401.
+No fixture mutation, password or Auth configuration change. Positive pending,
+cancelled-history, multi-page and real inactive fixtures unavailable remotely;
+local detail suite covers those cases (33 assertions). Password Auth/SDK remains
+pending original credentials.
+
+Production T-023/T-024 detail now shows all four read-only status filters, cursor
+pages, manual finalization, sync/correction metadata and cancellation actor/time/
+reason. Parent views refresh after return; finalized corrections refresh correctly.
+59 Flutter tests PASS + 1 hosted opt-in SKIP; final targeted refresh/race checks
+PASS. Analyzer PASS; 90 local SQL + 11 native race assertions PASS; manifest eleven
+unchanged/zero pending. Debug APK compilation completes successfully; artifact hash
+and detailed evidence are in IMPLEMENTATION_PROGRESS.md and
+SESSION_DETAIL_CHANGE_REVIEW.md. CI now includes the detail SQL regression suite;
+remote CI/device/iOS/signing/cross-app acceptance were not rerun.
+
+Next eligible T-030 read proposal is prepared and locally tested (21 assertions),
+not copied into managed migrations/deployed/called by production. Separate review:
+STUDENT_PROFILE_CHANGE_REVIEW.md. All existing user edits remain preserved.

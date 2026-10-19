@@ -108,3 +108,19 @@ Client read cache is bounded memory only (64 responses, 30 seconds), keyed by SD
 identity/endpoint/parameters; no persistent student or finance cache. Validation,
 logout and mutations invalidate it. Session/token changes reject late responses.
 Refresh bypasses cache; offline failures never fall back to stale sensitive data.
+
+
+## Approved session detail extension (deployed 2026-10-19)
+
+`202610190002_session_detail.sql` adds teacher-only
+`get_teacher_session_detail(p_id uuid,p_status text=null,p_cursor uuid=null,
+p_limit integer=30) -> jsonb`. Status accepts present/absent/excused/not_marked;
+limit 1..100. Returns session/group/subject/cancellation actor/time/reason, counts
+of persisted attendance, filtered_count, attendance records with student/marker
+names and timestamps, accurate limit+1 next_cursor and server synced_at.
+Missing attendance is not inferred; cancelled history remains readable. Teacher
+attendance is read only. All eleven deployed hashes are pinned. See
+[actual verification and limits](SESSION_DETAIL_CHANGE_REVIEW.md).
+
+A separate student-profile proposal is local only, outside managed migrations;
+it is not a callable hosted contract. No further deployment is authorized.

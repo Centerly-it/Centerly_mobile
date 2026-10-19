@@ -59,6 +59,9 @@ class _LiveDashboardState extends State<LiveDashboard> {
         },
         child: DashboardContent(
           data: data,
+          onChanged: () => setState(() {
+            _data = _load(refresh: true);
+          }),
           onDate: (date) => setState(() {
             _date = CairoTime.date(date);
             _data = _load(refresh: true);
