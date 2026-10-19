@@ -63,3 +63,28 @@ reads or editing the immutable nine versions. The three new teacher-only reads a
 locally verified and remain undeployed; no production call depends on them yet.
 Review is docs/TEACHER_READ_CHANGE_REVIEW.md. Future React clients can reuse these
 contracts after approval/version pinning; no duplicate backend or write grants.
+
+## ADR-008 — Approved reads activated; operator verification without passwords
+
+2026-10-19. Deploy exactly 202610190001 after explicit owner approval, exact
+historical SQL/hash comparison and a single-version dry run. Skip vault updates,
+seeds and roles. Pin all ten hashes after grants/search paths and read-only
+synthetic-UUID tenant/role checks pass. No fixture or Auth-setting mutations.
+Read-only SQL role/JWT-subject checks do not replace password-based Auth/SDK/UI
+acceptance. Original credential file is unavailable; do not reset or reconstruct
+passwords. Reconstruct only ignored public app config from verified project metadata.
+
+Wire overview + named-session reads and group browsing; guard the whole multi-read
+overview against account changes, not just individual HTTP responses. Reuse the
+existing list_students contract for a bounded directory and group rosters. Full
+student profiles, academic/financial history and detailed attendance remain
+contract gaps; no unrestricted table-read shortcut or extra hosted migration.
+
+## ADR-009 — Minimum supported Android build tooling
+
+2026-10-19. Current installed Flutter requires Gradle 8.14, Android Gradle Plugin
+8.11.1 and Kotlin 2.2.20. Upgrade those project versions after real configuration
+failures, instead of disabling validation. Preserve app ID/signing behavior.
+This changes local/CI Android tooling only; no backend or client data contract.
+Do not infer APK success from configuration or dependency downloads; record the
+actual final build result and keep historical pinned-SDK checks separate.

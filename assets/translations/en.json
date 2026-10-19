@@ -371,5 +371,20 @@
   "live_error_TENANT_SCOPE": "Account validation failed.",
   "live_error_RATE_LIMITED": "Please try again later.",
   "live_cancel_confirmation": "Cancel this session, preserve existing attendance and notify secretaries?",
-  "live_sessions_for_date": "Sessions on selected date"
+  "live_sessions_for_date": "Sessions on selected date",
+  "live_group_students": "{count} students — capacity {capacity}",
+  "live_open_schedule": "Ongoing",
+  "live_schedule_preview": "Showing the first 32 schedule entries",
+  "live_roster_preview": "Student preview",
+  "live_clear_grade": "Clear grade filter",
+  "live_load_more": "Load more",
+  "live_no_schedules": "No group schedules",
+  "live_students": "Students",
+  "live_student_search": "Search students by name",
+  "live_no_students": "No students found",
+  "live_missing_value": "Not recorded",
+  "live_view_students": "View group students",
+  "live_work_duration": "Scheduled work hours",
+  "live_finance_snapshot": "Financial summary",
+  "live_attendance_summary": "Manual attendance summary"
 }

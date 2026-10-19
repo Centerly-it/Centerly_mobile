@@ -1,8 +1,57 @@
 # Centerly implementation progress
 
-Updated: 2026-10-19 (Africa/Cairo). Implementation commit ef11882; historical audit at de42879.
-Current phase: T1 repository/shell hardening; T2 live dashboard/session slices.
+Updated: 2026-10-19 (Africa/Cairo). Approved read deployment and production activation; commits recorded in docs/PROGRESS.md.
+Current phase: T2 live overview/groups/sessions; T-030 directory/roster slice.
 Development backend is deployed with explicit owner approval; not production ready.
+
+## Approved read deployment and activation — 2026-10-19
+
+Owner approved only 202610190001. CLI login completed on this Mac; verified and
+linked the expected centerly-dev project. Read-only preflight matched exact SQL
+history and all nine pinned hashes, 18 tables/30 policies/forced RLS and four
+synthetic accounts. Dry run listed only 202610190001, no seeds or roles. Deployment
+used --skip-vault; postflight confirmed all ten SQL bodies match local history.
+Manifest now pins the tenth hash (6830529e…71f817b8). No other migration, fixture
+mutation, Auth configuration, password reset or account creation ran.
+
+New RPCs: three empty-search-path SECURITY DEFINER reads; authenticated execute,
+no anonymous execute. Real read-only hosted role/JWT-subject checks with the
+existing synthetic UUIDs passed for both tenants, teacher authorization, counts,
+secretary denial and anonymous denial. Three anonymous REST calls returned 401.
+Current hosted fixtures contain zero not_marked and zero cancelled attendance
+rows: positive preservation/exclusion was verified locally, not claimed hosted.
+Local SQL suite now has 90 assertions including an isolated cancelled/pending case.
+
+Public config was reconstructed with owner-only permissions and remains ignored.
+The original operator environment is not mounted/configured via SSH. Synthetic
+account passwords remain unavailable; no attempt to retrieve them was made.
+Password-based hosted SDK/Flutter tests require the original credential file.
+Approval and deployment are no longer blockers for this read extension.
+
+Production activation: overview attendance counts remain distinct, including
+not_marked; named sessions enable identified cancellation; Groups now has real
+server search/grade filter, cursor pagination, retry/refresh and bounded roster/
+schedule previews. Typed errors and stale-search/duplicate-page guards are tested.
+Physical device/full hosted UI/Figma acceptance remains open. Gradle 8.12 failed
+configuration against Flutter 3.47.2; updated Gradle/AGP/Kotlin to the installed
+SDK's supported minimums (8.14/8.11.1/2.2.20). Debug compilation then passed, and a
+second current-source debug APK with public development config compiled successfully.
+APK SHA256: 66ec39db51b754685329f12c9436165901eb840544c44c1676df0b10cb162b91.
+No device installation, signed release, iOS build or production-readiness claim.
+
+Next eligible T-030 slice implemented using existing list_students: global
+read-only student directory plus group-scoped roster, bounded search/cursor pages,
+missing contact values shown as missing, stale search and duplicate page guards.
+Logout regression verifies nested contact screens are removed. Full profile,
+membership/academic/financial history and notes remain incomplete.
+
+Final local checks: analyzer clean; full Flutter suite 52 PASS / 1 hosted opt-in
+SKIP; eight font-loaded shell captures at AR/EN 320/430, 100%/200% text PASS;
+local SQL 90 PASS; independent PostgreSQL races 11 PASS; migration-history tokenizer
+unit test PASS; 10 deployed hashes unchanged / 0 pending; Dart format and diff checks
+PASS. Default SDK tests use synthetic HTTP; native hosted Auth/SDK/UI tests were not
+rerun without original development credentials. Sanitized deployment evidence:
+docs/verification/teacher_read_20261019.json.
 
 ## Historical repository audit (before implementation resumed, 2026-10-19)
 
@@ -136,19 +185,20 @@ are documented in VISUAL_PRESERVATION.md. No hosted backend mutation/deployment 
 | T-003 | DONE | All 12 documented checks passed on clean checkout of 3f6f16b, including debug/profile builds; CI configured |
 | T-010 | DONE (owner override) | Canonical schema here, nine hosted versions verified, deployed hashes pinned, shared contracts and typed auth profile tested |
 | T-011 | IN_PROGRESS | Real SDK auth, secure storage, guards, logout/refresh/role checks implemented; native Windows verification passed; configured support channel pending |
-| T-012 | IN_PROGRESS | Production safe areas, scalable metric layout and loading/retry fixes implemented; device TalkBack and visual acceptance remain |
+| T-012 | IN_PROGRESS | Blue/white live shell, adaptive paired metrics, safe areas, accessible actions; 8 font-loaded AR/EN scale captures pass; physical TalkBack/full Figma acceptance remain |
 | T-013 | DONE (local acceptance) | Existing read RPC models/repositories, bounded pagination, safe errors/retry, 30-second bounded memory cache and stale-session rejection pass regression tests; hosted cross-app acceptance remains T-050/T-054 |
 | T-020 | IN_PROGRESS | Live date-filtered metrics, scheduled minutes, session cards, refresh; attendance-count contract proposed locally, hosted fixture/UI reconciliation pending |
-| T-021 | BLOCKED (hosted contract approval) | Additive teacher group-summary read prepared/tested locally; production Groups remains pending, no mock fallback |
+| T-021 | IN_PROGRESS | Approved RPC deployed; production search/grade filtering/cursor pagination/previews wired; hosted SQL isolation passes, full Flutter/scale-device acceptance remains |
 | T-022 | IN_PROGRESS | Production day/week/month sessions wired to deployed RPC; server initial date, Cairo DST display, ranges/empty-state tests pass; hosted/web/device acceptance pending |
-| T-023 | NOT_STARTED | Detailed attendance read contract/UI still needed; no teacher marking controls |
-| T-024 | IN_PROGRESS | Reason/confirmation, duplicate guard, secure RPC, no automatic mutation retry, cache invalidation and refreshed status tested with synthetic transport; production action activation awaits named-session contract, actor/history display and hosted acceptance |
-| T-030..T-034 | NOT_STARTED | Live student/academic/attendance/finance/notes |
+| T-023 | IN_PROGRESS (local proposal) | Session-detail/attendance read proposed outside managed migrations; 31 isolated tests pass; separate hosted approval and Flutter UI still required |
+| T-024 | IN_PROGRESS | Reason/confirmation, duplicate guard, secure RPC, no automatic mutation retry, cache invalidation and refreshed status tested with synthetic transport; production action now uses named-session contract; actor/history display and hosted acceptance remain |
+| T-030 | IN_PROGRESS | Production server-search directory and group roster with read-only contacts, bounded pagination and logout guard tested; full profile/membership and hosted Flutter acceptance remain |
+| T-031..T-034 | NOT_STARTED | Live academic/attendance/finance history and notes require remaining read contracts/UI |
 | T-040..T-042 | NOT_STARTED | Live secretaries/notifications and design polish |
 | T-050..T-054 | NOT_STARTED | Full integration/security/performance/signing/cross-app acceptance |
 | T-LATER-01..03 | DEFERRED | QR scanning, push, public stores/billing |
 
-## Hosted milestone (approved in chat)
+## Original hosted milestone (approved in chat; historical)
 
 - Supabase CLI 2.121.0 authenticated through user-authorized login. Discovered the
   sole project centerly-dev, reference yfeubomyglmhuwizaqoj; repository linked.
@@ -181,7 +231,7 @@ are documented in VISUAL_PRESERVATION.md. No hosted backend mutation/deployment 
 - Added CI, setup docs, codegen drift check, schema manifest, native/hosted/local
   auth tests, real PostgreSQL 17 concurrency tests and trusted provisioning scripts.
 
-## Actual verification so far
+## Earlier baseline verification (historical)
 
 - pub get and codegen: PASS; analyzer: PASS (no issues).
 - Debug APK with public hosted config: PASS; debug/profile builds on clean checkout: PASS.
@@ -206,14 +256,25 @@ test auth/visual helpers and integration_test/auth_session_test.dart.
 The two original migration fixes occurred before first deployment; deployed files
 are now immutable and hash-checked. No further schema changes are approved implicitly.
 
+## Next contract prepared locally — T-023 (not deployed)
+
+`supabase/proposals/202610190002_session_detail.sql` adds a bounded teacher-only
+session/attendance read with counts, manual finalization, cancellation/marker names
+and server sync time. It is outside managed migrations and has no production UI
+consumer. Native disposable PostgreSQL verification: 31 assertions PASS. Managed
+manifest remains ten unchanged / zero pending. Separate review/approval is needed
+before any hosted deployment: docs/SESSION_DETAIL_CHANGE_REVIEW.md. This local
+proposal is not a completed end-to-end attendance feature.
+
 ## Exact next task / blockers
 
-Approve or decline the additive development-only read migration reviewed in
-`docs/TEACHER_READ_CHANGE_REVIEW.md`. After approval, verify remote preflight,
-deploy only the new reviewed version, verify grants/tenant behavior, pin the hash,
-and wire overview attendance counters and group browsing. No deployment is implied
-by the existing approval of versions 001..009. Continue detailed attendance/student
-contracts and live UI in dependency order. T-012 still needs full visual composition,
-physical TalkBack and safe-area acceptance; support configuration remains pending
-without blocking unrelated work. Backup/restore, monitoring, Android/iOS device QA,
-release signing and Secretary cross-app acceptance remain open pilot gates.
+Read deployment 202610190001 is approved, deployed, verified and pinned. Existing
+RPC-backed overview/groups/sessions/directory/rosters are wired. Next: reviewable
+the separately reviewed session-detail proposal, then the remaining student-profile
+read contract and T-023/T-030..034 workflows. No additional migration was deployed. Named-session status currently displays
+the stored backend status; full temporal-status/clock-skew acceptance is still open.
+No additional hosted migrations are approved. Missing original development
+credentials block password-based hosted Flutter acceptance, not local feature work
+or read-only operator SQL verification. Support remains configurable/pending.
+Physical TalkBack/safe-area and Figma fidelity, backup/restore, monitoring, target
+device QA, release signing and Secretary cross-app acceptance remain pilot gates.

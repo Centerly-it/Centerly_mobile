@@ -5,6 +5,9 @@ class DashboardReadFixture {
   bool fail = false;
   int calls = 0;
   SupabaseClient client() => readFixture((request) async {
+    if (request.url.path.endsWith('list_teacher_sessions')) {
+      return jsonResponse(request, []);
+    }
     calls++;
     return jsonResponse(
       request,
@@ -12,6 +15,12 @@ class DashboardReadFixture {
           ? {'message': 'unavailable'}
           : {
               'today_sessions': [],
+              'attendance_counts': {
+                'present': 0,
+                'absent': 0,
+                'excused': 0,
+                'not_marked': 0,
+              },
               'total_students': 12,
               'total_groups': 3,
               'date': '2026-10-19',

@@ -42,3 +42,19 @@ stats, named session cards, detailed financial composition and notifications are
 not yet equivalent to Figma. Do not mark T-012/T-042 visually complete. Test captures
 currently cover scaled layout; 100% fidelity matrix and physical-device TalkBack/
 safe-area acceptance remain open. No approved Figma reference was overwritten.
+
+## Activated live reads and responsive composition — 2026-10-19
+
+The shell capture matrix now includes Arabic/English, 320/430 pixels, text scale
+1 and 2 (eight captures/tests). Compared `ar-430-scale1.png` with the original
+teacher dashboard reference. Restored the blue header with white accessible
+controls and paired metric layout at normal scale; larger text uses a single
+column. Session, finance and manual attendance sections reuse existing cards,
+fonts, colors and spacing. Student/group counts and Cairo server date are real
+repository fields; fixture captures deliberately contain synthetic values.
+
+Remaining intentional differences: generic account heading until a verified name
+contract exists, student-directory/logout actions, no invented notifications or
+avatar, no progress percentage combining daily receipts with all-time outstanding.
+Finance labels explicitly state their distinct date scopes. This does not claim
+full Figma parity or physical TalkBack/iOS/Android safe-area acceptance.

@@ -27,7 +27,7 @@ class SessionRepository {
       throw const BackendFailure('VALIDATION_ERROR');
     }
     final data = await api.read(
-      TeacherRead.sessions,
+      TeacherRead.namedSessions,
       refresh: refresh,
       params: {'p_from': from, 'p_to': to, 'p_group_id': groupId},
     );

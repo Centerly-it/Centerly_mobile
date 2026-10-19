@@ -47,3 +47,17 @@ Auth sessions persist in platform secure storage, not SharedPreferences.
 The generated Supabase config.toml is local tooling configuration. `supabase link`
 saves its project reference under ignored supabase/.temp. Linking does not deploy.
 Never use linked `db reset`. Review dry-run and approve migrations before `db push`.
+
+## Android compatibility update — 2026-10-19
+
+The current Mac uses Flutter 3.47.2 / Dart 3.13.2. Its installed dependency checker
+requires Gradle >=8.14, AGP >=8.11.1 and Kotlin >=2.2.20. The project now specifies
+those minimum supported versions; no dependency-validation bypass is used.
+Historical baseline results for Flutter 3.44.2 remain historical; current CI/clean
+checkout verification on that pinned SDK has not been rerun. Current compilation
+results are recorded in IMPLEMENTATION_PROGRESS.md rather than inferred from downloads.
+
+The current configured debug build completed successfully after this update:
+`flutter build apk --debug --no-pub --dart-define-from-file=.env.local.json`.
+Public URL/publishable key are intended client configuration; account passwords
+were not included. APK compilation does not verify login, installation or pilot signing.

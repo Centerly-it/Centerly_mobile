@@ -1,11 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import '../../core/di/di.dart';
+import 'package:flutter/services.dart';
 import '../../core/theme/color_manager.dart';
 import '../../core/theme/values_manager.dart';
-import '../../features/auth/presentation/view_models/auth_session_cubit.dart';
+import 'widgets/workspace_actions.dart';
 import '../../features/dashboard/presentation/live_dashboard.dart';
 import '../../features/sessions/presentation/live_sessions.dart';
+import '../../features/groups/presentation/live_groups.dart';
 
 /// Production entry: no prototype mock screens or secretary operations.
 class TeacherWorkspace extends StatefulWidget {
@@ -19,14 +20,20 @@ class _TeacherWorkspaceState extends State<TeacherWorkspace> {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      title: Text('workspace_title'.tr()),
-      actions: [
-        IconButton(
-          tooltip: 'auth_logout'.tr(),
-          icon: const Icon(Icons.logout),
-          onPressed: () => getIt<AuthSessionCubit>().logout(),
-        ),
-      ],
+      title: Text(
+        'workspace_title'.tr(),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
+      backgroundColor: ColorManager.primary,
+      foregroundColor: ColorManager.white,
+      titleTextStyle: Theme.of(
+        context,
+      ).textTheme.titleLarge?.copyWith(color: ColorManager.white),
+      iconTheme: const IconThemeData(color: ColorManager.white),
+      actionsIconTheme: const IconThemeData(color: ColorManager.white),
+      systemOverlayStyle: SystemUiOverlayStyle.light,
+      actions: const [WorkspaceActions()],
     ),
     body: SafeArea(
       top: false,
@@ -34,6 +41,8 @@ class _TeacherWorkspaceState extends State<TeacherWorkspace> {
           ? const LiveDashboard()
           : _index == 1
           ? const LiveSessions()
+          : _index == 2
+          ? const LiveGroups()
           : SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(AppPadding.p24),

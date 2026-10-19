@@ -11,6 +11,7 @@ import '../features/dashboard/data/dashboard_repository.dart';
 import '../core/api/teacher_read_client.dart';
 import '../features/students/data/student_repository.dart';
 import '../features/sessions/data/session_repository.dart';
+import '../features/groups/data/group_repository.dart';
 
 Future<void> bootstrapAuth() async {
   final config = AppConfig.fromEnvironment();
@@ -61,6 +62,7 @@ Future<void> bootstrapAuth() async {
       getIt.registerSingleton<DashboardRepository>(
         DashboardRepository(readApi),
       );
+      getIt.registerSingleton<GroupRepository>(GroupRepository(readApi));
       getIt.registerSingleton<StudentRepository>(StudentRepository(readApi));
       getIt.registerSingleton<SessionRepository>(SessionRepository(readApi));
     } catch (_) {

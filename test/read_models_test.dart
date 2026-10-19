@@ -13,6 +13,12 @@ void main() {
     () {
       final data = {
         'today_sessions': [],
+        'attendance_counts': {
+          'present': 0,
+          'absent': 0,
+          'excused': 0,
+          'not_marked': 0,
+        },
         'total_students': 2,
         'total_groups': 1,
         'date': '2026-10-18',

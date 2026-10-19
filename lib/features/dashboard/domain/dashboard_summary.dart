@@ -1,4 +1,5 @@
 import '../../sessions/domain/session_record.dart';
+import 'attendance_counts.dart';
 import '../../../models/centerly_models.dart';
 
 class DashboardSummary {
@@ -8,9 +9,11 @@ class DashboardSummary {
     required this.collectedEgp,
     required this.outstandingEgp,
     required this.localDate,
+    required this.attendance,
     this.sessions = const [],
   });
   final int students, groups;
+  final AttendanceCounts attendance;
   final List<SessionRecord> sessions;
   int get scheduledMinutes => sessions
       .where((s) => s.status != SessionStatus.cancelled)
@@ -28,7 +31,8 @@ class DashboardSummary {
       if (!RegExp(r'^-?\d+(\.\d{1,2})?$').hasMatch(text)) {
         throw const FormatException('Invalid server amount');
       }
-      return text;
+      final parts = text.split('.');
+      return '${parts.first}.${(parts.length == 1 ? '' : parts.last).padRight(2, '0')}';
     }
 
     if (students is! int ||
@@ -43,6 +47,9 @@ class DashboardSummary {
       students: students,
       groups: groups,
       localDate: date,
+      attendance: AttendanceCounts.fromJson(
+        Map<String, dynamic>.from(data['attendance_counts'] as Map),
+      ),
       sessions: List.unmodifiable(
         (data['today_sessions'] as List).map(
           (row) =>

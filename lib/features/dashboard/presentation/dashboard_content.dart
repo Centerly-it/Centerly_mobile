@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/theme/values_manager.dart';
 import '../../../core/widgets/app_empty_state.dart';
-import '../../../screens/teacher/teacher_shared.dart';
+import 'dashboard_metrics.dart';
 import '../../sessions/presentation/live_session_card.dart';
 import '../domain/dashboard_summary.dart';
 
@@ -29,23 +29,16 @@ class DashboardContent extends StatelessWidget {
           if (selected != null && context.mounted) onDate(selected);
         },
       ),
-      for (final entry in {
-        'live_total_students': '${data.students}',
-        'live_total_groups': '${data.groups}',
-        'live_collected': data.collectedEgp,
-        'live_outstanding': data.outstandingEgp,
-        'live_session_count': '${data.sessions.length}',
-        'live_scheduled_minutes': '${data.scheduledMinutes}',
-      }.entries)
-        Padding(
-          padding: const EdgeInsets.only(bottom: AppPadding.p16),
-          child: TeacherStatCard(
-            title: entry.key.tr(),
-            value: entry.value,
-            icon: Icons.analytics_outlined,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-        ),
+      DashboardMetrics(
+        values: {
+          'live_session_count': '${data.sessions.length}',
+          'live_work_duration':
+              '${data.scheduledMinutes ~/ 60}:${(data.scheduledMinutes % 60).toString().padLeft(2, '0')}',
+          'live_total_students': '${data.students}',
+          'live_total_groups': '${data.groups}',
+        },
+      ),
+      const SizedBox(height: AppSize.s24),
       Text(
         'live_sessions_for_date'.tr(),
         style: Theme.of(context).textTheme.titleLarge,
@@ -56,6 +49,30 @@ class DashboardContent extends StatelessWidget {
           subtitle: 'sessions_no_sessions_subtitle'.tr(),
         ),
       for (final session in data.sessions) LiveSessionCard(session: session),
+      const SizedBox(height: AppSize.s24),
+      Text(
+        'live_finance_snapshot'.tr(),
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
+      DashboardMetrics(
+        values: {
+          'live_collected': data.collectedEgp,
+          'live_outstanding': data.outstandingEgp,
+        },
+      ),
+      const SizedBox(height: AppSize.s24),
+      Text(
+        'live_attendance_summary'.tr(),
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
+      DashboardMetrics(
+        values: {
+          'attendance_present': '${data.attendance.present}',
+          'attendance_absent': '${data.attendance.absent}',
+          'attendance_excused': '${data.attendance.excused}',
+          'attendance_not_marked': '${data.attendance.notMarked}',
+        },
+      ),
     ],
   );
 }

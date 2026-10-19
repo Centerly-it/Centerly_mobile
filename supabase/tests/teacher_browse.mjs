@@ -18,6 +18,17 @@ export async function testTeacherBrowse(db, actor, teacher, other, secretary) {
   await eq("select count(*)::int from public.list_teacher_sessions(current_date-30,current_date-30)",1);
   await eq("select g->>'group_name' from public.list_teacher_sessions(current_date-30,current_date-30) g",'A');
   await denied("select public.list_teacher_sessions(current_date,current_date+62)",'VALIDATION_ERROR');
+  // Ephemeral local-only case: cancelled pending attendance must be excluded.
+  await db.exec('reset role');
+  await db.exec(`insert into public.sessions(id,teacher_id,group_id,local_date,starts_at,ends_at,status,cancelled_by,cancel_reason,cancelled_at)
+    values('50000000-0000-0000-0000-000000000099','${teacher}','40000000-0000-0000-0000-000000000001',
+      current_date-30,now()-interval '30 days',now()-interval '30 days'+interval '1 hour','cancelled','${teacher}','Local test',now());
+    insert into public.attendance(teacher_id,session_id,student_id)
+    values('${teacher}','50000000-0000-0000-0000-000000000099','30000000-0000-0000-0000-000000000001');`);
+  await actor(teacher);
+  await eq("select (public.get_teacher_overview(current_date-30)->'attendance_counts'->>'not_marked')::int",1);
+  await eq("select status from public.attendance where session_id='50000000-0000-0000-0000-000000000099'",'not_marked');
+  await db.exec("reset role; delete from public.attendance where session_id='50000000-0000-0000-0000-000000000099'; delete from public.sessions where id='50000000-0000-0000-0000-000000000099'");
   await actor(other);
   await eq("select count(*)::int from public.list_teacher_sessions(current_date-30,current_date-30)",0);
   await eq("select count(*)::int from public.list_teacher_groups() g where g->>'name'='A'",0);

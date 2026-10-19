@@ -7,7 +7,7 @@ class SessionReadFixture {
   final ranges = <Map>[];
   bool cancelled = false;
   SupabaseClient client() => readFixture((request) async {
-    if (request.url.path.endsWith('get_teacher_dashboard')) {
+    if (request.url.path.endsWith('get_teacher_overview')) {
       return jsonResponse(request, {
         'date': '2026-07-01',
         'total_students': 1,
@@ -15,6 +15,12 @@ class SessionReadFixture {
         'collected_egp': '0',
         'outstanding_egp': '0',
         'today_sessions': [],
+        'attendance_counts': {
+          'present': 0,
+          'absent': 0,
+          'excused': 0,
+          'not_marked': 0,
+        },
       });
     }
     if (request.url.path.endsWith('cancel_session')) {

@@ -371,5 +371,20 @@
   "live_error_TENANT_SCOPE": "تعذر التحقق من الحساب.",
   "live_error_RATE_LIMITED": "حاول لاحقاً.",
   "live_cancel_confirmation": "سيتم إلغاء الحصة مع الاحتفاظ بالحضور السابق وإبلاغ السكرتارية. هل تريد المتابعة؟",
-  "live_sessions_for_date": "حصص التاريخ المحدد"
+  "live_sessions_for_date": "حصص التاريخ المحدد",
+  "live_group_students": "{count} طالب — السعة {capacity}",
+  "live_open_schedule": "مستمر",
+  "live_schedule_preview": "عرض أول ٣٢ موعداً فقط",
+  "live_roster_preview": "معاينة الطلاب",
+  "live_clear_grade": "إلغاء تصفية المرحلة",
+  "live_load_more": "عرض المزيد",
+  "live_no_schedules": "لا توجد مواعيد للمجموعة",
+  "live_students": "الطلاب",
+  "live_student_search": "ابحث باسم الطالب",
+  "live_no_students": "لا يوجد طلاب",
+  "live_missing_value": "غير مسجل",
+  "live_view_students": "عرض طلاب المجموعة",
+  "live_work_duration": "ساعات العمل المجدولة",
+  "live_finance_snapshot": "ملخص المدفوعات",
+  "live_attendance_summary": "ملخص الحضور اليدوي"
 }

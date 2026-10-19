@@ -28,22 +28,27 @@ class TeacherReadClient {
     TeacherRead.overview: 'get_teacher_overview',
     TeacherRead.namedSessions: 'list_teacher_sessions',
   };
-  Future<dynamic> read(
-    TeacherRead endpoint, {
-    Map<String, dynamic>? params,
-    bool refresh = false,
-  }) async {
+  void Function() sessionGuard() {
     final generation = cache.generation;
     final identity = client.auth.currentUser?.id;
     final token = client.auth.currentSession?.accessToken;
-    final key = jsonEncode([identity, endpoint.name, params]);
-    void checkSession() {
+    return () {
       if (generation != cache.generation ||
           identity != client.auth.currentUser?.id ||
           token != client.auth.currentSession?.accessToken) {
         throw const BackendFailure('AUTH_REQUIRED');
       }
-    }
+    };
+  }
+
+  Future<dynamic> read(
+    TeacherRead endpoint, {
+    Map<String, dynamic>? params,
+    bool refresh = false,
+  }) async {
+    final checkSession = sessionGuard();
+    final identity = client.auth.currentUser?.id;
+    final key = jsonEncode([identity, endpoint.name, params]);
 
     if (!refresh &&
         identity != null &&

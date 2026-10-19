@@ -1,7 +1,7 @@
-# Pending development read-contract approval
+# Approved development read-contract deployment — 2026-10-19
 
-Target: existing linked centerly-dev development project. **Not deployed.**
-Proposed version: `202610190001_teacher_browse.sql` (after immutable 001..009).
+Target: existing linked centerly-dev development project. **Deployed after explicit approval.**
+Deployed version: `202610190001_teacher_browse.sql` (after immutable 001..009).
 Canonical ownership remains this repository for both clients. No production or
 Auth configuration change is proposed.
 
@@ -36,15 +36,36 @@ manual pending attendance, grade/search/page validation and a synthetic 10,000-g
 bounded query. This is local evidence, not hosted integration/performance proof.
 Existing PostgreSQL concurrency tests also apply the full migration directory.
 
-After explicit approval: read-only remote migration preflight and dry run; deploy
-only this pending version; verify RPC grants/search paths and tenant-scoped hosted
-reads using approved synthetic fixtures. Stop if remote state differs. Do not run
-fixture mutation scripts or change Auth configuration. Then pin the newly deployed
-hash and wire the typed overview/group repositories and production UI, with tests.
-Until names are available, production session cards do not expose cancellation
-controls; a time alone is insufficient to identify overlapping groups.
-No deployment or remote configuration command has run in this implementation slice.
+Actual sequence: CLI 2.121.0 login authorized on this Mac; verified the project
+reference/name/region, linked locally, checked original nine local hashes and exact
+remote migration SQL history, 18 tables/30 policies/FORCE RLS and four approved
+accounts. Dry run listed only this version, no seeds/roles. Deployed with
+`db push --linked --skip-vault --yes`, no include-seed/include-roles flags.
+Postflight verified exact SQL history for all ten versions, three restricted grants
+and empty search paths; manifest pins SHA256
+`6830529e9cc9bbd9812f406bd7ce272492e199807e0126d5cc45ae2271f817b8`.
+
+Read-only hosted transactions impersonated the existing synthetic Auth UUIDs via
+transaction-local JWT subject/role settings. Both tenant scopes, named sessions,
+overview counts and both secretaries/anonymous denial passed. Anonymous REST calls to
+all three new functions returned HTTP 401. No fixtures or Auth settings changed.
+This is real hosted SQL/RLS verification, not password-based Auth/SDK/UI acceptance.
+Existing development account passwords are unavailable on this Mac and were not
+retrieved, guessed, reset or replaced. The public-only ignored config was restored
+from the verified project URL and publishable key with owner-only file permissions.
+No original operator SSH host or mounted environment was available.
+
+Hosted positive-case limitation: current fixtures have zero not_marked rows and
+zero attendance rows on cancelled sessions. Live results match the relational
+formula, but positive preservation/exclusion scenarios were verified in isolated
+local PostgreSQL tests only (90 assertions total), without altering hosted data.
+Production overview/session repositories and Groups UI now use these deployed
+contracts. Full hosted Flutter acceptance still requires restored account credentials.
 
 Remaining backend gaps are outside this proposal: full student profile, detailed
 session/attendance reads, operational integrity extensions, backup/restore and
 Secretary cross-app acceptance. They require their own reviewed work.
+
+Sanitized evidence: [teacher_read_20261019.json](verification/teacher_read_20261019.json).
+The configured debug APK compiled after aligning Gradle/AGP/Kotlin minimums;
+this is compilation evidence only, not hosted Flutter/device acceptance.

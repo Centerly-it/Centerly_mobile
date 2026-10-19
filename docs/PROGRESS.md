@@ -28,3 +28,43 @@ teacher-only read functions. Support URL stays configurable/pending. Original
 uncommitted analyzer/iOS/SDK lock resolutions and the supplied untracked plan are
 preserved. The implementation commit stages only the new timezone lock entry,
 leaving the five pre-existing SDK lock resolutions uncommitted.
+
+## 2026-10-19 approved deployment and next eligible read workflows
+
+Implementation commit: recorded below after local checkpoint.
+
+| Task | Status | Evidence / changed areas | Next / acceptance limits |
+|---|---|---|---|
+| T-010 | DONE under override | Exact SQL history before/after deployment; ten hashes pinned | Transfer same canonical history to future Secretary repo |
+| T-012 | IN_PROGRESS | Responsive blue/white shell; 8 AR/EN normal/200% captures; accessible actions | Physical TalkBack/safe areas and full Figma parity remain |
+| T-020 | IN_PROGRESS | Deployed overview counts, date filters, decimal display, named sessions; multi-read scope guard | Hosted password/UI fixture reconciliation and remaining filters |
+| T-021 | IN_PROGRESS | Live group search/grade filter/pages/schedule and roster previews; full roster navigation | Hosted Flutter and device/10k interaction acceptance |
+| T-022 | IN_PROGRESS | Named day/week/month reads, Cairo/DST tests | Stored status temporal/clock-skew and cross-app acceptance |
+| T-024 | IN_PROGRESS | Identified production cancellation via existing RPC, tested confirmation/error/reload | No hosted mutations rerun; actor/time/history display remains |
+| T-030 | IN_PROGRESS | Real directory and group roster via list_students; read-only contacts, stale/paged/logout tests | Full profile/memberships/academic/financial history/notes |
+
+Actual commands/results: preflight SQL + validator PASS (nine originals and exact
+remote history unchanged, expected 18 tables/30 policies/four accounts); dry run
+only 202610190001; db push --linked --skip-vault --yes applied that file only,
+no seeds/roles; postflight history/grants/search paths and all four synthetic actor
+read-only SQL checks PASS. Anonymous REST: 401 for all three reads. No fixture/Auth
+settings/password/account changes. No positive pending/cancelled-attendance hosted
+rows exist; local nonvacuous tests cover those cases. Password-based Auth/SDK/UI
+checks require the original missing credentials, which were not retrieved/reset.
+
+Analyzer PASS, 52 Flutter PASS + 1 hosted opt-in SKIP, 90 isolated SQL PASS,
+11 independent PostgreSQL race PASS, tokenizer unit test PASS, 8 capture tests
+PASS, format/diff PASS, manifest 10 unchanged / 0 pending.
+Initial Android configuration failed because current Flutter requires newer tools;
+Gradle 8.14 / AGP 8.11.1 / Kotlin 2.2.20 now pass actual debug compilation.
+`flutter build apk --debug --no-pub --dart-define-from-file=.env.local.json` PASS:
+SHA256 66ec39db51b754685329f12c9436165901eb840544c44c1676df0b10cb162b91.
+No installation, iOS build, pilot signing or store publication performed.
+
+Next: detailed attendance/session and full student-profile read contracts/UI.
+No further hosted migration is approved. Support remains pending/configurable.
+
+Next local slice: T-023 session-detail read proposal is prepared outside the managed
+migrations directory. 31 disposable native PostgreSQL assertions PASS; separate
+approval required before hosted changes/UI activation. Review:
+docs/SESSION_DETAIL_CHANGE_REVIEW.md. Managed history remains ten / zero pending.

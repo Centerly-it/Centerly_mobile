@@ -1,7 +1,7 @@
 # Shared backend contract — v6.1 development deployment
 
 Canonical source: this repository's `supabase/migrations`, by explicit owner
-override on 2026-10-18. Nine migrations are deployed to centerly-dev after explicit
+override on 2026-10-18. Ten migrations are deployed to centerly-dev after explicit
 owner approval; supabase/schema-manifest.json pins their hashes. See BACKEND_COMPAT.md.
 Transfer the same versioned migrations and Supabase migration history to the
 future Secretary repo; never create/reapply a duplicate schema. Both clients
@@ -93,15 +93,16 @@ hosted fixtures passed 36 Auth/REST/RPC assertions and the Dart SDK auth integra
 test. Public signup is disabled; email login remains enabled. Production still
 requires backups/restore, monitoring and the remaining release gates in BACKEND_REVIEW.md.
 
-## Pending read extension (not hosted)
+## Approved read extension (deployed 2026-10-19)
 
-`202610190001_teacher_browse.sql` proposes teacher-only `get_teacher_overview(p_date)`
+`202610190001_teacher_browse.sql` deploys teacher-only `get_teacher_overview(p_date)`
 (existing dashboard plus explicit manual attendance counts) and bounded
 `list_teacher_groups(p_search,p_grade_level_id,p_cursor,p_limit)` with grade,
 student count, roster and schedule previews, plus `list_teacher_sessions(p_from,
-p_to,p_group_id)` adding group/subject identity to bounded session reads. Existing production calls still use
-001..009. See [review](TEACHER_READ_CHANGE_REVIEW.md); deployment needs explicit
-owner approval, remote preflight and postflight. No new version is pinned as deployed.
+p_to,p_group_id)` adding group/subject identity to bounded session reads. Production overview, named-session and group reads use the deployed extension.
+The original nine versions are unchanged; all ten hashes are pinned. See
+[deployment evidence](TEACHER_READ_CHANGE_REVIEW.md). No additional hosted changes
+are authorized by this milestone.
 
 Client read cache is bounded memory only (64 responses, 30 seconds), keyed by SDK
 identity/endpoint/parameters; no persistent student or finance cache. Validation,
