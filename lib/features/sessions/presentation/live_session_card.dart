@@ -1,5 +1,5 @@
+import 'session_attendance_status.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import '../../../core/theme/color_manager.dart';
 import '../../../core/theme/style_manager.dart';
@@ -66,7 +66,6 @@ class LiveSessionCard extends StatelessWidget {
                       session.endsAt,
                       context.locale.languageCode,
                     ),
-                    textDirection: ui.TextDirection.ltr,
                     style: AppTextStyles.bodySmall,
                   ),
                 ],
@@ -80,13 +79,7 @@ class LiveSessionCard extends StatelessWidget {
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               AppStatusBadge.session(status: session.status),
-              Text(
-                (session.finalizedAt == null
-                        ? 'live_attendance_pending'
-                        : 'live_attendance_finalized')
-                    .tr(),
-                style: AppTextStyles.bodySmall,
-              ),
+              SessionAttendanceStatus(session: session),
             ],
           ),
           const Divider(height: AppSize.s24),

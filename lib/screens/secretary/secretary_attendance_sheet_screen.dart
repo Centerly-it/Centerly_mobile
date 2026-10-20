@@ -1,3 +1,4 @@
+import 'package:centrally/core/format/cairo_time.dart';
 import 'dart:async';
 
 import 'package:centrally/core/constants/strings_manager.dart';
@@ -314,7 +315,7 @@ class _SecretaryAttendanceSheetScreenState
                       ),
                       const SizedBox(height: AppSize.s6),
                       Text(
-                        '${widget.session.startTime.hour}:00 - ${widget.session.endTime.hour}:00 | ${groupStudents.length} ${StringsManager.groupsStudentsLabel.tr()}',
+                        '${CairoTime.clockRange(widget.session.startTime, widget.session.endTime, context.locale.toString())} | ${groupStudents.length} ${StringsManager.groupsStudentsLabel.tr()}',
                         style: AppTextStyles.bodySmall,
                       ),
                     ],

@@ -28,6 +28,7 @@ class SessionReadFixture {
         'summary': {
           'invoiced_egp': '0.00',
           'period_net_collected_egp': '0.00',
+          'paid_against_invoices_egp': '0.00',
           'outstanding_egp': '0.00',
         },
       });

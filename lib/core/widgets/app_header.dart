@@ -5,19 +5,28 @@ import '../theme/values_manager.dart';
 
 /// Shared branded header; account-specific content is supplied by the caller.
 class AppHeader extends StatelessWidget implements PreferredSizeWidget {
-  const AppHeader({required this.title, this.avatar, this.actions, super.key});
+  const AppHeader({
+    required this.title,
+    this.avatar,
+    this.actions,
+    this.titleContent,
+    this.toolbarHeight = height,
+    super.key,
+  });
   final String title;
+  final Widget? titleContent;
+  final double toolbarHeight;
   final Widget? avatar;
   final List<Widget>? actions;
 
-  static const height = AppSize.s80;
+  static const height = AppSize.s92;
   @override
-  Size get preferredSize => const Size.fromHeight(height);
+  Size get preferredSize => Size.fromHeight(toolbarHeight);
 
   @override
   Widget build(BuildContext context) => AppBar(
     automaticallyImplyLeading: false,
-    toolbarHeight: height,
+    toolbarHeight: toolbarHeight,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
         bottom: Radius.circular(AppRadius.r16),
@@ -29,7 +38,9 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
       children: [
         if (avatar != null) ...[avatar!, const SizedBox(width: AppSize.s12)],
         Expanded(
-          child: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
+          child:
+              titleContent ??
+              Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
         ),
       ],
     ),

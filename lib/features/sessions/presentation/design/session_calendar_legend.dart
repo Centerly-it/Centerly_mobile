@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/theme/style_manager.dart';
 import '../../../../core/theme/values_manager.dart';
-import 'session_design.dart';
+import 'session_calendar_dot.dart';
 
 class SessionCalendarLegend extends StatelessWidget {
   const SessionCalendarLegend({super.key});
@@ -14,14 +14,14 @@ class SessionCalendarLegend extends StatelessWidget {
       runSpacing: AppSize.s4,
       children: [
         for (final entry in {
-          '5e17e.svg': 'design_ended',
-          'cd60c.svg': 'design_available',
-          '82d1c.svg': 'design_cancelled',
+          SessionCalendarStatus.ended: 'design_ended',
+          SessionCalendarStatus.available: 'design_available',
+          SessionCalendarStatus.cancelled: 'design_cancelled',
         }.entries)
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SessionAsset(entry.key),
+              SessionCalendarDot(status: entry.key),
               const SizedBox(width: AppSize.s4),
               Text(
                 entry.value.tr(),

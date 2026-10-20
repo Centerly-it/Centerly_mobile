@@ -14,6 +14,21 @@ class MoneyEgp {
         .toString();
   }
 
+  /// Exact grouped whole pounds for display; no floating point conversion.
+  String get groupedWholePounds => wholePounds.replaceAllMapped(
+    RegExp(r'(\d)(?=(\d{3})+(?!\d))'),
+    (match) => '${match[1]},',
+  );
+
+  factory MoneyEgp.fromMinorUnits(BigInt value) {
+    final digits = value.abs().toString().padLeft(3, '0');
+    final sign = value.isNegative ? '-' : '';
+    return MoneyEgp._(
+      '$sign${digits.substring(0, digits.length - 2)}.${digits.substring(digits.length - 2)}',
+      value,
+    );
+  }
+
   factory MoneyEgp.parse(dynamic input) {
     if (input is! String || !RegExp(r'^-?\d{1,18}\.\d{2}$').hasMatch(input)) {
       throw const FormatException('Expected decimal money string');

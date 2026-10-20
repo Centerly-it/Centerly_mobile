@@ -22,13 +22,27 @@ class ColorManager {
   static const Color grey700 = Color(0xFF374151);
   static const Color grey900 = Color(0xFF111827);
 
+  static const Color canvas = Color(0xFFFBFCFC);
+  static const Color stroke = Color(0xFFE3E6EB);
+  static const Color successSurface = Color(0xFFE7F3ED);
+  static const Color successBorder = Color(0xFFB4DAC8);
+  static const Color successText = Color(0xFF084A2B);
+
   // Semantic
   static const Color error = Color(0xFFDC2626);
+  static const Color errorSurface = Color(0xFFFCEBEB);
+  static const Color errorBorder = Color(0xFFF4C0C0);
+  static const Color errorText = Color(0xFF7A1D1D);
   static const Color errorLight = Color(0xFFFEE2E2);
   static const Color success = Color(0xFF16A34A);
   static const Color successLight = Color(0xFFDCFCE7);
   static const Color warning = Color(0xFFD97706);
   static const Color warningLight = Color(0xFFFEF3C7);
+
+  // Calendar status markers (shared by grid and legend).
+  static const Color calendarEnded = Color(0xFFAEBBD0);
+  static const Color calendarAvailable = Color(0xFF78CCA8);
+  static const Color calendarCancelled = Color(0xFFF49B9B);
 
   // Text
   static const Color textPrimary = grey900;

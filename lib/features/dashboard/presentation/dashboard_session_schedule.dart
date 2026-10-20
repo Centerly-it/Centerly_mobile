@@ -2,6 +2,7 @@ import 'dart:ui' as ui;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/format/cairo_time.dart';
+import '../../../core/widgets/app_status_badge.dart';
 import '../../../core/theme/color_manager.dart';
 import '../../../core/theme/style_manager.dart';
 import '../../../core/theme/values_manager.dart';
@@ -31,6 +32,7 @@ class DashboardSessionSchedule extends StatelessWidget {
                 sessions[i].groupName ?? 'nav_groups'.tr(),
                 style: AppTextStyles.titleSmall,
               ),
+              AppStatusBadge.session(status: sessions[i].status),
               Row(
                 textDirection: ui.TextDirection.ltr,
                 mainAxisSize: MainAxisSize.min,
@@ -47,7 +49,6 @@ class DashboardSessionSchedule extends StatelessWidget {
                       sessions[i].endsAt,
                       context.locale.languageCode,
                     ),
-                    textDirection: ui.TextDirection.ltr,
                     style: AppTextStyles.bodySmall,
                   ),
                 ],

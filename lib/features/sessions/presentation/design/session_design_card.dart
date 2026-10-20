@@ -60,12 +60,14 @@ class SessionDesignCard extends StatelessWidget {
                                   color: ColorManager.primary,
                                 ),
                               ),
-                            Text(
-                              '${data.present}/${data.expected}',
-                              style: AppTextStyles.bodySmall.copyWith(
-                                color: SessionDesign.green,
+                            if (data.cancellationReason == null &&
+                                (current || data.completed))
+                              Text(
+                                '${data.present}/${data.expected}',
+                                style: AppTextStyles.bodySmall.copyWith(
+                                  color: SessionDesign.green,
+                                ),
                               ),
-                            ),
                             if (data.cancellationReason != null)
                               Text(
                                 'status_cancelled'.tr(),

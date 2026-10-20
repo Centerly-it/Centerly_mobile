@@ -1,3 +1,4 @@
+import 'package:centrally/core/format/cairo_time.dart';
 import 'package:centrally/core/constants/strings_manager.dart';
 import 'package:centrally/core/theme/color_manager.dart';
 import 'package:centrally/core/theme/style_manager.dart';
@@ -254,7 +255,11 @@ class _SessionCard extends StatelessWidget {
                     ),
                     const SizedBox(width: AppSize.s4),
                     Text(
-                      '${session.startTime.hour}:00 - ${session.endTime.hour}:00',
+                      CairoTime.clockRange(
+                        session.startTime,
+                        session.endTime,
+                        context.locale.toString(),
+                      ),
                       style: AppTextStyles.bodySmall,
                     ),
                   ],

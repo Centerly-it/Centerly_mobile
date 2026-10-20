@@ -157,3 +157,18 @@ row; replay creates no second row/event. Pending->handled removal transition not
 the teacher; status-only handling never deactivates a secretary. No backfill, push or
 cron. Trigger failure rolls back the corresponding business transaction. Existing
 cancellation notifications, note writes, mark-read and removal request RPCs unchanged.
+
+
+## Finance business read-model proposals — 2026-10-20 (NOT DEPLOYED)
+
+The three additive teacher-only RPCs in `supabase/proposals/finance_business/`
+are local proposals, not part of the deployed nineteen-version contract. See
+[FINANCE_BACKEND_CHANGE_REVIEW.md](FINANCE_BACKEND_CHANGE_REVIEW.md) for signatures,
+exact SHA256, security/date/pagination semantics and 68 local PostgreSQL assertions.
+No hosted verification or activation is implied. Existing payment/reversal writes,
+RLS, account ownership and Secretary permissions remain unchanged. Invoice creator,
+original collector and correction recorder are distinct attribution fields, never
+an assignment of unpaid debt or a cash-custody balance. The dashboard due-cohort
+settlement card consumes `paid_against_invoices_egp`, while actual period cash uses
+`period_net_collected_egp`. Production clients must filter/search before pagination,
+and use server totals rather than summing a loaded page.

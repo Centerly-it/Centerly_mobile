@@ -24,7 +24,9 @@ class PreviewSessions {
         'local_date': date,
         'starts_at': start.toIso8601String(),
         'ends_at': start.add(const Duration(minutes: 90)).toIso8601String(),
-        'status': cancelled.containsKey(id) ? 'cancelled' : 'upcoming',
+        'status': cancelled.containsKey(id)
+            ? 'cancelled'
+            : ['completed', 'ongoing', 'upcoming'][i],
         'cancel_reason': cancelled[id],
         'attendance_finalized_at': null,
       };

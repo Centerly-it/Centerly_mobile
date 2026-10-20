@@ -11,19 +11,21 @@ class SessionCalendar extends StatelessWidget {
     required this.month,
     required this.onDate,
     required this.hasSessions,
+    this.hasCancelledSessions,
     super.key,
   });
   final DateTime date;
   final bool month;
   final ValueChanged<DateTime> onDate;
   final bool Function(DateTime) hasSessions;
+  final bool Function(DateTime)? hasCancelledSessions;
   @override
   Widget build(BuildContext context) {
     final from = month
         ? DateTime(date.year, date.month)
-        : date.subtract(Duration(days: date.weekday % 7));
+        : DateTime(date.year, date.month, date.day - date.weekday % 7);
     final start = month
-        ? from.subtract(Duration(days: from.weekday % 7))
+        ? DateTime(from.year, from.month, from.day - from.weekday % 7)
         : from;
     final count = month
         ? ((DateTime(date.year, date.month + 1, 0).day +
@@ -57,18 +59,20 @@ class SessionCalendar extends StatelessWidget {
           itemCount: count,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 7,
-            childAspectRatio: month ? 1.55 / scale : 0.9 / scale,
+            childAspectRatio: month ? 1.4 / scale : 0.9 / scale,
             crossAxisSpacing: month ? 0 : AppSize.s4,
             mainAxisSpacing: AppSize.s4,
           ),
           itemBuilder: (context, i) {
-            final day = start.add(Duration(days: i));
+            // Civil dates must not advance by 24 hours across Cairo DST.
+            final day = DateTime(start.year, start.month, start.day + i);
             return SessionCalendarDay(
               day: day,
               date: date,
               month: month,
               onDate: onDate,
               hasSessions: hasSessions(day),
+              hasCancelledSessions: hasCancelledSessions?.call(day) ?? false,
             );
           },
         ),

@@ -1,5 +1,272 @@
 # Centerly implementation progress
 
+## Pre-push review and fixes — 2026-10-20
+
+Reviewed all tracked diffs/new source, local SQL proposals, assets, localization,
+preview/live entry points and CI. Fixed paid-badge/profile/invoice-history conflicts
+using shared synthetic invoice records; dashboard unpaid card/list now shares the
+finance ledger and opens invoice history (five students/6,600 at fixed review date).
+Normalized Arabic/Persian target digits with a reusable integer formatter; corrected
+remaining civil-date range iteration across Cairo DST. Split directory/calendar/
+attendance widgets and centralized calendar colors/shared padding tokens.
+
+CI now runs the finance proposal suite with exact review-hash guards and explicit
+opt-in UI navigation. Proposal SQL LF bytes are pinned for cross-platform checkout;
+no managed migration changed and no proposal was deployed. No new package needed.
+
+Fresh: enforced offline lockfile PASS/unchanged; build_runner PASS with zero source
+byte changes; format/analyzer PASS; full Flutter 208 PASS/1 hosted opt-in SKIP;
+explicit preview transport/navigation 3 PASS; refreshed student/unpaid renders
+16 PASS. Local SQL suites total 343 assertions PASS; Windows PostgreSQL launcher
+2 PASS; nineteen managed hashes/zero pending PASS; three proposal pins PASS.
+
+Readiness: UI-preview milestone can be committed; NOT production activation.
+New designs are debug-gated, finance queries/adapters/deployment remain incomplete,
+live teacher name is still generic, group notes lack a persistence contract,
+contacts/QR remain preview, and device/pilot/Secretary acceptance remains open.
+Student/group/session samples are still separate across modules; do not infer
+whole-tenant reconciliation from widget tests. Report and exact next task:
+docs/PRE_PUSH_REVIEW_2026-10-20.md. Existing earlier verification entries are
+historical and do not override these current limitations.
+
+No staging/commit/push, hosted access/mutation, Auth changes, APK build or restart.
+
+
+## Business-first finance preview — 2026-10-20
+
+T-033 UI/business milestone only; hosted end-to-end acceptance is NOT completed.
+Replaced the debug preview Finance screen with month-scoped overview, searchable
+invoice dues/status filters, invoice history, receipt/correction details, actor/
+method/kind movement filters and local collection/target calculators. Preserved
+shared app bar/navigation and teacher financial read-only permissions. Exact BigInt
+piastres underpin all balances; decimal details survive, whole values are grouped.
+Due-date invoice settlements reconcile separately from receipt-date cash. Full
+correction/original references and creator vs collector vs correction actor remain
+distinct. Date/month changes reset dependent filters; no future receipts fabricated.
+Arabic/English and narrow/enlarged text layouts covered. Preview figures are local
+synthetic fixtures, not operational teacher data.
+
+Related business correction: dashboard due-cohort settlement card now consumes
+paid_against_invoices_egp rather than period_net_collected_egp. Updated its mock
+contract to test distinct receipt/settlement values. Dashboard preview totals share
+the finance fixture; existing student-profile/unpaid design samples remain separate
+and are not evidence of cross-screen live reconciliation.
+
+Three additive LOCAL proposals (202610200001..003) provide teacher-only aggregate
+finance, attributed invoice history and filtered/paginated dues; one payment/invoice
+index. No managed migration or existing nineteen bodies changed. Exact hashes,
+effects, permission/date semantics and remaining receipt-filter adapter work are in
+docs/FINANCE_BACKEND_CHANGE_REVIEW.md. Not deployed/activated or freshly verified
+against hosted Supabase. Shared contract explicitly marks these as undeployed.
+
+Fresh validation: complete Flutter suite 202 PASS / 1 hosted opt-in SKIP;
+`dart analyze lib test` clean; final finance render/navigation batch 20 PASS,
+including AR/EN 320px at 200% text; six domain arithmetic/fixture tests passed.
+Fourteen screenshots under docs/screenshots/finance inspected for key layouts.
+Disposable PostgreSQL finance proposal tests: 68 assertions PASS, covering exact
+cents, cross-cohort receipts, different correcting actor, signed actor totals,
+Cairo midnight boundaries, tenant/role/anon/inactive/subscription denials,
+historical attribution/archive visibility, pagination and totals, index/search_path
+and absence of read-triggered notifications. git diff --check passed.
+
+No hosted access/mutation, deployment, Auth changes, restart, APK build, commit or
+push performed. Current new finance UI remains gated by debug CENTERLY_UI_PREVIEW;
+existing production LiveFinance is retained. See docs/FINANCE_BUSINESS_DESIGN.md.
+Next eligible work: owner UI review; then complete remote receipt query contracts
+and live adapters, obtain a concrete deployment approval, postflight and device/
+Secretary cross-app acceptance. Do not treat mock tests as completion of T-033.
+
+
+Student empty-search illustration (2026-10-20): student directory now uses the
+exact attendance-search image and aspect ratio through shared AppSearchEmpty.
+Attendance delegates to the same shared widget; localized directory copy retained.
+Focused analyzer clean; 11 directory-filter/session-render tests PASS, including
+assertions for the exact shared image asset. No restart or build.
+
+## Teacher student-creation control removed — 2026-10-20
+
+Owner clarification overrides the reference add button: removed it from the
+student directory together with its local callback, dialog and unused translations.
+Search, filters and profiles retained; no hosted permissions changed. Replaced
+local-add test with a regression asserting no creation action in the Teacher UI.
+Validation: focused analyzer clean; seven permission/filter/navigation/translation
+tests PASS. No restart, APK build or hosted mutation.
+
+## Figma students section — 2026-10-20 (current UI milestone)
+
+Implemented six adjacent frames 961:5521 / 5540 / 5597 / 5669 / 5743 / 5810 from
+high-fidelity context and screenshots: directory, level sheet, profile information,
+attendance, academics and payments. Debug preview only; shared workspace app bar
+and five-tab navigation retained, connected student flows/backend unchanged.
+Search and combined level/group/payment filters, clear/cancel/apply, local name
+validation/addition, selected-student note editing and all four profile tabs are
+interactive. Workspace-owned synthetic students preserve local edits across main
+tabs. Shared surface panel/section and identity widgets avoid repeated layout;
+Arabic/English localization and original exported assets included.
+
+Design data correction: attendance rate is computed as 24/30 = 80%, rather than
+inconsistent reference 85%; full student name stays consistent across views.
+Grouped whole-pound payment display and exact 1,900 = 1,300 + 600 summary retained.
+Contact actions expose only sample-number copying; reference QR is a design image,
+not an active attendance credential. Add/notes remain in-memory fixtures; Teacher
+hosted creation permissions are not changed. No hosted operational claim.
+
+Validation: full analyzer clean; full Flutter suite 176 PASS / 1 hosted opt-in SKIP.
+That run includes 12 AR/EN state renders, 12 320px/200% cases, filter reset/cancel,
+local add/note validation and isolation, profile navigation and summary arithmetic,
+plus existing regressions. After final label/tab polish: 17 affected design/action/
+workspace/translation tests PASS; final 12 design renders PASS. Verified nonempty
+assets and effective SVG/PNG geometry at callsites, and visually reviewed renders.
+Physical-device/numeric pixel comparison remains unverified. No restart, APK build
+or hosted mutation. New assets may need owner-initiated Stop/Run once if absent
+from the current bundle. See `docs/FIGMA_STUDENTS_IMPLEMENTATION.md` and
+`docs/FIGMA_STUDENT_ASSETS.json`.
+
+## Figma groups section — 2026-10-20 (current UI milestone)
+
+Implemented the five adjacent frames 961:6366 / 6356 / 6177 / 6259 / 6268 from
+high-fidelity design context and screenshots: grade-grouped list, empty state,
+detail with no notes, note editor and detail with saved note. Original local
+assets, reusable widgets, Arabic/English labels, local search, view-all lists,
+required-note validation and group-scoped in-memory notes. Workspace retains
+preview groups across tab navigation. Existing shared app bar and five-item
+navigation unchanged; connected LiveGroups/backend untouched. No hosted group
+notes or persistence claim: this is the owner-requested offline UI preview.
+
+Validation: focused analyzer clean; 24 relevant tests PASS (10 design states,
+6 responsive, 1 note save/validation/isolation, 3 view-all, 2 main-tab navigation,
+2 translation parity). Verified original SVG render dimensions against manifest
+and visually inspected five rendered states. Physical-device pixel comparison
+remains unverified; no numeric pixel-perfect claim. New asset bundle may need an
+owner-initiated Stop/Run once. No restart, APK build or hosted changes performed.
+See `docs/FIGMA_GROUPS_IMPLEMENTATION.md` and `docs/FIGMA_GROUP_ASSETS.json`.
+
+## Attendance ratios and navigation order — 2026-10-20
+
+Session preview cards now show present/expected for both current and completed
+sessions, excluding upcoming/cancelled cards. Preview model explicitly records
+completion; today includes current/completed examples (19/25), earlier days are
+completed, later days upcoming. Shared app bar reduced from 100 to 92 across all
+five tabs. Swapped Students and Finance positions: Home, Sessions, Groups, Students,
+Finance; navigation routing updated with the labels. Focused analyzer clean and
+18 design/responsive/navigation tests PASS, including per-card ratio visibility
+and the student destination at index 3. No restart, APK or hosted changes.
+
+## Identical workspace header across tabs — 2026-10-20
+
+Removed Home-only header/action variants. All five main tabs now compose the exact
+same greeting/date/avatar/boxed notification/more-menu header. Responsive height
+calculation is shared and independent of selected tab. Future header changes apply
+to every main tab. Focused analyzer clean; eight greeting tests and final two
+Arabic/English navigation regressions PASS, asserting the same header composition
+and height on every destination. No restart, build or hosted changes.
+
+## Dashboard and selected navigation polish — 2026-10-20
+
+Removed the bottom navigation selection background; selected icons and labels use
+the primary color. Dashboard payment figures now group whole pounds with commas,
+using exact BigInt/string formatting (18,000), retaining ledger precision and the
+existing currency symbol. Compact dashboard session rows reuse AppStatusBadge for
+completed/current/upcoming labels; offline sample shows all three states. Connected
+rows use supplied contract statuses. Arabic upcoming label changed to feminine.
+Shared branded app bar height increased from 80 to 100, retaining Home text-scale
+adaptation and all tab controls.
+Validation: focused analyzer clean; nine navigation/decimal-contract/translation
+tests PASS, including transparent indicator, selected label color, and rendered
+18,000 amount. Dashboard badge tests exercise Arabic/English at 320px/200% text.
+No restart, APK build or hosted changes.
+
+## Five-tab teacher navigation — 2026-10-20
+
+Moved the unpaid preview card before the center attendance section. Student
+shortcut now lives as a fifth bottom destination after the existing four; removed
+it from header actions. StudentDirectory supports an embedded body, preserving
+search/profile navigation without a duplicate app bar; pushed directory/group
+routes retain their existing scaffold. All five destinations use primary-colored
+selected icons and the existing pale indicator. Navigation extracted into a
+focused shared teacher widget.
+Validation: focused analyzer clean; 14 preview navigation/greeting/unpaid tests
+PASS. Final Arabic/English navigation assertions cover five destinations, primary
+selected icons, actual embedded student directory and one shared app bar.
+No restart, APK build or hosted changes.
+
+## Home students shortcut and unpaid summary — 2026-10-20
+
+Restored the student directory shortcut beside notifications on Home, using the
+same reusable white rounded action button. Removed duplicate home overflow entry.
+Reviewed Figma 961:6655 context/screenshot and added its unpaid-students summary at
+the end of the offline dashboard: original 24px SVG, error tile, count and working
+View list button. Preview count and list both use eight synthetic rows; card is
+preview-gated because no connected monthly debtor count/list contract is wired.
+No real debt status inferred from aggregate balances. Other backend behavior
+unchanged. Responsive stacked layout supports narrow screens/large text.
+Validation: focused analyzer clean; 12 greeting/navigation/translation tests PASS
+and four unpaid card/list Arabic/English/large-text tests PASS. Reviewed rendered
+header and card against requested Figma components. Asset provenance/hash in
+`docs/FIGMA_HOME_UNPAID_ASSET.json`. No restart, APK build or hosted changes.
+
+## Home greeting header — 2026-10-20
+
+Reviewed Figma 961:6626 high-fidelity context and screenshot. Home now uses the
+shared header with localized greeting and current Cairo date, keeping editable
+avatar and rounded blue header. Preview name is Ahmed with abbreviated Arabic
+honorific; morning switches to evening at noon Cairo time and refreshes each
+minute while mounted. Connected mode uses a generic teacher label until a trusted
+teacher display-name contract is available (Auth profile currently has IDs only).
+Notification action uses the original 24px Figma SVG in a white rounded box;
+existing notification navigation preserved. Student directory moved into the home
+more menu for space, remains a direct action on other tabs. Other tab titles stay
+unchanged. No artificial unread indicator. Asset hash recorded in
+`docs/FIGMA_HOME_HEADER_ASSET.json`.
+Validation: focused analyzer clean; 12 greeting/preview navigation/translation tests
+PASS, covering 11:59/noon Cairo, Arabic/English and 320px/200% text. Reviewed rendered
+home header image against Figma, adapting only owner-requested white box, title and
+existing account/menu controls. No restart, APK build or hosted changes.
+
+Arabic clock polish (2026-10-20): shared time formatting now places the day
+period (AM/PM) physically left of clock digits while preserving start/end reading
+order. English formatting unchanged. Five direction/session tests PASS; focused
+analyzer clean. No restart, build or hosted mutation.
+
+## Time interval reading order — 2026-10-20
+
+Shared interval formatting now isolates the whole range according to locale and
+each clock individually: Arabic start time on the right, end on the left; English
+start on the left. Applied to session details/attendance header, dashboard and
+connected session cards, plus legacy teacher/secretary mock screens. Legacy local
+clock fields retain their original hours/minutes without UTC conversion. Removed
+forced LTR text overrides while retaining the dashboard clock icon position.
+Validation: focused analyzer clean; 17 time-direction/Cairo/session/design tests
+PASS, including measured text positions inside both LTR and RTL parent contexts.
+No restart, APK build or hosted changes.
+
+## Calendar civil dates and status markers — 2026-10-20
+
+Fixed month/week generation to construct civil dates rather than adding 24-hour
+Durations across Cairo DST (the cause of repeated October dates). Pastel 6px
+markers share a legend and support both scheduled and cancelled sessions on the
+same day. Cancelled sessions remain excluded from the schedule list; the monthly
+calendar retains their red marker. Offline fixture includes one cancellation on
+the 28th for visual review. Today has a persistent blue outline and bold number,
+independent of the selected date; selecting it uses the existing solid blue fill.
+Validation: 17 design/responsive/action tests PASS, including unique October dates,
+exactly one October 29 and mixed cancellation markers; dedicated today selection
+regression PASS. No restart, APK build or hosted changes.
+
+Attendance preview polish (2026-10-20): removed the read-only header badge at
+owner request; attendance permissions and behavior unchanged. No restart/build.
+
+## Sessions schedule simplification — 2026-10-20
+
+Owner override of the Figma summary: the offline preview sessions tab now shows
+only non-cancelled sessions for the selected day. Removed daily/weekly/monthly
+summary metrics and the cancelled calendar legend. Attendance ratios appear only
+on the current session; date selection and session details remain available.
+The heading uses today only for the actual Cairo date. Connected backend unchanged.
+Validation: 17 focused design, responsive and cancellation tests PASS, including
+assertions for no summary/cancelled legend and attendance ratios only on current
+cards. No restart, APK build or hosted mutation performed.
+
 ## Figma sessions and attendance UI — 2026-10-20 (current milestone)
 
 Reviewed all ten owner-specified section frames through high-fidelity Figma design

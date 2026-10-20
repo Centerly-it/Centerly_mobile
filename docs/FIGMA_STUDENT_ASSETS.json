@@ -1,0 +1,160 @@
+{
+  "fileKey": "iAEfLCYGeeGRYkvwUyEA9H",
+  "nodes": [
+    "961:5521",
+    "961:5540",
+    "961:5597",
+    "961:5669",
+    "961:5743",
+    "961:5810"
+  ],
+  "assets": [
+    {
+      "path": "assets/figma/students/083ac.svg",
+      "bytes": 1952,
+      "sha256": "59feec9106d17c1ab21c1dd267666614cdadf12d5e79237112582f1d7e62a0ff",
+      "width": 16.0,
+      "height": 16.0
+    },
+    {
+      "path": "assets/figma/students/0b657.svg",
+      "bytes": 453,
+      "sha256": "bea0962ea7179e00aaace508ee606bbb31d03c5554c7717d49ece8b3358b7301",
+      "width": 16.0,
+      "height": 16.0
+    },
+    {
+      "path": "assets/figma/students/20a01.svg",
+      "bytes": 1641,
+      "sha256": "26a49f4481c98cfed5d4fe3bec978603e2d7075509a2658c6c1dba475b670322",
+      "width": 16.0,
+      "height": 16.0
+    },
+    {
+      "path": "assets/figma/students/23005.svg",
+      "bytes": 564,
+      "sha256": "8228c9a5760133ba91c62c7c81fcb32227c07098d124ff13ec995869fb12ee8b",
+      "width": 24.0,
+      "height": 24.0
+    },
+    {
+      "path": "assets/figma/students/246ac.svg",
+      "bytes": 2322,
+      "sha256": "81b116fcd06fed652e9054ea532168d9874ec8339944acd126c41cf78e69637f",
+      "width": 16.0,
+      "height": 16.0
+    },
+    {
+      "path": "assets/figma/students/460bc.svg",
+      "bytes": 1664,
+      "sha256": "c7b20d3dd3079ef2a245725809b2e0d46e13c7e1b25523b467b0aeea861995c4",
+      "width": 16.0,
+      "height": 16.0
+    },
+    {
+      "path": "assets/figma/students/853f1.svg",
+      "bytes": 1184,
+      "sha256": "842c215aabbb61021eb4c690652160d7970bee0beab95404f2bb4271df76d5a4",
+      "width": 44.0,
+      "height": 44.0
+    },
+    {
+      "path": "assets/figma/students/bc58e.svg",
+      "bytes": 1380,
+      "sha256": "a7a507d5b2657acb0b11877a65c36c33a9c6e71948208d3dc8dd005a288a8839",
+      "width": 16.0,
+      "height": 16.0
+    },
+    {
+      "path": "assets/figma/students/cc156.svg",
+      "bytes": 475,
+      "sha256": "4796810e448a027a708a547a7460bed50159646cdcfea20b661d3b4e32c5f1c7",
+      "width": 16.0,
+      "height": 16.0
+    },
+    {
+      "path": "assets/figma/students/d6b26.png",
+      "bytes": 81103,
+      "sha256": "033c9378e3da86ec121b0e4e58c842aa2c8136cbb5ed4800a0b6290283b812ac",
+      "renderSizes": [
+        [
+          57.002,
+          58.196
+        ]
+      ]
+    },
+    {
+      "path": "assets/figma/students/dadab.svg",
+      "bytes": 3669,
+      "sha256": "450c3cbe2a6ce0c12028e076d8883f1b4578002dcdb0f5125ffeb7833daa062b",
+      "width": 16.0,
+      "height": 16.0
+    },
+    {
+      "path": "assets/figma/students/dbef8.svg",
+      "bytes": 3215,
+      "sha256": "7ef310c4652971308679d850fd1b0d91aaf7deee7e6bda6fa7005859b4c03b08",
+      "width": 16.0,
+      "height": 16.0
+    },
+    {
+      "path": "assets/figma/students/e90e0.svg",
+      "bytes": 1730,
+      "sha256": "afce4ab631009e7ba613d035b9b401904665781f5d0887a79bc99209701c65e2",
+      "width": 16.0,
+      "height": 16.0
+    },
+    {
+      "path": "assets/figma/students/f399a.svg",
+      "bytes": 3635,
+      "sha256": "1e24c7b124180b482c059e24582e74ba03550512f5e61392a42a6548e99ea7f9",
+      "width": 16.0,
+      "height": 16.0
+    },
+    {
+      "path": "assets/figma/students/f921f.svg",
+      "bytes": 1941,
+      "sha256": "a0dbafa37bc31fe62fbe7b8848b7d6b402e6461ba9063e8ea1827eb87742e2e0",
+      "width": 20.0,
+      "height": 20.0
+    },
+    {
+      "path": "assets/figma/sessions/04ab7.png",
+      "sha256": "fea08ec0be849d6de68b0b2543b4bd179f0d596ac369025c3eb7e4bb8ee3b55c",
+      "bytes": 1369656,
+      "reused": true,
+      "renderSizes": [
+        [
+          32,
+          32
+        ],
+        [
+          56,
+          56
+        ]
+      ]
+    },
+    {
+      "path": "assets/figma/sessions/ea117.svg",
+      "sha256": "0f1b408f0b1b6ea2d0bc33ffe692c255a8913b29966ed723b2f021dc80cc2256",
+      "bytes": 626,
+      "reused": true,
+      "width": 24.0,
+      "height": 24.0
+    },
+    {
+      "path": "assets/figma/groups/451d4.svg",
+      "sha256": "1ec5a035ae868d19d50e81d3547eb8b16c67642c80618210ac2fec95637a6da3",
+      "bytes": 847,
+      "reused": true,
+      "width": 24.0,
+      "height": 24.0
+    }
+  ],
+  "reused_assets": [
+    "assets/figma/sessions/04ab7.png",
+    "assets/figma/sessions/ea117.svg",
+    "assets/figma/groups/451d4.svg"
+  ],
+  "code_connect": "Reference 3DAvatars26 is a React Material kit snippet with no corresponding Flutter component in this repository; matching original avatar export reused."
+}

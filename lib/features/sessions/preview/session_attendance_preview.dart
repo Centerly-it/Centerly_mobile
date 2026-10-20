@@ -15,10 +15,7 @@ class SessionAttendancePreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: SessionDesign.background,
-    appBar: const SessionSubpageBar(
-      title: 'design_attendance_sheet',
-      readOnly: true,
-    ),
+    appBar: const SessionSubpageBar(title: 'design_attendance_sheet'),
     body: SafeArea(
       child: ListView(
         padding: const EdgeInsets.all(AppPadding.p16),

@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/theme/values_manager.dart';
 import 'dashboard_metrics.dart';
+import '../../../core/config/preview_mode.dart';
+import '../preview/preview_unpaid_students.dart';
 import 'dashboard_payment_progress.dart';
 import '../../../core/format/money_egp.dart';
 import '../../../screens/teacher/teacher_shared.dart';
@@ -26,7 +28,7 @@ class DashboardContent extends StatelessWidget {
             locale: context.locale.toString(),
             name: 'EGP',
           ).currencySymbol;
-    return '${MoneyEgp.parse(amount).wholePounds} $symbol';
+    return '${MoneyEgp.parse(amount).groupedWholePounds} $symbol';
   }
 
   @override
@@ -64,6 +66,10 @@ class DashboardContent extends StatelessWidget {
         ),
       ],
       const SizedBox(height: AppSize.s24),
+      if (PreviewMode.enabled) ...[
+        const PreviewUnpaidStudents(),
+        const SizedBox(height: AppSize.s24),
+      ],
       Text(
         'dashboard_attendance_title'.tr(),
         style: Theme.of(context).textTheme.titleLarge,

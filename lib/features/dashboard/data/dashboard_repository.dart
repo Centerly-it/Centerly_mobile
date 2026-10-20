@@ -67,7 +67,8 @@ class DashboardRepository {
         );
         final totals = Map<String, dynamic>.from(finance['summary'] as Map);
         json['invoiced_egp'] = totals['invoiced_egp'];
-        json['collected_egp'] = totals['period_net_collected_egp'];
+        // This card reconciles with this month's due invoices, not receipt dates.
+        json['collected_egp'] = totals['paid_against_invoices_egp'];
         json['outstanding_egp'] = totals['outstanding_egp'];
       }
       checkSession();

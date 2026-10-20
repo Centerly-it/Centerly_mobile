@@ -1,15 +1,21 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import '../../core/theme/color_manager.dart';
 import '../../core/data/completion_contracts.dart';
 import '../../core/config/preview_mode.dart';
 import '../../features/sessions/preview/figma_sessions_preview.dart';
 import '../../features/finances/presentation/live_finance.dart';
+import '../../features/finances/preview/finance_preview.dart';
 import '../../core/theme/values_manager.dart';
 import 'widgets/workspace_app_bar.dart';
+import 'widgets/teacher_bottom_navigation.dart';
+import '../../features/students/presentation/student_directory.dart';
+import '../../features/students/preview/figma_students_preview.dart';
+import '../../features/students/preview/student_preview_data.dart';
 import '../../features/dashboard/presentation/live_dashboard.dart';
 import '../../features/sessions/presentation/live_sessions.dart';
 import '../../features/groups/presentation/live_groups.dart';
+import '../../features/groups/preview/figma_groups_preview.dart';
+import '../../features/groups/preview/group_preview_data.dart';
 
 /// Production entry: no prototype mock screens or secretary operations.
 class TeacherWorkspace extends StatefulWidget {
@@ -20,9 +26,11 @@ class TeacherWorkspace extends StatefulWidget {
 
 class _TeacherWorkspaceState extends State<TeacherWorkspace> {
   int _index = 0;
+  late final _previewStudents = StudentPreviewData.fixtures();
+  late final _previewGroups = GroupPreviewData.fixtures();
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: const WorkspaceAppBar(),
+    appBar: WorkspaceAppBar(height: WorkspaceAppBar.heightFor(context)),
     body: SafeArea(
       top: false,
       child: _index == 0
@@ -32,7 +40,15 @@ class _TeacherWorkspaceState extends State<TeacherWorkspace> {
                 ? const FigmaSessionsPreview()
                 : const LiveSessions())
           : _index == 2
-          ? const LiveGroups()
+          ? (PreviewMode.enabled
+                ? FigmaGroupsPreview(groups: _previewGroups)
+                : const LiveGroups())
+          : _index == 3
+          ? (PreviewMode.enabled
+                ? FigmaStudentsPreview(students: _previewStudents)
+                : const StudentDirectory(embedded: true))
+          : PreviewMode.enabled
+          ? const FinancePreview()
           : CompletionContracts.enabled
           ? const LiveFinance()
           : SingleChildScrollView(
@@ -45,33 +61,9 @@ class _TeacherWorkspaceState extends State<TeacherWorkspace> {
               ),
             ),
     ),
-    bottomNavigationBar: NavigationBar(
-      height:
-          AppSize.s80 +
-          MediaQuery.textScalerOf(context).scale(AppSize.s24) -
-          AppSize.s24,
-      selectedIndex: _index,
-      onDestinationSelected: (value) => setState(() => _index = value),
-      backgroundColor: ColorManager.surface,
-      indicatorColor: ColorManager.primaryBright,
-      destinations: [
-        NavigationDestination(
-          icon: const Icon(Icons.home_outlined),
-          label: 'nav_home'.tr(),
-        ),
-        NavigationDestination(
-          icon: const Icon(Icons.calendar_month_outlined),
-          label: 'nav_sessions'.tr(),
-        ),
-        NavigationDestination(
-          icon: const Icon(Icons.groups_2_outlined),
-          label: 'nav_groups'.tr(),
-        ),
-        NavigationDestination(
-          icon: const Icon(Icons.account_balance_wallet_outlined),
-          label: 'nav_finance'.tr(),
-        ),
-      ],
+    bottomNavigationBar: TeacherBottomNavigation(
+      index: _index,
+      onSelected: (value) => setState(() => _index = value),
     ),
   );
 }

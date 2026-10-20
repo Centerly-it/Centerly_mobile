@@ -10,6 +10,8 @@ class SessionDesignFixture {
   ) => _days.putIfAbsent(CairoTime.date(day), () {
     if (day.weekday == DateTime.friday) return [];
     final locale = Intl.getCurrentLocale();
+    final today = CairoTime.date(CairoTime.local(DateTime.now()));
+    final date = CairoTime.date(day);
     return List.generate(5, (i) {
       final group = 'design_group'.tr(args: ['${i + 1}']);
       final offset = CairoTime.local(
@@ -21,7 +23,7 @@ class SessionDesignFixture {
         day.day,
         10 + i * 2,
       ).subtract(offset);
-      return SessionDesignData(
+      final session = SessionDesignData(
         id: '${CairoTime.date(day)}-$i',
         date: day,
         start: start,
@@ -33,6 +35,7 @@ class SessionDesignFixture {
             i == 0 &&
             CairoTime.date(day) ==
                 CairoTime.date(CairoTime.local(DateTime.now())),
+        completed: date.compareTo(today) < 0 || (date == today && i == 1),
         students: List.generate(
           25,
           (n) => SessionStudentData(
@@ -48,10 +51,19 @@ class SessionDesignFixture {
           ),
         ),
       );
+      // A cancelled preview session makes the monthly marker reviewable.
+      if (day.day == 28 && i == 4) {
+        session.cancellationReason = 'design_low_students'.tr();
+      }
+      return session;
     });
   });
   List<SessionDesignData> range(DateTime from, DateTime to) => [
-    for (var d = from; !d.isAfter(to); d = d.add(const Duration(days: 1)))
+    for (
+      var d = DateTime.utc(from.year, from.month, from.day);
+      !d.isAfter(DateTime.utc(to.year, to.month, to.day));
+      d = DateTime.utc(d.year, d.month, d.day + 1)
+    )
       ...day(d),
   ];
 }

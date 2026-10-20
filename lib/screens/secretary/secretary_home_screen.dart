@@ -1,3 +1,4 @@
+import 'package:centrally/core/format/cairo_time.dart';
 import 'package:centrally/core/constants/strings_manager.dart';
 import 'package:centrally/core/theme/color_manager.dart';
 import 'package:centrally/core/theme/style_manager.dart';
@@ -292,7 +293,11 @@ class _LiveAttendanceBanner extends StatelessWidget {
           ),
           const SizedBox(height: AppSize.s4),
           Text(
-            '${session.startTime.hour}:00 - ${session.endTime.hour}:00',
+            CairoTime.clockRange(
+              session.startTime,
+              session.endTime,
+              context.locale.toString(),
+            ),
             style: AppTextStyles.bodySmall.copyWith(
               color: ColorManager.white.withAlpha(220),
             ),
@@ -446,7 +451,7 @@ class _SecretarySessionTile extends StatelessWidget {
                   ),
                   const SizedBox(height: AppSize.s4),
                   Text(
-                    '${session.startTime.hour}:00 - ${session.endTime.hour}:00 | ${session.expectedStudentsCount} ${StringsManager.groupsStudentsLabel.tr()}',
+                    '${CairoTime.clockRange(session.startTime, session.endTime, context.locale.toString())} | ${session.expectedStudentsCount} ${StringsManager.groupsStudentsLabel.tr()}',
                     style: AppTextStyles.labelSmall,
                   ),
                 ],

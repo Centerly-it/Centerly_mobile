@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/style_manager.dart';
 import '../../../../core/theme/values_manager.dart';
 import 'session_design.dart';
+import '../../../../core/widgets/app_search_empty.dart';
 
 class SessionDesignEmpty extends StatelessWidget {
   const SessionDesignEmpty({super.key});
@@ -39,21 +40,6 @@ class SessionDesignEmpty extends StatelessWidget {
 class SessionSearchEmpty extends StatelessWidget {
   const SessionSearchEmpty({super.key});
   @override
-  Widget build(BuildContext context) => Column(
-    children: [
-      AspectRatio(
-        aspectRatio: 290 / 216,
-        child: Image.asset(
-          '${SessionDesign.assets}9578e.png',
-          fit: BoxFit.cover,
-        ),
-      ),
-      const SizedBox(height: AppSize.s16),
-      Text(
-        'design_student_not_found'.tr(),
-        textAlign: TextAlign.center,
-        style: AppTextStyles.headlineMedium,
-      ),
-    ],
-  );
+  Widget build(BuildContext context) =>
+      AppSearchEmpty(title: 'design_student_not_found'.tr());
 }

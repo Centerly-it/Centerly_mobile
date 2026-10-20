@@ -1,3 +1,5 @@
+import 'preview_mutations.dart';
+import '../../features/finances/preview/finance_preview_summary.dart';
 import '../format/cairo_time.dart';
 import 'preview_sessions.dart';
 
@@ -13,13 +15,15 @@ class PreviewResponses {
     switch (rpc) {
       case 'get_teacher_overview':
       case 'get_teacher_dashboard':
+        final summary = financePreviewSummary();
         return {
           'date': date,
           'total_students': 72,
           'total_groups': 3,
           'today_sessions': sessions.list(date),
-          'collected_egp': '12000.00',
-          'outstanding_egp': '6000.00',
+          'invoiced_egp': summary['invoiced_egp'],
+          'collected_egp': summary['paid_against_invoices_egp'],
+          'outstanding_egp': summary['outstanding_egp'],
           'attendance_counts': {
             'present': 42,
             'absent': 5,
@@ -64,42 +68,21 @@ class PreviewResponses {
       case 'get_teacher_student_attendance':
         return data['attendance'];
       case 'get_teacher_finance':
-        return data[p['p_kind'] == 'payments' ? 'payments' : 'invoices'];
+        final response = Map<String, dynamic>.from(
+          data[p['p_kind'] == 'payments' ? 'payments' : 'invoices'] as Map,
+        );
+        if (p['p_student_id'] == null && p['p_group_id'] == null) {
+          response['summary'] = financePreviewSummary();
+        }
+        return response;
       case 'get_teacher_student_note':
         return data['note'];
-      case 'save_teacher_note':
-        data['note'] = {
-          'note': {'content': p['p_content'], 'updated_at': now},
-          'synced_at': now,
-        };
-        return null;
       case 'list_teacher_secretaries':
         return data['secretaries'];
       case 'list_teacher_notifications':
         return data['notifications'];
-      case 'mark_notification_read':
-        for (final row in data['notifications']['rows']) {
-          if (row['id'] == p['p_id']) row['read_at'] = now;
-        }
-        data['notifications']['unread_count'] =
-            (data['notifications']['rows'] as List)
-                .where((r) => r['read_at'] == null)
-                .length;
-        return null;
-      case 'request_secretary_removal':
-        for (final row in data['secretaries']['rows']) {
-          if (row['id'] == p['p_secretary_id']) {
-            row['removal_request'] = {
-              'id': '70000000-0000-0000-0000-000000000001',
-              'status': 'pending',
-              'requested_at': now,
-              'handled_at': null,
-            };
-          }
-        }
-        return null;
       default:
-        throw StateError('Unsupported local preview operation: $rpc');
+        return previewMutation(rpc, p, data, now);
     }
   }
 }

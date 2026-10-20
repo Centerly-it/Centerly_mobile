@@ -61,6 +61,8 @@ flutter:
     - assets/icons/
     - assets/preview/
     - assets/figma/sessions/
+    - assets/figma/groups/
+    - assets/figma/students/
 
   fonts:
     - family: Cairo

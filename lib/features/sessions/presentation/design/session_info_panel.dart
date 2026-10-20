@@ -1,4 +1,3 @@
-import 'dart:ui' as ui;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/format/cairo_time.dart';
@@ -57,8 +56,7 @@ class SessionInfoPanel extends StatelessWidget {
                         data.end,
                         context.locale.toString(),
                       ),
-                      textDirection: ui.TextDirection.ltr,
-                      textAlign: TextAlign.end,
+                      textAlign: TextAlign.start,
                       style: AppTextStyles.bodySmall,
                     ),
                   ),

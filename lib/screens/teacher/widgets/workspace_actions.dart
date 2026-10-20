@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'workspace_action_button.dart';
 import '../../../core/di/di.dart';
 import '../../../core/theme/color_manager.dart';
 import '../../../core/theme/values_manager.dart';
@@ -7,7 +9,6 @@ import '../../../core/data/completion_contracts.dart';
 import '../../../features/secretaries/presentation/teacher_secretaries_page.dart';
 import '../../../features/notifications/presentation/teacher_notifications_page.dart';
 import '../../../features/auth/presentation/view_models/auth_session_cubit.dart';
-import '../../../features/students/presentation/student_directory.dart';
 
 class WorkspaceActions extends StatelessWidget {
   const WorkspaceActions({super.key});
@@ -15,17 +16,11 @@ class WorkspaceActions extends StatelessWidget {
   Widget build(BuildContext context) => Row(
     mainAxisSize: MainAxisSize.min,
     children: [
-      IconButton(
-        tooltip: 'live_students'.tr(),
-        icon: const Icon(Icons.school_outlined),
-        onPressed: () => Navigator.of(context).push(
-          MaterialPageRoute<void>(builder: (_) => const StudentDirectory()),
-        ),
-      ),
       if (CompletionContracts.enabled)
-        IconButton(
+        WorkspaceActionButton(
+          boxed: true,
           tooltip: 'completion_notifications'.tr(),
-          icon: const Icon(Icons.notifications_outlined),
+          icon: SvgPicture.asset('assets/icons/home_notification.svg'),
           onPressed: () => Navigator.of(context).push(
             MaterialPageRoute<void>(
               builder: (_) => const TeacherNotificationsPage(),

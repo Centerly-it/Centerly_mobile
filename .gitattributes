@@ -1,0 +1,2 @@
+# Keep SHA256-pinned local SQL reviews stable across Windows/Linux checkouts.
+supabase/proposals/finance_business/*.sql text eol=lf

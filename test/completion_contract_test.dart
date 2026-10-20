@@ -14,6 +14,20 @@ import 'package:centrally/features/notes/domain/student_note.dart';
 
 void main() {
   test(
+    'whole pounds group thousands exactly including rounding and negatives',
+    () {
+      for (final entry in {
+        '18000.00': '18,000',
+        '999.50': '1,000',
+        '-1234567.50': '-1,234,568',
+        '0.00': '0',
+        '999999999999999999.99': '1,000,000,000,000,000,000',
+      }.entries) {
+        expect(MoneyEgp.parse(entry.key).groupedWholePounds, entry.value);
+      }
+    },
+  );
+  test(
     'whole-pound display rounds exact piastres without changing ledger values',
     () {
       for (final entry in {

@@ -4,6 +4,9 @@ import 'package:centrally/features/sessions/preview/session_design_fixture.dart'
 import 'package:centrally/features/sessions/preview/session_attendance_preview.dart';
 import 'package:centrally/features/sessions/presentation/design/session_design_card.dart';
 import 'package:centrally/features/sessions/presentation/design/session_student_row.dart';
+import 'package:centrally/features/sessions/presentation/design/session_summary_strip.dart';
+import 'package:centrally/features/sessions/presentation/design/session_calendar_day.dart';
+import 'package:centrally/features/sessions/presentation/design/session_calendar_dot.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -37,6 +40,51 @@ void main() {
         expect(find.byType(SessionDesignCard), findsNothing);
       } else {
         expect(find.byType(SessionDesignCard), findsWidgets);
+      }
+      if (period == 'month' || period == 'empty') {
+        final days = tester
+            .widgetList<SessionCalendarDay>(find.byType(SessionCalendarDay))
+            .toList();
+        final dates = days
+            .map((cell) => '${cell.day.year}-${cell.day.month}-${cell.day.day}')
+            .toSet();
+        expect(dates.length, days.length);
+        expect(
+          days
+              .where((cell) => cell.day.month == 10 && cell.day.day == 29)
+              .length,
+          1,
+        );
+        final cancelledDay = days.singleWhere(
+          (cell) => cell.day.month == 10 && cell.day.day == 28,
+        );
+        expect(cancelledDay.hasCancelledSessions, isTrue);
+        expect(cancelledDay.hasSessions, isTrue);
+        expect(
+          find.descendant(
+            of: find.byWidget(cancelledDay),
+            matching: find.byType(SessionCalendarDot),
+          ),
+          findsNWidgets(2),
+        );
+      }
+      expect(find.byType(SessionSummaryStrip), findsNothing);
+      expect(
+        find.text('design_cancelled'.tr()),
+        period == 'month' || period == 'empty' ? findsOneWidget : findsNothing,
+      );
+      for (final element in find.byType(SessionDesignCard).evaluate()) {
+        final card = element.widget as SessionDesignCard;
+        expect(card.data.cancellationReason, isNull);
+        expect(
+          find.descendant(
+            of: find.byWidget(card),
+            matching: find.text('${card.data.present}/${card.data.expected}'),
+          ),
+          (card.data.current || card.data.completed)
+              ? findsOneWidget
+              : findsNothing,
+        );
       }
       await captureSessionDesign(tester, key, period);
     });

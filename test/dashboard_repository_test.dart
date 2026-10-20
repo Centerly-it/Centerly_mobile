@@ -105,7 +105,8 @@ Map<String, dynamic> _monthlyFinance(String body) {
   return {
     'summary': {
       'invoiced_egp': '167.50',
-      'period_net_collected_egp': '125.50',
+      'period_net_collected_egp': '375.50',
+      'paid_against_invoices_egp': '125.50',
       'outstanding_egp': '42.00',
     },
   };

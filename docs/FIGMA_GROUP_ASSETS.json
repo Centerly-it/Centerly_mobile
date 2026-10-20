@@ -1,0 +1,99 @@
+{
+  "fileKey": "iAEfLCYGeeGRYkvwUyEA9H",
+  "nodes": [
+    "961:6366",
+    "961:6356",
+    "961:6177",
+    "961:6259",
+    "961:6268"
+  ],
+  "assets": [
+    {
+      "path": "assets/figma/groups/0122d.svg",
+      "sha256": "7e336ba2fc2a73b619d0f5215b26a3d0958cef99988ad585a38a792a06c6ef40",
+      "bytes": 848,
+      "width": 24.0,
+      "height": 24.0
+    },
+    {
+      "path": "assets/figma/groups/263e2.svg",
+      "sha256": "f9e7b16fe001a8fb1260447223bccd3633710ff595c2f0a00f6c430ea97fa27e",
+      "bytes": 2742,
+      "width": 20.0,
+      "height": 20.0
+    },
+    {
+      "path": "assets/figma/groups/3dd9c.png",
+      "sha256": "0c1c85e44a2bcf83b613ea6a6ae3af7c72a24edc12a1bbc472a1d032ae5bccd5",
+      "bytes": 1115378
+    },
+    {
+      "path": "assets/figma/groups/444b3.svg",
+      "sha256": "ae77c97f3bf043f35e4714ba886675e88012a1e032dcf3b8ff000ca2b54005a9",
+      "bytes": 646,
+      "width": 20.0,
+      "height": 20.0
+    },
+    {
+      "path": "assets/figma/groups/451d4.svg",
+      "sha256": "1ec5a035ae868d19d50e81d3547eb8b16c67642c80618210ac2fec95637a6da3",
+      "bytes": 847,
+      "width": 24.0,
+      "height": 24.0
+    },
+    {
+      "path": "assets/figma/groups/7b2bc.svg",
+      "sha256": "55026714046ab2ab37318e38328ce9196bc4833b4a6bf33c175d9b50620782b1",
+      "bytes": 2508,
+      "width": 24.0,
+      "height": 24.0
+    },
+    {
+      "path": "assets/figma/groups/a02c2.svg",
+      "sha256": "f1c72e5bff197e589765689e163557dbab242798a9e92344d245d96bf4d88f9f",
+      "bytes": 3414,
+      "width": 18.0,
+      "height": 18.0
+    },
+    {
+      "path": "assets/figma/groups/a57fd.svg",
+      "sha256": "b794de5a68f9ceb6a75610f937d293b8c4d1e8c3adef59c9101d62d90a58e8fa",
+      "bytes": 2739,
+      "width": 16.0,
+      "height": 16.0
+    },
+    {
+      "path": "assets/figma/groups/b1b35.svg",
+      "sha256": "0b0b9dc6cc04593879e5b0396bac399d52b48d6ed5f9f17580c94fd13319da4f",
+      "bytes": 3688,
+      "width": 20.0,
+      "height": 20.0
+    },
+    {
+      "path": "assets/figma/groups/cee4b.svg",
+      "sha256": "8c3990edc4abf31e6deca3015cbeca3410e40ef39c8e6b9291742b468556f1b6",
+      "bytes": 666,
+      "width": 16.0,
+      "height": 16.0
+    },
+    {
+      "path": "assets/figma/groups/e90e0.svg",
+      "sha256": "afce4ab631009e7ba613d035b9b401904665781f5d0887a79bc99209701c65e2",
+      "bytes": 1730,
+      "width": 16.0,
+      "height": 16.0
+    },
+    {
+      "path": "assets/figma/groups/f399a.svg",
+      "sha256": "1e24c7b124180b482c059e24582e74ba03550512f5e61392a42a6548e99ea7f9",
+      "bytes": 3635,
+      "width": 16.0,
+      "height": 16.0
+    }
+  ],
+  "reused_assets": [
+    "assets/figma/sessions/04ab7.png",
+    "assets/figma/sessions/ea117.svg"
+  ],
+  "excluded_chrome": "Existing owner-approved shared header, five-item bottom navigation and native system bars retained. Original static design chrome is not rendered as content."
+}

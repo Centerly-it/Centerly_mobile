@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:centrally/core/format/cairo_time.dart';
 import 'package:centrally/core/theme/color_manager.dart';
 import 'package:centrally/core/theme/style_manager.dart';
 import 'package:centrally/core/theme/values_manager.dart';
@@ -82,7 +84,7 @@ class RoleSectionsView extends StatelessWidget {
                 .firstWhere((group) => group.id == session.groupId)
                 .name,
             subtitle:
-                '${_formatTime(session.startTime)} - ${_formatTime(session.endTime)} | ${session.expectedStudentsCount} expected',
+                '${CairoTime.clockRange(session.startTime, session.endTime, Intl.getCurrentLocale())} | ${session.expectedStudentsCount} expected',
             trailing: session.isAttendanceLocked ? 'Locked' : 'Open',
             icon: Icons.calendar_today_outlined,
           ),
@@ -157,10 +159,4 @@ class _PermissionNote extends StatelessWidget {
       ),
     );
   }
-}
-
-String _formatTime(DateTime value) {
-  final hour = value.hour.toString().padLeft(2, '0');
-  final minute = value.minute.toString().padLeft(2, '0');
-  return '$hour:$minute';
 }

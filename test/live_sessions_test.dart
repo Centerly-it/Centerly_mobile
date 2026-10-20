@@ -47,13 +47,10 @@ void main() {
     });
     await tester.pumpAndSettle();
     expect(
-      find.text('\u206612:00 AM\u2069 – \u20661:00 AM\u2069'),
+      find.text('\u2066\u206612:00 AM\u2069 – \u20661:00 AM\u2069\u2069'),
       findsOneWidget,
     );
-    expect(
-      find.text('Attendance in progress'),
-      findsOneWidget,
-    );
+    expect(find.text('Attendance in progress'), findsOneWidget);
     expect(fixture.ranges.first['p_from'], '2026-07-01');
     getIt.registerSingleton<TeacherReadClient>(api);
     await tester.tap(find.widgetWithText(TextButton, 'Cancel Session'));
