@@ -1,5 +1,56 @@
 # Centerly implementation progress
 
+## Figma sessions and attendance UI — 2026-10-20 (current milestone)
+
+Reviewed all ten owner-specified section frames through high-fidelity Figma design
+context and rendered reference images. Implemented day/week/month/empty, detail,
+cancellation and attendance all/present/absent/search-empty with original local
+assets, reusable section widgets, independent data model and local fixture wiring.
+Existing owner-approved shared app bar/navigation remain. Locale labels, arrows,
+12-hour time and responsive layouts covered; no frozen screenshot used in UI.
+Month/week date selection, previous/next, search, filters, reason validation, local
+cancellation and retained attendance history are interactive. UI fixtures only;
+connected flows/backend unchanged. Optional not-marked state remains explicit.
+
+Validation this turn: full analyzer PASS; full Flutter suite 108 PASS / 1 hosted
+opt-in SKIP before final typography polish; final affected design/state/layout/
+action checks 17 PASS (ten screenshot states and six AR/EN 320px/200% cases);
+translation parity 2 PASS; actual offline-mode main-tab navigation 2 PASS.
+Original asset files checked nonempty and every literal asset reference resolved;
+35 asset hashes recorded. Ten rendered states saved and visually reviewed. No
+numeric pixel-diff or physical-device visual sign-off claimed. Intentional system
+chrome/shared-header/dynamic-data differences documented in
+docs/FIGMA_SESSIONS_IMPLEMENTATION.md. All new design/preview components kept
+focused and below the repository's 100-line guideline.
+
+No build/restart/deployment/hosted mutation. Owner must stop/run UI-preview once
+to load newly bundled Figma assets; later UI changes can use Hot Reload/Restart.
+Next: owner visual review, then adapter integration only when requested.
+
+## Sessions tab and detail layout — 2026-10-20
+
+Removed repeated Cairo timezone line from session cards. Short localized attendance
+status now says in progress; finalized records still correctly say recorded.
+Cards group date/time with icons, badge/status in a wrapping row, and actions
+together below a divider. Extracted action composition, retaining cancellation
+confirmation/conflict logic and details navigation. Detail metadata moved into
+expandable card; attendance summary uses paired metrics, student name/status share
+a row. Arabic/English translations regenerated. Full analyzer PASS. Eight session
+detail (AR/EN at 200%), action, locale and preview-navigation regression cases PASS
+(after updating old 24h/status expectations and wrapping expandable tile in Material).
+No restart/build/hosted mutation.
+
+
+## Consistent tab header — 2026-10-20
+
+All four main Teacher tabs share the home app-bar configuration: 80px toolbar,
+avatar menu, title, visible notifications, overflow actions and 16px bottom radius.
+Shared core/widgets/AppHeader owns appearance and accepts title/avatar/actions;
+WorkspaceAppBar supplies only teacher-specific composition. Removed home-specific
+flag instead of duplicating headers. Avatar state now remains
+mounted when switching tabs. No restart/build; nested detail-page app bars unchanged.
+
+
 ## Avatar menu and smaller header curvature — 2026-10-20
 
 App-bar lower radius reduced from 24 to 16px. Removed permanent avatar edit badge;

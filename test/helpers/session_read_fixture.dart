@@ -23,6 +23,15 @@ class SessionReadFixture {
         },
       });
     }
+    if (request.url.path.endsWith('get_teacher_finance')) {
+      return jsonResponse(request, {
+        'summary': {
+          'invoiced_egp': '0.00',
+          'period_net_collected_egp': '0.00',
+          'outstanding_egp': '0.00',
+        },
+      });
+    }
     if (request.url.path.endsWith('cancel_session')) {
       expect(jsonDecode(request.body), {
         'p_session_id': 'one',

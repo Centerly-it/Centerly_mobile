@@ -8,6 +8,7 @@ class LocalizedTestApp extends StatelessWidget {
   final double scale;
   @override
   Widget build(BuildContext context) => MaterialApp(
+    debugShowCheckedModeBanner: false,
     theme: AppTheme.light,
     locale: context.locale,
     supportedLocales: context.supportedLocales,

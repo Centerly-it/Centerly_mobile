@@ -23,6 +23,7 @@ class SessionAttendanceList extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
+      const SizedBox(height: AppSize.s24),
       Wrap(
         spacing: AppSize.s8,
         children: [
@@ -55,11 +56,19 @@ class SessionAttendanceList extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(row.name, style: Theme.of(context).textTheme.titleMedium),
-                Align(
-                  alignment: AlignmentDirectional.centerStart,
-                  child: AppStatusBadge.attendance(status: row.status),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        row.name,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                    ),
+                    const SizedBox(width: AppSize.s8),
+                    AppStatusBadge.attendance(status: row.status),
+                  ],
                 ),
+                const SizedBox(height: AppSize.s12),
                 Text(
                   'detail_actor'.tr(
                     args: [row.marker ?? 'detail_not_recorded'.tr()],

@@ -30,16 +30,33 @@ class SessionDetailHeader extends StatelessWidget {
             ? onChanged
             : null,
       ),
-      Text(
-        'detail_synced'.tr(args: [detailTimestamp(detail.syncedAt, context)]),
-      ),
-      Text('detail_manual_read_only'.tr()),
-      if (detail.session.finalizedAt != null)
-        Text(
-          'detail_finalized'.tr(
-            args: [detailTimestamp(detail.session.finalizedAt!, context)],
+      TeacherCard(
+        padding: const EdgeInsets.all(AppPadding.p8),
+        child: Material(
+          color: Colors.transparent,
+          child: ExpansionTile(
+            title: Text('session_attendance_info'.tr()),
+            subtitle: Text(
+              'detail_synced'.tr(
+                args: [detailTimestamp(detail.syncedAt, context)],
+              ),
+            ),
+            childrenPadding: const EdgeInsets.all(AppPadding.p12),
+            expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text('detail_manual_read_only'.tr()),
+              if (detail.session.finalizedAt != null)
+                Text(
+                  'detail_finalized'.tr(
+                    args: [
+                      detailTimestamp(detail.session.finalizedAt!, context),
+                    ],
+                  ),
+                ),
+            ],
           ),
         ),
+      ),
       if (detail.session.status == SessionStatus.cancelled) ...[
         const SizedBox(height: AppSize.s12),
         TeacherCard(
@@ -61,6 +78,7 @@ class SessionDetailHeader extends StatelessWidget {
       ],
       const SizedBox(height: AppSize.s16),
       DashboardMetrics(
+        twoColumns: true,
         values: {
           'attendance_present': '${detail.counts.present}',
           'attendance_absent': '${detail.counts.absent}',

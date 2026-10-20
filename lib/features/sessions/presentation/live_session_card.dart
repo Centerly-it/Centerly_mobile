@@ -1,13 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import '../../../core/theme/color_manager.dart';
+import '../../../core/theme/style_manager.dart';
 import '../../../core/format/cairo_time.dart';
 import '../../../core/theme/values_manager.dart';
 import '../../../core/widgets/app_status_badge.dart';
 import '../../../screens/teacher/teacher_shared.dart';
 import '../domain/session_record.dart';
-import '../../../models/centerly_models.dart';
-import 'cancel_session_dialog.dart';
-import 'session_detail_page.dart';
+import 'session_card_actions.dart';
 
 class LiveSessionCard extends StatelessWidget {
   const LiveSessionCard({
@@ -33,54 +34,68 @@ class LiveSessionCard extends StatelessWidget {
               '${session.groupName} – ${session.subjectName ?? ''}',
               style: Theme.of(context).textTheme.titleMedium,
             ),
-          Text(
-            session.localDate,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          Text(
-            '${CairoTime.time(session.startsAt, context.locale.languageCode)} – '
-            '${CairoTime.time(session.endsAt, context.locale.languageCode)}',
-          ),
-          Text('live_cairo_time'.tr()),
-          Align(
-            alignment: AlignmentDirectional.centerStart,
-            child: AppStatusBadge.session(status: session.status),
-          ),
-          Text(
-            (session.finalizedAt == null
-                    ? 'live_attendance_pending'
-                    : 'live_attendance_finalized')
-                .tr(),
-          ),
-          if (onChanged != null &&
-              session.groupName != null &&
-              session.status != SessionStatus.cancelled &&
-              session.status != SessionStatus.completed)
-            TextButton(
-              onPressed: () async {
-                final changed = await showDialog<bool>(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (_) => CancelSessionDialog(
-                    sessionId: session.id,
-                    sessionLabel: session.groupName!,
+          const SizedBox(height: AppSize.s12),
+          Wrap(
+            spacing: AppSize.s16,
+            runSpacing: AppSize.s8,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    Icons.calendar_today_outlined,
+                    size: AppSize.s16,
+                    color: ColorManager.primary,
                   ),
-                );
-                // Errors may be ambiguous; always reconcile after closing.
-                if (context.mounted && changed != null) onChanged!();
-              },
-              child: Text('session_cancel_button'.tr()),
-            ),
-          if (showDetails)
-            TextButton(
-              onPressed:
-                  onTap ??
-                  () async {
-                    await SessionDetailPage.open(context, session.id);
-                    if (context.mounted) onChanged?.call();
-                  },
-              child: Text('session_details_title'.tr()),
-            ),
+                  const SizedBox(width: AppSize.s4),
+                  Text(session.localDate, style: AppTextStyles.bodySmall),
+                ],
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    Icons.schedule_rounded,
+                    size: AppSize.s16,
+                    color: ColorManager.primary,
+                  ),
+                  const SizedBox(width: AppSize.s4),
+                  Text(
+                    CairoTime.range(
+                      session.startsAt,
+                      session.endsAt,
+                      context.locale.languageCode,
+                    ),
+                    textDirection: ui.TextDirection.ltr,
+                    style: AppTextStyles.bodySmall,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSize.s12),
+          Wrap(
+            spacing: AppSize.s8,
+            runSpacing: AppSize.s8,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              AppStatusBadge.session(status: session.status),
+              Text(
+                (session.finalizedAt == null
+                        ? 'live_attendance_pending'
+                        : 'live_attendance_finalized')
+                    .tr(),
+                style: AppTextStyles.bodySmall,
+              ),
+            ],
+          ),
+          const Divider(height: AppSize.s24),
+          SessionCardActions(
+            session: session,
+            showDetails: showDetails,
+            onChanged: onChanged,
+            onTap: onTap,
+          ),
         ],
       ),
     ),

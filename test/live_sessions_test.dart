@@ -46,9 +46,12 @@ void main() {
       );
     });
     await tester.pumpAndSettle();
-    expect(find.text('00:00 – 01:00'), findsOneWidget);
     expect(
-      find.text('Attendance not finalized — does not imply absence'),
+      find.text('\u206612:00 AM\u2069 – \u20661:00 AM\u2069'),
+      findsOneWidget,
+    );
+    expect(
+      find.text('Attendance in progress'),
       findsOneWidget,
     );
     expect(fixture.ranges.first['p_from'], '2026-07-01');

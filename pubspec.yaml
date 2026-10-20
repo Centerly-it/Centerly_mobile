@@ -60,6 +60,7 @@ flutter:
     - assets/translations/
     - assets/icons/
     - assets/preview/
+    - assets/figma/sessions/
 
   fonts:
     - family: Cairo
