@@ -37,6 +37,10 @@ No credentials are required for static verification/builds. An unconfigured app
 shows the login screen and fails closed; it never invents a session or backend.
 Create ignored `.env.local.json` following `.env.example` (JSON key/value pairs)
 and use `flutter run --dart-define-from-file=.env.local.json`.
+In VS Code select **Centerly (development)** in Run and Debug, then press F5.
+The committed launch configuration passes the ignored local configuration file;
+it contains no keys itself. Stop any session started without these defines and
+launch this configuration once; subsequent UI edits can use Hot Reload/Restart.
 Completion contracts through 202610190010 are now deployed and enabled by default;
 use CENTERLY_COMPLETION_CONTRACTS=false only for an older backend, not this MVP.
 Public URL and publishable key only; never place service-role/secret keys in Dart.

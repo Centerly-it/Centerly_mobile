@@ -1,11 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../../core/theme/color_manager.dart';
 import '../../core/data/completion_contracts.dart';
 import '../../features/finances/presentation/live_finance.dart';
 import '../../core/theme/values_manager.dart';
-import 'widgets/workspace_actions.dart';
+import 'widgets/workspace_app_bar.dart';
 import '../../features/dashboard/presentation/live_dashboard.dart';
 import '../../features/sessions/presentation/live_sessions.dart';
 import '../../features/groups/presentation/live_groups.dart';
@@ -21,22 +20,7 @@ class _TeacherWorkspaceState extends State<TeacherWorkspace> {
   int _index = 0;
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: Text(
-        'workspace_title'.tr(),
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
-      backgroundColor: ColorManager.primary,
-      foregroundColor: ColorManager.white,
-      titleTextStyle: Theme.of(
-        context,
-      ).textTheme.titleLarge?.copyWith(color: ColorManager.white),
-      iconTheme: const IconThemeData(color: ColorManager.white),
-      actionsIconTheme: const IconThemeData(color: ColorManager.white),
-      systemOverlayStyle: SystemUiOverlayStyle.light,
-      actions: const [WorkspaceActions()],
-    ),
+    appBar: WorkspaceAppBar(isHome: _index == 0),
     body: SafeArea(
       top: false,
       child: _index == 0

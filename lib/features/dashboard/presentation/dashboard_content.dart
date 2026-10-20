@@ -1,9 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/theme/values_manager.dart';
-import '../../../core/widgets/app_empty_state.dart';
 import 'dashboard_metrics.dart';
-import '../../sessions/presentation/live_session_card.dart';
+import 'dashboard_day_section.dart';
 import '../domain/dashboard_summary.dart';
 
 class DashboardContent extends StatelessWidget {
@@ -21,41 +20,7 @@ class DashboardContent extends StatelessWidget {
     physics: const AlwaysScrollableScrollPhysics(),
     padding: const EdgeInsets.all(AppPadding.p16),
     children: [
-      TextButton.icon(
-        icon: const Icon(Icons.calendar_month_outlined),
-        label: Text(data.localDate),
-        onPressed: () async {
-          final date = DateTime.parse(data.localDate);
-          final selected = await showDatePicker(
-            context: context,
-            initialDate: date,
-            firstDate: DateTime(2000),
-            lastDate: DateTime(2100),
-          );
-          if (selected != null && context.mounted) onDate(selected);
-        },
-      ),
-      DashboardMetrics(
-        values: {
-          'live_session_count': '${data.sessions.length}',
-          'live_work_duration':
-              '${data.scheduledMinutes ~/ 60}:${(data.scheduledMinutes % 60).toString().padLeft(2, '0')}',
-          'live_total_students': '${data.students}',
-          'live_total_groups': '${data.groups}',
-        },
-      ),
-      const SizedBox(height: AppSize.s24),
-      Text(
-        'live_sessions_for_date'.tr(),
-        style: Theme.of(context).textTheme.titleLarge,
-      ),
-      if (data.sessions.isEmpty)
-        AppEmptyState(
-          title: 'sessions_no_sessions_title'.tr(),
-          subtitle: 'sessions_no_sessions_subtitle'.tr(),
-        ),
-      for (final session in data.sessions)
-        LiveSessionCard(session: session, onChanged: onChanged),
+      DashboardDaySection(data: data, onDate: onDate, onChanged: onChanged),
       const SizedBox(height: AppSize.s24),
       Text(
         'live_finance_snapshot'.tr(),

@@ -20,9 +20,12 @@ adb devices
 adb install -r build/app/outputs/flutter-apk/app-debug.apk
 ```
 
-The verified APK is build/app/outputs/flutter-apk/app-debug.apk (170553861 bytes),
+Credential-free CI APKs are build checks only and cannot log in. Use the configured
+local build command above for device testing.
+
+The configured APK is build/app/outputs/flutter-apk/app-debug.apk (198667524 bytes),
 Android 7.0/API24 or later, ARM64/ARMv7/x86_64. SHA256:
-9d058ca18d6f0a694bcc1169975922af081c793e454693fa81918296a7f780b7.
+1c12d34f66855d641e176f2bb01c339972d970fd2f38926073230a488a659942.
 Package currently
 com.example.centrally, version 1.0.0+1, debug-signed for development only. Existing
 installs signed with a different key cannot update in place; preserve any needed

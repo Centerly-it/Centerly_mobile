@@ -1,5 +1,65 @@
 # Centerly implementation progress
 
+## Remember login on device — 2026-10-20
+
+Owner explicitly requested retaining entered email/password across restarts. Login
+now saves only after successful teacher authentication in FlutterSecureStorage,
+scoped to backend URL, and restores masked fields without overwriting user edits.
+Existing secure Supabase session persistence/role validation remains unchanged;
+explicit logout ends the session but retains owner-requested remembered fields.
+Storage failure cannot block login. Two storage tests and four auth/router regression
+cases PASS; focused analyzer PASS. No build/restart/hosted changes; physical-device
+credential restoration remains pending owner testing.
+
+
+## VS Code configured launch — 2026-10-20
+
+No launch.json existed, so VS Code default Run omitted compile-time backend defines.
+Added Centerly (development) launch using --dart-define-from-file=.env.local.json.
+Validated launch JSON and required local config presence without logging values.
+Documented restarting the launch once with this configuration. No build, app restart,
+hosted change or device login verification performed for this setup correction.
+
+
+## Dashboard date grouping — 2026-10-20
+
+Selected Cairo current date displays localized Today; other dates retain the selected
+calendar date. Date selector, four opening metrics and selected-date sessions share
+one bordered primary-tint section; finance/attendance summaries remain separate.
+Follow-up: opening metrics explicitly stay in two columns inside the section; Today
+falls back to the existing localized day label when installed assets lack the new key.
+No restart/build performed for this follow-up, per owner request.
+Focused Dart analysis PASS. Initial change updated via configured Flutter attach/hot restart on
+Redmi Note 9S; no APK built for this change. Owner visual acceptance pending.
+
+
+## Home app bar UI — 2026-10-20
+
+Home toolbar increased to 80 logical pixels with a 48px circular profile fallback
+aligned beside the title using directional Row layout. No stored teacher photo
+contract currently exists; no fabricated personal photo is used. Logout moved into
+the overflow menu, retaining the existing AuthSessionCubit logout and other actions.
+Other tabs retain their normal toolbar height. Analyzer PASS; configured debug APK
+build PASS; update installed and launched on owner's connected Redmi Note 9S.
+Visual acceptance on device remains with owner. APK SHA256:
+1c12d34f66855d641e176f2bb01c339972d970fd2f38926073230a488a659942.
+
+
+## Android configuration repair — 2026-10-20
+
+Owner's Redmi Note 9S displayed NOT_CONFIGURED at login. The installed debug
+build had been produced without runtime defines; credential-free CI/build APKs
+are compile checks and cannot sign in. Rebuilt with ignored .env.local.json:
+`flutter build apk --debug --no-pub --dart-define-from-file=.env.local.json` PASS.
+Confirmed public URL/key bytes are embedded (values not logged); installed with
+`adb -s 7e8fce74 install -r` PASS and launched on the connected Redmi Note 9S.
+APK SHA256: 476bffa873486363b2da93e962654781148cc481f9fa782003311544d2a4b381
+(198665928 bytes). This supersedes the earlier APK checksum for this local build.
+Owner device login/workflow acceptance remains pending; installation is not login
+verification. No schema/Auth settings changed in this repair. Earlier owner-requested
+synthetic teacher password change was separately verified with real Auth/profile.
+
+
 ## GitHub CI repair — 2026-10-19
 
 Main run 39293622024 passed lockfile/codegen/format/analyzer/Flutter tests, SQL and

@@ -5,8 +5,13 @@ import '../../../core/theme/values_manager.dart';
 import '../../../screens/teacher/teacher_shared.dart';
 
 class DashboardMetrics extends StatelessWidget {
-  const DashboardMetrics({required this.values, super.key});
+  const DashboardMetrics({
+    required this.values,
+    this.twoColumns = false,
+    super.key,
+  });
   final Map<String, String> values;
+  final bool twoColumns;
   Color _color(String key) => switch (key) {
     'attendance_present' || 'live_collected' => ColorManager.success,
     'attendance_absent' => ColorManager.error,
@@ -18,8 +23,9 @@ class DashboardMetrics extends StatelessWidget {
   Widget build(BuildContext context) => LayoutBuilder(
     builder: (context, constraints) {
       final paired =
-          constraints.maxWidth >= 340 &&
-          MediaQuery.textScalerOf(context).scale(16) <= 24;
+          twoColumns ||
+          (constraints.maxWidth >= 340 &&
+              MediaQuery.textScalerOf(context).scale(16) <= 24);
       final width = paired
           ? (constraints.maxWidth - AppSize.s12) / 2
           : constraints.maxWidth;

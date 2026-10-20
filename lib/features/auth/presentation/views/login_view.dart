@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/di/di.dart';
+import '../../../../core/auth/remembered_login.dart';
+import '../../../../core/config/app_config.dart';
 import '../../../../core/theme/color_manager.dart';
 import '../../../../core/theme/values_manager.dart';
 import '../../../../core/widgets/brand_logo.dart';
@@ -25,6 +27,25 @@ class _LoginViewState extends State<LoginView> {
   final _email = TextEditingController();
   final _password = TextEditingController();
   bool _obscure = true;
+  late final _remembered = RememberedLogin(AppConfig.fromEnvironment().url);
+  @override
+  void initState() {
+    super.initState();
+    _restoreLogin();
+  }
+
+  Future<void> _restoreLogin() async {
+    final saved = await _remembered.read();
+    if (!mounted ||
+        saved == null ||
+        _email.text.isNotEmpty ||
+        _password.text.isNotEmpty) {
+      return;
+    }
+    _email.text = saved.email;
+    _password.text = saved.password;
+  }
+
   @override
   void dispose() {
     _email.dispose();
@@ -32,9 +53,14 @@ class _LoginViewState extends State<LoginView> {
     super.dispose();
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     if (_formKey.currentState?.validate() ?? false) {
-      getIt<AuthSessionCubit>().login(_email.text, _password.text);
+      final email = _email.text, password = _password.text;
+      final session = getIt<AuthSessionCubit>();
+      await session.login(email, password);
+      if (session.state.isAuthenticated) {
+        await _remembered.save(email, password);
+      }
     }
   }
 
