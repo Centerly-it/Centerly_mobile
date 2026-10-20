@@ -37,7 +37,7 @@ No credentials are required for static verification/builds. An unconfigured app
 shows the login screen and fails closed; it never invents a session or backend.
 Create ignored `.env.local.json` following `.env.example` (JSON key/value pairs)
 and use `flutter run --dart-define-from-file=.env.local.json`.
-In VS Code select **Centerly (development)** in Run and Debug, then press F5.
+In VS Code select **Centerly (connected development)** in Run and Debug, then press F5.
 The committed launch configuration passes the ignored local configuration file;
 it contains no keys itself. Stop any session started without these defines and
 launch this configuration once; subsequent UI edits can use Hot Reload/Restart.
@@ -71,3 +71,35 @@ The current configured debug build completed successfully after this update:
 `flutter build apk --debug --no-pub --dart-define-from-file=.env.local.json`.
 Public URL/publishable key are intended client configuration; account passwords
 were not included. APK compilation does not verify login, installation or pilot signing.
+
+## Offline UI review (temporary owner-selected mode)
+
+Select **Centerly (UI preview — offline)** in VS Code and launch with F5.
+Stop the existing launch first once when switching modes or adding bundled assets;
+Hot Restart cannot change the launch-time defines or reliably install new assets.
+No automatic build/restart was performed by the agent. After launch, use normal
+Hot Reload/Restart for UI edits. The local ignored runtime file also enables UI
+preview; the connected launch explicitly overrides it to false.
+
+Preview reuses the real screens and repositories with a terminal in-memory HTTP
+transport. No Supabase initialization, real login, session reads/writes, database
+reads/writes or auth refresh occurs. It starts signed in as a synthetic teacher;
+logout/login exercise local UI only and do not validate credentials. Preview input
+is never stored as a real remembered password. Fixture changes reset on restart.
+The banner identifies the mode. The switch is enforced debug-only and defaults off
+outside this local launch. To restore backend integration select **Centerly
+(connected development)**. Preview assets are synthetic and are not acceptance
+evidence for hosted authorization or business workflows.
+
+## Translation updates
+
+Arabic/English JSON files remain the source of truth. Regenerate the official
+Easy Localization compiled loader after changing translations:
+
+```powershell
+dart run easy_localization:generate -S assets/translations -O lib/core/localization
+dart format lib/core/localization/codegen_loader.g.dart
+```
+
+The app uses CodegenLoader so a Hot Restart reloads compiled labels without stale
+installed JSON assets. The locale parity test rejects stale generated translations.

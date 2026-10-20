@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../../../core/format/cairo_time.dart';
 import '../../../core/theme/color_manager.dart';
 import '../../../core/theme/values_manager.dart';
+import '../../../core/theme/style_manager.dart';
+import '../../../core/theme/font_manager.dart';
 import '../../../core/widgets/app_empty_state.dart';
-import '../../sessions/presentation/live_session_card.dart';
+import 'dashboard_session_schedule.dart';
 import '../domain/dashboard_summary.dart';
 import 'dashboard_metrics.dart';
 
@@ -12,12 +14,10 @@ class DashboardDaySection extends StatelessWidget {
   const DashboardDaySection({
     required this.data,
     required this.onDate,
-    this.onChanged,
     super.key,
   });
   final DashboardSummary data;
   final ValueChanged<DateTime> onDate;
-  final VoidCallback? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class DashboardDaySection extends StatelessWidget {
         data.localDate == CairoTime.date(CairoTime.local(DateTime.now()));
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: ColorManager.primaryBright,
+        color: ColorManager.primarySoft,
         borderRadius: BorderRadius.circular(AppRadius.r16),
         border: Border.all(color: ColorManager.primaryLight),
       ),
@@ -35,6 +35,9 @@ class DashboardDaySection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextButton.icon(
+              style: TextButton.styleFrom(
+                textStyle: AppTextStyles.headlineSmall,
+              ),
               icon: const Icon(Icons.calendar_month_outlined),
               label: Text(
                 isToday
@@ -66,16 +69,28 @@ class DashboardDaySection extends StatelessWidget {
             ),
             const SizedBox(height: AppSize.s24),
             Text(
-              'live_sessions_for_date'.tr(),
+              isToday
+                  ? 'home_today_sessions_title'.tr()
+                  : 'dashboard_sessions_on_day'.tr(
+                      namedArgs: {
+                        'date': DateFormat.yMMMd(
+                          context.locale.toString(),
+                        ).format(DateTime.parse(data.localDate)),
+                      },
+                    ),
               style: Theme.of(context).textTheme.titleLarge,
             ),
             if (data.sessions.isEmpty)
               AppEmptyState(
-                title: 'sessions_no_sessions_title'.tr(),
-                subtitle: 'sessions_no_sessions_subtitle'.tr(),
+                title: 'sessions_no_sessions_subtitle'.tr(),
+                titleStyle: AppTextStyles.bodySmall.copyWith(
+                  fontSize: FontSize.s15,
+                ),
               ),
-            for (final session in data.sessions)
-              LiveSessionCard(session: session, onChanged: onChanged),
+            if (data.sessions.isNotEmpty) ...[
+              const SizedBox(height: AppSize.s12),
+              DashboardSessionSchedule(sessions: data.sessions),
+            ],
           ],
         ),
       ),

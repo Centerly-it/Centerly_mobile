@@ -1,9 +1,10 @@
-﻿import 'dart:developer';
+import 'dart:developer';
 
 import 'package:centrally/core/constants/app_constants.dart';
 import 'package:centrally/core/theme/color_manager.dart';
 import 'package:centrally/core/router/routes_manager.dart';
 import 'package:centrally/core/widgets/brand_logo.dart';
+import '../../core/theme/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
@@ -20,6 +21,10 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
+    // Keep the system splash until Flutter has painted its first branded frame.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) FlutterNativeSplash.remove();
+    });
     _initialize();
   }
 
@@ -51,9 +56,16 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: ColorManager.white,
-      body: Center(child: BrandLogo()),
+      body: Center(
+        child: BrandLogo(
+          size: (MediaQuery.sizeOf(context).width * 0.55).clamp(
+            AppSize.s200,
+            AppSize.s240,
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:centrally/core/api/teacher_read_client.dart';
 import 'package:centrally/core/errors/backend_failure.dart';
 import 'package:centrally/features/dashboard/data/dashboard_repository.dart';
@@ -11,7 +12,9 @@ void main() {
       final client = readFixture(
         (request) async => jsonResponse(
           request,
-          request.url.path.endsWith('get_teacher_overview')
+          request.url.path.endsWith('get_teacher_finance')
+              ? _monthlyFinance(request.body)
+              : request.url.path.endsWith('get_teacher_overview')
               ? {
                   'date': '2026-10-19',
                   'total_students': 3,
@@ -50,7 +53,9 @@ void main() {
       final summary = await DashboardRepository(
         TeacherReadClient(client),
       ).load();
-      expect(summary.collectedEgp, '12.50');
+      expect(summary.collectedEgp, '125.50');
+      expect(summary.outstandingEgp, '42.00');
+      expect(summary.invoicedEgp, '167.50');
       expect(summary.attendance.notMarked, 2);
       expect(summary.sessions.single.groupName, 'أولى ثانوي');
       expect(summary.scheduledMinutes, 60);
@@ -91,4 +96,17 @@ void main() {
       await client.dispose();
     },
   );
+}
+
+Map<String, dynamic> _monthlyFinance(String body) {
+  final params = jsonDecode(body) as Map;
+  expect(params['p_from'], '2026-10-01');
+  expect(params['p_to'], '2026-10-31');
+  return {
+    'summary': {
+      'invoiced_egp': '167.50',
+      'period_net_collected_egp': '125.50',
+      'outstanding_egp': '42.00',
+    },
+  };
 }

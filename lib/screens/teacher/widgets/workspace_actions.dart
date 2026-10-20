@@ -22,6 +22,16 @@ class WorkspaceActions extends StatelessWidget {
           MaterialPageRoute<void>(builder: (_) => const StudentDirectory()),
         ),
       ),
+      if (CompletionContracts.enabled)
+        IconButton(
+          tooltip: 'completion_notifications'.tr(),
+          icon: const Icon(Icons.notifications_outlined),
+          onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (_) => const TeacherNotificationsPage(),
+            ),
+          ),
+        ),
       PopupMenuButton<String>(
         tooltip: 'completion_more'.tr(),
         itemBuilder: (_) => [
@@ -29,10 +39,6 @@ class WorkspaceActions extends StatelessWidget {
             PopupMenuItem(
               value: 'secretaries',
               child: Text('completion_secretaries'.tr()),
-            ),
-            PopupMenuItem(
-              value: 'notifications',
-              child: Text('completion_notifications'.tr()),
             ),
           ],
           PopupMenuItem(
@@ -54,9 +60,7 @@ class WorkspaceActions extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute<void>(
-              builder: (_) => value == 'secretaries'
-                  ? const TeacherSecretariesPage()
-                  : const TeacherNotificationsPage(),
+              builder: (_) => const TeacherSecretariesPage(),
             ),
           );
         },

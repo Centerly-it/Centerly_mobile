@@ -1,40 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:centrally/core/theme/style_manager.dart';
+import '../../../auth/presentation/widgets/contact_support_button.dart';
 import 'package:centrally/core/theme/values_manager.dart';
 import 'package:centrally/core/constants/strings_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:centrally/core/theme/color_manager.dart' show ColorManager;
-
-class AppButton extends StatelessWidget {
-  final String text;
-  final VoidCallback? onPressed;
-  final bool outlined;
-
-  const AppButton({
-    super.key,
-    required this.text,
-    required this.onPressed,
-    this.outlined = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final child = Text(
-      text,
-      style: AppTextStyles.titleMedium.copyWith(
-        color: outlined ? ColorManager.primary : ColorManager.white,
-      ),
-    );
-
-    return SizedBox(
-      height: AppSize.s54,
-      width: double.infinity,
-      child: outlined
-          ? OutlinedButton(onPressed: onPressed, child: child)
-          : FilledButton(onPressed: onPressed, child: child),
-    );
-  }
-}
+import '../../../../core/widgets/app_button.dart';
+export '../../../../core/widgets/app_button.dart';
 
 class OnboardingNextButton extends StatelessWidget {
   final VoidCallback onNext;
@@ -66,7 +36,7 @@ class OnboardingLastActions extends StatelessWidget {
 
         const SizedBox(height: AppSize.s12),
 
-        AppButton(text: 'Contact Us', onPressed: onLogin, outlined: true),
+        const ContactSupportButton(outlined: true),
       ],
     );
   }

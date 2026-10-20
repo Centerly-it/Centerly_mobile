@@ -1,6 +1,8 @@
+import 'dart:ui' as ui;
 import 'package:centrally/core/constants/strings_manager.dart';
 import 'package:centrally/core/theme/color_manager.dart';
 import 'package:centrally/core/theme/style_manager.dart';
+import 'package:centrally/core/theme/font_manager.dart';
 import 'package:centrally/core/theme/values_manager.dart';
 import 'package:centrally/core/widgets/app_empty_state.dart';
 import 'package:centrally/core/widgets/app_session_card.dart';
@@ -102,12 +104,14 @@ class TeacherStatCard extends StatelessWidget {
     required this.color,
     super.key,
     this.icon,
+    this.unit,
   });
 
   final String title;
   final String value;
   final Color color;
   final IconData? icon;
+  final String? unit;
 
   @override
   Widget build(BuildContext context) {
@@ -117,9 +121,20 @@ class TeacherStatCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Wrap(
+            textDirection: unit == null ? null : ui.TextDirection.ltr,
             alignment: WrapAlignment.center,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
+              if (unit != null) ...[
+                Text(
+                  unit!,
+                  style: AppTextStyles.titleMedium.copyWith(
+                    color: color,
+                    fontWeight: FontWeightManager.bold,
+                  ),
+                ),
+                const SizedBox(width: AppSize.s4),
+              ],
               if (icon != null) ...[
                 Icon(icon, color: color, size: AppSize.s18),
                 const SizedBox(width: AppSize.s4),

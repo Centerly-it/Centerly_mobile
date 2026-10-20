@@ -1,4 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../core/config/preview_mode.dart';
+import 'bootstrap_preview.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/auth/secure_auth_storage.dart';
 import '../core/config/app_config.dart';
@@ -16,6 +18,10 @@ import '../features/groups/data/group_repository.dart';
 Future<void> bootstrapAuth() async {
   final config = AppConfig.fromEnvironment();
   getIt.registerSingleton<AppConfig>(config);
+  if (PreviewMode.enabled) {
+    await bootstrapPreview();
+    return;
+  }
   // Remove prototype auth and obsolete REST tokens, never import them into Supabase.
   for (final key in [
     CacheConstants.userToken,

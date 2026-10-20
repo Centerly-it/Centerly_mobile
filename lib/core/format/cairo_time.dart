@@ -13,7 +13,10 @@ class CairoTime {
   static DateTime local(DateTime instant) =>
       tz.TZDateTime.from(instant, _location);
   static String time(DateTime instant, String locale) =>
-      DateFormat.Hm(locale).format(local(instant));
+      DateFormat('h:mm a', locale).format(local(instant));
+  // Isolate each numeric time so Arabic day periods cannot cross the separator.
+  static String range(DateTime start, DateTime end, String locale) =>
+      '\u2066${time(start, locale)}\u2069 – \u2066${time(end, locale)}\u2069';
   static String date(DateTime value) =>
       '${value.year.toString().padLeft(4, '0')}-${value.month.toString().padLeft(2, '0')}-${value.day.toString().padLeft(2, '0')}';
 }

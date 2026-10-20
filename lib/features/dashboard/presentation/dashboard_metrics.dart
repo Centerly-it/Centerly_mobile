@@ -13,10 +13,15 @@ class DashboardMetrics extends StatelessWidget {
   final Map<String, String> values;
   final bool twoColumns;
   Color _color(String key) => switch (key) {
-    'attendance_present' || 'live_collected' => ColorManager.success,
+    'attendance_present' ||
+    'live_collected' ||
+    'dashboard_month_collected' => ColorManager.success,
     'attendance_absent' => ColorManager.error,
-    'attendance_excused' || 'live_outstanding' => ColorManager.warning,
-    'attendance_not_marked' => ColorManager.grey500,
+    'attendance_excused' ||
+    'live_outstanding' ||
+    'dashboard_month_outstanding' => ColorManager.warning,
+    'attendance_not_marked' ||
+    'dashboard_attendance_waiting' => ColorManager.grey500,
     _ => ColorManager.primary,
   };
   @override
@@ -40,6 +45,9 @@ class DashboardMetrics extends StatelessWidget {
                 title: entry.key.tr(),
                 value: entry.value,
                 color: _color(entry.key),
+                unit: entry.key == 'live_work_duration'
+                    ? 'dashboard_hour_unit'.tr()
+                    : null,
               ),
             ),
         ],

@@ -6,6 +6,7 @@ class ColorManager {
   // Primary palette
   static const Color primary = Color(0xFF246EFA);
   static const Color primaryLight = Color(0xFF7FAAFC);
+  static const Color primarySoft = Color(0xFFF7FAFF);
   static const Color primaryBright = Color(0xFFE9F1FF);
   static const Color primaryDark = Color(0xFF1558D6);
 

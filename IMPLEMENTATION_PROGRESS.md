@@ -1,5 +1,204 @@
 # Centerly implementation progress
 
+## Avatar menu and smaller header curvature — 2026-10-20
+
+App-bar lower radius reduced from 24 to 16px. Removed permanent avatar edit badge;
+tapping photo opens localized change/remove menu (remove disabled without photo).
+Removal deletes only scoped local avatar file and returns to fallback icon.
+Work-duration unit reduced from headlineLarge to titleMedium. No build/restart.
+Full analyzer and avatar/localization/responsive preview checks run for this change.
+
+
+## Visible notifications, local avatar and splash — 2026-10-20
+
+Notifications promoted from overflow to direct app-bar bell. Bottom app-bar corners
+use shared 24px radius. Avatar has edit affordance and gallery picker (existing
+image_picker); compressed bounded image stored in application-support directory,
+scoped by environment/account, never uploaded in UI preview. Supports cancel/error
+fallback and Android lost-picker-data recovery. Local file survives restart; cloud
+avatar storage/synchronization remains a future connected implementation. Added
+iOS gallery-purpose description; no broad Android storage permissions introduced.
+path_provider promoted from transitive to direct at identical locked 2.1.5.
+Flutter splash logo increased responsively to 200–240px; native splash is removed
+only after first Flutter frame, retaining existing white native setup and Android
+12 masked-image assets/system sizing. Native resources not regenerated or resized.
+Schedule clock now sits physically left of time range; work-duration icon replaced
+with localized hour unit on left (Arabic requested letter, English h).
+Full analyzer PASS; 14 local avatar persistence/isolation/rejection, localization,
+AR/EN preview/responsive and protected-route checks PASS. Native gallery selection,
+permissions, Android process-loss recovery, iOS and cold-start transition remain
+owner/device acceptance. No APK/restart/hosted mutation performed.
+
+
+## Attendance preview grid and translation reload — 2026-10-20
+
+Attendance cards now use the existing two-column metric grid: present/waiting first,
+absent/excused second, with normal metric sizing. Local preview supplies 42/2/5/3.
+Replaced bundled-asset translation loading with the dependency official generated
+CodegenLoader, retaining JSON as canonical AR/EN source. This resolves repeated raw
+new-key display during Hot Restart after JSON edits. Documented regeneration and
+added generated-map parity coverage. No restart/build/hosted changes.
+
+
+## Dashboard time direction repair — 2026-10-20
+
+Isolated start/end time strings in shared CairoTime.range to keep Arabic day-period
+markers attached to their own time across the range separator. Compact dashboard
+schedule uses the helper with LTR range layout. Reused TeacherStatCard optional
+icon for scheduled work-duration clock alongside value. Focused analyzer PASS.
+No restart/build; owner device visual verification pending.
+
+
+## 12-hour time and waiting attendance — 2026-10-20
+
+Shared Cairo time display now explicitly uses h:mm a (Arabic day periods/English
+AM-PM). Dashboard attendance title uses a dedicated static locale key; does not
+depend on selected-date text. Fourth Waiting card uses existing notMarked count,
+with owner-requested Arabic diacritic, without changing backend attendance enums.
+Current UI-preview mode remains local only. No restart/build.
+
+
+## Compact dashboard schedule — 2026-10-20
+
+Owner requested dashboard glance rather than repeated detailed session cards.
+Retained four summary metrics (session count, work duration, students, groups).
+Replaced detailed operational cards with one compact schedule card: group name
+and Cairo start/end time per row, wrapping for narrow/large-text layouts.
+No attendance metadata, repeated dates, details buttons or cancellation controls
+on dashboard; existing sessions tab retains full functionality. Uses shared card,
+theme and locale time formatting. Focused analyzer PASS; preview AR/EN navigation
+and responsive workspace tests PASS. No restart/build/hosted changes.
+
+
+## Whole-app offline UI review — 2026-10-20 (current owner priority)
+
+Owner explicitly paused connected business testing to review the entire Teacher UI.
+Added opt-in debug-only PreviewMode, separate local auth/bootstrap and terminal HTTP
+transport with dedicated synthetic fixtures. Existing production screens/repositories
+are reused; hosted backend/auth code is preserved and bypassed completely in preview.
+Local reads cover dashboard/groups/calendar/detail/attendance/students/profiles/
+academics/finance/notes/secretaries/notifications. Writes simulate cancellation, notes,
+read state and removal requests in memory only; restart resets fixtures.
+Removed one-off sample-session widget. Preview has a visible mode banner, local
+auth starts signed in, and remembered real credentials are neither read nor changed.
+VS Code preview launch uses no backend configuration; separate connected launch
+explicitly disables preview. Ignored local config defaults to preview for owner UI
+work. Release/profile cannot activate the debug guard. No APK/restart/hosted mutation.
+One-time owner relaunch needed to load new assets/defines and fresh translations.
+Full analyzer PASS; 14 local contract/auth/dashboard/responsive cases PASS, plus
+two Arabic/English offline-preview main-tab navigation cases PASS. Preview tests
+use only terminal local transport and detect dashboard translation-key leakage.
+This mode is for design review, not hosted MVP/production acceptance.
+
+
+## Temporary session visual preview — 2026-10-20
+
+Owner requested one sample session to inspect layout before Secretary data entry.
+Empty dashboard session lists now show a labeled visual sample only in development
+debug builds. Reuses LiveSessionCard, disables details/cancellation, does not affect
+counts/finance/attendance or hosted data. Release/profile excludes this preview.
+Localized group/subject/preview labels; selected calendar date, 16:00 Cairo, 90min.
+No build/restart/hosted writes. Remove this temporary preview after owner UI review.
+
+
+## Monthly payment progress — 2026-10-20
+
+Added rounded green payment progress track with localized label/percentage and
+accessibility semantics. Ratio uses exact invoice cohort (invoiced minus outstanding)
+over invoiced; monthly receipt totals are not mixed into the denominator. Zero due
+shows zero progress; over/under bounds clamped for display. Empty-session title now
+explicitly uses shared 10px size. No build/restart; owner visual acceptance pending.
+
+
+## Attendance heading and card hierarchy — 2026-10-20
+
+Restored localized center attendance heading per owner correction. Present count
+now spans full section width, with absent/excused paired beneath. Recorded-mark
+semantics unchanged (not live occupancy). Arabic money uses owner-selected symbol
+from shared MoneyEgp formatting constant; English retains intl EGP. No restart/build.
+Focused analyzer PASS.
+
+
+## Dashboard numeric display repair — 2026-10-20
+
+Owner screenshot showed untranslated currency/basis keys from installed locale assets.
+Money display now composes exact rounded integer with intl EGP currency symbol,
+independent of new translation templates. Preserves actual backend numbers; no mock
+values introduced. Removed attendance heading and explanatory text per owner request;
+three recorded-mark cards remain. No build/restart. Focused analyzer PASS.
+
+
+## Dashboard typography, EGP and attendance — 2026-10-20
+
+Reduced date selector to headlineSmall and empty-session message to bodySmall.
+Money cards render localized EGP with whole pounds, exact BigInt half-away-from-zero
+display rounding; stored money unchanged. Attendance section title follows owner
+request with spacing and three explicit present/absent/excused metrics only. Added
+localized basis text: selected-date session marks, not live center occupancy; no
+new live-presence claim or automatic absence conversion. No build/restart.
+Focused analyzer PASS; dashboard/responsive and exact-rounding regressions run.
+
+
+## Monthly three-card dashboard — 2026-10-20
+
+Date selector enlarged with shared headlineMedium; dashboard empty-state title uses
+bodyMedium through optional shared titleStyle. Monthly finance uses a full-width
+invoiced total card, followed by two-column net collected and outstanding cards.
+All three values come from deployed finance summary, not client arithmetic.
+Invoiced/outstanding are for invoices due in current Cairo month; net receipts follow
+receipt dates (can include earlier invoices). Labels supplied AR/EN. Older disabled
+contract has no fabricated invoiced amount. No restart/build or hosted mutation.
+Focused analyzer PASS; repository/month bounds and responsive workspace tests PASS.
+
+
+## Dashboard empty state and monthly payments — 2026-10-20
+
+Empty sessions use the existing full day message as title, with no subtitle or gap.
+Shared AppEmptyState supports omitted subtitle. Payment heading now says this month
+(AR/EN), with 16px gap below. Corrected data basis as well: dashboard reads deployed
+finance summary for the current server Cairo month, even when another session date
+is selected. Collections are net receipts/reversals in month; outstanding is balance
+on invoices due in month. Existing global/day overview contract unchanged.
+Updated repository fixture asserts exact month bounds and monthly totals; overflow
+menu regression reflects owner-requested logout relocation. Analyzer PASS.
+No build/restart/hosted writes; device/real-data monthly acceptance pending.
+
+
+## Home date copy and lighter section — 2026-10-20
+
+Opening session metric shortened to Sessions. Session heading uses Today sessions
+or localized Sessions on {date}; AR/EN provided. Section uses new primarySoft
+palette token near white; other primary surfaces preserved. Confirmed initial
+LiveDashboard date is null so backend defaults to current Cairo date (no persisted
+previous selection). No build/restart; owner device acceptance pending.
+
+
+## Login branding follow-up — 2026-10-20
+
+Owner screenshot showed a residual baked-in tagline; tightened login-only clipping
+to 0.74. Increased login logo responsive width from 35% to 42% (120–200 logical
+pixels), with 48px spacing before the welcome heading. Changed welcome heading to Arabic Welcome / English Welcome in locale
+assets. Focused analyzer PASS; no restart/build or device visual acceptance claimed.
+
+
+## Login copy cleanup — 2026-10-20
+
+Removed teacher-account sign-in caption from LoginView. BrandLogo now supports
+showTagline=false using layout clipping of the existing bundled PNG (tagline is
+baked into the image); login opts out, other brand surfaces retain their default.
+Focused analyzer PASS. No build/restart; owner visual acceptance pending.
+
+
+## Configurable WhatsApp support — 2026-10-20
+
+Owner supplied support phone. Onboarding/login use localized Contact support and
+shared support action; opens owner WhatsApp with localized draft, never auto-sends.
+Default owner-approved wa.me destination remains overridable by CENTERLY_SUPPORT_URL.
+Extracted existing AppButton into core widget to avoid circular feature imports;
+retained export for compatibility. Arabic/English labels/messages provided.
+No build/restart/message sent; physical WhatsApp handoff remains owner acceptance.
+
+
 ## Remember login on device — 2026-10-20
 
 Owner explicitly requested retaining entered email/password across restarts. Login

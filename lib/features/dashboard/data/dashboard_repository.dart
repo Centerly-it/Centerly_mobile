@@ -1,6 +1,7 @@
 import '../../../core/api/teacher_read_client.dart';
 import '../../../core/data/completion_contracts.dart';
 import '../../../core/errors/backend_failure.dart';
+import '../../../core/format/cairo_time.dart';
 import '../domain/dashboard_summary.dart';
 
 class DashboardRepository {
@@ -42,6 +43,33 @@ class DashboardRepository {
               'status': names[row['id']]['status'] as String,
           },
       ];
+      if (CompletionContracts.enabled) {
+        final current = date == null
+            ? json
+            : Map<String, dynamic>.from(
+                await api.read(TeacherRead.overview, refresh: refresh) as Map,
+              );
+        final today = DateTime.parse(current['date'] as String);
+        final finance = Map<String, dynamic>.from(
+          await api.read(
+                TeacherRead.finance,
+                refresh: refresh,
+                params: {
+                  'p_from': CairoTime.date(DateTime(today.year, today.month)),
+                  'p_to': CairoTime.date(
+                    DateTime(today.year, today.month + 1, 0),
+                  ),
+                  'p_kind': 'invoices',
+                  'p_limit': 1,
+                },
+              )
+              as Map,
+        );
+        final totals = Map<String, dynamic>.from(finance['summary'] as Map);
+        json['invoiced_egp'] = totals['invoiced_egp'];
+        json['collected_egp'] = totals['period_net_collected_egp'];
+        json['outstanding_egp'] = totals['outstanding_egp'];
+      }
       checkSession();
       return DashboardSummary.fromJson(json);
     } on BackendFailure {

@@ -1,0 +1,332 @@
+{
+  "profile": {
+    "student": {
+      "id": "30000000-0000-0000-0000-000000000001",
+      "phone": null,
+      "full_name": "أحمد محمد",
+      "level_tag": "الأول الثانوي",
+      "created_at": "2026-10-19T15:46:02.572597+03:00",
+      "updated_at": "2026-10-19T15:46:02.574109+03:00",
+      "guardian_phone": null
+    },
+    "synced_at": "2026-10-19T15:46:02.643411+03:00",
+    "memberships": [
+      {
+        "id": "37cbf39c-0897-48f9-98c7-9ccf451d88c1",
+        "status": "active",
+        "left_at": null,
+        "group_id": "40000000-0000-0000-0000-000000000001",
+        "joined_at": "2026-08-20T15:46:02.572597+03:00",
+        "grade_name": "الأول الثانوي",
+        "group_name": "مجموعة التفوق",
+        "subject_name": "رياضيات",
+        "group_archived_at": null
+      }
+    ],
+    "next_cursor": null,
+    "membership_count": 1
+  },
+  "exams": {
+    "rows": [
+      {
+        "id": "48b26edf-4958-4d65-98d9-36f2b4da62b6",
+        "date": "2026-10-19",
+        "title": "اختبار الجبر",
+        "group_id": null,
+        "group_name": null,
+        "updated_at": "2026-10-19T15:46:02.637984+03:00",
+        "score_percent": "85.00",
+        "entered_by_name": "سارة أحمد"
+      },
+      {
+        "id": "53b7043e-ad05-4e32-ae1f-abe66efe83cb",
+        "date": "2026-10-19",
+        "title": "اختبار الهندسة",
+        "group_id": null,
+        "group_name": null,
+        "updated_at": "2026-10-19T15:46:02.637995+03:00",
+        "score_percent": "92.00",
+        "entered_by_name": "سارة أحمد"
+      },
+      {
+        "id": "b8eca57e-11ee-4b29-ac39-76599344a8c9",
+        "date": "2026-10-19",
+        "title": "مراجعة شهرية",
+        "group_id": null,
+        "group_name": null,
+        "updated_at": "2026-10-19T15:46:02.637121+03:00",
+        "score_percent": null,
+        "entered_by_name": "سارة أحمد"
+      }
+    ],
+    "summary": {
+      "scored": 2,
+      "missing": 1,
+      "below_50": 1,
+      "from_50_to_64": 0,
+      "from_65_to_79": 0,
+      "from_80_to_100": 1,
+      "average_percent": "50.00"
+    },
+    "synced_at": "2026-10-19T15:46:02.646044+03:00",
+    "next_cursor": null,
+    "total_count": 3
+  },
+  "assignments": {
+    "rows": [
+      {
+        "id": "ad7fbd09-59ff-4ebc-ae3d-cc9884b46418",
+        "date": "2026-10-19",
+        "title": "تدريبات المعادلات",
+        "status": "late",
+        "group_id": null,
+        "group_name": null,
+        "updated_at": "2026-10-19T15:46:02.63901+03:00",
+        "entered_by_name": "سارة أحمد"
+      }
+    ],
+    "summary": {
+      "late": 1,
+      "pending": 0,
+      "submitted": 0
+    },
+    "synced_at": "2026-10-19T15:46:02.647245+03:00",
+    "next_cursor": null,
+    "total_count": 1
+  },
+  "attendance": {
+    "rows": [
+      {
+        "id": "93249d73-f5e6-4af0-992d-ca80b8bd8c89",
+        "status": "not_marked",
+        "ends_at": "2026-09-19T16:46:02.572597+03:00",
+        "group_id": "40000000-0000-0000-0000-000000000001",
+        "marked_at": null,
+        "starts_at": "2026-09-19T15:46:02.572597+03:00",
+        "group_name": "A",
+        "local_date": "2026-09-19",
+        "session_id": "50000000-0000-0000-0000-000000000001",
+        "updated_at": "2026-10-19T15:46:02.572597+03:00",
+        "marked_by_name": null,
+        "session_status": "upcoming",
+        "attendance_finalized_at": null
+      }
+    ],
+    "summary": {
+      "absent": 0,
+      "excused": 0,
+      "present": 0,
+      "not_marked": 1,
+      "cancelled_records": 0,
+      "marked_denominator": 0
+    },
+    "synced_at": "2026-10-19T15:46:02.647898+03:00",
+    "next_cursor": null,
+    "total_count": 1
+  },
+  "invoices": {
+    "rows": [
+      {
+        "id": "bb541f9b-403e-48f1-b0b3-7c752c7b16f9",
+        "due_on": "2026-10-19",
+        "status": "partially_paid",
+        "group_id": null,
+        "amount_egp": "18000.00",
+        "group_name": null,
+        "student_id": "30000000-0000-0000-0000-000000000001",
+        "void_reason": null,
+        "net_paid_egp": "12000.00",
+        "student_name": "أحمد محمد",
+        "invoice_number": "PKG-1",
+        "outstanding_egp": "6000.00"
+      }
+    ],
+    "summary": {
+      "invoiced_egp": "18000.00",
+      "outstanding_egp": "6000.00",
+      "daily_collections": [
+        {
+          "date": "2026-10-19",
+          "net_egp": "0.00"
+        }
+      ],
+      "period_net_collected_egp": "12000.00",
+      "paid_against_invoices_egp": "12000.00"
+    },
+    "synced_at": "2026-10-19T15:46:02.649032+03:00",
+    "next_cursor": null,
+    "total_count": 1
+  },
+  "payments": {
+    "rows": [
+      {
+        "id": "3ed2d361-dd38-417f-b68c-77b1a4f79b73",
+        "method": "cash",
+        "reason": null,
+        "amount_egp": "12000.00",
+        "invoice_id": "bb541f9b-403e-48f1-b0b3-7c752c7b16f9",
+        "student_id": "30000000-0000-0000-0000-000000000001",
+        "reversal_of": null,
+        "collected_at": "2026-10-19T15:46:02.640907+03:00",
+        "collected_by": "20000000-0000-0000-0000-000000000001",
+        "student_name": "أحمد محمد",
+        "invoice_number": "PKG-1",
+        "receipt_number": "115544a7-2d8d-42d7-95dc-5b3ed0f93864",
+        "collected_by_name": "سارة أحمد",
+        "signed_amount_egp": "12000.00"
+      }
+    ],
+    "summary": {
+      "invoiced_egp": "18000.00",
+      "outstanding_egp": "6000.00",
+      "daily_collections": [
+        {
+          "date": "2026-10-19",
+          "net_egp": "0.00"
+        }
+      ],
+      "period_net_collected_egp": "12000.00",
+      "paid_against_invoices_egp": "12000.00"
+    },
+    "synced_at": "2026-10-19T15:46:02.650851+03:00",
+    "next_cursor": null,
+    "total_count": 1
+  },
+  "note": {
+    "note": {
+      "content": "مستوى الطالب جيد، يحتاج إلى متابعة الواجبات.",
+      "updated_at": "2026-10-20T10:00:00Z"
+    },
+    "synced_at": "2026-10-19T15:46:02.651981+03:00"
+  },
+  "secretaries": {
+    "rows": [
+      {
+        "id": "20000000-0000-0000-0000-000000000001",
+        "name": "سارة أحمد",
+        "email": "secretary@example.invalid",
+        "phone": null,
+        "status": "active",
+        "removal_request": null
+      }
+    ],
+    "synced_at": "2026-10-19T15:46:02.652379+03:00",
+    "next_cursor": null,
+    "total_count": 1
+  },
+  "notifications": {
+    "rows": [
+      {
+        "id": "915208c7-6e43-476b-9ca8-abcb5ca8d14b",
+        "type": "payment_reversed",
+        "payload": {
+          "payment_id": "ecf0226e-451e-483d-ac59-230adaaeab46"
+        },
+        "read_at": null,
+        "created_at": "2026-10-19T15:46:02.642625+03:00"
+      },
+      {
+        "id": "d04d1fec-414e-4db7-88c6-9086292293c8",
+        "type": "payment_collected",
+        "payload": {
+          "payment_id": "3ed2d361-dd38-417f-b68c-77b1a4f79b73"
+        },
+        "read_at": null,
+        "created_at": "2026-10-19T15:46:02.640907+03:00"
+      }
+    ],
+    "synced_at": "2026-10-19T15:46:02.653027+03:00",
+    "next_cursor": null,
+    "total_count": 2,
+    "unread_count": 2
+  },
+  "students": [
+    {
+      "id": "30000000-0000-0000-0000-000000000001",
+      "phone": null,
+      "full_name": "أحمد محمد",
+      "level_tag": "الأول الثانوي",
+      "created_at": "2026-10-19T15:46:02.572597+03:00",
+      "updated_at": "2026-10-19T15:46:02.574109+03:00",
+      "guardian_phone": null
+    },
+    {
+      "id": "30000000-0000-0000-0000-000000000002",
+      "phone": null,
+      "full_name": "مريم علي",
+      "level_tag": "الأول الثانوي",
+      "created_at": "2026-10-19T15:46:02.572597+03:00",
+      "updated_at": "2026-10-19T15:46:02.574109+03:00",
+      "guardian_phone": null
+    },
+    {
+      "id": "30000000-0000-0000-0000-000000000003",
+      "phone": null,
+      "full_name": "يوسف حسن",
+      "level_tag": "الأول الثانوي",
+      "created_at": "2026-10-19T15:46:02.572597+03:00",
+      "updated_at": "2026-10-19T15:46:02.574109+03:00",
+      "guardian_phone": null
+    },
+    {
+      "id": "30000000-0000-0000-0000-000000000004",
+      "phone": null,
+      "full_name": "نور خالد",
+      "level_tag": "الأول الثانوي",
+      "created_at": "2026-10-19T15:46:02.572597+03:00",
+      "updated_at": "2026-10-19T15:46:02.574109+03:00",
+      "guardian_phone": null
+    }
+  ],
+  "groups": [
+    {
+      "id": "40000000-0000-0000-0000-000000000001",
+      "name": "مجموعة التفوق",
+      "subject_name": "رياضيات",
+      "grade_level_id": "60000000-0000-0000-0000-000000000001",
+      "grade_name": "الأول الثانوي",
+      "capacity": 30,
+      "students_count": 24,
+      "roster_preview": [
+        {
+          "id": "30000000-0000-0000-0000-000000000001",
+          "phone": null,
+          "full_name": "أحمد محمد",
+          "level_tag": "الأول الثانوي",
+          "created_at": "2026-10-19T15:46:02.572597+03:00",
+          "updated_at": "2026-10-19T15:46:02.574109+03:00",
+          "guardian_phone": null
+        },
+        {
+          "id": "30000000-0000-0000-0000-000000000002",
+          "phone": null,
+          "full_name": "مريم علي",
+          "level_tag": "الأول الثانوي",
+          "created_at": "2026-10-19T15:46:02.572597+03:00",
+          "updated_at": "2026-10-19T15:46:02.574109+03:00",
+          "guardian_phone": null
+        },
+        {
+          "id": "30000000-0000-0000-0000-000000000003",
+          "phone": null,
+          "full_name": "يوسف حسن",
+          "level_tag": "الأول الثانوي",
+          "created_at": "2026-10-19T15:46:02.572597+03:00",
+          "updated_at": "2026-10-19T15:46:02.574109+03:00",
+          "guardian_phone": null
+        },
+        {
+          "id": "30000000-0000-0000-0000-000000000004",
+          "phone": null,
+          "full_name": "نور خالد",
+          "level_tag": "الأول الثانوي",
+          "created_at": "2026-10-19T15:46:02.572597+03:00",
+          "updated_at": "2026-10-19T15:46:02.574109+03:00",
+          "guardian_phone": null
+        }
+      ],
+      "schedules": [],
+      "schedules_truncated": false
+    }
+  ]
+}

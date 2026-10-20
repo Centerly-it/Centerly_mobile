@@ -41,7 +41,9 @@ class AppConfig {
   }
 
   Uri? get supportUri {
-    final uri = Uri.tryParse(supportUrl);
+    final uri = Uri.tryParse(
+      supportUrl.isEmpty ? 'https://wa.me/201028684980' : supportUrl,
+    );
     return uri != null &&
             ['https', 'tel', 'mailto'].contains(uri.scheme) &&
             (uri.scheme != 'https' || uri.host.isNotEmpty)

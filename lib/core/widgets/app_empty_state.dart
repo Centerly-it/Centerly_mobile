@@ -8,15 +8,17 @@ import 'package:flutter/material.dart';
 class AppEmptyState extends StatelessWidget {
   const AppEmptyState({
     required this.title,
-    required this.subtitle,
+    this.subtitle = '',
     super.key,
     this.icon,
     this.iconColor,
+    this.titleStyle,
     this.actionLabel,
     this.onAction,
   });
 
   final String title;
+  final TextStyle? titleStyle;
   final String subtitle;
   final IconData? icon;
   final Color? iconColor;
@@ -43,15 +45,17 @@ class AppEmptyState extends StatelessWidget {
           const SizedBox(height: AppSize.s20),
           Text(
             title,
-            style: AppTextStyles.headlineSmall,
+            style: titleStyle ?? AppTextStyles.headlineSmall,
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: AppSize.s8),
-          Text(
-            subtitle,
-            style: AppTextStyles.bodySmall,
-            textAlign: TextAlign.center,
-          ),
+          if (subtitle.isNotEmpty) ...[
+            const SizedBox(height: AppSize.s8),
+            Text(
+              subtitle,
+              style: AppTextStyles.bodySmall,
+              textAlign: TextAlign.center,
+            ),
+          ],
           if (actionLabel != null && onAction != null) ...[
             const SizedBox(height: AppSize.s20),
             FilledButton(onPressed: onAction, child: Text(actionLabel!)),

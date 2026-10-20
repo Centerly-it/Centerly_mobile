@@ -85,3 +85,13 @@ QA, app ID/signing/privacy/support/update policy, monitoring, encrypted backups 
 a successful restore drill, plus the future Secretary cross-app matrix and owner
 sign-off. Missing future Secretary acceptance does not block starting that app.
 See SECRETARY_HANDOFF.md; no production/store/publication claim is made.
+
+## Current UI review checks (2026-10-20)
+
+In offline preview, tap the visible bell to open notifications. Tap the avatar edit
+icon, choose a gallery image, cancel once, then choose a valid image and restart:
+the device-local photo should remain for that account. No photo is uploaded. Check
+Android background/process recovery and permission denial separately. iOS permission
+metadata requires a full native launch when testing iOS. Native splash is visible
+only on a cold app start; hot restart does not test Android 12 system-mask sizing.
+The larger Flutter splash follows the unchanged native white launch screen.

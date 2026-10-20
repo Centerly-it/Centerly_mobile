@@ -2,12 +2,25 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Centerly (development)",
+      "name": "Centerly (UI preview — offline)",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
       "flutterMode": "debug",
-      "toolArgs": ["--dart-define-from-file=.env.local.json"]
+      "toolArgs": [
+        "--dart-define=CENTERLY_UI_PREVIEW=true"
+      ]
+    },
+    {
+      "name": "Centerly (connected development)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "toolArgs": [
+        "--dart-define-from-file=.env.local.json",
+        "--dart-define=CENTERLY_UI_PREVIEW=false"
+      ]
     }
   ]
 }

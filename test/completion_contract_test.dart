@@ -13,6 +13,22 @@ import 'package:centrally/features/notifications/domain/notification_record.dart
 import 'package:centrally/features/notes/domain/student_note.dart';
 
 void main() {
+  test(
+    'whole-pound display rounds exact piastres without changing ledger values',
+    () {
+      for (final entry in {
+        '12.49': '12',
+        '12.50': '13',
+        '-12.50': '-13',
+        '-0.01': '0',
+        '999999999999999999.99': '1000000000000000000',
+      }.entries) {
+        final value = MoneyEgp.parse(entry.key);
+        expect(value.wholePounds, entry.value);
+        expect(value.decimal, entry.key);
+      }
+    },
+  );
   final fixture = readMap(
     jsonDecode(
       File('test/fixtures/teacher_completion.json').readAsStringSync(),

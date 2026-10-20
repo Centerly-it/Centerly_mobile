@@ -76,7 +76,11 @@ void main() {
             }
             final semantics = tester.ensureSemantics();
 
-            expect(find.byTooltip('auth_logout'.tr()), findsOneWidget);
+            await tester.tap(find.byTooltip('completion_more'.tr()));
+            await tester.pumpAndSettle();
+            expect(find.text('auth_logout'.tr()), findsOneWidget);
+            await tester.tapAt(const Offset(8, 300));
+            await tester.pumpAndSettle();
             await tester.tap(
               find.byIcon(Icons.account_balance_wallet_outlined),
             );

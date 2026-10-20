@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import '../../../core/theme/color_manager.dart';
 import '../../../core/theme/values_manager.dart';
 import 'workspace_actions.dart';
+import 'teacher_avatar.dart';
 
 class WorkspaceAppBar extends StatelessWidget implements PreferredSizeWidget {
   const WorkspaceAppBar({super.key, required this.isHome});
@@ -17,17 +18,17 @@ class WorkspaceAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) => AppBar(
     automaticallyImplyLeading: false,
     toolbarHeight: preferredSize.height,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        bottom: Radius.circular(AppRadius.r16),
+      ),
+    ),
     titleSpacing: AppPadding.p16,
     centerTitle: false,
     title: Row(
       children: [
         if (isHome) ...[
-          const CircleAvatar(
-            radius: AppSize.s24,
-            backgroundColor: ColorManager.primaryBright,
-            foregroundColor: ColorManager.primaryDark,
-            child: Icon(Icons.person_rounded, size: AppSize.s32),
-          ),
+          const TeacherAvatar(),
           const SizedBox(width: AppSize.s12),
         ],
         Expanded(

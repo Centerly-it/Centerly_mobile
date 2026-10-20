@@ -1,9 +1,9 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/di/di.dart';
 import '../../../../core/auth/remembered_login.dart';
 import '../../../../core/config/app_config.dart';
+import '../../../../core/config/preview_mode.dart';
 import '../../../../core/theme/color_manager.dart';
 import '../../../../core/theme/values_manager.dart';
 import '../../../../core/widgets/brand_logo.dart';
@@ -35,6 +35,7 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Future<void> _restoreLogin() async {
+    if (PreviewMode.enabled) return;
     final saved = await _remembered.read();
     if (!mounted ||
         saved == null ||
@@ -58,7 +59,7 @@ class _LoginViewState extends State<LoginView> {
       final email = _email.text, password = _password.text;
       final session = getIt<AuthSessionCubit>();
       await session.login(email, password);
-      if (session.state.isAuthenticated) {
+      if (session.state.isAuthenticated && !PreviewMode.enabled) {
         await _remembered.save(email, password);
       }
     }
@@ -79,12 +80,16 @@ class _LoginViewState extends State<LoginView> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: AppSize.s40),
-                  const BrandLogo(),
-                  const SizedBox(height: AppSize.s32),
+                  BrandLogo(
+                    showTagline: false,
+                    size: (MediaQuery.sizeOf(context).width * 0.42).clamp(
+                      AppSize.s120,
+                      AppSize.s200,
+                    ),
+                  ),
+                  const SizedBox(height: AppSize.s48),
                   const WelcomeHeader(),
                   const SizedBox(height: AppSize.s24),
-                  Text('auth_teacher_only'.tr()),
-                  const SizedBox(height: AppSize.s16),
                   EmailField(controller: _email),
                   const SizedBox(height: AppSize.s16),
                   PasswordField(

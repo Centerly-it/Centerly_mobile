@@ -8,11 +8,13 @@ class DashboardSummary {
     required this.groups,
     required this.collectedEgp,
     required this.outstandingEgp,
+    this.invoicedEgp,
     required this.localDate,
     required this.attendance,
     this.sessions = const [],
   });
   final int students, groups;
+  final String? invoicedEgp;
   final AttendanceCounts attendance;
   final List<SessionRecord> sessions;
   int get scheduledMinutes => sessions
@@ -56,6 +58,9 @@ class DashboardSummary {
               SessionRecord.fromJson(Map<String, dynamic>.from(row as Map)),
         ),
       ),
+      invoicedEgp: data.containsKey('invoiced_egp')
+          ? amount('invoiced_egp')
+          : null,
       collectedEgp: amount('collected_egp'),
       outstandingEgp: amount('outstanding_egp'),
     );
