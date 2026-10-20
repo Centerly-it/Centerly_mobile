@@ -1,5 +1,5 @@
 -- LOCAL PROPOSAL ONLY: teacher read-model, no hosted deployment authorized.
-create index teacher_invoice_movements on public.payments(teacher_id,invoice_id,id);
+create index teacher_invoice_movements on public.payments(invoice_id,id) include(teacher_id,amount_egp,reversal_of);
 create function public.get_teacher_finance_overview(p_from date,p_to date) returns jsonb
 language plpgsql stable security definer set search_path='' as $$
 declare t uuid:=private.require_actor('teacher'); result jsonb; breakdown jsonb;

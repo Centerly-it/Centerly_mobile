@@ -47,12 +47,12 @@ class AuthSessionCubit extends Cubit<AuthSessionState> {
     } catch (error) {
       if (!isClosed && generation == _generation) _signedOut(_code(error));
     } finally {
-      _busy = false;
+      if (generation == _generation) _busy = false;
     }
   }
 
   Future<void> login(String email, String password) async {
-    if (_busy) return;
+    if (_busy || isClosed) return;
     _busy = true;
     final generation = ++_generation;
     emit(const AuthSessionState(AuthSessionStatus.checking));
@@ -66,18 +66,19 @@ class AuthSessionCubit extends Cubit<AuthSessionState> {
     } catch (error) {
       if (!isClosed && generation == _generation) _signedOut(_code(error));
     } finally {
-      _busy = false;
+      if (generation == _generation) _busy = false;
     }
   }
 
   Future<void> logout() async {
-    ++_generation;
+    if (isClosed) return;
+    final generation = ++_generation;
     _busy = true;
     _signedOut(); // Hide protected UI before a possibly offline revocation request.
     try {
       await repository.logout();
     } finally {
-      _busy = false;
+      if (generation == _generation) _busy = false;
     }
   }
 

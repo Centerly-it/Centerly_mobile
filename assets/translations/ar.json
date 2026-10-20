@@ -5,7 +5,7 @@
   "teacher_change_photo": "تغيير صورة المدرس",
   "teacher_photo_failed": "تعذّر حفظ الصورة. اختر صورة بحجم أقل من ٢ ميجابايت وتأكد من سماح الوصول للمعرض.",
   "dashboard_attendance_title": "الحضور في السنتر الآن",
-  "dashboard_attendance_waiting": "مُنتظر",
+  "dashboard_attendance_waiting": "لم يُسجّل",
   "ui_preview_mode": "معاينة",
   "dashboard_session_preview": "معاينة تجريبية للشكل فقط",
   "dashboard_preview_group": "مجموعة أولى ثانوي",
@@ -724,5 +724,7 @@
   "finance_demo_student_8": "نور خالد",
   "finance_demo_student_9": "ملك سامح",
   "finance_demo_student_10": "كريم عادل",
-  "finance_dues_result": "{} فاتورة · المتبقي: {}"
+  "finance_dues_result": "{} فاتورة · المتبقي: {}",
+  "dashboard_attendance_unavailable": "بيانات حضور الحصص الجارية غير متاحة حاليًا",
+  "dashboard_attendance_updated": "آخر تحديث: {}"
 }

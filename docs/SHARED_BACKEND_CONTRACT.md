@@ -1,11 +1,23 @@
 # Shared backend contract — v6.1 development deployment
 
 Canonical source: this repository's `supabase/migrations`, by explicit owner
-override on 2026-10-18. Nineteen migrations are deployed to centerly-dev after explicit
+override on 2026-10-18. Twenty-five migrations are deployed to centerly-dev after explicit
 owner approval; supabase/schema-manifest.json pins their hashes. See BACKEND_COMPAT.md.
 Transfer the same versioned migrations and Supabase migration history to the
 future Secretary repo; never create/reapply a duplicate schema. Both clients
 must pin the same deployed migration version before integrating live data.
+
+## Latest verified deployment — 2026-10-20
+
+Owner-approved202610200001..006 is now deployed to centerly-dev. Fresh remote
+history and live catalog matched all25 managed versions;44 application functions,
+18 tables,30 policies, grants/indexes/triggers/constraints/RLS verified. Enrollment
+violations0; CHECK remains NOT VALID as approved. Hosted135 business assertions
+and1 real Flutter SDK Auth test passed using approved synthetic fixtures only.
+The local-only October20 section below is historical; exact deployment evidence
+and remaining client activation limits: HARDENING_DEPLOYMENT_VERIFICATION_2026-10-20.md.
+Finance RPCs are available; debug designs are not automatically production-wired.
+Do not replay these25 versions when migration ownership transfers to Secretary.
 
 ## Identity, authorization and provisioning
 
@@ -172,3 +184,31 @@ an assignment of unpaid debt or a cash-custody balance. The dashboard due-cohort
 settlement card consumes `paid_against_invoices_egp`, while actual period cash uses
 `period_net_collected_egp`. Production clients must filter/search before pagination,
 and use server totals rather than summing a loaded page.
+
+
+## 2026-10-20 hardening proposals — NOT DEPLOYED
+
+The unchanged nineteen-version manifest is the only managed contract confirmed
+locally; hosted claims above are historical. MAIN_HARDENING_CHANGE_REVIEW.md pins
+six local proposals202610200001..006. Revised finance001 index leads invoice_id
+and includes tenant/amount/reversal. Private settlement004 preserves void invoices.
+Enrollment005 requires active+NULL left_at or inactive+left_at>=joined_at for future
+writes; status/left_at must change atomically in Secretary. NOT VALID leaves old
+invalid rows untouched and does not authorize guessed historical exit timestamps.
+
+Overview006 attendance_counts represents marks for non-cancelled sessions with
+starts_at<=statement_timestamp()<ends_at, independent of p_date; includes overnight
+ongoing sessions. attendance_scope='ongoing_sessions' and attendance_synced_at
+identify new semantics. Selected-day sessions/financial fields stay unchanged.
+not_marked remains «لم يُسجّل», never inferred absent. Counts are per student-session
+record; overlapping sessions do not establish unique physical presence. Existing
+server without scope marker must not be shown as current attendance. Flutter shows
+update time and manual refresh; no realtime/presence transport is contracted.
+
+No new teacher write/Secretary finance-read grants, no notification/backfill/account
+changes. Exact reviewed approval, remote preflight and authenticated postflight
+must precede deployment/finance activation. Future Secretary transfers identical
+migration bodies/history; no replay. Full rollout/pilot and device acceptance
+remain separate. Client cached groups/students30s, profile/academics15s; sensitive
+reads no stored TTL. Cached copies are scoped to project/user/token, memory-only;
+server RLS and write-role checks remain authoritative.

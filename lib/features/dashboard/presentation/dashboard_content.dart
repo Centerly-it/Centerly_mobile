@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/theme/values_manager.dart';
 import 'dashboard_metrics.dart';
+import 'dashboard_attendance_section.dart';
 import '../../../core/config/preview_mode.dart';
 import '../preview/preview_unpaid_students.dart';
 import 'dashboard_payment_progress.dart';
@@ -70,20 +71,7 @@ class DashboardContent extends StatelessWidget {
         const PreviewUnpaidStudents(),
         const SizedBox(height: AppSize.s24),
       ],
-      Text(
-        'dashboard_attendance_title'.tr(),
-        style: Theme.of(context).textTheme.titleLarge,
-      ),
-      const SizedBox(height: AppSize.s16),
-      DashboardMetrics(
-        twoColumns: true,
-        values: {
-          'attendance_present': '${data.attendance.present}',
-          'dashboard_attendance_waiting': '${data.attendance.notMarked}',
-          'attendance_absent': '${data.attendance.absent}',
-          'attendance_excused': '${data.attendance.excused}',
-        },
-      ),
+      DashboardAttendanceSection(data: data),
     ],
   );
 }

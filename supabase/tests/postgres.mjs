@@ -5,7 +5,7 @@ import { mkdtemp, readFile, readdir, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve, relative } from 'node:path';
 
-export async function startPostgres() {
+export async function startPostgres({through}={}) {
   const password=randomBytes(24).toString('hex');
   const databaseDir=await mkdtemp(join(tmpdir(),'centerly-pg-'));
   const port=55439;
@@ -28,6 +28,7 @@ export async function startPostgres() {
     $$ select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid $$;
     grant usage on schema auth to authenticated; grant execute on function auth.uid() to authenticated;`);
   for(const name of (await readdir(new URL('../migrations/',import.meta.url))).sort()) {
+    if(through && name.split('_')[0]>through) continue;
     await admin.query(await readFile(new URL('../migrations/'+name,import.meta.url),'utf8'));
   }
   await admin.query(await readFile(new URL('fixtures.sql',import.meta.url),'utf8'));

@@ -5,7 +5,7 @@
   "teacher_change_photo": "Change teacher photo",
   "teacher_photo_failed": "Could not save photo. Choose an image under 2 MB and allow gallery access.",
   "dashboard_attendance_title": "Attendance at the center now",
-  "dashboard_attendance_waiting": "Waiting",
+  "dashboard_attendance_waiting": "Not recorded",
   "ui_preview_mode": "UI preview",
   "dashboard_session_preview": "Visual preview only",
   "dashboard_preview_group": "Grade 10 group",
@@ -724,5 +724,7 @@
   "finance_demo_student_8": "Nour Khaled",
   "finance_demo_student_9": "Malak Sameh",
   "finance_demo_student_10": "Karim Adel",
-  "finance_dues_result": "{} invoices · Outstanding: {}"
+  "finance_dues_result": "{} invoices · Outstanding: {}",
+  "dashboard_attendance_unavailable": "Current session attendance is currently unavailable",
+  "dashboard_attendance_updated": "Updated: {}"
 }

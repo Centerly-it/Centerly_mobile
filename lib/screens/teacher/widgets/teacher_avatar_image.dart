@@ -14,8 +14,13 @@ class TeacherAvatarImage extends StatelessWidget {
     child: bytes == null
         ? const Icon(Icons.person_rounded, size: AppSize.s32)
         : ClipOval(
-            child: Image.memory(
-              bytes!,
+            child: Image(
+              image: ResizeImage(
+                MemoryImage(bytes!),
+                width: 144,
+                height: 144,
+                policy: ResizeImagePolicy.fit,
+              ),
               width: AppSize.s48,
               height: AppSize.s48,
               fit: BoxFit.cover,

@@ -13,6 +13,7 @@ class FakeAuth implements TeacherAuthRepository {
   Object? failure;
   Completer<TeacherProfile?>? pending;
   Completer<TeacherProfile>? loginPending;
+  Completer<void>? logoutPending;
   int logouts = 0, logins = 0;
   @override
   Stream<void> get changes => events.stream;
@@ -33,5 +34,6 @@ class FakeAuth implements TeacherAuthRepository {
   Future<void> logout() async {
     logouts++;
     saved = null;
+    if (logoutPending != null) await logoutPending!.future;
   }
 }

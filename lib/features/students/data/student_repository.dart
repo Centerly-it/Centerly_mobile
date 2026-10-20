@@ -1,3 +1,4 @@
+import '../../../core/data/keyset_page.dart';
 import '../../../core/api/teacher_read_client.dart';
 import '../../../core/errors/backend_failure.dart';
 import '../domain/student_record.dart';
@@ -34,7 +35,11 @@ class StudentRepository {
           .toList(growable: false);
       return StudentPage(
         List.unmodifiable(records),
-        records.length == limit ? records.last.id : null,
+        validateKeysetPage(
+          records.map((r) => r.id),
+          limit: limit,
+          cursor: cursor,
+        ),
       );
     } catch (_) {
       throw const BackendFailure('SERVICE_UNAVAILABLE');

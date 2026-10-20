@@ -34,6 +34,25 @@ void main() {
       '2026-10-31',
     });
   });
+  testWidgets(
+    'calendar markers do not allocate attendance rosters for invisible days',
+    (tester) async {
+      await pumpSessionDesign(tester, () => const Scaffold());
+      final fixture = SessionDesignFixture();
+      for (var day = 1; day <= 31; day++) {
+        fixture.hasSessions(DateTime(2026, 10, day));
+        fixture.hasCancelledSessions(DateTime(2026, 10, day));
+      }
+      expect(fixture.cachedDayCount, 0);
+      final sessions = fixture.day(DateTime(2026, 10, 20));
+      for (final s in sessions) {
+        s.cancellationReason = 'Preview cancellation';
+      }
+      expect(fixture.hasSessions(DateTime(2026, 10, 20)), false);
+      expect(fixture.hasCancelledSessions(DateTime(2026, 10, 20)), true);
+      expect(fixture.cachedDayCount, 1);
+    },
+  );
   testWidgets('today remains outlined when another date is selected', (
     tester,
   ) async {

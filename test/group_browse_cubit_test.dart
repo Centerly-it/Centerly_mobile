@@ -37,7 +37,8 @@ void main() {
         final cursor = (jsonDecode(request.body) as Map)['p_cursor'];
         if (cursor == null) {
           return jsonResponse(request, [
-            for (var i = 0; i < 30; i++) groupJson('$i'),
+            for (var i = 0; i < 30; i++)
+              groupJson(i.toString().padLeft(2, '0')),
           ]);
         }
         if (fail) {

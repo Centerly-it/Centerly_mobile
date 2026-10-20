@@ -1,2 +1,4 @@
 # Keep SHA256-pinned local SQL reviews stable across Windows/Linux checkouts.
 supabase/proposals/finance_business/*.sql text eol=lf
+supabase/proposals/logic_hardening/*.sql text eol=lf
+supabase/migrations/20261020*.sql text eol=lf

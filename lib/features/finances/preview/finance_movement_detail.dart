@@ -22,11 +22,9 @@ class FinanceMovementDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     final invoice = ledger.invoice(movement.invoiceId);
     final original = movement.reversed
-        ? ledger.movements.singleWhere((m) => m.id == movement.reversalOf)
+        ? ledger.movement(movement.reversalOf!)
         : null;
-    final reversedBy = ledger.movements
-        .where((m) => m.reversalOf == movement.id)
-        .firstOrNull;
+    final reversedBy = ledger.correctionFor(movement.id);
     return SafeArea(
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(AppPadding.p20),

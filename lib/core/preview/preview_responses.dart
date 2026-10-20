@@ -24,6 +24,8 @@ class PreviewResponses {
           'invoiced_egp': summary['invoiced_egp'],
           'collected_egp': summary['paid_against_invoices_egp'],
           'outstanding_egp': summary['outstanding_egp'],
+          'attendance_scope': 'ongoing_sessions',
+          'attendance_synced_at': now,
           'attendance_counts': {
             'present': 42,
             'absent': 5,

@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
-import 'dart:ui' as ui;
+import '../format/avatar_thumbnail.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// Device-local avatar only. Backend/account namespaces never share files.
@@ -35,16 +35,11 @@ class LocalAvatarStore {
 
   Future<void> save(Uint8List bytes) async {
     if (bytes.isEmpty || bytes.length > maxBytes) throw const FormatException();
-    final codec = await ui.instantiateImageCodec(bytes, targetWidth: 512);
-    try {
-      final frame = await codec.getNextFrame();
-      frame.image.dispose();
-    } finally {
-      codec.dispose();
-    }
+    final thumbnail = await avatarThumbnail(bytes);
+    if (thumbnail.length > maxBytes) throw const FormatException();
     final file = await _file();
     final pending = File('${file.path}.pending');
-    await pending.writeAsBytes(bytes, flush: true);
+    await pending.writeAsBytes(thumbnail, flush: true);
     await pending.rename(file.path);
   }
 }

@@ -1,3 +1,4 @@
+import 'dart:ui' as ui;
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:centrally/core/data/local_avatar_store.dart';
@@ -20,12 +21,20 @@ void main() {
           directory: directory,
         );
         await store.save(bytes);
+        final saved = await store.read();
+        expect(saved, isNotNull);
+        final buffer = await ui.ImmutableBuffer.fromUint8List(saved!);
+        final descriptor = await ui.ImageDescriptor.encoded(buffer);
+        expect(descriptor.width, lessThanOrEqualTo(512));
+        expect(descriptor.height, lessThanOrEqualTo(512));
+        descriptor.dispose();
+        buffer.dispose();
         expect(
           await LocalAvatarStore(
             'preview-teacher-a',
             directory: directory,
           ).read(),
-          bytes,
+          saved,
         );
         expect(
           await LocalAvatarStore(
@@ -45,7 +54,7 @@ void main() {
         );
         expect(
           await store.read(),
-          bytes,
+          saved,
         ); // Rejected picks preserve previous image.
         await store.remove();
         expect(await store.read(), isNull);

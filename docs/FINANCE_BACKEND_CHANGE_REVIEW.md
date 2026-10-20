@@ -1,5 +1,13 @@
 # Finance business read-model — LOCAL ONLY, 2026-10-20
 
+> Deployment update — 2026-10-20: owner approved this exact six-file package;
+> deployed to centerly-dev through202610200006 and freshly verified (25 bodies,
+> catalog/grants/RLS,135 hosted business assertions +1 real Flutter SDK test).
+> No production or account/Auth configuration change. Read the historical review
+> below as the approved scope; its earlier LOCAL ONLY labels describe pre-approval
+> status. Current evidence/limitations: HARDENING_DEPLOYMENT_VERIFICATION_2026-10-20.md.
+
+
 Not approved for deployment, not copied to managed migrations, not linked or pushed
 by this task. Existing nineteen migration bodies are untouched. This review does
 not imply a fresh hosted baseline/hash verification. Future deployment requires
@@ -8,12 +16,12 @@ and authenticated postflight before any live Flutter activation.
 
 | File under `supabase/proposals/finance_business/` | SHA256 |
 |---|---|
-| `202610200001_finance_overview.sql` | `d553364fe91028cd8f6797ef5a89308b960db72e291b6df242d24b327c110e3b` |
-| `202610200002_invoice_detail.sql` | `cc15edcce38c095eb4a9ac865ce87339a04bc83e14f72a6228efc6e06b0ac6a7` |
-| `202610200003_finance_dues.sql` | `aa62c07724295a77067bd0b7c4c63594d2008464a790024e1c7cbf1828d38855` |
+| `202610200001_finance_overview.sql` | `a678fa4f06d43b8dc28439d5a0723bcc05c2b508906481c3aa70447dcec19206` |
+| `202610200002_invoice_detail.sql` | `dfc4e1ab01a986b818caa366976ee163406997424348f8a9999d1a987d8219df` |
+| `202610200003_finance_dues.sql` | `47f0467802e6a10f67c7ea7d2943d5e450acac6bec1bf626a26a652cfd17ae60` |
 
 Effects: three additive teacher-only, stable SECURITY DEFINER read RPCs and one
-`public.payments(teacher_id,invoice_id,id)` index. No tables, writes, backfill,
+`public.payments(invoice_id,id) INCLUDE (teacher_id,amount_egp,reversal_of)` covering index. No tables, writes, backfill,
 triggers, notifications, accounts, Auth settings or financial-write changes.
 
 - `get_teacher_finance_overview(date,date)`: due-date invoice cohort and receipt-date
@@ -58,3 +66,13 @@ Pre-push hardening: finance_business.mjs now verifies all three exact review has
 before starting PostgreSQL; CI runs this test explicitly. A scoped .gitattributes
 rule keeps these pinned proposal bytes at LF on Windows/Linux. The above SQL
 hashes and nineteen managed migration bodies remain unchanged.
+
+
+Revision 2 — 2026-10-20 deep performance audit: the UNDEPLOYED 001 proposal index
+now leads with invoice_id and covers tenant/amount/reversal. Private settlement
+queries omit a tenant predicate after locking a tenant-validated globally unique
+invoice, so the previous tenant-leading proposal did not help that lookup. The
+new shape supports both read and settlement plans. Its hash above is revised;
+no previous approval covers these new bytes. Review/approval and exact dry run are
+still required before any hosted application. See MAIN_LOGIC_PERFORMANCE_AUDIT.md
+for measured local results and limits. The other two SQL hashes are unchanged.

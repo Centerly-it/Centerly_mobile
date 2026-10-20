@@ -37,7 +37,7 @@ class LoginCubit extends Cubit<LoginState> {
         break;
       case Failure<LoginEntity>():
         emit(LoginState.failure(result.exception.toString()));
-        log('login failure | ${result.exception}', name: 'LoginCubit');
+        log('login failure', name: 'LoginCubit');
         break;
     }
   }

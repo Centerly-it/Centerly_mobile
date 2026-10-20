@@ -1,5 +1,6 @@
 import '../../../core/format/cairo_time.dart';
 import 'finance_entry.dart';
+import 'finance_snapshot_index.dart';
 
 /// Invoice cohorts follow due dates; cash movement reports follow receipt dates.
 class FinanceLedger {
@@ -7,42 +8,42 @@ class FinanceLedger {
     required List<FinanceInvoice> invoices,
     required List<FinanceMovement> movements,
   }) : invoices = List.unmodifiable(invoices),
-       movements = List.unmodifiable(movements);
+       movements = List.unmodifiable(movements),
+       _index = FinanceSnapshotIndex(invoices, movements);
   final List<FinanceInvoice> invoices;
   final List<FinanceMovement> movements;
-  FinanceInvoice invoice(String id) => invoices.singleWhere((i) => i.id == id);
-  BigInt paid(FinanceInvoice invoice) => movements
-      .where((m) => m.invoiceId == invoice.id)
-      .fold(BigInt.zero, (total, m) => total + m.signedAmount);
-  BigInt remaining(FinanceInvoice invoice) =>
-      invoice.voided ? BigInt.zero : invoice.amount - paid(invoice);
-  List<FinanceInvoice> dueIn(DateTime month) => invoices
-      .where(
-        (i) =>
-            !i.voided &&
-            i.dueOn.year == month.year &&
-            i.dueOn.month == month.month,
-      )
-      .toList();
-  List<FinanceMovement> receivedIn(DateTime month) => movements.where((m) {
-    final local = CairoTime.local(m.at);
-    return local.year == month.year && local.month == month.month;
-  }).toList();
+  final FinanceSnapshotIndex _index;
+  FinanceInvoice invoice(String id) =>
+      _index.byId[id] ?? (throw const FormatException('Unknown invoice'));
+  FinanceMovement movement(String id) =>
+      _index.byMovement[id] ??
+      (throw const FormatException('Unknown movement'));
+  FinanceMovement? correctionFor(String id) => _index.reversedBy[id];
+  List<FinanceMovement> historyFor(String id) =>
+      _index.history[invoice(id).id] ?? const [];
+  BigInt paid(FinanceInvoice value) => _index.paid[invoice(value.id).id]!;
+  BigInt remaining(FinanceInvoice value) {
+    final original = invoice(value.id);
+    return original.voided ? BigInt.zero : original.amount - paid(original);
+  }
+
+  List<FinanceInvoice> dueIn(DateTime month) =>
+      _index.due[financeMonthKey(month)] ?? const [];
+  List<FinanceMovement> receivedIn(DateTime month) =>
+      _index.received[financeMonthKey(month)] ?? const [];
   BigInt invoiced(DateTime month) =>
       dueIn(month).fold(BigInt.zero, (sum, i) => sum + i.amount);
   BigInt paidAgainst(DateTime month) =>
       dueIn(month).fold(BigInt.zero, (sum, i) => sum + paid(i));
   BigInt outstanding(DateTime month) =>
       dueIn(month).fold(BigInt.zero, (sum, i) => sum + remaining(i));
-  BigInt net(DateTime month, {String? actor}) => receivedIn(month)
-      .where((m) => actor == null || m.actor == actor)
-      .fold(BigInt.zero, (sum, m) => sum + m.signedAmount);
-  BigInt gross(DateTime month) => receivedIn(
-    month,
-  ).where((m) => !m.reversed).fold(BigInt.zero, (sum, m) => sum + m.amount);
-  BigInt corrections(DateTime month) => receivedIn(
-    month,
-  ).where((m) => m.reversed).fold(BigInt.zero, (sum, m) => sum + m.amount);
+  BigInt net(DateTime month, {String? actor}) => actor == null
+      ? (_index.net[financeMonthKey(month)] ?? BigInt.zero)
+      : (_index.actors[(financeMonthKey(month), actor)] ?? BigInt.zero);
+  BigInt gross(DateTime month) =>
+      _index.gross[financeMonthKey(month)] ?? BigInt.zero;
+  BigInt corrections(DateTime month) =>
+      _index.corrections[financeMonthKey(month)] ?? BigInt.zero;
   bool overdue(FinanceInvoice invoice, DateTime now) =>
       remaining(invoice) > BigInt.zero &&
       CairoTime.date(

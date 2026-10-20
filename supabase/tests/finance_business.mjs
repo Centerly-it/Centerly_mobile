@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile,readdir} from 'node:fs/promises';
 import {completionContext,ids} from './completion_context.mjs';
 await verifyFinanceReview();
-const ctx=await completionContext();
+const ctx=await completionContext({through:'202610190010'});
 const {pg,a,b,s,date,call,invoice,payment}=ctx;
 let checks=0;
 const eq=(actual,expected)=>{assert.deepEqual(actual,expected);checks++;};
@@ -78,7 +78,7 @@ try {
  const count=async()=> (await pg.admin.query('select count(*)::int n from public.notifications')).rows[0].n;
  const notifications=await count();await overview();await call(a,'public.get_teacher_invoice_detail($1)',[invoice]);
  await call(a,'public.list_teacher_finance_dues($1,$1)',[date]);eq(await count(),notifications);
- eq((await pg.admin.query("select count(*)::int n from pg_indexes where indexname='teacher_invoice_movements'")).rows[0].n,1);
+ eq((await pg.admin.query("select count(*)::int n from pg_indexes where indexname='teacher_invoice_movements' and indexdef like '%(invoice_id, id) INCLUDE (teacher_id, amount_egp, reversal_of)%'")).rows[0].n,1);
  const defs=(await pg.admin.query("select prosecdef,proconfig from pg_proc where proname in ('get_teacher_finance_overview','get_teacher_invoice_detail','list_teacher_finance_dues')")).rows;
  eq(defs.length,3);for(const def of defs){eq(def.prosecdef,true);assert.ok(def.proconfig.includes('search_path=""'));checks++;}
  console.log(`Finance business proposals: ${checks} assertions PASS (disposable local PostgreSQL; no hosted access).`);

@@ -52,6 +52,22 @@ void main() {
     expect(cubit.state.isAuthenticated, isFalse);
     expect(repo.logouts, 1);
   });
+  test('old restore cannot release the busy flag of a newer logout', () async {
+    repo.pending = Completer<TeacherProfile?>();
+    repo.logoutPending = Completer<void>();
+    final restore = cubit.restore();
+    final logout = cubit.logout();
+    repo.pending!.complete(profile);
+    await restore;
+    await cubit.login('new', 'login');
+    expect(repo.logins, 0);
+    expect(cubit.state.isAuthenticated, false);
+    repo.logoutPending!.complete();
+    await logout;
+    await cubit.login('new', 'login');
+    expect(repo.logins, 1);
+    expect(cubit.state.isAuthenticated, true);
+  });
   test('duplicate login taps invoke repository once', () async {
     repo.loginPending = Completer<TeacherProfile>();
     final first = cubit.login('a', 'b');

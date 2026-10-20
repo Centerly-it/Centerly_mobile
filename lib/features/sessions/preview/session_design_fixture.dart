@@ -5,6 +5,13 @@ import '../domain/session_design_data.dart';
 /// Explicit design-review fixture. Never queries or mutates a server.
 class SessionDesignFixture {
   final Map<String, List<SessionDesignData>> _days = {};
+  bool hasSessions(DateTime date) =>
+      _days[CairoTime.date(date)]?.any((s) => s.cancellationReason == null) ??
+      date.weekday != DateTime.friday;
+  bool hasCancelledSessions(DateTime date) =>
+      _days[CairoTime.date(date)]?.any((s) => s.cancellationReason != null) ??
+      (date.weekday != DateTime.friday && date.day == 28);
+  int get cachedDayCount => _days.length;
   List<SessionDesignData> day(
     DateTime day,
   ) => _days.putIfAbsent(CairoTime.date(day), () {

@@ -13,7 +13,7 @@ export async function testTeacherBrowse(db, actor, teacher, other, secretary) {
   await eq("select count(*)::int from public.list_teacher_groups(p_grade_level_id=>'70000000-0000-0000-0000-000000000002')",0);
   await denied('select public.list_teacher_groups(p_limit=>101)','VALIDATION_ERROR');
   await denied("select public.list_teacher_groups(p_search=>repeat('x',201))",'VALIDATION_ERROR');
-  await eq("select (public.get_teacher_overview(current_date-30)->'attendance_counts'->>'not_marked')::int",1);
+  await eq("select (public.get_teacher_overview(current_date-30)->'attendance_counts'->>'not_marked')::int",0);
   await eq("select (public.get_teacher_overview(current_date-30)->'attendance_counts'->>'absent')::int",0);
   await eq("select count(*)::int from public.list_teacher_sessions(current_date-30,current_date-30)",1);
   await eq("select g->>'group_name' from public.list_teacher_sessions(current_date-30,current_date-30) g",'A');
@@ -26,7 +26,7 @@ export async function testTeacherBrowse(db, actor, teacher, other, secretary) {
     insert into public.attendance(teacher_id,session_id,student_id)
     values('${teacher}','50000000-0000-0000-0000-000000000099','30000000-0000-0000-0000-000000000001');`);
   await actor(teacher);
-  await eq("select (public.get_teacher_overview(current_date-30)->'attendance_counts'->>'not_marked')::int",1);
+  await eq("select (public.get_teacher_overview(current_date-30)->'attendance_counts'->>'not_marked')::int",0);
   await eq("select status from public.attendance where session_id='50000000-0000-0000-0000-000000000099'",'not_marked');
   await db.exec("reset role; delete from public.attendance where session_id='50000000-0000-0000-0000-000000000099'; delete from public.sessions where id='50000000-0000-0000-0000-000000000099'");
   await actor(other);

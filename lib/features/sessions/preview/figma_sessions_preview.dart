@@ -45,12 +45,8 @@ class _FigmaSessionsPreviewState extends State<FigmaSessionsPreview> {
             SessionCalendar(
               date: _date,
               month: _period == SessionPeriod.month,
-              hasSessions: (d) => _fixture
-                  .day(d)
-                  .any((session) => session.cancellationReason == null),
-              hasCancelledSessions: (d) => _fixture
-                  .day(d)
-                  .any((session) => session.cancellationReason != null),
+              hasSessions: _fixture.hasSessions,
+              hasCancelledSessions: _fixture.hasCancelledSessions,
               onDate: (v) => setState(() => _date = v),
             ),
           const SizedBox(height: AppSize.s16),

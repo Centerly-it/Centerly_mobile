@@ -11,11 +11,13 @@ class DashboardSummary {
     this.invoicedEgp,
     required this.localDate,
     required this.attendance,
+    this.attendanceSyncedAt,
     this.sessions = const [],
   });
   final int students, groups;
   final String? invoicedEgp;
   final AttendanceCounts attendance;
+  final DateTime? attendanceSyncedAt;
   final List<SessionRecord> sessions;
   int get scheduledMinutes => sessions
       .where((s) => s.status != SessionStatus.cancelled)
@@ -46,6 +48,9 @@ class DashboardSummary {
       throw const FormatException('Invalid dashboard summary');
     }
     return DashboardSummary(
+      attendanceSyncedAt: data['attendance_scope'] == 'ongoing_sessions'
+          ? DateTime.parse(data['attendance_synced_at'] as String).toUtc()
+          : null,
       students: students,
       groups: groups,
       localDate: date,

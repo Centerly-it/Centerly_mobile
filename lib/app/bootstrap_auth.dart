@@ -15,7 +15,7 @@ import '../features/students/data/student_repository.dart';
 import '../features/sessions/data/session_repository.dart';
 import '../features/groups/data/group_repository.dart';
 
-Future<void> bootstrapAuth() async {
+Future<void> bootstrapAuth({bool restoreSession = true}) async {
   final config = AppConfig.fromEnvironment();
   getIt.registerSingleton<AppConfig>(config);
   if (PreviewMode.enabled) {
@@ -84,5 +84,5 @@ Future<void> bootstrapAuth() async {
       getIt<TeacherReadClient>().invalidate();
     }
   });
-  await session.restore();
+  if (restoreSession) await session.restore();
 }

@@ -27,7 +27,7 @@ class LogoutCubit extends Cubit<LogoutState> {
         break;
       case Failure<LogoutEntity>():
         await _tokenManager.clearAll();
-        log('logout failure | ${result.exception}', name: 'LogoutCubit');
+        log('logout failure', name: 'LogoutCubit');
         emit(LogoutState.failure(result.exception.toString()));
         break;
     }

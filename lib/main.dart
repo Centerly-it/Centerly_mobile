@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'features/auth/presentation/view_models/auth_session_cubit.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'app/bootstrap_auth.dart';
 import 'core/config/preview_mode.dart';
@@ -28,7 +30,7 @@ Future<void> main() async {
   ]);
 
   configureDependencies();
-  await bootstrapAuth();
+  await bootstrapAuth(restoreSession: false);
   Bloc.observer = const MyBlocObserver();
 
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -51,6 +53,12 @@ Future<void> main() async {
       child: const Centrally(),
     ),
   );
+  // Paint first; the existing checking route gates access during remote validation.
+  if (!PreviewMode.enabled) {
+    widgetsBinding.addPostFrameCallback(
+      (_) => unawaited(getIt<AuthSessionCubit>().restore()),
+    );
+  }
 }
 
 class Centrally extends StatelessWidget {

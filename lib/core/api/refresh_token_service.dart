@@ -47,12 +47,12 @@ class RefreshTokenService {
       return newAccessToken;
     } on DioException catch (e) {
       log(
-        'refresh failed: ${e.response?.statusCode} — ${e.response?.data}',
+        'refresh failed status: ${e.response?.statusCode}',
         name: 'RefreshTokenService',
       );
       return null;
-    } catch (e) {
-      log('unexpected error: $e', name: 'RefreshTokenService');
+    } catch (_) {
+      log('unexpected refresh failure', name: 'RefreshTokenService');
       return null;
     }
   }

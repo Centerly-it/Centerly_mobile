@@ -37,21 +37,21 @@ void main() {
         password: 'test',
       );
       final api = TeacherReadClient(client);
-      await api.read(TeacherRead.dashboard);
-      await api.read(TeacherRead.dashboard);
+      await api.read(TeacherRead.groups);
+      await api.read(TeacherRead.groups);
       expect(
-        requests.where((p) => p.endsWith('get_teacher_dashboard')).length,
+        requests.where((p) => p.endsWith('list_teacher_groups')).length,
         1,
       );
-      await api.read(TeacherRead.dashboard, refresh: true);
+      await api.read(TeacherRead.groups, refresh: true);
       expect(
-        requests.where((p) => p.endsWith('get_teacher_dashboard')).length,
+        requests.where((p) => p.endsWith('list_teacher_groups')).length,
         2,
       );
       await client.auth.signOut();
-      await api.read(TeacherRead.dashboard);
+      await api.read(TeacherRead.groups);
       expect(
-        requests.where((p) => p.endsWith('get_teacher_dashboard')).length,
+        requests.where((p) => p.endsWith('list_teacher_groups')).length,
         3,
       );
       await client.dispose();

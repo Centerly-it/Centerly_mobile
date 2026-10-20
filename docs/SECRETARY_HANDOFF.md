@@ -1,18 +1,27 @@
-# Secretary React handoff — shared backend v202610190010
+# Secretary React handoff — shared backend v202610200006
 
 Teacher repository temporarily owns the canonical backend by explicit owner
-override. Nineteen approved immutable migrations are deployed to centerly-dev
+override. Twenty-five approved immutable migrations are deployed to centerly-dev
 (yfeubomyglmhuwizaqoj). Do not initialize a second schema/project or replay these
 migrations. supabase/schema-manifest.json pins LF-normalized SHA256 hashes;
 SHARED_BACKEND_CONTRACT.md defines current signatures, date/money/error semantics.
 TEACHER_COMPLETION_CHANGE_REVIEW.md records the last seven-file approval/deployment.
+
+Latest verified development deployment: six approved202610200001..006 migrations,
+25 bodies/catalog/grants/RLS matched,135 hosted business checks and1 SDK Auth test
+passed. See HARDENING_DEPLOYMENT_VERIFICATION_2026-10-20.md and PROJECT_HANDOFF.md
+in the repository root. Finance read contracts are available; new Teacher designs
+remain preview until adapters are integrated. Secretary enrollment updates must
+atomically change status/left_at. Ongoing overview counts use server time,
+independent of selected day; not_marked is never absence. Earlier test counts below
+are historical and do not replace device/React cross-app acceptance.
 
 ## Ownership transfer
 
 When the Secretary repository exists, copy the exact versioned migrations, tests,
 contracts and manifest, retaining the hosted supabase_migrations history. Establish
 that repository as sole owner in both projects, then stop adding migrations here.
-Verify all nineteen remote bodies and hashes before new additive migrations. Never
+Verify all twenty-five remote bodies and hashes before new additive migrations. Never
 db reset/push existing IDs again, rename versions, edit deployed bytes or apply a
 duplicate baseline. Both clients pin the same version. Hosted changes need owner
 approval; React implementation is a separate next task, not created by this handoff.

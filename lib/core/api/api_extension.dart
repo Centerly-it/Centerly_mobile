@@ -14,7 +14,10 @@ Future<Result<T>> executeApi<T>(Future<T> Function() apiCall) async {
     return const Failure(NoInternetException());
   } on DioException catch (ex) {
     final message = _extractMessage(ex);
-    log('DioException: $message', name: 'ApiExtension');
+    log(
+      'DioException status: ${ex.response?.statusCode}',
+      name: 'ApiExtension',
+    );
 
     if (ex.response != null) {
       return Failure(

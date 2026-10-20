@@ -31,6 +31,16 @@ Visual capture uses the existing teacher screens, bundled Cairo/Material fonts,
 Arabic 390x844; see VISUAL_PRESERVATION.md. For deliberate screenshot refresh:
 `flutter test test/visual_preservation_test.dart --dart-define=CAPTURE_VISUALS=true`.
 
+## Current deployment / new computer
+
+Start with ../PROJECT_HANDOFF.md for actual feature/preview boundaries and secure
+local file transfer. Development has25 migrations through202610200006; do not
+reapply the nineteen-version historical baseline below. The old Mac compatibility
+notes are historical; Flutter3.44.2 is the pinned CI/current setup target.
+Supabase CLI is separate from the tests npm package; install/cache it before the
+Windows operator scripts that use npx --offline. Credentials/CLI link/secure
+storage/APKs do not travel with Git. Existing deployments are not new approval.
+
 ## Runtime configuration and build variants
 
 No credentials are required for static verification/builds. An unconfigured app

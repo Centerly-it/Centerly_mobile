@@ -20,9 +20,8 @@ class FinanceInvoiceDetail extends StatelessWidget {
   final FinanceInvoice invoice;
   @override
   Widget build(BuildContext context) {
-    final movements =
-        ledger.movements.where((m) => m.invoiceId == invoice.id).toList()
-          ..sort((a, b) => b.at.compareTo(a.at));
+    final movements = ledger.historyFor(invoice.id).toList()
+      ..sort((a, b) => b.at.compareTo(a.at));
     return Scaffold(
       backgroundColor: ColorManager.canvas,
       appBar: AppBar(

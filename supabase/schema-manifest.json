@@ -1,7 +1,7 @@
 {
   "projectRef": "yfeubomyglmhuwizaqoj",
   "environment": "development",
-  "lastMigration": "202610190010",
+  "lastMigration": "202610200006",
   "migrations": [
     {
       "file": "202610180001_identity.sql",
@@ -78,6 +78,30 @@
     {
       "file": "202610190010_teacher_event_producers.sql",
       "sha256": "988718aa10559528fda4b47f55a8803059492c4177257bbc2007973214dc02b0"
+    },
+    {
+      "file": "202610200001_finance_overview.sql",
+      "sha256": "a678fa4f06d43b8dc28439d5a0723bcc05c2b508906481c3aa70447dcec19206"
+    },
+    {
+      "file": "202610200002_invoice_detail.sql",
+      "sha256": "dfc4e1ab01a986b818caa366976ee163406997424348f8a9999d1a987d8219df"
+    },
+    {
+      "file": "202610200003_finance_dues.sql",
+      "sha256": "47f0467802e6a10f67c7ea7d2943d5e450acac6bec1bf626a26a652cfd17ae60"
+    },
+    {
+      "file": "202610200004_preserve_void_invoices.sql",
+      "sha256": "6ceb7a1b9c3fc331cf186a2e95783a742626a3357deaae2bbbd1fa2126717b20"
+    },
+    {
+      "file": "202610200005_enrollment_timeline.sql",
+      "sha256": "6cb0278715d11f4278130616a633ccc9e88b351a3a09b7d68c0eb6166507839b"
+    },
+    {
+      "file": "202610200006_ongoing_attendance.sql",
+      "sha256": "133967844480b543e3ba6611ea334825d5289652a242d5ba203fca268792333b"
     }
   ]
 }

@@ -4,8 +4,8 @@ export const ids={teacher:'10000000-0000-0000-0000-000000000001',other:'10000000
  secretary:'20000000-0000-0000-0000-000000000001',student:'30000000-0000-0000-0000-000000000001',
  otherStudent:'30000000-0000-0000-0000-000000000002',group:'40000000-0000-0000-0000-000000000001',
  otherGroup:'40000000-0000-0000-0000-000000000002',session:'50000000-0000-0000-0000-000000000001'};
-export async function completionContext() {
- const pg=await startPostgres();
+export async function completionContext(options) {
+ const pg=await startPostgres(options);
  try {
   if (!await access(new URL('../migrations/202610190003_student_profile.sql',import.meta.url)).then(()=>true,()=>false)) await pg.admin.query(await readFile(new URL('../proposals/202610190003_student_profile.sql',import.meta.url),'utf8'));
   for(const file of (await readdir(new URL('../proposals/teacher_completion/',import.meta.url))).filter(f=>f.endsWith('.sql')).sort()) {

@@ -1,5 +1,84 @@
 # Centerly implementation progress
 
+## Repository handoff packaged for push — 2026-10-20
+
+Owner requested all changes on main plus a complete new-computer report.
+PROJECT_HANDOFF.md now consolidates actual UI/live status, business semantics,
+25-version deployment, exact test evidence, ignored local config/credential transfer,
+secure setup/launch commands and remaining finance/device/Secretary tasks. README,
+SETUP and SECRETARY_HANDOFF point to the current snapshot/version. Remote main was
+fetched and matched0577486 before preparing the commit; no merge/reset needed.
+Staged-files scan excludes local env/credential values, private keys and runtime
+artifacts. Existing19 managed contents unchanged; all25 manifest pins pass. The
+commit containing this entry is the transfer snapshot; use git log for its ID.
+No new hosted mutation, build or restart is part of this push request.
+
+
+## Approved hardening deployed — 2026-10-20
+
+Owner explicitly approved the reviewed six-file package. Verified CLI auth and
+linked centerly-dev identity. Fresh preflight:19 exact remote bodies plus matching
+catalog/grants/RLS, enrollment violations0. Exact six SHA256-pinned files copied
+to managed migrations; dry run contained only202610200001..006; all six applied.
+Postflight verified25 exact remote bodies and full catalog,44 functions/18 tables/
+30 policies, both indexes and approved NOT VALID timeline constraint. Existing19
+files unchanged; schema-manifest now pins25. No Auth/account changes/backfill.
+
+Real hosted validation:98 completion +37 hardening =135 business assertions PASS;
+Flutter SDK Auth1 PASS (existing synthetic teacher/Secretary credentials). Verified
+payment/reversal retry/exactly-once notifications, void preservation, transactional
+rollback, attendance start/end/cancellation/overnight/selected-day semantics,
+corrections, removal handling and tenant/role denial. Only approved synthetic
+fixtures mutated; temporary attendance boundary data rolled back. No new customer
+or account provisioning/data scope. Full25-version local regression results in
+build/hardening-local-*.log; earlier audit Flutter240+preview3 remain historical.
+
+Ongoing dashboard scope detection can now display fresh server counts after
+refresh. New finance reads are deployed/verified, but redesigned Finance remains
+debug preview pending production adapters. Remaining UI/live/device/pilot/Secretary
+gates still apply. Next eligible implementation: production finance adapters and
+cross-screen reconciliation. No APK/restart, staging/commit/push or publishing.
+Evidence: docs/HARDENING_DEPLOYMENT_VERIFICATION_2026-10-20.md. Earlier LOCAL ONLY
+entries below describe pre-approval state and are superseded for this package.
+
+
+## Deep main logic/performance hardening — 2026-10-20
+
+Verified local main starting 0577486; initially clean. Implemented bounded,
+project/user/token-scoped memory TTL cache with duplicate-read coalescing, stale
+response guards, Auth logout/restore race fixes, exact indexed finance snapshot
+calculations/validation, parallel dashboard reads, strict cursor progression,
+bounded avatar decoding/storage and cheaper calendar marker generation. Profile
+verification follows first frame while protected routing remains gated. Removed
+raw legacy backend error logging. No new dependencies or lockfile change.
+
+Owner clarified «الحضور في السنتر الآن» = ongoing-session attendance independent
+of selected day; unmarked label = «لم يُسجّل». Prepared SQL006 with server-time
+start-inclusive/end-exclusive/cancel/overnight semantics and index. UI requires
+scope/timestamp before showing current counts; old daily totals are withheld.
+Snapshot timestamp + manual refresh, not realtime physical occupancy.
+
+Fresh: Flutter240 PASS/1 hosted opt-in SKIP; explicit preview3 PASS; analyzer and
+format clean; enforced offline lockfile and codegen PASS; existing PostgreSQL343
++ hardening30 =373 assertions PASS; Windows PostgreSQL launcher2 PASS; all19
+managed hashes unchanged. Local load/reference arithmetic benchmarks passed;
+measurements/limits and initial test-fixture failure/fix in audit report.
+
+Six LOCAL ONLY SQL proposals202610200001..006: three finance reads/covering index,
+void-preserving settlement helper, NOT VALID enrollment timeline check, ongoing
+attendance overview/index. Existing19 migrations untouched; no deployment or new
+approval assumed. Revised001 hash invalidates prior proposal bytes. Historical
+invalid enrollment rows require read-only preflight/owner-reviewed repair; no
+backfill authorized. Exact review: docs/MAIN_HARDENING_CHANGE_REVIEW.md.
+
+NOT production-ready: redesigned screens/finance are still debug preview; real
+finance adapters, generic teacher name, group-note persistence, QR/contact behavior,
+fresh hosted acceptance and device/pilot/Secretary matrix remain open. See
+ docs/MAIN_LOGIC_PERFORMANCE_AUDIT.md for concrete findings, cache policy, measured
+limits and next eligible sequence. No hosted access/mutation, commit/push, APK
+build or restart during this audit. Earlier ledger counts are historical.
+
+
 ## Pre-push review and fixes — 2026-10-20
 
 Reviewed all tracked diffs/new source, local SQL proposals, assets, localization,

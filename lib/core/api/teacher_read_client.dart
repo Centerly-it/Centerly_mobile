@@ -3,17 +3,41 @@ import 'teacher_read_endpoint.dart';
 export 'teacher_read_endpoint.dart';
 import 'dart:convert';
 import '../network/read_cache.dart';
+import '../network/read_coalescer.dart';
+import 'teacher_read_policy.dart';
+import 'teacher_read_request.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../errors/backend_failure.dart';
 
 class TeacherReadClient {
   TeacherReadClient(this.client, {this.onAccessDenied, ReadCache? cache})
-    : cache = cache ?? ReadCache();
+    : cache = cache ?? ReadCache() {
+    _identity = client.auth.currentUser?.id;
+    _token = client.auth.currentSession?.accessToken;
+  }
   final ReadCache cache;
-  void invalidate() => cache.clear();
+  final _pending = ReadCoalescer();
+  String? _identity, _token;
+  void invalidate() {
+    cache.clear();
+    _pending.clear();
+  }
+
+  void _syncSession() {
+    final id = client.auth.currentUser?.id,
+        token = client.auth.currentSession?.accessToken;
+    cache.bind((client.storage.url, id, token));
+    if (id != _identity || token != _token) {
+      invalidate();
+      _identity = id;
+      _token = token;
+    }
+  }
+
   final SupabaseClient client;
   final Future<void> Function()? onAccessDenied;
   void Function() sessionGuard() {
+    _syncSession();
     final generation = cache.generation;
     final identity = client.auth.currentUser?.id;
     final token = client.auth.currentSession?.accessToken;
@@ -32,34 +56,38 @@ class TeacherReadClient {
     bool refresh = false,
   }) async {
     final checkSession = sessionGuard();
+    params = snapshotReadParams(params);
     final identity = client.auth.currentUser?.id;
-    final key = jsonEncode([identity, endpoint.name, params]);
-
+    final key = teacherReadKey(client.storage.url, identity, endpoint, params);
+    final ttl = teacherReadTtl(endpoint);
     if (!refresh &&
+        ttl > Duration.zero &&
         identity != null &&
         client.auth.currentSession?.isExpired == false) {
       final cached = cache.get(key);
-      if (cached != null) return cached;
-    }
-    for (var attempt = 0; attempt < 2; attempt++) {
-      try {
-        final data = await client
-            .rpc(teacherReadNames[endpoint]!, params: params)
-            .timeout(const Duration(seconds: 15));
+      if (cached != null) {
         checkSession();
-        if (identity != null) cache.put(key, data);
-        return data;
-      } catch (error) {
-        checkSession();
-        final failure = mapBackendFailure(error);
-        if (failure.deniesAccess) {
-          invalidate();
-          if (onAccessDenied != null) unawaited(onAccessDenied!());
-          throw failure;
-        }
-        if (failure.code != 'NETWORK_ERROR' || attempt == 1) throw failure;
+        return cached;
       }
     }
-    throw const BackendFailure('SERVICE_UNAVAILABLE');
+    final encoded = await _pending.run('${cache.generation}:$key', () async {
+      final data = await fetchTeacherRead(
+        client,
+        endpoint,
+        params,
+        checkSession,
+        () {
+          invalidate();
+          if (onAccessDenied != null) unawaited(onAccessDenied!());
+        },
+      );
+      checkSession();
+      if (identity != null && client.auth.currentSession?.isExpired == false) {
+        cache.put(key, data, ttl: ttl);
+      }
+      return jsonEncode(data);
+    });
+    checkSession();
+    return jsonDecode(encoded);
   }
 }

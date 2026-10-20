@@ -17,16 +17,33 @@ class SupabaseTeacherAuth implements TeacherAuthRepository {
           await logout();
         }
       });
-  Future<TeacherProfile> _profile() async {
+  Future<TeacherProfile> _profile({bool retryToken = true}) async {
     final session = client.auth.currentSession;
     if (session == null) throw const TeacherAuthFailure('AUTH_REQUIRED');
-    if (session.isExpired) await client.auth.refreshSession();
+    final attempt = _attempt;
+    if (session.isExpired) {
+      await client.auth.refreshSession().timeout(const Duration(seconds: 15));
+    }
+    final active = client.auth.currentSession;
+    if (active == null || _blocked || attempt != _attempt) {
+      throw const TeacherAuthFailure('AUTH_REQUIRED');
+    }
+    final token = active.accessToken;
     final data = await client
         .rpc('get_current_profile')
         .timeout(const Duration(seconds: 15));
+    if (_blocked ||
+        attempt != _attempt ||
+        client.auth.currentUser?.id != active.user.id) {
+      throw const TeacherAuthFailure('AUTH_REQUIRED');
+    }
+    if (client.auth.currentSession?.accessToken != token) {
+      if (retryToken) return _profile(retryToken: false);
+      throw const TeacherAuthFailure('AUTH_REQUIRED');
+    }
     return TeacherProfile.fromJson(
       Map<String, dynamic>.from(data as Map),
-      session.user.id,
+      active.user.id,
     );
   }
 

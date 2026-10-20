@@ -22,7 +22,7 @@ class CodegenLoader extends AssetLoader {
     "teacher_photo_failed":
         "تعذّر حفظ الصورة. اختر صورة بحجم أقل من ٢ ميجابايت وتأكد من سماح الوصول للمعرض.",
     "dashboard_attendance_title": "الحضور في السنتر الآن",
-    "dashboard_attendance_waiting": "مُنتظر",
+    "dashboard_attendance_waiting": "لم يُسجّل",
     "ui_preview_mode": "معاينة",
     "dashboard_session_preview": "معاينة تجريبية للشكل فقط",
     "dashboard_preview_group": "مجموعة أولى ثانوي",
@@ -767,6 +767,9 @@ class CodegenLoader extends AssetLoader {
     "finance_demo_student_9": "ملك سامح",
     "finance_demo_student_10": "كريم عادل",
     "finance_dues_result": "{} فاتورة · المتبقي: {}",
+    "dashboard_attendance_unavailable":
+        "بيانات حضور الحصص الجارية غير متاحة حاليًا",
+    "dashboard_attendance_updated": "آخر تحديث: {}",
   };
   static const Map<String, dynamic> _en = {
     "session_attendance_info": "Attendance record information",
@@ -776,7 +779,7 @@ class CodegenLoader extends AssetLoader {
     "teacher_photo_failed":
         "Could not save photo. Choose an image under 2 MB and allow gallery access.",
     "dashboard_attendance_title": "Attendance at the center now",
-    "dashboard_attendance_waiting": "Waiting",
+    "dashboard_attendance_waiting": "Not recorded",
     "ui_preview_mode": "UI preview",
     "dashboard_session_preview": "Visual preview only",
     "dashboard_preview_group": "Grade 10 group",
@@ -1538,6 +1541,9 @@ class CodegenLoader extends AssetLoader {
     "finance_demo_student_9": "Malak Sameh",
     "finance_demo_student_10": "Karim Adel",
     "finance_dues_result": "{} invoices · Outstanding: {}",
+    "dashboard_attendance_unavailable":
+        "Current session attendance is currently unavailable",
+    "dashboard_attendance_updated": "Updated: {}",
   };
   static const Map<String, Map<String, dynamic>> mapLocales = {
     "ar": _ar,

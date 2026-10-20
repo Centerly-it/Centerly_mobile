@@ -1,3 +1,4 @@
+import '../../../core/data/keyset_page.dart';
 import '../../../core/api/teacher_read_client.dart';
 import '../../../core/errors/backend_failure.dart';
 import '../domain/group_record.dart';
@@ -35,7 +36,11 @@ class GroupRepository {
           .toList();
       return (
         groups: List<GroupRecord>.unmodifiable(rows),
-        nextCursor: rows.length == limit ? rows.last.id : null,
+        nextCursor: validateKeysetPage(
+          rows.map((r) => r.id),
+          limit: limit,
+          cursor: cursor,
+        ),
       );
     } catch (_) {
       throw const BackendFailure('SERVICE_UNAVAILABLE');

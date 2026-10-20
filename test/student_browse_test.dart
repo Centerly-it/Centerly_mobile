@@ -38,7 +38,7 @@ void main() {
     },
   );
   test(
-    'student pages deduplicate records and stop at the final cursor',
+    'student pages advance exactly once and stop at the final cursor',
     () async {
       var calls = 0;
       final client = readFixture((request) async {
@@ -47,8 +47,8 @@ void main() {
         return jsonResponse(
           request,
           body['p_cursor'] == null
-              ? [for (var i = 0; i < 30; i++) studentJson('$i')]
-              : [studentJson('29'), studentJson('30')],
+              ? [for (var i = 0; i < 30; i++) studentJson('$i'.padLeft(2, '0'))]
+              : [studentJson('30')],
         );
       });
       final cubit = StudentBrowseCubit(
@@ -59,6 +59,29 @@ void main() {
       expect(calls, 2);
       expect(cubit.state.students.length, 31);
       expect(cubit.state.cursor, isNull);
+      await cubit.close();
+      await client.dispose();
+    },
+  );
+  test(
+    'repeated page records fail safely without hiding existing students',
+    () async {
+      final client = readFixture((request) async {
+        final body = jsonDecode(request.body) as Map;
+        return jsonResponse(
+          request,
+          body['p_cursor'] == null
+              ? [for (var i = 0; i < 30; i++) studentJson('$i'.padLeft(2, '0'))]
+              : [studentJson('29'), studentJson('30')],
+        );
+      });
+      final cubit = StudentBrowseCubit(
+        StudentRepository(TeacherReadClient(client)),
+      );
+      await cubit.search('');
+      await cubit.next();
+      expect(cubit.state.students.length, 30);
+      expect(cubit.state.error, 'SERVICE_UNAVAILABLE');
       await cubit.close();
       await client.dispose();
     },

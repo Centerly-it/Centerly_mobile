@@ -1,7 +1,8 @@
+import 'dashboard_finance_loader.dart';
+import '../../finances/domain/finance_summary.dart';
 import '../../../core/api/teacher_read_client.dart';
 import '../../../core/data/completion_contracts.dart';
 import '../../../core/errors/backend_failure.dart';
-import '../../../core/format/cairo_time.dart';
 import '../domain/dashboard_summary.dart';
 
 class DashboardRepository {
@@ -18,17 +19,26 @@ class DashboardRepository {
     try {
       final json = Map<String, dynamic>.from(data as Map);
       final summary = DashboardSummary.fromJson(json);
-      final named = await api.read(
-        CompletionContracts.enabled
-            ? TeacherRead.calendar
-            : TeacherRead.namedSessions,
-        refresh: refresh,
-        params: {
-          'p_from': summary.localDate,
-          'p_to': summary.localDate,
-          'p_group_id': null,
-        },
-      );
+      final reads = await Future.wait<dynamic>([
+        api.read(
+          CompletionContracts.enabled
+              ? TeacherRead.calendar
+              : TeacherRead.namedSessions,
+          refresh: refresh,
+          params: {
+            'p_from': summary.localDate,
+            'p_to': summary.localDate,
+            'p_group_id': null,
+          },
+        ),
+        loadDashboardFinance(
+          api,
+          json,
+          refresh: refresh,
+          selectedDate: date != null,
+        ),
+      ], eagerError: true);
+      final named = reads[0];
       final rows = CompletionContracts.enabled
           ? (named as Map)['sessions']
           : named;
@@ -43,33 +53,12 @@ class DashboardRepository {
               'status': names[row['id']]['status'] as String,
           },
       ];
-      if (CompletionContracts.enabled) {
-        final current = date == null
-            ? json
-            : Map<String, dynamic>.from(
-                await api.read(TeacherRead.overview, refresh: refresh) as Map,
-              );
-        final today = DateTime.parse(current['date'] as String);
-        final finance = Map<String, dynamic>.from(
-          await api.read(
-                TeacherRead.finance,
-                refresh: refresh,
-                params: {
-                  'p_from': CairoTime.date(DateTime(today.year, today.month)),
-                  'p_to': CairoTime.date(
-                    DateTime(today.year, today.month + 1, 0),
-                  ),
-                  'p_kind': 'invoices',
-                  'p_limit': 1,
-                },
-              )
-              as Map,
-        );
-        final totals = Map<String, dynamic>.from(finance['summary'] as Map);
-        json['invoiced_egp'] = totals['invoiced_egp'];
-        // This card reconciles with this month's due invoices, not receipt dates.
-        json['collected_egp'] = totals['paid_against_invoices_egp'];
-        json['outstanding_egp'] = totals['outstanding_egp'];
+      final totals = reads[1] as FinanceSummary?;
+      if (totals != null) {
+        json['invoiced_egp'] = totals.values['invoiced_egp']!.decimal;
+        json['collected_egp'] =
+            totals.values['paid_against_invoices_egp']!.decimal;
+        json['outstanding_egp'] = totals.values['outstanding_egp']!.decimal;
       }
       checkSession();
       return DashboardSummary.fromJson(json);

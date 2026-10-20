@@ -42,6 +42,7 @@ jobs:
       - run: node supabase/tests/teacher_completion_package.mjs
       - run: node supabase/tests/completion_integrity.mjs
       - run: node supabase/tests/finance_business.mjs
+      - run: node supabase/tests/logic_hardening.mjs
       - run: flutter build apk --debug --no-pub
       - run: flutter build apk --profile --no-pub
       - uses: actions/upload-artifact@v4

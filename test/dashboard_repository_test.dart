@@ -108,6 +108,9 @@ Map<String, dynamic> _monthlyFinance(String body) {
       'period_net_collected_egp': '375.50',
       'paid_against_invoices_egp': '125.50',
       'outstanding_egp': '42.00',
+      'daily_collections': [
+        {'date': '2026-10-01', 'net_egp': '375.50'},
+      ],
     },
   };
 }
