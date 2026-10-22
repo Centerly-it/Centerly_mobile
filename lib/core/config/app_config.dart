@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 
 class AppConfig {
   const AppConfig({
@@ -16,7 +17,14 @@ class AppConfig {
   final String url, publishableKey, supportUrl, environment;
   bool get isConfigured => url.isNotEmpty && publishableKey.isNotEmpty;
   bool get isValid {
+    if (kReleaseMode && environment != 'production') return false;
     final uri = Uri.tryParse(url);
+    if (!['development', 'production'].contains(environment) ||
+        (environment == 'production' &&
+            (uri?.host == 'yfeubomyglmhuwizaqoj.supabase.co' ||
+                publishableKey.contains('fixture')))) {
+      return false;
+    }
     if (uri == null ||
         uri.host.isEmpty ||
         uri.userInfo.isNotEmpty ||
@@ -41,9 +49,8 @@ class AppConfig {
   }
 
   Uri? get supportUri {
-    final uri = Uri.tryParse(
-      supportUrl.isEmpty ? 'https://wa.me/201028684980' : supportUrl,
-    );
+    if (supportUrl.isEmpty) return null;
+    final uri = Uri.tryParse(supportUrl);
     return uri != null &&
             ['https', 'tel', 'mailto'].contains(uri.scheme) &&
             (uri.scheme != 'https' || uri.host.isNotEmpty)

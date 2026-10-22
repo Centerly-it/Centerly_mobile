@@ -79,4 +79,25 @@ void main() {
       'INVALID_CREDENTIALS',
     );
   });
+  test(
+    'production rejects fixture backend and requires configured support',
+    () {
+      const config = AppConfig(
+        url: 'https://yfeubomyglmhuwizaqoj.supabase.co',
+        publishableKey: 'sb_publishable_test',
+        environment: 'production',
+      );
+      expect(config.isValid, isFalse);
+      expect(config.supportUri, isNull);
+      expect(
+        const AppConfig(
+          url: 'https://production.supabase.co',
+          publishableKey: 'sb_publishable_live',
+          environment: 'production',
+          supportUrl: 'https://support.example.com',
+        ).isValid,
+        isTrue,
+      );
+    },
+  );
 }

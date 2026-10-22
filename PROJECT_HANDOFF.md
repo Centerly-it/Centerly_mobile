@@ -1,3 +1,9 @@
+# Current shared pilot checkpoint — 22 October 2026
+
+Teacher remains canonical migration owner. All 27 deployed versions through `202610220002` are now present and hash-pinned here; fresh hosted history/full catalog match. No hosted schema/config/business changes ran. The previously missing original four-account credential file is available on this Windows machine and was read only in memory. Real SDK/Secretary Chrome and native Windows Teacher Auth/read-route checks passed. The configured Android debug APK built; physical-device/cross-app business acceptance remains gated.
+
+The authoritative shared checklist is [SHARED_COMPLETION_CHECKLIST.md](docs/SHARED_COMPLETION_CHECKLIST.md); the [acceptance matrix](docs/CROSS_APP_ACCEPTANCE.md), [evidence](docs/PILOT_EVIDENCE.json) and [operations/runbook](docs/PILOT_OPERATIONS.md) separate passed checks from release gates. Secretary exists at `D:\ahmedtamer\Centerly_secretary`. Both initial worktrees were clean; this checkpoint preserves designs and existing immutable migration bodies. The migration-27 source is imported unchanged from the approved Secretary review, not newly deployed. Historical 26-version/credential-missing/future-Secretary statements below are superseded.
+
 # Current handoff — approved Finance migration26,22 October2026
 
 Teacher implementation is complete for the agreed owner-testing scope. Only the
