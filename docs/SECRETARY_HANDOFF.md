@@ -1,3 +1,11 @@
+# Current handoff — verified migration 27
+
+Owner-approved 202610220002 is deployed to centerly-dev and pinned. Exact 27-body/full catalog comparison and 49 read-only hosted SQL-role checks passed; anonymous REST denied. See `SECRETARY_DEPLOYMENT_2026-10-22.md`. Teacher repository retains canonical ownership. Secretary web at `/Users/mohamedsalem/Desktop/Centerly_secretary` pins the same manifest and has its hosted extension enabled after verification. Do not replay baseline versions or apply this migration again.
+
+Hosted business-fixture mutations are not approved. Original passwords are absent; no actual password/browser/Flutter hosted acceptance is claimed. Secretary contains a separate concrete fixture approval proposal. Earlier 26-version/proposal/ownership-transfer statements below are historical where they conflict with this current owner decision.
+
+---
+
 # Secretary React handoff — shared backend v202610220001
 
 Teacher repository temporarily owns the canonical backend by explicit owner

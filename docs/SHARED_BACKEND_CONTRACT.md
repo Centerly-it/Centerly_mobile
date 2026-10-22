@@ -1,3 +1,22 @@
+# Current shared contract — migration 27 (202610220002)
+
+Teacher repository remains canonical migration owner. The isolated canonical worktree manifest pins 27 deployed versions, including owner-approved Secretary operations, verified 2026-10-22. No baseline migration was replayed/edited. Prior 26-version statements below are historical. Deployment evidence and limits: `SECRETARY_DEPLOYMENT_2026-10-22.md`.
+
+Secretary-only secured RPCs added:
+
+| Function | Named arguments | Return |
+|---|---|---|
+| secretary_browse | p_entity text, p_filters jsonb='{}', p_search text='', p_cursor uuid=null, p_limit integer=30 | JSON rows/full count/next_cursor/synced_at/server_date/unread_count; 1..100 pages; fixed entity/filter allowlists; tenant/recipient scope |
+| secretary_dashboard | none | Server Cairo date, today's sessions/persisted pending, exact-string net cash/due-through-today/all outstanding |
+| secretary_enroll | p_group_id uuid, p_student_id uuid, p_enrollment_id uuid=null | enrollment UUID; null creates, specified active record withdraws at server time; history retained |
+| secretary_set_attendance | p_session_id uuid, p_student_id uuid, p_status text, p_expected_updated_at timestamptz=null, p_reason text=null | UUID; expected version conflict before existing manual/audited attendance |
+| secretary_revise_schedule | p_id uuid, p_from date, p_weekday integer, p_start time, p_end time, p_to date=null | new schedule UUID; no past/equal-start revision, no affected generated occurrences |
+| secretary_archive | p_entity text, p_id uuid | server archived_at; students/groups only, historical records retained |
+
+Capacity/lifecycle guards apply to direct enrollment/group writes too. Current add_schedule/generate_sessions signatures are unchanged, with tenant-level serialization added for revision/generation and overlap checks. Every original Teacher function/grant and all table/RLS permissions remain unchanged. Secretary reads never call teacher-only report RPCs. Existing payment/reversal/finalization/cancellation semantics are preserved. Invoice/balance/payment values in Secretary reads are exact decimal strings; session pages use starts_at/id order with UUID cursor lookup. Other pages use UUID order. Search is literal; financial summaries cover the complete server set.
+
+---
+
 # Shared backend contract — v6.1 development deployment
 
 Canonical source: this repository's `supabase/migrations`, by explicit owner

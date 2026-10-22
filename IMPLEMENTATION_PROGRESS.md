@@ -1,3 +1,9 @@
+# Current canonical backend checkpoint — 2026-10-22
+
+Approved Secretary migration 27 deployed once, exact hash b23fbfcc0ad6a55c21a03c4c4d1a85e42f3234cab63ef970ad72343633d6ff43. Fresh baseline 26-body/catalog preflight, only-one-version dry run and exact 27-body/full catalog postflight passed. Final catalog 54 functions, 18 tables, 30 policies, 13 triggers; zero invalid enrollment timelines. All table/RLS grants preserved. Read-only hosted 49 checks and anonymous REST 401 passed; no fixture/account/Auth changes. Canonical manifest updated only after verification. Original Teacher checkout untouched; this isolated canonical worktree is the deployment commit source. No website/production publication. Evidence: docs/SECRETARY_DEPLOYMENT_2026-10-22.md and .json. Next: separately approved fixture scope and original-credential hosted acceptance; no claim of Auth/Flutter/browser readiness from SQL simulation.
+
+---
+
 # Centerly implementation progress
 
 ## Teacher owner-testing implementation complete; Finance26 deployed — 2026-10-22
