@@ -13,6 +13,7 @@ import '../../../core/widgets/teacher_action_button.dart';
 import '../../../screens/teacher/teacher_shared.dart';
 import '../../sessions/presentation/session_detail_page.dart';
 import '../domain/notification_record.dart';
+import 'notification_payment_button.dart';
 
 class TeacherNotificationsPage extends StatelessWidget {
   const TeacherNotificationsPage({super.key});
@@ -55,6 +56,11 @@ class TeacherNotificationsPage extends StatelessWidget {
                     onPressed: () =>
                         SessionDetailPage.open(context, r.sessionId!),
                     child: Text('session_details_title'.tr()),
+                  ),
+                if (r.paymentId != null)
+                  NotificationPaymentButton(
+                    paymentId: r.paymentId!,
+                    reversed: r.type == 'payment_reversed',
                   ),
                 if (r.readAt == null)
                   TeacherActionButton(

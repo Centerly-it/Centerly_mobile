@@ -1,0 +1,1129 @@
+{
+  "namespace": "SEC27-ACCEPT-20261022",
+  "projectRef": "yfeubomyglmhuwizaqoj",
+  "environment": "centerly-dev only",
+  "at": "2026-10-22T20:51:06.563Z",
+  "approval": "Explicit user approval of the original scope, atomic void cleanup and consolidated note/removal addendum",
+  "baseline": {
+    "at": "2026-10-22T20:07:36.953Z",
+    "hostedWrites": 0,
+    "pass": true,
+    "migrations": 27,
+    "functions": 54,
+    "tables": 18,
+    "policies": 30,
+    "triggers": 13
+  },
+  "credentials": {
+    "originalFileAvailable": true,
+    "exactAuthenticatedIdentities": 4,
+    "passwordOrTokenMaterialInReport": false
+  },
+  "modes": {
+    "actualSupabaseSDKREST": true,
+    "actualSecretaryChromium": true,
+    "actualTeacherWindowsNative": true,
+    "trustedSQLFixtureSeeding": true,
+    "trustedAtomicSQLVoidCleanup": true,
+    "hostedSQLRoleSimulationUsedAsAcceptance": false,
+    "localSyntheticBrowserTestsSeparate": true
+  },
+  "completedAt": "2026-10-22T20:29:15.549Z",
+  "registry": {
+    "location": ".local/sec27/registry.json",
+    "restrictedACL": true,
+    "completedSteps": 56,
+    "unfinishedSteps": 0,
+    "resumePolicy": "completed; read-only verification only; do not recreate fixtures, replace keys, repeat note writes or repeat cleanup"
+  },
+  "counts": {
+    "assignments": 1,
+    "attendance": 10,
+    "attendance_change_log": 5,
+    "audit_events": 13,
+    "exams": 2,
+    "grade_levels": 2,
+    "group_enrollments": 3,
+    "group_schedules": 2,
+    "groups": 3,
+    "invoices": 1,
+    "notifications": 7,
+    "payments": 4,
+    "secretary_removal_requests": 1,
+    "sessions": 5,
+    "students": 3,
+    "teacher_notes": 1
+  },
+  "ceilings": {
+    "auditEvents": 23,
+    "attendanceChanges": 6,
+    "notifications": 8,
+    "successfulNoteSaves": 2,
+    "pendingRemovalRequests": 1
+  },
+  "verification": {
+    "recordedPassedChecks": 61,
+    "distinctCheckLabels": 50,
+    "checks": [
+      {
+        "label": "Authenticated REST foreign student hidden",
+        "at": "2026-10-22T20:11:21.351Z"
+      },
+      {
+        "label": "Teacher enrollment denied",
+        "at": "2026-10-22T20:11:21.497Z"
+      },
+      {
+        "label": "Foreign group enrollment denied",
+        "at": "2026-10-22T20:11:21.587Z"
+      },
+      {
+        "label": "Capacity-one denies A2",
+        "at": "2026-10-22T20:15:49.955Z"
+      },
+      {
+        "label": "Duplicate concurrent enrollments denied without added history",
+        "at": "2026-10-22T20:15:50.416Z"
+      },
+      {
+        "label": "Capacity shrink below two active members denied",
+        "at": "2026-10-22T20:15:59.238Z"
+      },
+      {
+        "label": "Exact generation replay creates zero sessions",
+        "at": "2026-10-22T20:16:16.981Z"
+      },
+      {
+        "label": "Overlapping schedule rejected",
+        "at": "2026-10-22T20:16:17.610Z"
+      },
+      {
+        "label": "Revision affecting generated history rejected",
+        "at": "2026-10-22T20:16:17.704Z"
+      },
+      {
+        "label": "Exactly five sessions and ten persisted roster rows",
+        "at": "2026-10-22T20:16:27.097Z"
+      },
+      {
+        "label": "Generated November Cairo calendar dates preserved",
+        "at": "2026-10-22T20:16:27.097Z"
+      },
+      {
+        "label": "Finalized correction requires reason",
+        "at": "2026-10-22T20:16:55.293Z"
+      },
+      {
+        "label": "Cancelled attendance rejects later marks",
+        "at": "2026-10-22T20:16:59.752Z"
+      },
+      {
+        "label": "Teacher attendance scoped read 0001",
+        "at": "2026-10-22T20:16:59.919Z"
+      },
+      {
+        "label": "Teacher attendance scoped read 0002",
+        "at": "2026-10-22T20:17:00.075Z"
+      },
+      {
+        "label": "Teacher attendance scoped read 0003",
+        "at": "2026-10-22T20:17:00.232Z"
+      },
+      {
+        "label": "Other teacher denied foreign session",
+        "at": "2026-10-22T20:17:00.495Z"
+      },
+      {
+        "label": "Exactly five audited attendance changes",
+        "at": "2026-10-22T20:17:10.061Z"
+      },
+      {
+        "label": "Unmarked remains persisted after time/finalization",
+        "at": "2026-10-22T20:17:10.061Z"
+      },
+      {
+        "label": "Teacher report distinguishes missing score from actual zero",
+        "at": "2026-10-22T20:18:02.712Z"
+      },
+      {
+        "label": "Teacher assignment report matches Secretary submitted status",
+        "at": "2026-10-22T20:18:02.858Z"
+      },
+      {
+        "label": "Foreign student academic report denied",
+        "at": "2026-10-22T20:18:02.997Z"
+      },
+      {
+        "label": "Secretary note write denied",
+        "at": "2026-10-22T20:18:05.263Z"
+      },
+      {
+        "label": "Other teacher note write denied",
+        "at": "2026-10-22T20:18:05.586Z"
+      },
+      {
+        "label": "Original exact payload/key replay returns same receipt",
+        "at": "2026-10-22T20:19:02.134Z"
+      },
+      {
+        "label": "Changed payload with original key denied",
+        "at": "2026-10-22T20:19:02.461Z"
+      },
+      {
+        "label": "Two accepted originals exactly settle 100.10",
+        "at": "2026-10-22T20:19:03.063Z"
+      },
+      {
+        "label": "Teacher full filtered balance matches fully paid Secretary invoice",
+        "at": "2026-10-22T20:19:03.253Z"
+      },
+      {
+        "label": "Duplicate reversal returns same correcting receipt",
+        "at": "2026-10-22T20:19:05.625Z"
+      },
+      {
+        "label": "Exactly two originals and two immutable reversals retained",
+        "at": "2026-10-22T20:19:16.196Z"
+      },
+      {
+        "label": "Reversed invoice has exact zero net and 100.10 balance before atomic void",
+        "at": "2026-10-22T20:19:16.368Z"
+      },
+      {
+        "label": "Exact removal replay returns same pending request",
+        "at": "2026-10-22T20:28:45.953Z"
+      },
+      {
+        "label": "Removal request never deactivates secretary",
+        "at": "2026-10-22T20:28:45.953Z"
+      },
+      {
+        "label": "Archived targets reject enrollment",
+        "at": "2026-10-22T20:28:56.262Z"
+      },
+      {
+        "label": "Archived empty group rejects schedules",
+        "at": "2026-10-22T20:28:56.425Z"
+      },
+      {
+        "label": "All new students/groups archived",
+        "at": "2026-10-22T20:29:15.549Z"
+      },
+      {
+        "label": "Exactly three enrollment histories retained with real exit times",
+        "at": "2026-10-22T20:29:15.549Z"
+      },
+      {
+        "label": "Only generated fixture notifications marked read",
+        "at": "2026-10-22T20:29:15.549Z"
+      },
+      {
+        "label": "Real browser cancelled session retains both attendance rows",
+        "at": "2026-10-22T20:31:02.108Z"
+      },
+      {
+        "label": "Real browser cancelled attendance controls disabled",
+        "at": "2026-10-22T20:31:02.110Z"
+      },
+      {
+        "label": "Real Secretary UI reads persisted Teacher note winner",
+        "at": "2026-10-22T20:31:03.193Z"
+      },
+      {
+        "label": "Void invoice cannot start new collection",
+        "at": "2026-10-22T20:31:04.149Z"
+      },
+      {
+        "label": "Real browser displays all four retained ledger movements",
+        "at": "2026-10-22T20:31:04.151Z"
+      },
+      {
+        "label": "Real browser cancelled session retains both attendance rows",
+        "at": "2026-10-22T20:32:12.120Z"
+      },
+      {
+        "label": "Real browser cancelled attendance controls disabled",
+        "at": "2026-10-22T20:32:12.122Z"
+      },
+      {
+        "label": "Real Secretary UI reads persisted Teacher note winner",
+        "at": "2026-10-22T20:32:13.157Z"
+      },
+      {
+        "label": "Void invoice cannot start new collection",
+        "at": "2026-10-22T20:32:14.077Z"
+      },
+      {
+        "label": "Real browser displays all four retained ledger movements",
+        "at": "2026-10-22T20:32:14.080Z"
+      },
+      {
+        "label": "Teacher retained invoice has zero payable balance, zero net paid and all four movements",
+        "at": "2026-10-22T20:32:14.779Z"
+      },
+      {
+        "label": "Deployed contract hides archived student-scoped reports; retained invoice detail remains readable",
+        "at": "2026-10-22T20:32:14.935Z"
+      },
+      {
+        "label": "Foreign recipient cannot mark fixture notification read",
+        "at": "2026-10-22T20:32:15.428Z"
+      },
+      {
+        "label": "Foreign recipient cannot mark fixture notification read",
+        "at": "2026-10-22T20:32:15.684Z"
+      },
+      {
+        "label": "Foreign recipient cannot mark fixture notification read",
+        "at": "2026-10-22T20:32:15.838Z"
+      },
+      {
+        "label": "Foreign recipient cannot mark fixture notification read",
+        "at": "2026-10-22T20:32:16.052Z"
+      },
+      {
+        "label": "Foreign recipient cannot mark fixture notification read",
+        "at": "2026-10-22T20:32:16.181Z"
+      },
+      {
+        "label": "Foreign recipient cannot mark fixture notification read",
+        "at": "2026-10-22T20:32:16.384Z"
+      },
+      {
+        "label": "Foreign recipient cannot mark fixture notification read",
+        "at": "2026-10-22T20:32:16.577Z"
+      },
+      {
+        "label": "Actual Teacher/Secretary calendar RPCs match both retained generated sessions and Cairo instants",
+        "at": "2026-10-22T20:39:20.392Z"
+      },
+      {
+        "label": "Same-tenant wrong-recipient notification hidden from Secretary RPC",
+        "at": "2026-10-22T20:49:52.928Z"
+      },
+      {
+        "label": "Real Secretary browser hides Teacher-addressed scoped notification",
+        "at": "2026-10-22T20:49:53.418Z"
+      },
+      {
+        "label": "Full two-tenant namespace search contains only captured approved IDs; unrelated baseline digests preserved",
+        "at": "2026-10-22T20:51:05.905Z"
+      }
+    ],
+    "nativeWindows": {
+      "pass": true,
+      "profile": true,
+      "cancelledAttendance": true,
+      "academics": true,
+      "invoice": true,
+      "noteConflict": true,
+      "removalRequest": true
+    },
+    "noteConflict": {
+      "pass": true,
+      "draftPreserved": true,
+      "staleSaveRejected": true
+    },
+    "notificationReceiptUI": {
+      "pass": true,
+      "realReceiptActor": true,
+      "invoiceDrilldown": true
+    },
+    "secretaryNotificationUI": {
+      "pass": true,
+      "ownNotifications": 0,
+      "teacherNotifications": 7,
+      "wrongRecipientBrowserDenied": true,
+      "positiveSecretaryEventAvailable": false,
+      "readOnly": true
+    }
+  },
+  "reconciliation": {
+    "before": [
+      {
+        "net": "240.00",
+        "outstanding": "200.04",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "net": "0",
+        "outstanding": "0",
+        "teacher_id": "296a86e5-ca79-4b5c-8817-e64fe70375cc"
+      }
+    ],
+    "after": [
+      {
+        "net": "240.00",
+        "outstanding": "200.04",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "net": "0",
+        "outstanding": "0",
+        "teacher_id": "296a86e5-ca79-4b5c-8817-e64fe70375cc"
+      }
+    ],
+    "allTenantFinancialTotalsRestored": true,
+    "unrelatedRecordDigestsUnchanged": true,
+    "accountTenantStatusSubscriptionUnchanged": true,
+    "cleanupAuditCount": 1,
+    "zeroNetFixturePayments": "0.00",
+    "invoicePayableBalance": "0.00",
+    "invoiceStatus": "void",
+    "atomicVoidLocalGuardChecks": 6,
+    "noteSaveAuditCount": 2
+  },
+  "retained": {
+    "students": [
+      {
+        "archived_at": "2026-10-22T20:28:55.774003+00:00",
+        "created_at": "2026-10-22T20:10:53.822802+00:00",
+        "full_name": "SEC27-ACCEPT-20261022-A1",
+        "guardian_phone": null,
+        "id": "ce270000-0000-4000-8000-000000000001",
+        "level_tag": "SEC27-ACCEPT-20261022",
+        "phone": null,
+        "qr_code_value": "1b91390c-10c8-43f8-9978-35e628064b55",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "updated_at": "2026-10-22T20:28:55.774183+00:00"
+      },
+      {
+        "archived_at": "2026-10-22T20:28:55.907959+00:00",
+        "created_at": "2026-10-22T20:10:53.923169+00:00",
+        "full_name": "SEC27-ACCEPT-20261022-A2",
+        "guardian_phone": null,
+        "id": "ce270000-0000-4000-8000-000000000002",
+        "level_tag": null,
+        "phone": null,
+        "qr_code_value": "e3527500-172c-49c6-a8b3-97a805d037ff",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "updated_at": "2026-10-22T20:28:55.908106+00:00"
+      },
+      {
+        "archived_at": "2026-10-22T20:28:55.997667+00:00",
+        "created_at": "2026-10-22T20:10:54.032285+00:00",
+        "full_name": "SEC27-ACCEPT-20261022-B1",
+        "guardian_phone": null,
+        "id": "ce270000-0000-4000-8000-000000000003",
+        "level_tag": null,
+        "phone": null,
+        "qr_code_value": "83796dbd-5516-4063-9a35-7755b12c854a",
+        "teacher_id": "296a86e5-ca79-4b5c-8817-e64fe70375cc",
+        "updated_at": "2026-10-22T20:28:55.997849+00:00"
+      }
+    ],
+    "grades": [
+      {
+        "id": "ce270100-0000-4000-8000-000000000001",
+        "name": "SEC27-ACCEPT-20261022-GRADE-A",
+        "sort_order": 9999,
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "id": "ce270100-0000-4000-8000-000000000002",
+        "name": "SEC27-ACCEPT-20261022-GRADE-B",
+        "sort_order": 9999,
+        "teacher_id": "296a86e5-ca79-4b5c-8817-e64fe70375cc"
+      }
+    ],
+    "groups": [
+      {
+        "archived_at": "2026-10-22T20:28:56.093398+00:00",
+        "capacity": 1,
+        "grade_level_id": "ce270100-0000-4000-8000-000000000001",
+        "id": "ce270200-0000-4000-8000-000000000001",
+        "name": "SEC27-ACCEPT-20261022-A-capacity",
+        "subject_name": "Synthetic acceptance",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "archived_at": "2026-10-22T20:28:56.194418+00:00",
+        "capacity": 1,
+        "grade_level_id": "ce270100-0000-4000-8000-000000000001",
+        "id": "ce270200-0000-4000-8000-000000000002",
+        "name": "SEC27-ACCEPT-20261022-A-archive",
+        "subject_name": "Synthetic acceptance",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "archived_at": "2026-10-22T20:28:56.296489+00:00",
+        "capacity": 1,
+        "grade_level_id": "ce270100-0000-4000-8000-000000000002",
+        "id": "ce270200-0000-4000-8000-000000000003",
+        "name": "SEC27-ACCEPT-20261022-B-foreign",
+        "subject_name": "Synthetic acceptance",
+        "teacher_id": "296a86e5-ca79-4b5c-8817-e64fe70375cc"
+      }
+    ],
+    "enrollments": [
+      {
+        "group_id": "ce270200-0000-4000-8000-000000000001",
+        "id": "6c47f2a0-d85c-47c8-a43e-5d4329afd17f",
+        "joined_at": "2026-10-22T20:15:55.487728+00:00",
+        "left_at": "2026-10-22T20:28:46.758583+00:00",
+        "status": "inactive",
+        "student_id": "ce270000-0000-4000-8000-000000000002",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "group_id": "ce270200-0000-4000-8000-000000000001",
+        "id": "a0fdb226-5db7-4a75-bc3e-f9b9f6c440ea",
+        "joined_at": "2026-10-22T20:28:46.9055+00:00",
+        "left_at": "2026-10-22T20:28:47.041345+00:00",
+        "status": "inactive",
+        "student_id": "ce270000-0000-4000-8000-000000000001",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "group_id": "ce270200-0000-4000-8000-000000000001",
+        "id": "ec732733-c188-43ae-82f0-e29d13926098",
+        "joined_at": "2026-10-22T20:14:28.45036+00:00",
+        "left_at": "2026-10-22T20:28:46.285932+00:00",
+        "status": "inactive",
+        "student_id": "ce270000-0000-4000-8000-000000000001",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      }
+    ],
+    "schedules": [
+      {
+        "effective_from": "2026-11-05",
+        "effective_to": "2026-11-18",
+        "group_id": "ce270200-0000-4000-8000-000000000001",
+        "id": "67761793-9a2f-49a3-82a1-4407e1e75311",
+        "local_end_time": "19:00:00",
+        "local_start_time": "18:00:00",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "weekday": 4
+      },
+      {
+        "effective_from": "2026-11-19",
+        "effective_to": null,
+        "group_id": "ce270200-0000-4000-8000-000000000001",
+        "id": "b33352de-6bb0-4970-9d8a-81f183cec70c",
+        "local_end_time": "20:00:00",
+        "local_start_time": "19:00:00",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "weekday": 4
+      }
+    ],
+    "sessions": [
+      {
+        "attendance_finalized_at": null,
+        "attendance_finalized_by": null,
+        "cancel_reason": "SEC27-ACCEPT-20261022 approved cleanup",
+        "cancelled_at": "2026-10-22T20:28:47.229452+00:00",
+        "cancelled_by": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "created_at": "2026-10-22T20:16:15.555386+00:00",
+        "ends_at": "2026-11-12T17:00:00+00:00",
+        "group_id": "ce270200-0000-4000-8000-000000000001",
+        "id": "46f6e00c-1d01-4a2b-ade5-b59a70e0fd8c",
+        "local_date": "2026-11-12",
+        "schedule_id": "67761793-9a2f-49a3-82a1-4407e1e75311",
+        "starts_at": "2026-11-12T16:00:00+00:00",
+        "status": "cancelled",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "attendance_finalized_at": "2026-10-22T20:16:54.199186+00:00",
+        "attendance_finalized_by": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "cancel_reason": null,
+        "cancelled_at": null,
+        "cancelled_by": null,
+        "created_at": "2026-10-22T20:16:09.160958+00:00",
+        "ends_at": "2026-10-22T19:16:09.160958+00:00",
+        "group_id": "ce270200-0000-4000-8000-000000000001",
+        "id": "ce270300-0000-4000-8000-000000000001",
+        "local_date": "2026-10-22",
+        "schedule_id": null,
+        "starts_at": "2026-10-22T18:16:09.160958+00:00",
+        "status": "upcoming",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "attendance_finalized_at": null,
+        "attendance_finalized_by": null,
+        "cancel_reason": "SEC27-ACCEPT-20261022 cancellation race",
+        "cancelled_at": "2026-10-22T20:16:58.588991+00:00",
+        "cancelled_by": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "created_at": "2026-10-22T20:16:09.160958+00:00",
+        "ends_at": "2026-10-23T01:16:09.160958+00:00",
+        "group_id": "ce270200-0000-4000-8000-000000000001",
+        "id": "ce270300-0000-4000-8000-000000000002",
+        "local_date": "2026-10-23",
+        "schedule_id": null,
+        "starts_at": "2026-10-23T00:16:09.160958+00:00",
+        "status": "cancelled",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "attendance_finalized_at": null,
+        "attendance_finalized_by": null,
+        "cancel_reason": null,
+        "cancelled_at": null,
+        "cancelled_by": null,
+        "created_at": "2026-10-22T20:16:09.160958+00:00",
+        "ends_at": "2026-10-22T23:16:09.160958+00:00",
+        "group_id": "ce270200-0000-4000-8000-000000000001",
+        "id": "ce270300-0000-4000-8000-000000000003",
+        "local_date": "2026-10-22",
+        "schedule_id": null,
+        "starts_at": "2026-10-22T19:16:09.160958+00:00",
+        "status": "upcoming",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "attendance_finalized_at": null,
+        "attendance_finalized_by": null,
+        "cancel_reason": "SEC27-ACCEPT-20261022 approved cleanup",
+        "cancelled_at": "2026-10-22T20:28:47.130533+00:00",
+        "cancelled_by": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "created_at": "2026-10-22T20:16:15.555386+00:00",
+        "ends_at": "2026-11-05T17:00:00+00:00",
+        "group_id": "ce270200-0000-4000-8000-000000000001",
+        "id": "ee6f610a-d0ac-44a9-a395-236d8026ddc0",
+        "local_date": "2026-11-05",
+        "schedule_id": "67761793-9a2f-49a3-82a1-4407e1e75311",
+        "starts_at": "2026-11-05T16:00:00+00:00",
+        "status": "cancelled",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      }
+    ],
+    "attendance": [
+      {
+        "id": "11e7d34d-49c6-4dcf-a537-af3b7070d6e2",
+        "marked_at": null,
+        "marked_by": null,
+        "session_id": "46f6e00c-1d01-4a2b-ade5-b59a70e0fd8c",
+        "status": "not_marked",
+        "student_id": "ce270000-0000-4000-8000-000000000002",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "updated_at": "2026-10-22T20:16:15.555386+00:00"
+      },
+      {
+        "id": "15b4fcee-623b-4a7b-ad42-25bd3b21f479",
+        "marked_at": "2026-10-22T20:16:45.627074+00:00",
+        "marked_by": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "session_id": "ce270300-0000-4000-8000-000000000002",
+        "status": "present",
+        "student_id": "ce270000-0000-4000-8000-000000000001",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "updated_at": "2026-10-22T20:16:45.627074+00:00"
+      },
+      {
+        "id": "260e7f5a-eb01-456a-b3f0-b0c83c1ca5af",
+        "marked_at": null,
+        "marked_by": null,
+        "session_id": "ee6f610a-d0ac-44a9-a395-236d8026ddc0",
+        "status": "not_marked",
+        "student_id": "ce270000-0000-4000-8000-000000000002",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "updated_at": "2026-10-22T20:16:15.555386+00:00"
+      },
+      {
+        "id": "61c5712f-f341-474e-8290-0b3fba3e1624",
+        "marked_at": "2026-10-22T20:16:56.670951+00:00",
+        "marked_by": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "session_id": "ce270300-0000-4000-8000-000000000001",
+        "status": "excused",
+        "student_id": "ce270000-0000-4000-8000-000000000001",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "updated_at": "2026-10-22T20:16:56.670951+00:00"
+      },
+      {
+        "id": "735530b7-3d10-4185-938c-b00703a434f7",
+        "marked_at": null,
+        "marked_by": null,
+        "session_id": "ce270300-0000-4000-8000-000000000001",
+        "status": "not_marked",
+        "student_id": "ce270000-0000-4000-8000-000000000002",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "updated_at": "2026-10-22T20:16:09.160958+00:00"
+      },
+      {
+        "id": "89b5d332-e899-482f-b783-189cc8cd5177",
+        "marked_at": null,
+        "marked_by": null,
+        "session_id": "ce270300-0000-4000-8000-000000000002",
+        "status": "not_marked",
+        "student_id": "ce270000-0000-4000-8000-000000000002",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "updated_at": "2026-10-22T20:16:09.160958+00:00"
+      },
+      {
+        "id": "a78f537f-41b8-4c1a-90bd-73b1a5feffba",
+        "marked_at": null,
+        "marked_by": null,
+        "session_id": "ee6f610a-d0ac-44a9-a395-236d8026ddc0",
+        "status": "not_marked",
+        "student_id": "ce270000-0000-4000-8000-000000000001",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "updated_at": "2026-10-22T20:16:15.555386+00:00"
+      },
+      {
+        "id": "b235b499-812d-418e-ab77-a5c58176118a",
+        "marked_at": null,
+        "marked_by": null,
+        "session_id": "46f6e00c-1d01-4a2b-ade5-b59a70e0fd8c",
+        "status": "not_marked",
+        "student_id": "ce270000-0000-4000-8000-000000000001",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "updated_at": "2026-10-22T20:16:15.555386+00:00"
+      },
+      {
+        "id": "b8a34f6b-db4d-42f8-a37a-c33ab66d3edc",
+        "marked_at": "2026-10-22T20:16:57.831887+00:00",
+        "marked_by": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "session_id": "ce270300-0000-4000-8000-000000000003",
+        "status": "absent",
+        "student_id": "ce270000-0000-4000-8000-000000000001",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "updated_at": "2026-10-22T20:16:57.831887+00:00"
+      },
+      {
+        "id": "f4047475-86f6-4f1f-9780-686b8bff8015",
+        "marked_at": null,
+        "marked_by": null,
+        "session_id": "ce270300-0000-4000-8000-000000000003",
+        "status": "not_marked",
+        "student_id": "ce270000-0000-4000-8000-000000000002",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "updated_at": "2026-10-22T20:16:09.160958+00:00"
+      }
+    ],
+    "attendanceChanges": [
+      {
+        "actor_id": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "attendance_id": "b8a34f6b-db4d-42f8-a37a-c33ab66d3edc",
+        "changed_at": "2026-10-22T20:16:48.023076+00:00",
+        "id": "0b38ef66-c83b-445b-ba77-15a00304f443",
+        "next_status": "present",
+        "previous_status": "not_marked",
+        "reason": null,
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "actor_id": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "attendance_id": "61c5712f-f341-474e-8290-0b3fba3e1624",
+        "changed_at": "2026-10-22T20:16:56.667712+00:00",
+        "id": "2c684400-b7d7-457f-b9d9-adb390e3e2af",
+        "next_status": "excused",
+        "previous_status": "present",
+        "reason": "SEC27-ACCEPT-20261022 correction",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "actor_id": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "attendance_id": "15b4fcee-623b-4a7b-ad42-25bd3b21f479",
+        "changed_at": "2026-10-22T20:16:45.615619+00:00",
+        "id": "34889404-eba0-4964-909e-27f4755bc93b",
+        "next_status": "present",
+        "previous_status": "not_marked",
+        "reason": null,
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "actor_id": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "attendance_id": "b8a34f6b-db4d-42f8-a37a-c33ab66d3edc",
+        "changed_at": "2026-10-22T20:16:57.828299+00:00",
+        "id": "36290601-cd58-4579-8e58-1a06c581d92c",
+        "next_status": "absent",
+        "previous_status": "present",
+        "reason": "SEC27-ACCEPT-20261022 race",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "actor_id": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "attendance_id": "61c5712f-f341-474e-8290-0b3fba3e1624",
+        "changed_at": "2026-10-22T20:16:51.333238+00:00",
+        "id": "950cf443-d833-49e3-83a2-dc506f786632",
+        "next_status": "present",
+        "previous_status": "not_marked",
+        "reason": null,
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      }
+    ],
+    "exams": [
+      {
+        "entered_by": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "group_id": "ce270200-0000-4000-8000-000000000001",
+        "held_on": "2026-10-22",
+        "id": "39683744-d281-4568-b1cf-80109bb32bb8",
+        "score_percent": null,
+        "student_id": "ce270000-0000-4000-8000-000000000001",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "title": "SEC27-ACCEPT-20261022-MISSING",
+        "updated_at": "2026-10-22T20:17:57.155001+00:00"
+      },
+      {
+        "entered_by": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "group_id": "ce270200-0000-4000-8000-000000000001",
+        "held_on": "2026-10-22",
+        "id": "ba4c3d3c-0f3b-4123-817c-5390d0026de5",
+        "score_percent": 0,
+        "student_id": "ce270000-0000-4000-8000-000000000001",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "title": "SEC27-ACCEPT-20261022-ZERO",
+        "updated_at": "2026-10-22T20:17:59.089723+00:00"
+      }
+    ],
+    "assignments": [
+      {
+        "due_on": "2026-10-22",
+        "entered_by": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "group_id": "ce270200-0000-4000-8000-000000000001",
+        "id": "18062c82-6bf7-4cf7-b02b-de8eab563aa0",
+        "status": "submitted",
+        "student_id": "ce270000-0000-4000-8000-000000000001",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "title": "SEC27-ACCEPT-20261022-ASSIGNMENT",
+        "updated_at": "2026-10-22T20:18:02.989878+00:00"
+      }
+    ],
+    "invoices": [
+      {
+        "amount_egp": 100.1,
+        "created_at": "2026-10-22T20:18:04.16068+00:00",
+        "created_by": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "due_on": "2026-10-22",
+        "group_id": "ce270200-0000-4000-8000-000000000001",
+        "id": "cb296d5e-57fe-4974-8f50-e38d0ab1decd",
+        "invoice_number": "SEC27-ACCEPT-20261022-INV-01",
+        "status": "void",
+        "student_id": "ce270000-0000-4000-8000-000000000001",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "void_reason": "SEC27-ACCEPT-20261022 approved synthetic-fixture cleanup"
+      }
+    ],
+    "payments": [
+      {
+        "amount_egp": 40.05,
+        "collected_at": "2026-10-22T20:19:04.347772+00:00",
+        "collected_by": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "created_at": "2026-10-22T20:19:04.347772+00:00",
+        "id": "40de2538-9c10-41c6-bf7f-f1d17c33af4e",
+        "idempotency_key": "a9198aa7-4153-4f2f-a3a5-d4d5435e5918",
+        "invoice_id": "cb296d5e-57fe-4974-8f50-e38d0ab1decd",
+        "method": "cash",
+        "reason": "SEC27-ACCEPT-20261022 reversal first",
+        "receipt_number": "39c1d089-7953-4f56-b8ec-246dee015300",
+        "reversal_of": "9632d145-ca62-4ea4-a92f-a79e7ab0c885",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "amount_egp": 60.05,
+        "collected_at": "2026-10-22T20:19:05.544016+00:00",
+        "collected_by": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "created_at": "2026-10-22T20:19:05.544016+00:00",
+        "id": "4949544b-5c77-4818-a8c0-67cbbe5f500e",
+        "idempotency_key": "b320b9dc-9838-460d-aba3-17d427c3b735",
+        "invoice_id": "cb296d5e-57fe-4974-8f50-e38d0ab1decd",
+        "method": "transfer",
+        "reason": "SEC27-ACCEPT-20261022 reversal second",
+        "receipt_number": "cea56ec3-bec4-46d1-80e6-a42730c49376",
+        "reversal_of": "4e275136-b553-4657-8767-000d541e9823",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "amount_egp": 60.05,
+        "collected_at": "2026-10-22T20:19:02.794596+00:00",
+        "collected_by": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "created_at": "2026-10-22T20:19:02.794596+00:00",
+        "id": "4e275136-b553-4657-8767-000d541e9823",
+        "idempotency_key": "ce270600-0000-4000-8000-000000000002",
+        "invoice_id": "cb296d5e-57fe-4974-8f50-e38d0ab1decd",
+        "method": "transfer",
+        "reason": null,
+        "receipt_number": "0aed1726-ae2e-4785-bd6c-7fd53d64f6c3",
+        "reversal_of": null,
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "amount_egp": 40.05,
+        "collected_at": "2026-10-22T20:18:59.914431+00:00",
+        "collected_by": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "created_at": "2026-10-22T20:18:59.914431+00:00",
+        "id": "9632d145-ca62-4ea4-a92f-a79e7ab0c885",
+        "idempotency_key": "ce270600-0000-4000-8000-000000000001",
+        "invoice_id": "cb296d5e-57fe-4974-8f50-e38d0ab1decd",
+        "method": "cash",
+        "reason": null,
+        "receipt_number": "380f9e93-8f51-4def-9cc2-0c9d3810234b",
+        "reversal_of": null,
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      }
+    ],
+    "notes": [
+      {
+        "content": "SEC27-ACCEPT-20261022 NOTE-WINNER-A",
+        "id": "57895c8a-f02f-4e9a-bcec-e49a31bbf8f0",
+        "student_id": "ce270000-0000-4000-8000-000000000001",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "updated_at": "2026-10-22T20:23:21.976408+00:00"
+      }
+    ],
+    "removalRequests": [
+      {
+        "handled_at": null,
+        "id": "85bf1f3c-abd3-4220-858f-709b21bdd793",
+        "requested_at": "2026-10-22T20:27:14.413581+00:00",
+        "secretary_id": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "status": "pending",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      }
+    ],
+    "notifications": [
+      {
+        "created_at": "2026-10-22T20:28:47.127095+00:00",
+        "id": "2f21aa94-6efc-4f77-8901-b46ab312227a",
+        "payload": {
+          "session_id": "ee6f610a-d0ac-44a9-a395-236d8026ddc0"
+        },
+        "read_at": "2026-10-22T20:29:05.397309+00:00",
+        "recipient_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "type": "session_cancelled"
+      },
+      {
+        "created_at": "2026-10-22T20:28:47.22606+00:00",
+        "id": "320086e1-e4de-4c07-b006-ead1589556c2",
+        "payload": {
+          "session_id": "46f6e00c-1d01-4a2b-ade5-b59a70e0fd8c"
+        },
+        "read_at": "2026-10-22T20:29:05.490331+00:00",
+        "recipient_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "type": "session_cancelled"
+      },
+      {
+        "created_at": "2026-10-22T20:18:59.914431+00:00",
+        "id": "3cd5aab6-ea2d-4bed-a3c9-59f82c74abc0",
+        "payload": {
+          "payment_id": "9632d145-ca62-4ea4-a92f-a79e7ab0c885"
+        },
+        "read_at": "2026-10-22T20:29:05.582792+00:00",
+        "recipient_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "type": "payment_collected"
+      },
+      {
+        "created_at": "2026-10-22T20:19:04.347772+00:00",
+        "id": "73c8fe67-a3cd-449b-9949-144261b6745f",
+        "payload": {
+          "payment_id": "40de2538-9c10-41c6-bf7f-f1d17c33af4e"
+        },
+        "read_at": "2026-10-22T20:29:05.673794+00:00",
+        "recipient_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "type": "payment_reversed"
+      },
+      {
+        "created_at": "2026-10-22T20:19:02.794596+00:00",
+        "id": "ad511683-4f9c-4616-be8f-e79a983b85d4",
+        "payload": {
+          "payment_id": "4e275136-b553-4657-8767-000d541e9823"
+        },
+        "read_at": "2026-10-22T20:29:05.779277+00:00",
+        "recipient_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "type": "payment_collected"
+      },
+      {
+        "created_at": "2026-10-22T20:19:05.544016+00:00",
+        "id": "adb2ddfd-29aa-468b-b497-933c3268a2f9",
+        "payload": {
+          "payment_id": "4949544b-5c77-4818-a8c0-67cbbe5f500e"
+        },
+        "read_at": "2026-10-22T20:29:05.909056+00:00",
+        "recipient_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "type": "payment_reversed"
+      },
+      {
+        "created_at": "2026-10-22T20:16:58.585568+00:00",
+        "id": "deea06cc-186f-4517-8bc6-850f86d7bcab",
+        "payload": {
+          "session_id": "ce270300-0000-4000-8000-000000000002"
+        },
+        "read_at": "2026-10-22T20:29:06.002346+00:00",
+        "recipient_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "type": "session_cancelled"
+      }
+    ],
+    "audits": [
+      {
+        "action": "requested",
+        "actor_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "entity_id": "85bf1f3c-abd3-4220-858f-709b21bdd793",
+        "entity_type": "secretary_removal_request",
+        "happened_at": "2026-10-22T20:27:14.413581+00:00",
+        "id": "12c1a2bf-6999-433f-b93f-97393acc1551",
+        "metadata": {},
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "action": "cancelled",
+        "actor_id": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "entity_id": "ee6f610a-d0ac-44a9-a395-236d8026ddc0",
+        "entity_type": "session",
+        "happened_at": "2026-10-22T20:28:47.127095+00:00",
+        "id": "142e6481-2b4a-4774-a325-610713aabfa2",
+        "metadata": {
+          "reason": "SEC27-ACCEPT-20261022 approved cleanup"
+        },
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "action": "collected",
+        "actor_id": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "entity_id": "4e275136-b553-4657-8767-000d541e9823",
+        "entity_type": "payment",
+        "happened_at": "2026-10-22T20:19:02.794596+00:00",
+        "id": "36e4a06a-6d1c-4d1c-aaa3-5043291888bd",
+        "metadata": {},
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "action": "cancelled",
+        "actor_id": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "entity_id": "46f6e00c-1d01-4a2b-ade5-b59a70e0fd8c",
+        "entity_type": "session",
+        "happened_at": "2026-10-22T20:28:47.22606+00:00",
+        "id": "46d810d8-5a42-4ec6-8c4d-37d75fd55094",
+        "metadata": {
+          "reason": "SEC27-ACCEPT-20261022 approved cleanup"
+        },
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "action": "note_saved",
+        "actor_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "entity_id": "ce270000-0000-4000-8000-000000000001",
+        "entity_type": "student",
+        "happened_at": "2026-10-22T20:18:05.339051+00:00",
+        "id": "641b7ecb-996a-4996-976c-31c99aa38410",
+        "metadata": {},
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "action": "note_saved",
+        "actor_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0",
+        "entity_id": "ce270000-0000-4000-8000-000000000001",
+        "entity_type": "student",
+        "happened_at": "2026-10-22T20:23:21.973253+00:00",
+        "id": "742ac4ea-60b6-4d8a-81f9-89e9ff539c23",
+        "metadata": {},
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "action": "cancelled",
+        "actor_id": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "entity_id": "ce270300-0000-4000-8000-000000000002",
+        "entity_type": "session",
+        "happened_at": "2026-10-22T20:16:58.585568+00:00",
+        "id": "7546ae8c-f7ee-40bd-9737-390a62cb7e59",
+        "metadata": {
+          "reason": "SEC27-ACCEPT-20261022 cancellation race"
+        },
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "action": "attendance_finalized",
+        "actor_id": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "entity_id": "ce270300-0000-4000-8000-000000000001",
+        "entity_type": "session",
+        "happened_at": "2026-10-22T20:16:54.195285+00:00",
+        "id": "96182e36-11dd-4253-903b-7dc7d87a6aaa",
+        "metadata": {},
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "action": "reversed",
+        "actor_id": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "entity_id": "40de2538-9c10-41c6-bf7f-f1d17c33af4e",
+        "entity_type": "payment",
+        "happened_at": "2026-10-22T20:19:04.347772+00:00",
+        "id": "c3236412-2e57-4c35-b09a-d318e35da6ff",
+        "metadata": {},
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "action": "created",
+        "actor_id": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "entity_id": "cb296d5e-57fe-4974-8f50-e38d0ab1decd",
+        "entity_type": "invoice",
+        "happened_at": "2026-10-22T20:18:04.16068+00:00",
+        "id": "cd33d4e9-71f8-4ae8-a6a7-ab7507381a31",
+        "metadata": {},
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "action": "synthetic_fixture_void",
+        "actor_id": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "entity_id": "cb296d5e-57fe-4974-8f50-e38d0ab1decd",
+        "entity_type": "invoice",
+        "happened_at": "2026-10-22T20:28:55.180128+00:00",
+        "id": "ef4e1ce1-8d0b-4c3c-a1e4-510c1e41b3a3",
+        "metadata": {
+          "namespace": "SEC27-ACCEPT-20261022",
+          "net_egp": "0.00"
+        },
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "action": "reversed",
+        "actor_id": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "entity_id": "4949544b-5c77-4818-a8c0-67cbbe5f500e",
+        "entity_type": "payment",
+        "happened_at": "2026-10-22T20:19:05.544016+00:00",
+        "id": "f6665105-6b54-41d1-b356-61a2b37278a6",
+        "metadata": {},
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      },
+      {
+        "action": "collected",
+        "actor_id": "bbc158ec-b660-45f6-8135-edee0c186fa4",
+        "entity_id": "9632d145-ca62-4ea4-a92f-a79e7ab0c885",
+        "entity_type": "payment",
+        "happened_at": "2026-10-22T20:18:59.914431+00:00",
+        "id": "fcb0066f-83f8-4af5-bd11-c2bf82db7aab",
+        "metadata": {},
+        "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+      }
+    ]
+  },
+  "localRegression": {
+    "secretaryTests": 25,
+    "localBrowserTests": 14,
+    "flutterTests": 256,
+    "flutterHostedOptInSkip": 1,
+    "notificationAndExistingCompletionTargetedTests": 23,
+    "atomicVoidTests": 6,
+    "finalAnalyzer": "PASS"
+  },
+  "configuredArtifacts": {
+    "androidDebug": "build/app/outputs/flutter-apk/app-debug.apk",
+    "androidSha256": "64fefcb24145d46cc6f45bbaa69da9bfc28ab08e10e266f98cb7eaf5fc023589",
+    "secretaryWeb": "dist/",
+    "credentialsScan": "zero matches including 679 decompressed APK entries; registry/artifact logs are local and ignored",
+    "finalCredentialScan": "PASS: configured web and rebuilt APK, all 679 decompressed entries, zero credential matches"
+  },
+  "limitations": [
+    "Android/iOS physical runtime, accessibility and low-end device performance remain unaccepted; Windows native is not mobile acceptance",
+    "Deployed student-scoped Teacher RPCs reject archived students; all histories remain stored, Secretary retained notes remain readable, and Teacher invoice/session details remain accessible",
+    "The Secretary browse contract exposes raw amount-minus-net balance on void invoices; UI payable balance is now zero and the original invoice amount/history is preserved",
+    "No account/password/Auth configuration, migration, production deployment, push or publication was performed",
+    "Natural hosted expiry/operator status revocation and provider Auth/storage/database restore drill remain separate gates",
+    "The cancellation race was won by Secretary; all seven scoped notifications belong to Teacher. Secretary wrong-recipient RPC/browser denial passed; no new Secretary-addressed positive event was fabricated."
+  ],
+  "postflight": {
+    "at": "2026-10-22T20:46:23.027Z",
+    "hostedWrites": 0,
+    "pass": true,
+    "migrations": 27,
+    "functions": 54,
+    "tables": 18,
+    "policies": 30,
+    "triggers": 13
+  }
+}

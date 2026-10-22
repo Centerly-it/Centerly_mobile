@@ -175,5 +175,18 @@
     "Production environment/signing/hosted restore/monitoring/remote CI/publication pending",
     "Isolated PGlite snapshot is not Supabase provider recovery",
     "Android build warns of future plugin KGP compatibility; current pinned SDK builds successfully"
-  ]
+  ],
+  "latestHostedAcceptance": {
+    "report": "SEC27_ACCEPTANCE_2026-10-22.json",
+    "complete": true,
+    "actualAuthSdkRest": true,
+    "actualSecretaryBrowser": true,
+    "actualTeacherWindows": true,
+    "atomicCleanup": true,
+    "audits": 13,
+    "notifications": 7,
+    "noteSaves": 2,
+    "pendingRemovalRequests": 1,
+    "noAccountSchemaOrProductionChanges": true
+  }
 }

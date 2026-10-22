@@ -1,3 +1,7 @@
+## Latest hosted acceptance
+
+SEC27 is approved, completed and reconciled. The synthetic removal request remains pending without deactivation. Production/device/provider-recovery gates below remain open. See [SEC27 acceptance](SEC27_ACCEPTANCE_2026-10-22.md).
+
 # Pilot operations and owner script
 
 22 October 2026. Development is `centerly-dev` / `yfeubomyglmhuwizaqoj`. It contains synthetic records and retained financial/audit history. It must remain development. No hosted configuration change, publication, real data entry or paid resource creation is authorized by this document.
@@ -68,7 +72,7 @@ For the real pilot, begin with read-only orientation. Enter real students/financ
 
 ## One bundled owner decision list
 
-- Approve or decline the existing precise SEC27 synthetic extension in `HOSTED_FIXTURE_ACCEPTANCE_SCOPE.md`, including its guarded fixture-only void cleanup. Recommend approve exactly those bounds, no new accounts/keys. The consolidated proposal, including the Teacher-action addendum, remains unexecuted. The same single extension now includes the bounded note-conflict/request-only addendum; approve the whole consolidated package once or execute none.
+- Completed: the exact SEC27 extension and consolidated note/removal addendum were approved and executed. See SEC27_ACCEPTANCE_2026-10-22.md/json for retained IDs and remaining gates. Do not recreate fixtures, mint replacement keys, repeat note writes or rerun cleanup.
 - Choose separate production project/region/budget and name operator/backup operator; recommend dedicated production plus an isolated restore target. Approve resource/configuration/migration work only after reviewing exact targets and costs.
 - Confirm Android app ID and keystore custody, iOS bundle/team/private distribution, web hostname/TLS host, support/privacy URLs and privacy/retention owner. Recommend private Android pilot first if iOS credentials/devices are unavailable.
 - Supply physical Android/iOS devices and owner test signoff; approve backup targets/RPO/RTO and provider restore drill. Confirm the remote push/CI/publication step separately. No production rollout, account changes or real-data entry is inferred from this preparation.

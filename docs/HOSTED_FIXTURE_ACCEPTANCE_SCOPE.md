@@ -1,6 +1,6 @@
-# Proposed hosted synthetic-fixture acceptance scope — NOT APPROVED
+# Approved hosted synthetic-fixture acceptance scope — 22 October 2026
 
-Target only: `centerly-dev` / `yfeubomyglmhuwizaqoj`, pinned migration 27 (`202610220002`). This is a separate approval from the migration deployment. Do not execute any business fixture writes until explicitly approved.
+Target only: `centerly-dev` / `yfeubomyglmhuwizaqoj`, pinned migration 27 (`202610220002`). The owner explicitly approved this exact package and consolidated addendum in the current conversation. Execution remains confined to its original bounds and stop conditions.
 
 ## Existing identities: use, never modify
 
@@ -11,7 +11,7 @@ Target only: `centerly-dev` / `yfeubomyglmhuwizaqoj`, pinned migration 27 (`2026
 
 These four known synthetic identities were identified read-only from their original `@centerly.test` provisioning identifiers. No new account, password reset, role/tenant reassignment, subscription/seat change or Auth configuration is included. No real customer or existing operational record is a mutation target.
 
-Original passwords remain absent. SQL role/JWT-claim simulation can test hosted business contracts after this scope is approved; it is not real Supabase Auth/REST/browser acceptance. Any actual password-based step waits for the original credentials and uses the same limited fixture registry. No synthetic browser adapter establishes hosted readiness.
+The original ignored credential file was securely checked: all four expected synthetic identities authenticate successfully with their original passwords. Credentials stay in process memory and are excluded from registries, browser bundles, logs and test artifacts. Actual SDK/REST/browser evidence is recorded separately from SQL-role simulation and synthetic browser adapters.
 
 ## Exact new records / bounds
 
@@ -58,15 +58,19 @@ No DELETE from business, payment, audit or attendance history tables; no account
 
 Stop on uncertain writes, scope drift, unexpected account/subscription state or cleanup mismatch. Reconcile existing IDs/keys; do not seed replacements or delete history. A failure requiring additional records/repair outside these limits needs a revised approval.
 
-## Approval requested
+## Approval recorded
 
-Approve this single bounded synthetic business-fixture scope, including the guarded operator-only void cleanup above, on centerly-dev? This excludes production/site publication and all account/password/Auth configuration changes. No part has been executed yet.
+The owner approved the exact package, guarded atomic invoice void cleanup and consolidated addendum on centerly-dev only. This excludes production/site publication and all account/password/Auth configuration changes. Execution and retained-record results are recorded separately; authorization does not imply test completion.
 
-## Consolidated pilot addendum — still NOT APPROVED
+## Consolidated pilot addendum — APPROVED
 
-This addendum is part of the same single approval request, not permission to execute. It closes the two Teacher-action acceptance gaps without creating or modifying any account. All original ceilings/IDs/keys/cleanup and stop conditions remain, except the audit ceiling increases from 20 to 23 for the following maximum three successful audited actions.
+This addendum was explicitly approved as part of the same bounded package. It closes the two Teacher-action acceptance gaps without creating or modifying any account. All original ceilings/IDs/keys/cleanup and stop conditions remain, except the audit ceiling increases from 20 to 23 for the following maximum three successful audited actions.
 
 - Teacher note: only the newly created A1 student in this registry, one note row, at most two successful saves. Content is exactly namespace plus NOTE-INITIAL or NOTE-WINNER-A/B; no PII. Capture the first returned updated_at before racing two different updates with that exact version: exactly one succeeds and one conflicts. Preserve the losing client draft; Secretary and teacher-B save attempts must be denied. Read the persisted winning value in both apps. Retain the namespace note on the archived synthetic student; do not clear/rewrite it in cleanup. Maximum two note_saved audit events. No existing student's note is touched.
 - Removal request: only the existing synthetic secretary-a UUID already listed. Inspect pending requests first; if one exists, reuse/read that request without modification. Otherwise allow at most one new request under teacher-a, record its UUID, replay exactly and verify the same pending ID. Verify secretary-a remains active with identical tenant/subscription before/after and can still log in. No handled transition, deactivation, deletion, seat/account change or extra notification is authorized. Retain the pending synthetic request as evidence; its pending-count difference is an explicit expected after-report exception. Maximum one requested audit event. Cross-tenant attempts remain denied.
 
-The total new budget is one note row/two accepted note versions, at most one pending removal request, and at most 23 audit events overall. Payment/notification bounds do not increase. Approve the original scope plus this addendum as one package or execute none. Original scope declarations that Teacher operational writes are denied continue to apply; these two named Teacher actions are the only additions.
+The total new budget is one note row/two accepted note versions, at most one pending removal request, and at most 23 audit events overall. Payment/notification bounds do not increase. The original scope and this addendum are one approved package; no additional mutations are implied. Original scope declarations that Teacher operational writes are denied continue to apply; these two named Teacher actions are the only additions.
+
+## Execution completed — 22 October 2026
+
+The approved run completed with 13/23 audits, 5/6 attendance changes, 7/8 notifications, 2/2 successful note saves and 1/1 pending removal requests. Atomic void cleanup ran once; whole-tenant totals, unrelated digests and account/status/subscription data match the baseline. See SEC27_ACCEPTANCE_2026-10-22.md/json. Do not recreate fixtures, mint new keys, repeat note saves or repeat cleanup. Only read-only verification is allowed for this completed registry.

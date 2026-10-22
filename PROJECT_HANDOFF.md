@@ -1,3 +1,9 @@
+# SEC27 hosted acceptance complete — 22 October 2026
+
+The owner-approved bounded SEC27 package and consolidated note/removal addendum completed on centerly-dev. Actual Supabase SDK/REST, Secretary Chromium and Windows Teacher UI acceptance passed. Thirteen audit events (limit 23), five attendance changes (limit 6), seven notifications (limit 8), exactly two note saves and one pending removal request are retained. Atomic guarded void cleanup ran once; both tenants’ complete financial totals and unrelated record digests match their pre-run baselines. Secretary-a remains active. No account/password/Auth configuration, migration, production deployment, push or publication occurred.
+
+Current results and retained records: [SEC27 acceptance](docs/SEC27_ACCEPTANCE_2026-10-22.md), [detailed evidence](docs/SEC27_ACCEPTANCE_2026-10-22.json), [shared checklist](docs/SHARED_COMPLETION_CHECKLIST.md), [matrix](docs/CROSS_APP_ACCEPTANCE.md). Remaining gates: separate production/signing/privacy/support, provider recovery/monitoring, physical Android/iOS and remote CI/access. Archived-student RPC boundaries are documented; invoice/session histories remain retained/readable. Completed-run guards prohibit reseeding or repeated cleanup. Older unapproved-fixture/credential-absent statements below are historical.
+
 # Current shared pilot checkpoint — 22 October 2026
 
 Teacher remains canonical migration owner. All 27 deployed versions through `202610220002` are now present and hash-pinned here; fresh hosted history/full catalog match. No hosted schema/config/business changes ran. The previously missing original four-account credential file is available on this Windows machine and was read only in memory. Real SDK/Secretary Chrome and native Windows Teacher Auth/read-route checks passed. The configured Android debug APK built; physical-device/cross-app business acceptance remains gated.
