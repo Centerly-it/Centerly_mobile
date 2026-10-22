@@ -1,7 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/theme/values_manager.dart';
-import '../../../screens/teacher/teacher_shared.dart';
+import 'design/group_design.dart';
+import 'live_group_detail.dart';
 import '../domain/group_record.dart';
 import '../../students/presentation/student_directory.dart';
 
@@ -21,11 +22,28 @@ class LiveGroupCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.only(bottom: AppPadding.p12),
-    child: TeacherCard(
+    child: GroupPanel(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(group.name, style: Theme.of(context).textTheme.titleLarge),
+          InkWell(
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => LiveGroupDetail(group: group),
+              ),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    group.name,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ),
+                const GroupAsset('cee4b.svg'),
+              ],
+            ),
+          ),
           Text(group.subject),
           Align(
             alignment: AlignmentDirectional.centerStart,
@@ -49,7 +67,10 @@ class LiveGroupCard extends StatelessWidget {
           if (group.schedulesTruncated) Text('live_schedule_preview'.tr()),
           if (group.roster.isNotEmpty) ...[
             const SizedBox(height: AppSize.s8),
-            Text('live_roster_preview'.tr()),
+            GroupIconLabel(
+              asset: '263e2.svg',
+              label: 'live_roster_preview'.tr(),
+            ),
             for (final student in group.roster) Text(student.name),
           ],
           TextButton(

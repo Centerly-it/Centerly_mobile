@@ -7,7 +7,12 @@ class StudentBrowseCubit extends Cubit<StudentBrowseState> {
   StudentBrowseCubit(this.repository, {this.groupId})
     : super(const StudentBrowseState());
   final StudentRepository repository;
-  final String? groupId;
+  String? groupId;
+  Future<void> filterGroup(String? id) {
+    groupId = id;
+    return search(state.search);
+  }
+
   int _generation = 0;
   Future<void> search(String value, {bool refresh = false}) async {
     final generation = ++_generation;
@@ -59,9 +64,13 @@ class StudentBrowseCubit extends Cubit<StudentBrowseState> {
       if (isClosed || generation != _generation) return;
       emit(
         StudentBrowseState(
-          students: request.students,
+          students: error is BackendFailure && error.deniesAccess
+              ? const []
+              : request.students,
           search: request.search,
-          cursor: request.cursor,
+          cursor: error is BackendFailure && error.deniesAccess
+              ? null
+              : request.cursor,
           error: error is BackendFailure ? error.code : 'SERVICE_UNAVAILABLE',
         ),
       );

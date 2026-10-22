@@ -1,3 +1,21 @@
+# Current backend compatibility —26-version development deployment
+
+Current schema pin:202610180001 through 202610220001, all 26 immutable migration bodies
+and full hosted catalog verified on centerly-dev (`yfeubomyglmhuwizaqoj`) on22 October
+2026. 45 application functions,18 tables,30 policies; enrollment violations0.
+Approved receipt movement read is live with teacher-only restrictions. Flutter
+CENTERLY_FINANCE_MOVEMENT_FILTERS defaults true after successful read-only postflight.
+No account/finance/fixture mutation, build or restart in this deployment follow-up.
+
+Manifest: supabase/schema-manifest.json. Evidence:
+FINANCE_MOVEMENTS_DEPLOYMENT_2026-10-22.md. Original passwords remain unavailable;
+SQL-role and anonymous HTTP checks do not establish password SDK acceptance. The
+Teacher implementation scope is complete; remaining owner acceptance and exact
+credential path/build configuration are in TEACHER_OWNER_TESTING.md. Secretary
+must transfer the same26 versions/history without replay or permission widening.
+
+## Historical compatibility record — superseded by the pin above
+
 # Backend compatibility — development deployment
 
 Schema version range: 202610180001 through 202610190010, canonical in this repo.

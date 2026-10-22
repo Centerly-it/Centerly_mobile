@@ -1,3 +1,5 @@
+import '../../../features/auth/presentation/view_models/auth_session_cubit.dart';
+import '../../../core/di/di.dart';
 import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +35,11 @@ class _TeacherGreetingState extends State<TeacherGreeting> {
   @override
   Widget build(BuildContext context) {
     final now = CairoTime.local(widget.now ?? DateTime.now());
+    final displayName = getIt.isRegistered<AuthSessionCubit>()
+        ? getIt<AuthSessionCubit>().state.profile?.displayName
+        : null;
     final name =
+        displayName ??
         (PreviewMode.enabled
                 ? 'home_preview_teacher_name'
                 : 'home_teacher_name_fallback')

@@ -1,3 +1,4 @@
+import '../../domain/finance_overview_data.dart';
 import 'finance_cohort_amounts.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -10,15 +11,18 @@ import 'finance_design.dart';
 
 class FinanceCohortSummary extends StatelessWidget {
   const FinanceCohortSummary({
-    required this.ledger,
+    this.ledger,
+    this.summary,
     required this.month,
     super.key,
   });
-  final FinanceLedger ledger;
+  final FinanceLedger? ledger;
+  final FinanceOverviewData? summary;
   final DateTime month;
   @override
   Widget build(BuildContext context) {
-    final total = ledger.invoiced(month), paid = ledger.paidAgainst(month);
+    final total = summary?.invoiced ?? ledger!.invoiced(month),
+        paid = summary?.paid ?? ledger!.paidAgainst(month);
     final percent = total == BigInt.zero
         ? 0
         : (paid * BigInt.from(100) ~/ total).toInt();
@@ -40,13 +44,15 @@ class FinanceCohortSummary extends StatelessWidget {
             ),
           ),
           Text(
-            'finance_invoice_count'.tr(args: ['${ledger.dueIn(month).length}']),
+            'finance_invoice_count'.tr(
+              args: ['${summary?.invoiceCount ?? ledger!.dueIn(month).length}'],
+            ),
             style: AppTextStyles.caption,
           ),
           const SizedBox(height: AppSize.s16),
           FinanceCohortAmounts(
             paid: paid,
-            remaining: ledger.outstanding(month),
+            remaining: summary?.outstanding ?? ledger!.outstanding(month),
           ),
           const SizedBox(height: AppSize.s12),
           ClipRRect(

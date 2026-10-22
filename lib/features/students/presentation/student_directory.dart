@@ -21,7 +21,7 @@ class StudentDirectory extends StatelessWidget {
         StudentBrowseCubit(getIt<StudentRepository>(), groupId: groupId)
           ..search(''),
     child: embedded
-        ? const StudentDirectoryBody()
+        ? const StudentDirectoryBody(showGroupFilter: true)
         : Scaffold(
             appBar: AppBar(title: Text(groupName ?? 'live_students'.tr())),
             body: const SafeArea(top: false, child: StudentDirectoryBody()),

@@ -1,3 +1,4 @@
+import '../../domain/finance_overview_data.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/theme/color_manager.dart';
@@ -9,11 +10,13 @@ import 'finance_design.dart';
 
 class FinanceMethodsSummary extends StatelessWidget {
   const FinanceMethodsSummary({
-    required this.ledger,
+    this.ledger,
+    this.summary,
     required this.month,
     super.key,
   });
-  final FinanceLedger ledger;
+  final FinanceLedger? ledger;
+  final FinanceOverviewData? summary;
   final DateTime month;
   @override
   Widget build(BuildContext context) => AppSurfacePanel(
@@ -35,10 +38,15 @@ class FinanceMethodsSummary extends StatelessWidget {
                     style: AppTextStyles.caption,
                   ),
                   FinanceMoney(
-                    ledger
-                        .receivedIn(month)
-                        .where((m) => m.method == method)
-                        .fold(BigInt.zero, (sum, m) => sum + m.signedAmount),
+                    summary != null
+                        ? (summary!.methods[method] ?? BigInt.zero)
+                        : ledger!
+                              .receivedIn(month)
+                              .where((m) => m.method == method)
+                              .fold(
+                                BigInt.zero,
+                                (sum, m) => sum + m.signedAmount,
+                              ),
                     style: AppTextStyles.titleSmall.copyWith(
                       color: ColorManager.primaryDark,
                     ),

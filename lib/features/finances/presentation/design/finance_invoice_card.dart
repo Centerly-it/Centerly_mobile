@@ -13,20 +13,30 @@ import 'finance_design.dart';
 class FinanceInvoiceCard extends StatelessWidget {
   const FinanceInvoiceCard({
     required this.invoice,
-    required this.ledger,
+    this.ledger,
+    this.paidAmount,
+    this.remainingAmount,
+    this.asOfDate,
     required this.now,
     required this.onTap,
     super.key,
   });
   final FinanceInvoice invoice;
-  final FinanceLedger ledger;
+  final FinanceLedger? ledger;
+  final BigInt? paidAmount, remainingAmount;
+  final DateTime? asOfDate;
   final DateTime now;
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
-    final remaining = ledger.remaining(invoice), paid = ledger.paid(invoice);
-    final late = ledger.overdue(invoice, now);
-    final status = remaining == BigInt.zero
+    final remaining = remainingAmount ?? ledger!.remaining(invoice),
+        paid = paidAmount ?? ledger!.paid(invoice);
+    final late = asOfDate != null
+        ? remaining > BigInt.zero && invoice.dueOn.isBefore(asOfDate!)
+        : ledger!.overdue(invoice, now);
+    final status = invoice.voided
+        ? 'void'
+        : remaining == BigInt.zero
         ? 'paid'
         : late
         ? 'overdue'
@@ -50,7 +60,9 @@ class FinanceInvoiceCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      invoice.studentKey.tr(),
+                      invoice.localized
+                          ? invoice.studentKey.tr()
+                          : invoice.studentKey,
                       style: AppTextStyles.titleMedium.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -61,7 +73,7 @@ class FinanceInvoiceCard extends StatelessWidget {
                 ],
               ),
               Text(
-                '${invoice.groupKey.tr()}  ·  #${invoice.id}',
+                '${invoice.localized ? invoice.groupKey.tr() : invoice.groupKey}  ·  #${invoice.id}',
                 style: AppTextStyles.caption,
               ),
               const SizedBox(height: AppSize.s12),

@@ -10,8 +10,9 @@ import 'app_empty_state.dart';
 import 'app_error_state.dart';
 
 class PagedReadBody<T, S> extends StatelessWidget {
-  const PagedReadBody({required this.item, this.header, super.key});
+  const PagedReadBody({required this.item, this.header, this.items, super.key});
   final Widget Function(BuildContext, T) item;
+  final Widget Function(BuildContext, List<T>)? items;
   final Widget Function(BuildContext, ReadPage<T, S>)? header;
   @override
   Widget build(
@@ -35,7 +36,9 @@ class PagedReadBody<T, S> extends StatelessWidget {
                 ),
               ),
             ],
-            for (final row in state.rows)
+            if (items != null && state.rows.isNotEmpty)
+              items!(context, state.rows),
+            for (final row in items == null ? state.rows : <T>[])
               Padding(
                 padding: const EdgeInsets.only(bottom: AppPadding.p12),
                 child: item(context, row),

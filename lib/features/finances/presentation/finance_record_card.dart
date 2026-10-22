@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/format/cairo_time.dart';
-import '../../../screens/teacher/teacher_shared.dart';
+import '../../../core/widgets/app_surface_panel.dart';
 import '../domain/finance_record.dart';
 
 class FinanceRecordCard extends StatelessWidget {
@@ -10,7 +10,7 @@ class FinanceRecordCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final r = record;
-    return TeacherCard(
+    return AppSurfacePanel(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

@@ -53,6 +53,8 @@ Future<void> main() async {
       child: const Centrally(),
     ),
   );
+  // Release the native splash when Flutter is ready to render the app itself.
+  FlutterNativeSplash.remove();
   // Paint first; the existing checking route gates access during remote validation.
   if (!PreviewMode.enabled) {
     widgetsBinding.addPostFrameCallback(

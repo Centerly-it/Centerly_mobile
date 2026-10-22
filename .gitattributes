@@ -2,3 +2,5 @@
 supabase/proposals/finance_business/*.sql text eol=lf
 supabase/proposals/logic_hardening/*.sql text eol=lf
 supabase/migrations/20261020*.sql text eol=lf
+supabase/proposals/teacher_owner_testing/*.sql text eol=lf
+supabase/migrations/20261022*.sql text eol=lf

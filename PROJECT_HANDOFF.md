@@ -1,3 +1,32 @@
+# Current handoff — approved Finance migration26,22 October2026
+
+Teacher implementation is complete for the agreed owner-testing scope. Only the
+approved202610220001 receipt-filter read was deployed to centerly-dev, exact SHA256;
+all26 migration bodies and full catalog verified. Receipt filters are enabled in
+source/connected launch. No account, financial or fixture mutations; no build or
+restart during this deployment follow-up. Original development credentials remain
+unavailable, so authenticated owner acceptance is pending. Exact expected path,
+route checklist and final preview=false/receipt-filters=true build command:
+[TEACHER_OWNER_TESTING.md](docs/TEACHER_OWNER_TESTING.md). Deployment evidence:
+[FINANCE_MOVEMENTS_DEPLOYMENT_2026-10-22.md](docs/FINANCE_MOVEMENTS_DEPLOYMENT_2026-10-22.md).
+Secretary inherits the identical26-version schema/history without replay. No pending
+backend approval blocks Teacher testing; attendance free-text search is unavailable,
+group notes excluded and QR deferred. Pilot/recovery/React acceptance are separate.
+All previous checkpoint text below is historical and superseded where inconsistent.
+
+# Latest checkpoint — 22 October 2026
+
+Read [TEACHER_OWNER_TESTING.md](docs/TEACHER_OWNER_TESTING.md) and the latest entry
+in IMPLEMENTATION_PROGRESS.md first. The October20 snapshot below is retained as
+historical context. Finance/Groups/Students/Profile/Calendar/Session designs are
+now connected to actual scoped repositories. Original development credentials are
+unavailable; authenticated owner acceptance is still open. Group-note editing is
+excluded by explicit owner decision. One default-off, undeployed receipt-filter
+read proposal is prepared in TEACHER_OWNER_BACKEND_REVIEW.md. All25 existing
+migration bodies and the live catalog were freshly verified; none was redeployed.
+Current route checklist, test evidence and one final configured build command are
+in TEACHER_OWNER_TESTING.md. Pilot/recovery and React acceptance are separate gates.
+
 # تسليم مشروع Centerly — الحالة الموثقة بتاريخ 20 أكتوبر 2026
 
 هذا هو ملف البداية عند الانتقال لجهاز آخر. يصف الكود الموجود فعلًا، ويفصل

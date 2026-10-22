@@ -1,6 +1,11 @@
 class TeacherProfile {
-  const TeacherProfile({required this.id, required this.teacherId});
+  const TeacherProfile({
+    required this.id,
+    required this.teacherId,
+    this.displayName,
+  });
   final String id, teacherId;
+  final String? displayName;
   factory TeacherProfile.fromJson(Map<String, dynamic> json, String authId) {
     final id = json['id'], tenant = json['teacher_id'];
     final uuid = RegExp(

@@ -10,6 +10,7 @@ import 'package:centrally/features/auth/presentation/view_models/auth_session_cu
 import 'package:centrally/features/auth/presentation/views/login_view.dart';
 import 'package:centrally/features/auth/presentation/views/create_admin_view.dart';
 import 'package:centrally/features/auth/presentation/views/create_center_view.dart';
+import 'package:centrally/features/onboarding/presentation/view/onboarding_view.dart';
 import 'package:centrally/screens/teacher/teacher_workspace.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,36 @@ void main() {
   setUpAll(() async {
     SharedPreferences.setMockInitialValues({});
     await EasyLocalization.ensureInitialized();
+  });
+  testWidgets('startup opens onboarding without a Flutter splash delay', (
+    tester,
+  ) async {
+    final repo = FakeAuth();
+    final session = AuthSessionCubit(repo);
+    await session.restore();
+    final router = AppRouter.create(session);
+    addTearDown(() async {
+      router.dispose();
+      await session.close();
+      await repo.events.close();
+    });
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    await tester.pumpWidget(
+      EasyLocalization(
+        supportedLocales: const [Locale('ar'), Locale('en')],
+        path: 'assets/translations',
+        assetLoader: const CodegenLoader(),
+        startLocale: const Locale('en'),
+        saveLocale: false,
+        child: _RouterApp(router),
+      ),
+    );
+    await tester.pump();
+    expect(find.byType(OnboardingView), findsOneWidget);
+    expect(router.routeInformationProvider.value.uri.path, '/onboarding');
   });
   testWidgets(
     'slow remote restore renders checking UI without opening protected pages',

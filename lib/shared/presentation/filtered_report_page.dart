@@ -14,19 +14,22 @@ class FilteredReportPage<T, S> extends StatefulWidget {
     required this.loader,
     required this.identity,
     required this.item,
+    this.items,
     required this.header,
     required this.kinds,
     this.kindKey = 'p_kind',
     this.collectorFilter = false,
+    this.embedded = false,
     super.key,
   });
   final String title, kindKey;
   final DateTime initialDate;
   final Map<String?, String> kinds;
-  final bool collectorFilter;
+  final bool collectorFilter, embedded;
   final PageLoader<T, S> loader;
   final String Function(T) identity;
   final Widget Function(BuildContext, T) item;
+  final Widget Function(BuildContext, List<T>)? items;
   final Widget Function(BuildContext, ReadPage<T, S>) header;
   @override
   State<FilteredReportPage<T, S>> createState() =>
@@ -54,7 +57,7 @@ class _FilteredReportPageState<T, S> extends State<FilteredReportPage<T, S>> {
   Widget build(BuildContext context) => BlocProvider.value(
     value: cubit,
     child: Scaffold(
-      appBar: AppBar(title: Text(widget.title.tr())),
+      appBar: widget.embedded ? null : AppBar(title: Text(widget.title.tr())),
       body: SafeArea(
         child: Column(
           children: [
@@ -87,6 +90,7 @@ class _FilteredReportPageState<T, S> extends State<FilteredReportPage<T, S>> {
             Expanded(
               child: PagedReadBody<T, S>(
                 item: widget.item,
+                items: widget.items,
                 header: widget.header,
               ),
             ),

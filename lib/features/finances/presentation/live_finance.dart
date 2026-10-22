@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import '../../../core/api/teacher_read_client.dart';
 import '../../../core/di/di.dart';
-import '../../../core/widgets/app_error_state.dart';
-import '../../dashboard/data/dashboard_repository.dart';
-import '../../dashboard/domain/dashboard_summary.dart';
-import 'teacher_finance_page.dart';
+import '../../../core/format/cairo_time.dart';
+import '../../../core/theme/color_manager.dart';
+import '../data/finance_repository.dart';
+import 'design/finance_month_bar.dart';
+import 'design/finance_tabs.dart';
+import 'live_finance_overview.dart';
+import 'live_finance_dues.dart';
+import 'live_finance_movements.dart';
 
 class LiveFinance extends StatefulWidget {
   const LiveFinance({super.key});
@@ -12,28 +17,68 @@ class LiveFinance extends StatefulWidget {
 }
 
 class _LiveFinanceState extends State<LiveFinance> {
-  late Future<DashboardSummary> data = getIt<DashboardRepository>().load(
-    refresh: true,
+  late final repository = FinanceRepository(getIt<TeacherReadClient>());
+  late DateTime month = DateTime(
+    CairoTime.local(DateTime.now()).year,
+    CairoTime.local(DateTime.now()).month,
   );
+  int tab = 0;
+  String status = 'all';
+  String? actor;
   @override
-  Widget build(BuildContext context) => FutureBuilder<DashboardSummary>(
-    future: data,
-    builder: (context, snapshot) {
-      if (snapshot.hasError) {
-        return SingleChildScrollView(
-          child: AppErrorState(
-            onRetry: () => setState(
-              () => data = getIt<DashboardRepository>().load(refresh: true),
+  Widget build(BuildContext context) => ColoredBox(
+    color: ColorManager.canvas,
+    child: Column(
+      children: [
+        FinanceMonthBar(
+          month: month,
+          onChanged: (v) => setState(() {
+            month = v;
+            actor = null;
+          }),
+        ),
+        FinanceTabs(
+          index: tab,
+          onChanged: (v) => setState(() {
+            tab = v;
+            status = 'all';
+            actor = null;
+          }),
+        ),
+        Expanded(
+          child: switch (tab) {
+            0 => LiveFinanceOverview(
+              key: ValueKey(month),
+              repository: repository,
+              month: month,
+              onDues: (v) => setState(() {
+                status = v;
+                tab = 1;
+              }),
+              onActor: (v) => setState(() {
+                actor = v;
+                tab = 2;
+              }),
             ),
-          ),
-        );
-      }
-      if (!snapshot.hasData) {
-        return const Center(child: CircularProgressIndicator());
-      }
-      return TeacherFinancePage(
-        initialDate: DateTime.parse(snapshot.requireData.localDate),
-      );
-    },
+            1 => LiveFinanceDues(
+              key: ValueKey('$month-$status'),
+              repository: repository,
+              month: month,
+              initialStatus: status,
+            ),
+            _ => LiveFinanceMovements(
+              key: ValueKey('$month-$actor'),
+              month: month,
+              actor: actor,
+            ),
+          },
+        ),
+      ],
+    ),
   );
 }
+
+Map<String, dynamic> financeDates(DateTime month) => {
+  'p_from': CairoTime.date(DateTime(month.year, month.month)),
+  'p_to': CairoTime.date(DateTime(month.year, month.month + 1, 0)),
+};

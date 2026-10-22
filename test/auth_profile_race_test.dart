@@ -14,6 +14,9 @@ void main() {
         final started = Completer<void>(), release = Completer<void>();
         var calls = 0;
         final client = scopedReadFixture((r) async {
+          if (r.url.path.endsWith('/teachers')) {
+            return jsonResponse(r, {'name': 'Trusted teacher'});
+          }
           calls++;
           if (!started.isCompleted) started.complete();
           await release.future;

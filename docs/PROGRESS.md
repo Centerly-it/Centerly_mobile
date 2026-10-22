@@ -1,15 +1,19 @@
 # Progress pointer
 
-Current milestone: Teacher completion package approved/deployed through
-202610190010 (nineteen exact remote SQL bodies verified); hosted synthetic
-completion suite 98 PASS. Completion gate enabled; core feature screens wired.
-Final 82 Flutter tests PASS, analyzer clean, real hosted SDK and Windows native
-navigation/secure-session tests PASS. Configured Android debug APK built and scanned;
-owner testing milestone reached. Android physical/pilot/Secretary acceptance open.
-See the current milestone at the top of IMPLEMENTATION_PROGRESS.md for final
-Flutter/native/APK results. SECRETARY_HANDOFF.md defines the next application's
-shared backend setup and separate cross-app/pilot acceptance. Historical entries
-below retain their original approval/access limits and are superseded by this pin.
+Current checkpoint: Teacher owner-testing IMPLEMENTATION COMPLETE,2026-10-22.
+Approved receipt-filter migration 26 (202610220001) deployed/verified on centerly-dev;
+all 26 bodies/catalog pinned. Receipt search/method/kind enabled in connected mode.
+No account/finance/fixture mutations; no build/restart during deployment follow-up.
+251 Flutter PASS/1 hosted Auth SKIP,3 activation UI/adapter PASS,3 preview PASS,
+119 local SQL assertions PASS,60 hosted read-only reports/230 pages/2,466 checks
+plus tenant/role denials; analyzer clean. See FINANCE_MOVEMENTS_DEPLOYMENT_2026-10-22.md.
+
+Owner ACCEPTANCE remains pending original credentials at
+`/Users/mohamedsalem/Desktop/Centerly_mobile/.env.development-accounts.json`.
+No pending implementation/backend approval blocks the agreed scope. Group notes
+excluded, QR deferred; attendance free-text search unavailable, status filters work.
+Testing guide contains exact preview=false/receipt-filters=true final build command;
+owner will request it. Pilot/recovery/React acceptance are separate gates.
 
 The session ledger is [IMPLEMENTATION_PROGRESS.md](../IMPLEMENTATION_PROGRESS.md).
 Read it with agent_rules.md, CENTERLY_TEACHER_IMPLEMENTATION_PLAN.md and

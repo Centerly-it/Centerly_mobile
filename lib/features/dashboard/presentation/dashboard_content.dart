@@ -1,3 +1,7 @@
+import '../../finances/presentation/live_finance_dues.dart';
+import '../../finances/data/finance_repository.dart';
+import '../../../core/api/teacher_read_client.dart';
+import '../../../core/di/di.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/theme/values_manager.dart';
@@ -71,6 +75,22 @@ class DashboardContent extends StatelessWidget {
         const PreviewUnpaidStudents(),
         const SizedBox(height: AppSize.s24),
       ],
+      if (!PreviewMode.enabled)
+        TextButton.icon(
+          icon: const Icon(Icons.receipt_long_outlined),
+          label: Text('finance_view_dues'.tr()),
+          onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (_) => Scaffold(
+                appBar: AppBar(title: Text('nav_finance'.tr())),
+                body: LiveFinanceDues(
+                  repository: FinanceRepository(getIt<TeacherReadClient>()),
+                  month: DateTime.parse(data.localDate),
+                ),
+              ),
+            ),
+          ),
+        ),
       DashboardAttendanceSection(data: data),
     ],
   );

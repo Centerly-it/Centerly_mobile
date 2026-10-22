@@ -41,9 +41,36 @@ class SupabaseTeacherAuth implements TeacherAuthRepository {
       if (retryToken) return _profile(retryToken: false);
       throw const TeacherAuthFailure('AUTH_REQUIRED');
     }
-    return TeacherProfile.fromJson(
+    final profile = TeacherProfile.fromJson(
       Map<String, dynamic>.from(data as Map),
       active.user.id,
+    );
+    String? name;
+    try {
+      final row = await client
+          .from('teachers')
+          .select('name')
+          .eq('id', profile.teacherId)
+          .maybeSingle()
+          .timeout(const Duration(seconds: 10));
+      final value = row?['name'];
+      if (value is String && value.trim().isNotEmpty) name = value.trim();
+    } catch (_) {
+      /* Optional display enrichment; RPC remains the authorization gate. */
+    }
+    if (_blocked ||
+        attempt != _attempt ||
+        client.auth.currentUser?.id != active.user.id) {
+      throw const TeacherAuthFailure('AUTH_REQUIRED');
+    }
+    if (client.auth.currentSession?.accessToken != token) {
+      if (retryToken) return _profile(retryToken: false);
+      throw const TeacherAuthFailure('AUTH_REQUIRED');
+    }
+    return TeacherProfile(
+      id: profile.id,
+      teacherId: profile.teacherId,
+      displayName: name,
     );
   }
 

@@ -1,3 +1,4 @@
+import '../../domain/finance_overview_data.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/theme/color_manager.dart';
@@ -7,8 +8,14 @@ import '../../domain/finance_ledger.dart';
 import 'finance_design.dart';
 
 class FinanceCashHero extends StatelessWidget {
-  const FinanceCashHero({required this.ledger, required this.month, super.key});
-  final FinanceLedger ledger;
+  const FinanceCashHero({
+    this.ledger,
+    required this.month,
+    this.summary,
+    super.key,
+  });
+  final FinanceLedger? ledger;
+  final FinanceOverviewData? summary;
   final DateTime month;
   @override
   Widget build(BuildContext context) => Container(
@@ -56,7 +63,7 @@ class FinanceCashHero extends StatelessWidget {
           ],
         ),
         FinanceMoney(
-          ledger.net(month),
+          summary?.net ?? ledger!.net(month),
           style: AppTextStyles.displayLarge.copyWith(
             color: ColorManager.white,
             fontWeight: FontWeight.bold,
@@ -69,8 +76,11 @@ class FinanceCashHero extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             for (final item in [
-              ('finance_gross', ledger.gross(month)),
-              ('finance_corrections', ledger.corrections(month)),
+              ('finance_gross', summary?.gross ?? ledger!.gross(month)),
+              (
+                'finance_corrections',
+                summary?.corrections ?? ledger!.corrections(month),
+              ),
             ])
               Expanded(
                 child: Column(

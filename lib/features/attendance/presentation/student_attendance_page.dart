@@ -1,3 +1,4 @@
+import 'live_attendance_table.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/api/teacher_read_client.dart';
@@ -13,13 +14,16 @@ class StudentAttendancePage extends StatelessWidget {
   const StudentAttendancePage({
     required this.studentId,
     required this.initialDate,
+    this.embedded = false,
     super.key,
   });
   final String studentId;
   final DateTime initialDate;
+  final bool embedded;
   @override
   Widget build(BuildContext context) =>
       FilteredReportPage<StudentAttendanceRecord, StudentAttendanceSummary>(
+        embedded: embedded,
         title: 'completion_attendance',
         initialDate: initialDate,
         kindKey: 'p_status',
@@ -71,6 +75,7 @@ class StudentAttendancePage extends StatelessWidget {
             ),
           ],
         ),
+        items: (context, rows) => LiveAttendanceTable(rows: rows),
         item: (context, r) => StudentAttendanceCard(record: r),
       );
 }

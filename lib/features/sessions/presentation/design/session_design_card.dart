@@ -60,7 +60,8 @@ class SessionDesignCard extends StatelessWidget {
                                   color: ColorManager.primary,
                                 ),
                               ),
-                            if (data.cancellationReason == null &&
+                            if (data.hasAttendanceCounts &&
+                                data.cancellationReason == null &&
                                 (current || data.completed))
                               Text(
                                 '${data.present}/${data.expected}',

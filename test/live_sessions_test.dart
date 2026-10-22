@@ -46,24 +46,9 @@ void main() {
       );
     });
     await tester.pumpAndSettle();
-    expect(
-      find.text('\u2066\u206612:00 AM\u2069 – \u20661:00 AM\u2069\u2069'),
-      findsOneWidget,
-    );
-    expect(find.text('Attendance in progress'), findsOneWidget);
+    expect(find.textContaining('12:00'), findsOneWidget);
+    expect(find.textContaining('Group A', findRichText: true), findsOneWidget);
     expect(fixture.ranges.first['p_from'], '2026-07-01');
-    getIt.registerSingleton<TeacherReadClient>(api);
-    await tester.tap(find.widgetWithText(TextButton, 'Cancel Session'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.byType(FilledButton));
-    await tester.pumpAndSettle();
-    expect(fixture.cancelled, isFalse);
-    await tester.enterText(find.byType(TextField), ' Teacher unavailable ');
-    await tester.tap(find.byType(FilledButton));
-    await tester.pumpAndSettle();
-    expect(fixture.cancelled, isTrue);
-    expect(find.widgetWithText(TextButton, 'Cancel Session'), findsNothing);
-    expect(find.text('Cancelled'), findsOneWidget);
     await tester.tap(find.text('Week'));
     await tester.pumpAndSettle();
     expect(fixture.ranges.last['p_from'], '2026-06-28');

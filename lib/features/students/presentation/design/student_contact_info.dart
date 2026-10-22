@@ -1,3 +1,5 @@
+import '../../domain/student_record.dart';
+import '../../../../core/utils/contact_launcher.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,7 +10,8 @@ import '../../../../core/widgets/app_surface_section.dart';
 import 'student_design.dart';
 
 class StudentContactInfo extends StatelessWidget {
-  const StudentContactInfo({super.key});
+  const StudentContactInfo({this.student, super.key});
+  final StudentRecord? student;
   Future<void> _previewContact(BuildContext context, String label) =>
       showDialog<void>(
         context: context,
@@ -26,6 +29,11 @@ class StudentContactInfo extends StatelessWidget {
           ],
         ),
       );
+  String? _phone(String who) => student == null
+      ? '0123456789'
+      : who == 'student_phone'
+      ? student!.phone
+      : student!.guardianPhone;
   @override
   Widget build(BuildContext context) => AppSurfaceSection(
     title: 'student_design_contacts'.tr(),
@@ -51,7 +59,7 @@ class StudentContactInfo extends StatelessWidget {
                         ),
                       ),
                       SelectableText(
-                        '0123456789',
+                        _phone(who) ?? 'live_missing_value'.tr(),
                         style: AppTextStyles.caption,
                       ),
                     ],
@@ -64,8 +72,13 @@ class StudentContactInfo extends StatelessWidget {
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   tooltip: 'student_design_whatsapp'.tr(),
-                  onPressed: () =>
-                      _previewContact(context, 'student_design_$who'.tr()),
+                  onPressed: student == null
+                      ? () =>
+                            _previewContact(context, 'student_design_$who'.tr())
+                      : _phone(who) == null
+                      ? null
+                      : () =>
+                            openContact(context, _phone(who)!, whatsapp: true),
                   icon: Container(
                     width: 44,
                     height: 44,
@@ -85,8 +98,13 @@ class StudentContactInfo extends StatelessWidget {
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   tooltip: 'student_design_call'.tr(),
-                  onPressed: () =>
-                      _previewContact(context, 'student_design_$who'.tr()),
+                  onPressed: student == null
+                      ? () =>
+                            _previewContact(context, 'student_design_$who'.tr())
+                      : _phone(who) == null
+                      ? null
+                      : () =>
+                            openContact(context, _phone(who)!, whatsapp: false),
                   icon: const StudentAsset('853f1.svg'),
                 ),
               ],

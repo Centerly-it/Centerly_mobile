@@ -45,7 +45,7 @@ void main() {
       expect(
         tester
             .widgetList<StudentDirectoryRow>(find.byType(StudentDirectoryRow))
-            .every((w) => w.data.paid),
+            .every((w) => w.data!.paid),
         isTrue,
       );
       await chip('level');

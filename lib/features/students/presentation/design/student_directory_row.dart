@@ -1,3 +1,4 @@
+import '../../domain/student_record.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/theme/color_manager.dart';
@@ -8,19 +9,25 @@ import 'student_identity.dart';
 
 class StudentDirectoryRow extends StatelessWidget {
   const StudentDirectoryRow({
-    required this.data,
+    this.data,
+    this.record,
     required this.onTap,
     super.key,
   });
-  final StudentPreviewData data;
+  final StudentPreviewData? data;
+  final StudentRecord? record;
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     final large = MediaQuery.textScalerOf(context).scale(12) > 16;
-    final tag = StudentTag(
-      label: (data.paid ? 'student_design_paid' : 'student_design_unpaid').tr(),
-      positive: data.paid,
-    );
+    final tag = data == null
+        ? const SizedBox.shrink()
+        : StudentTag(
+            label:
+                (data!.paid ? 'student_design_paid' : 'student_design_unpaid')
+                    .tr(),
+            positive: data!.paid,
+          );
     return Column(
       children: [
         InkWell(
@@ -35,7 +42,9 @@ class StudentDirectoryRow extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Expanded(child: StudentIdentity(data: data)),
+                    Expanded(
+                      child: StudentIdentity(data: data, record: record),
+                    ),
                     const SizedBox(width: AppSize.s8),
                     if (!large) tag,
                     const SizedBox(width: AppSize.s12),

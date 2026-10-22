@@ -110,3 +110,32 @@ changes gate the prior UI. Startup/resume and access-denial checks still gate
 immediately. All RPC/RLS live actor checks remain authoritative; no stale offline
 data fallback or persistent business cache is introduced. Regression tests cover
 in-flight validation, deactivation and nested navigation retention/logout removal.
+
+
+## ADR-012 — Connect designs using full server financial summaries
+
+2026-10-22. Reuse the established design components with explicit overview and
+invoice amounts supplied by the deployed read models. Never wrap a partial ledger
+in the preview snapshot index or compute filtered totals from its rows. Exact
+BigInt piastres, negative period net, creator/collector/corrector attribution and
+UUID pagination are preserved. Extend receipt filters with one additive teacher-only
+read proposal; default-false feature flag until separately approved/deployed. No
+baseline migrations or teacher write permissions change. See
+TEACHER_OWNER_BACKEND_REVIEW.md and TEACHER_OWNER_TESTING.md.
+
+## ADR-013 — Trusted display name and explicit owner-testing exclusions
+
+2026-10-22. Existing teachers SELECT/name access is RLS-scoped to the validated
+teacher tenant. Fetch only name after the live profile RPC; optional enrichment
+failure uses the generic localized greeting. SDK account/token changes still reject
+late data; editable Auth metadata does not control name, role or tenant.
+Owner explicitly chose to hide group-note editing for this milestone. Student
+teacher notes retain their existing durable optimistic-lock contract. QR scanner/
+cards are already deferred by the approved plan; connected mode shows the profile
+identifier and no fabricated QR image. Call/WhatsApp uses actual scoped contacts,
+validated external URIs and a copy fallback, without sending messages automatically.
+
+Native synthetic/plugin checks, read-only SQL actor checks and password SDK checks
+are separate evidence. Missing original credentials must not lead to provisioning
+or resetting accounts. Pilot signing/recovery and future React acceptance remain
+separate gates; no test requiring an unbuilt React client blocks Teacher work.

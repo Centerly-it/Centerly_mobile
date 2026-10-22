@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'helpers/dashboard_read_fixture.dart';
 import 'helpers/capture_widget.dart';
-import 'package:centrally/features/finances/presentation/teacher_finance_page.dart';
+import 'package:centrally/features/finances/presentation/live_finance.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -86,7 +86,7 @@ void main() {
             );
             await tester.pumpAndSettle();
             expect(find.text('workspace_pending'.tr()), findsNothing);
-            expect(find.byType(TeacherFinancePage), findsOneWidget);
+            expect(find.byType(LiveFinance), findsOneWidget);
             fixture.fail = true;
             await tester.tap(find.byIcon(Icons.home_outlined));
             await tester.pumpAndSettle();
@@ -97,7 +97,7 @@ void main() {
             await tester.tap(find.byIcon(Icons.refresh));
             await tester.pumpAndSettle();
             expect(find.text('12'), findsOneWidget);
-            expect(fixture.calls, 4);
+            expect(fixture.calls, 3);
             semantics.dispose();
             expect(tester.takeException(), isNull);
           },

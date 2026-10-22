@@ -7,11 +7,12 @@ class FinanceInvoice {
     required this.dueOn,
     this.createdBy,
     this.voided = false,
+    this.localized = true,
   });
   final String id, studentKey, groupKey;
   final BigInt amount;
   final DateTime dueOn;
-  final bool voided;
+  final bool voided, localized;
   final String? createdBy;
 }
 

@@ -1,27 +1,93 @@
-# Secretary React handoff — shared backend v202610200006
+# Secretary React handoff — shared backend v202610220001
 
 Teacher repository temporarily owns the canonical backend by explicit owner
-override. Twenty-five approved immutable migrations are deployed to centerly-dev
+override. Twenty-six approved immutable migrations are deployed to centerly-dev
 (yfeubomyglmhuwizaqoj). Do not initialize a second schema/project or replay these
 migrations. supabase/schema-manifest.json pins LF-normalized SHA256 hashes;
 SHARED_BACKEND_CONTRACT.md defines current signatures, date/money/error semantics.
 TEACHER_COMPLETION_CHANGE_REVIEW.md records the last seven-file approval/deployment.
 
-Latest verified development deployment: six approved202610200001..006 migrations,
-25 bodies/catalog/grants/RLS matched,135 hosted business checks and1 SDK Auth test
-passed. See HARDENING_DEPLOYMENT_VERIFICATION_2026-10-20.md and PROJECT_HANDOFF.md
-in the repository root. Finance read contracts are available; new Teacher designs
-remain preview until adapters are integrated. Secretary enrollment updates must
-atomically change status/left_at. Ongoing overview counts use server time,
-independent of selected day; not_marked is never absence. Earlier test counts below
-are historical and do not replace device/React cross-app acceptance.
+Latest verified development deployment:202610220001_finance_movements.sql, exact
+owner-approved SHA256,26 bodies/full catalog matched (45 functions,18 tables,
+30 policies,0 enrollment violations). No account, money or fixture mutations.
+See FINANCE_MOVEMENTS_DEPLOYMENT_2026-10-22.md. Teacher implementation is complete
+for the agreed owner-testing scope; authenticated acceptance awaits original
+credentials and owner-requested final build. Receipt filters are enabled.
+
+## Current Teacher handoff — after approved migration 26
+
+Production Finance now uses list_teacher_finance_movements for full-dataset receipt
+search/method/kind/collector/student/group/date filters, before UUID pagination;
+count/gross/correction/net totals cover every match. Original and current collectors
+remain separate. Other redesigned routes use their established scoped repositories;
+teacher attendance/academics/finance remain read-only. Group notes excluded and QR
+deferred as documented. No optional feature was added in the deployment follow-up.
+
+Transfer all 26 exact managed migrations/history/manifest, including202610220001;
+there is no pending receipt proposal to deploy again. Keep migration ownership
+singular. Do not replay or rename versions. This new function is teacher-only:
+Secretary must use its permitted RLS/operational contracts, not weaken teacher grants.
+
+Fresh checks:251 Flutter PASS/1 credential-blocked Auth SKIP;3 activation UI/adapter,
+3 preview and119 local SQL assertions PASS;60 hosted read-only reports/230 pages/
+2,466 checks plus tenant/role/anonymous denial. These SQL-role checks do not prove
+password Auth or React UI acceptance. No new build/restart occurred. Native smoke
+from the previous checkpoint is historical and synthetic.
+
+Expected local credential path:
+`/Users/mohamedsalem/Desktop/Centerly_mobile/.env.development-accounts.json`.
+It remains unavailable; do not reset/provision accounts or put credentials into
+Vite/source/builds. Teacher final command uses preview=false and receipt filters=true
+in TEACHER_OWNER_TESTING.md. Remaining acceptance: original credentials, connected
+login/restore/logout/reconciliation and owner-requested Android/contact checks.
+Attendance free-text search is unavailable; group notes/QR are agreed exclusions.
+Pilot signing/recovery and future React acceptance remain separate in
+PILOT_RELEASE_GATES.md. Do not hold the Teacher implementation open for an unbuilt
+React app. No Secretary app was created as part of this work.
+
+The preceding pre-deployment Teacher checkpoint below is retained as historical
+context; its25-version/default-off/local-proposal statements are superseded.
+
+## Teacher implementation checkpoint — 2026-10-22
+
+The latest connected Teacher implementation now consumes the deployed finance
+overview/filtered-dues/invoice-detail contracts and real Groups/Students/Profile/
+Calendar/Session repositories. Shared designs, translations and teacher read-only
+permissions are preserved. Trusted display name reads only RLS-scoped teachers.name;
+contact actions use actual scoped numbers. Group-note editing is explicitly
+excluded by owner decision. QR scanner/cards remain deferred, not preview stand-ins.
+See TEACHER_OWNER_TESTING.md for every route/action and exact final owner build.
+
+Fresh baseline verification matched all 25 remote bodies and full catalog (44
+functions,18 tables,30 policies), enrollment violations0; no migration redeployed.
+251 Flutter PASS/1 hosted Auth opt-in SKIP,3 explicit preview PASS,217 local SQL
+assertions PASS,13 hosted read-only synthetic-role assertions PASS, and1 Android
+native synthetic/plugin smoke PASS. Read-only SQL and native fixtures do not prove
+password Auth/React UI. Original development passwords are unavailable; owner
+confirmed this. Do not provision/reset accounts or copy credentials into Vite.
+
+One local proposal `teacher_owner_testing/202610220001_finance_movements.sql` is
+SHA-pinned in TEACHER_OWNER_BACKEND_REVIEW.md, outside managed migrations, undeployed
+and disabled in Flutter. It supplies full-dataset receipt search/method/kind totals
+without broadening teacher write or Secretary read grants. Transfer the deployed25
+baseline as-is; include a26th version only if it was later explicitly approved,
+deployed, verified and pinned. Never assume proposal presence means deployment.
+
+Remaining Teacher owner acceptance: original credentials and authenticated connected
+navigation/restore/logout/reconciliation; full receipt-filter acceptance after the
+one reviewed extension if approved. Native secure-storage/URL-handler/Finance-shell
+smoke ran on Android17/API37 emulator; external contact completion, physical device
+performance and revocation remain open. Pilot signing/recovery and future React
+cross-app matrix are separately documented in PILOT_RELEASE_GATES.md. Those future
+React tests must not hold the Teacher implementation milestone open indefinitely.
+
 
 ## Ownership transfer
 
 When the Secretary repository exists, copy the exact versioned migrations, tests,
 contracts and manifest, retaining the hosted supabase_migrations history. Establish
 that repository as sole owner in both projects, then stop adding migrations here.
-Verify all twenty-five remote bodies and hashes before new additive migrations. Never
+Verify all twenty-six remote bodies and hashes before new additive migrations. Never
 db reset/push existing IDs again, rename versions, edit deployed bytes or apply a
 duplicate baseline. Both clients pin the same version. Hosted changes need owner
 approval; React implementation is a separate next task, not created by this handoff.

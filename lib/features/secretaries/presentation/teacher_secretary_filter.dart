@@ -10,14 +10,19 @@ import '../../../core/widgets/paged_read_body.dart';
 import '../domain/secretary_record.dart';
 
 class TeacherSecretaryFilter extends StatefulWidget {
-  const TeacherSecretaryFilter({required this.onChanged, super.key});
+  const TeacherSecretaryFilter({
+    required this.onChanged,
+    this.initialLabel,
+    super.key,
+  });
   final ValueChanged<String?> onChanged;
+  final String? initialLabel;
   @override
   State<TeacherSecretaryFilter> createState() => _TeacherSecretaryFilterState();
 }
 
 class _TeacherSecretaryFilterState extends State<TeacherSecretaryFilter> {
-  String? label;
+  late String? label = widget.initialLabel;
   @override
   Widget build(BuildContext context) => TextButton.icon(
     icon: const Icon(Icons.person_outline),

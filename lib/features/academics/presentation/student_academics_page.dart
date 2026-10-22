@@ -1,3 +1,4 @@
+import 'live_academic_table.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/api/teacher_read_client.dart';
@@ -13,13 +14,16 @@ class StudentAcademicsPage extends StatelessWidget {
   const StudentAcademicsPage({
     required this.studentId,
     required this.initialDate,
+    this.embedded = false,
     super.key,
   });
   final String studentId;
   final DateTime initialDate;
+  final bool embedded;
   @override
   Widget build(BuildContext context) =>
       FilteredReportPage<AcademicRecord, AcademicSummary>(
+        embedded: embedded,
         title: 'completion_academics',
         initialDate: initialDate,
         kinds: const {
@@ -55,6 +59,7 @@ class StudentAcademicsPage extends StatelessWidget {
               ),
           ],
         ),
+        items: (context, rows) => LiveAcademicTable(rows: rows),
         item: (context, r) => AcademicRecordCard(record: r),
       );
 }

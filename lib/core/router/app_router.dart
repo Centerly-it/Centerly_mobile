@@ -6,7 +6,6 @@ import '../../features/auth/presentation/views/account_check_view.dart';
 import '../../features/auth/presentation/view_models/auth_session_cubit.dart';
 import '../../features/auth/presentation/view_models/auth_session_state.dart';
 import '../../features/onboarding/presentation/view/onboarding_view.dart';
-import '../../features/splash/splash_view.dart';
 import '../../screens/teacher/teacher_workspace.dart';
 import '../di/di.dart';
 import 'routes_manager.dart';
@@ -16,12 +15,11 @@ class AppRouter {
   AppRouter._();
   static GoRouter create(
     AuthSessionCubit session, {
-    String initialLocation = RoutesManager.splashPath,
+    String initialLocation = RoutesManager.onboardingPath,
   }) => GoRouter(
     initialLocation: initialLocation,
     refreshListenable: SessionRouterRefresh(session),
     redirect: (_, state) {
-      if (state.matchedLocation == RoutesManager.splashPath) return null;
       final status = session.state;
       if (status.status == AuthSessionStatus.checking) return '/checking';
       if (status.isAuthenticated) {
@@ -29,6 +27,7 @@ class AppRouter {
             ? null
             : RoutesManager.homePath;
       }
+      if (state.matchedLocation == '/') return RoutesManager.onboardingPath;
       if ([
         RoutesManager.loginPath,
         RoutesManager.onboardingPath,
@@ -40,7 +39,7 @@ class AppRouter {
     errorBuilder: (context, state) =>
         Scaffold(body: Center(child: Text('route_not_found'.tr()))),
     routes: [
-      GoRoute(path: '/', builder: (_, state) => const SplashView()),
+      GoRoute(path: '/', redirect: (_, _) => RoutesManager.onboardingPath),
       GoRoute(
         path: '/checking',
         builder: (_, state) => const AccountCheckView(),

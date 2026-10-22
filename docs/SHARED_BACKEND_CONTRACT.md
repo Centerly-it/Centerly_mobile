@@ -1,16 +1,39 @@
 # Shared backend contract — v6.1 development deployment
 
 Canonical source: this repository's `supabase/migrations`, by explicit owner
-override on 2026-10-18. Twenty-five migrations are deployed to centerly-dev after explicit
+override on 2026-10-18. Twenty-six migrations are deployed to centerly-dev after explicit
 owner approval; supabase/schema-manifest.json pins their hashes. See BACKEND_COMPAT.md.
 Transfer the same versioned migrations and Supabase migration history to the
 future Secretary repo; never create/reapply a duplicate schema. Both clients
 must pin the same deployed migration version before integrating live data.
 
-## Latest verified deployment — 2026-10-20
+## Latest verified deployment —2026-10-22
+
+Only approved202610220001_finance_movements.sql was applied after exact25-version
+preflight/catalog/hash comparison and a single-file dry run. All26 bodies/full
+catalog verified afterward (45 functions,18 tables,30 policies;0 enrollment
+violations); manifest pinned26. No account/finance/fixture mutation. Receipt filters
+now default enabled in Flutter. No build/restart ran. Exact evidence:
+FINANCE_MOVEMENTS_DEPLOYMENT_2026-10-22.md. Teacher implementation scope complete;
+authenticated owner acceptance remains pending original credentials.
+
+`list_teacher_finance_movements(p_from date,p_to date,p_search text='',p_method
+text=null,p_kind text=null,p_secretary_id uuid=null,p_student_id uuid=null,
+p_group_id uuid=null,p_cursor uuid=null,p_limit integer=30) -> jsonb`.
+Teacher-only, <=366 inclusive Cairo dates,1..100 UUID page, search<=100 literal
+substring; methods cash/transfer/other, kinds collections/corrections or null/all.
+Response rows/total_count/next_cursor/synced_at and summary gross_egp/corrections_egp/
+net_egp (decimal strings), all totals from the full filtered set before pagination.
+Original/current collector attribution retained. Search/method/kind affect rows,
+count and totals together. Secretary/anonymous/foreign entity filters denied.
+No financial writes or table/RLS changes. Transfer identical26 history to Secretary;
+do not call this teacher-only RPC from React or broaden grants.
+
+## Previous verified deployment —2026-10-20 (historical)
+
 
 Owner-approved202610200001..006 is now deployed to centerly-dev. Fresh remote
-history and live catalog matched all25 managed versions;44 application functions,
+history and live catalog matched all 25 managed versions;44 application functions,
 18 tables,30 policies, grants/indexes/triggers/constraints/RLS verified. Enrollment
 violations0; CHECK remains NOT VALID as approved. Hosted135 business assertions
 and1 real Flutter SDK Auth test passed using approved synthetic fixtures only.
@@ -18,6 +41,21 @@ The local-only October20 section below is historical; exact deployment evidence
 and remaining client activation limits: HARDENING_DEPLOYMENT_VERIFICATION_2026-10-20.md.
 Finance RPCs are available; debug designs are not automatically production-wired.
 Do not replay these25 versions when migration ownership transfers to Secretary.
+
+## Prior pre-deployment consumer checkpoint —superseded by migration 26
+
+Fresh read-only history/catalog verification matched all 25 managed bodies,
+44 functions,18 tables,30 policies, grants/RLS/indexes/triggers/constraints; zero
+enrollment violations. Redesigned Teacher overview/dues/invoice detail now consume
+the three deployed finance reads; the older NOT DEPLOYED paragraphs retained below
+are historical, not current activation instructions. See TEACHER_OWNER_TESTING.md.
+
+One new LOCAL ONLY proposal `202610220001_finance_movements.sql` adds full-dataset
+receipt search/method/kind filtering. It is outside managed migrations, default-off
+in Flutter and requires explicit new approval. No old migration was replayed or
+changed. Review: TEACHER_OWNER_BACKEND_REVIEW.md. No group-note contract is added;
+editing is excluded by owner decision. Existing RLS teachers.name SELECT supplies
+the greeting after validated profile identity; it grants no new permissions.
 
 ## Identity, authorization and provisioning
 
@@ -171,7 +209,7 @@ cron. Trigger failure rolls back the corresponding business transaction. Existin
 cancellation notifications, note writes, mark-read and removal request RPCs unchanged.
 
 
-## Finance business read-model proposals — 2026-10-20 (NOT DEPLOYED)
+## Historical pre-deployment finance proposal record — superseded by October20 deployment
 
 The three additive teacher-only RPCs in `supabase/proposals/finance_business/`
 are local proposals, not part of the deployed nineteen-version contract. See
@@ -186,7 +224,7 @@ settlement card consumes `paid_against_invoices_egp`, while actual period cash u
 and use server totals rather than summing a loaded page.
 
 
-## 2026-10-20 hardening proposals — NOT DEPLOYED
+## Historical pre-deployment hardening record — superseded by October20 deployment
 
 The unchanged nineteen-version manifest is the only managed contract confirmed
 locally; hosted claims above are historical. MAIN_HARDENING_CHANGE_REVIEW.md pins

@@ -11,6 +11,25 @@ class DashboardReadFixture {
     if (request.url.path.endsWith('get_teacher_calendar')) {
       return jsonResponse(request, {'sessions': []});
     }
+    if (request.url.path.endsWith('get_teacher_finance_overview')) {
+      return jsonResponse(request, {
+        'invoiced_egp': '0.00',
+        'paid_against_invoices_egp': '0.00',
+        'outstanding_egp': '0.00',
+        'period_net_collected_egp': '0.00',
+        'daily_collections': [],
+        'invoice_count': 0,
+        'gross_collected_egp': '0.00',
+        'corrections_egp': '0.00',
+        'overdue_egp': '0.00',
+        'due_today_egp': '0.00',
+        'future_due_egp': '0.00',
+        'actors': [],
+        'methods': [],
+        'as_of_date': '2026-10-22',
+        'synced_at': '2026-10-22T10:00:00Z',
+      });
+    }
     if (request.url.path.endsWith('get_teacher_finance')) {
       return jsonResponse(request, {
         'rows': [],

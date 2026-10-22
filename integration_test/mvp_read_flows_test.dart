@@ -1,3 +1,4 @@
+import 'package:centrally/features/students/presentation/design/student_directory_row.dart';
 // Real hosted reads through production navigation, using synthetic teacher only.
 import 'package:centrally/core/di/di.dart';
 import 'package:centrally/features/auth/presentation/view_models/auth_session_cubit.dart';
@@ -36,7 +37,7 @@ void main() {
         await tester.tap(find.byIcon(Icons.school_outlined));
         await settleLive(tester);
         expect(find.byType(StudentDirectory), findsOneWidget);
-        await tester.tap(find.text('completion_profile'.tr()).first);
+        await tester.tap(find.byType(StudentDirectoryRow).first);
         await settleLive(tester);
         expect(find.byType(StudentProfilePage), findsOneWidget);
         for (final label in [

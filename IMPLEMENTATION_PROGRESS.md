@@ -1,5 +1,152 @@
 # Centerly implementation progress
 
+## Teacher owner-testing implementation complete; Finance26 deployed — 2026-10-22
+
+Owner explicitly approved only202610220001 with SHA256
+`e59af624e58ddb7875fc59c6f02278806fcdb8eb8c93ec8b0765a17848e2eedf`, development
+centerly-dev, and read-only verification. Rechecked healthy project/ref, exact25
+baseline bodies/full catalog (44 functions,18 tables,30 policies,0 enrollment
+violations), old hashes and exact proposal bytes. Dry run listed only that file,
+no seeds/roles; --skip-vault. Applied once, no old migration replay.
+
+Postflight exact26 bodies/full catalog PASS:45 functions,18 tables,30 policies,
+0 enrollment violations. Approved function body/definer/search_path/execute grants
+match local schema; no unrelated catalog change. Read-only existing synthetic
+records:60 filter combinations,230 limit-one pages,2,466 teacher checks, maximum
+report22 rows and9 existing corrections. Every page's full filtered count/gross/
+correction/net matched an independent ledger reference; signed amounts, no loss/
+duplicates, original/current attribution, tenant/entity filters and invalid inputs
+verified. Additional other-teacher scope, Secretary and anonymous denials PASS;
+anonymous publishable-key REST401. This is SQL-role/anonymous HTTP evidence, not
+password-based SDK acceptance. No account/status/Auth changes, financial writes,
+fixture mutations or data repairs occurred.
+
+Only after all postflight checks passed: pinned26 in schema-manifest, enabled
+CENTERLY_FINANCE_MOVEMENT_FILTERS by default and in connected VS Code launch, and
+added the new RPC to the explicit offline test transport. No production preview
+substitution. Final dry run up to date (zero migrations/seeds/roles). The original25
+managed files remain unchanged. New bytes retain the approved hash and LF pin.
+
+Fresh checks: Flutter251 PASS/1 hosted Auth opt-in SKIP; activated AR/EN200% UI plus
+adapter3 PASS (including corrections-empty/clear); explicit preview3 PASS;
+analyzer/format/diff clean; local26 foundation90 + movement29 =119 SQL assertions
+PASS. Pinned26 remote history/catalog comparison and manifest checks PASS. No build
+or restart was run in this deployment follow-up, as requested. The earlier Android
+synthetic smoke remains historical evidence, not a new enabled-filter native test.
+
+Implementation milestone: COMPLETE for agreed Teacher owner-testing scope. T-033
+production adapter/receipt filters DONE; connected route/action checklist retained.
+No pending implementation/backend approval blocks that scope. Attendance full-text
+search across pages remains unavailable (status filters/paging work); group notes
+are explicitly excluded and QR/cards/scanning deferred. No optional feature added.
+
+Acceptance milestone: PENDING original development credentials, which owner says
+are unavailable. Exact expected ignored local file:
+`/Users/mohamedsalem/Desktop/Centerly_mobile/.env.development-accounts.json`.
+Do not create/reset accounts or expose credentials. Fresh password login/restore/
+refresh/logout/role denial, connected owner reconciliation, and final configured
+Android/contact acceptance remain unverified. These are acceptance gates separate
+from implementation gaps. Pilot signing/recovery/future React matrix remain
+separate and do not block the Teacher implementation milestone.
+
+Updated testing guide, backend compatibility/contract, deployment record and
+Secretary handoff. Final owner-requested build uses .env.local.json with
+CENTERLY_UI_PREVIEW=false and CENTERLY_FINANCE_MOVEMENT_FILTERS=true; exact command
+in docs/TEACHER_OWNER_TESTING.md. No new build produced. Next: owner restores the
+original credentials/requests final build, then authenticated acceptance; Secretary
+inherits identical26 migrations/history without replay. Working changes remain
+uncommitted; unrelated startup/splash/router/test/lockfile edits preserved.
+
+Evidence: docs/FINANCE_MOVEMENTS_DEPLOYMENT_2026-10-22.md and ignored
+build/finance-movements-deployment/. All older25-version/default-off/pending-approval
+entries below are historical and superseded by this26-version checkpoint.
+
+
+## Teacher connected-design owner-testing checkpoint — 2026-10-22
+
+Resumed from actual main `a3bb5e0`, not the stale October19 completion pointer.
+Preserved the six pre-existing startup/splash/router/test/SDK-lock changes exactly
+(46 insertions/86 deletions). No reset/stash, commit/push or backend deployment.
+Current Mac: Flutter3.47.2/Dart3.13.2; existing local SDK resolutions retained,
+no new dependencies. Public config verified against centerly-dev/publishable key.
+
+Implemented production FinanceRepository/DTOs and connected redesigned overview,
+filtered dues and invoice-detail/history to deployed reads. Complete server totals
+are distinct from paged rows; exact BigInt cents, negative period cash, historical
+creator/collector/corrector/reversal attribution retained. Filters precede server
+pagination; strict UUID order/cursor and monetary reconciliation reject malformed
+responses. Shared calculator uses complete server summary and no example target.
+Student invoice history uses the designed amounts, preserves void records and opens
+real invoice/receipt history. Parent Finance lists refresh after detail return.
+
+Connected shared Groups/Students/Profile/Calendar/Session designs to existing
+repositories: real bounded schedules/upcoming sessions/rosters, server directory
+search and group filters, contacts, membership history, academics/attendance/
+finance tabs, calendar markers and attendance/cancellation history. Missing badges
+and absent roster counts are withheld instead of filled with preview values.
+Teacher attendance/academics/finance remain read-only. Existing durable student
+notes/removal/notification actions retain their secured flows. Home gets a real
+dues drilldown without inventing a distinct-student unpaid count.
+
+Trusted teacher name uses the existing narrow RLS teachers.name SELECT after profile
+validation, with safe fallback/token guards. Real contact URIs validated; failures
+offer translated copy fallback, no automatic messaging. QR cards/scanner deferred
+per approved plan; no placeholder QR in connected mode. Owner explicitly excluded
+group-note editing for this milestone; unavailable message, no fake saved notes.
+Full route/action/scope checklist: docs/TEACHER_OWNER_TESTING.md.
+
+Fresh evidence (ignored build/owner-testing/):
+
+| Check | Actual result / scope |
+|---|---|
+| Remote baseline | Exact25 migration bodies,44 functions,18 tables,30 policies plus catalog/grants/RLS/indexes/triggers/constraints match; enrollment violations0 |
+| Managed manifest |25 hashes unchanged;0 pending managed versions; no replay/deployment |
+| Hosted read-only SQL |13 synthetic actor assertions PASS: trusted name, cohort/cash/dues/detail, tenant isolation and teacher-only denial. SQL role simulation, not SDK/password Auth |
+| Flutter full suite |251 PASS,1 hosted Auth opt-in SKIP; final run after native ink fix |
+| Explicit preview tests |3 PASS with CENTERLY_UI_PREVIEW=true |
+| Connected design traversal |2 PASS, AR/EN at320px/200% text; explicitly synthetic transport, not hosted UI |
+| New receipt adapter |1 PASS with CENTERLY_FINANCE_MOVEMENT_FILTERS=true; full filtered total independent of partial page |
+| Final route regressions |16 PASS after retaining the compatibility gate on profile tabs |
+| Analyzer / format / diff |PASS, no issues; changed Dart formatted, unrelated user files preserved |
+| Connected bundle |flutter build bundle --debug --no-pub with local config and preview=false PASS; no owner APK claim |
+| Local PostgreSQL |Foundation90 + deployed-finance transition68 + hardening30 + new movement proposal29 =217 assertions PASS, disposable local DB |
+| Android native smoke |1 PASS on Centerly_Dev/emulator-5554, Android17/API37; actual secure-storage write/read/delete, native URL-handler query and current connected Finance shell with synthetic transport |
+
+First native build took532.8s fetching Gradle dependencies, then exposed a real
+ListTile ink/ColoredBox assertion in the calculator link. Fixed with Material;
+second build15.5s, install and native smoke PASS. This was a test-harness APK, not an
+authenticated owner build; moved to ignored build/owner-testing/native-smoke-test.apk
+to avoid distributing it accidentally. No repeated app restarts after UI edits.
+External call/WhatsApp completion, physical-device performance, password login/
+restore/revocation and real connected route reconciliation remain unverified.
+
+Remaining genuine inputs:
+
+- Original development credential file unavailable (owner confirmed). Do not
+  create/reset accounts. Fresh hosted Auth and authenticated owner acceptance are
+  BLOCKED on those credentials, not on the future React application.
+- Receipt search/method/kind is absent from the25-version deployed API. Prepared
+  exactly one teacher-only additive read proposal, locally29 PASS and SHA-pinned:
+  docs/TEACHER_OWNER_BACKEND_REVIEW.md. Outside managed migrations, undeployed,
+  default-false feature flag; no partial-page filtering or previous approval reused.
+  Baseline date/group/collector reports work now; complete receipt-filter acceptance
+  needs explicit approval, single-version deployment and fresh verification.
+
+Readiness: connected implementation completed locally to the credential/approval
+boundary; do not label authenticated owner-testing milestone accepted yet. Exact
+one final configured owner build command is in docs/TEACHER_OWNER_TESTING.md.
+Pilot signing/recovery/physical-device and Secretary cross-app acceptance are
+separate in docs/PILOT_RELEASE_GATES.md and docs/SECRETARY_HANDOFF.md.
+
+Task state: T-033 IN_PROGRESS at full receipt-filter approval boundary; T-021/
+T-022/T-023/T-030..034 connected source and local regressions implemented; T-050
+fresh Auth acceptance BLOCKED by missing credentials. Implementations remain
+uncommitted in the working tree for review; baseline SHA above is not a claim that
+these changes were already committed. Next action: restore original credentials,
+approve only the reviewed receipt read if full filters are required, run final
+connected acceptance, then proceed to Secretary React without replaying the schema.
+
+
 ## Repository handoff packaged for push — 2026-10-20
 
 Owner requested all changes on main plus a complete new-computer report.

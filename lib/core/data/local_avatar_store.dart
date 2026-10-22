@@ -22,7 +22,7 @@ class LocalAvatarStore {
     try {
       final file = await _file();
       if (!await file.exists() || await file.length() > maxBytes) return null;
-      return file.readAsBytes();
+      return await file.readAsBytes();
     } catch (_) {
       return null;
     }

@@ -1,3 +1,4 @@
+import '../../domain/finance_overview_data.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/theme/color_manager.dart';
@@ -9,19 +10,21 @@ import 'finance_design.dart';
 
 class FinanceDebtBreakdown extends StatelessWidget {
   const FinanceDebtBreakdown({
-    required this.ledger,
+    this.ledger,
+    this.summary,
     required this.month,
     required this.now,
     required this.onLate,
     required this.onRemaining,
     super.key,
   });
-  final FinanceLedger ledger;
+  final FinanceLedger? ledger;
+  final FinanceOverviewData? summary;
   final DateTime month, now;
   final VoidCallback onLate, onRemaining;
   @override
   Widget build(BuildContext context) {
-    final late = ledger.lateAmount(month, now);
+    final late = summary?.overdue ?? ledger!.lateAmount(month, now);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -29,7 +32,7 @@ class FinanceDebtBreakdown extends StatelessWidget {
           ('finance_overdue', late, ColorManager.error, onLate),
           (
             'finance_not_late',
-            ledger.outstanding(month) - late,
+            (summary?.outstanding ?? ledger!.outstanding(month)) - late,
             ColorManager.warning,
             onRemaining,
           ),

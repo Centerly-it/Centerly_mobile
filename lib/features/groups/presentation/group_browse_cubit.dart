@@ -66,10 +66,14 @@ class GroupBrowseCubit extends Cubit<GroupBrowseState> {
       if (isClosed || generation != _generation) return;
       emit(
         GroupBrowseState(
-          groups: request.groups,
+          groups: error is BackendFailure && error.deniesAccess
+              ? const []
+              : request.groups,
           search: request.search,
           gradeId: request.gradeId,
-          cursor: request.cursor,
+          cursor: error is BackendFailure && error.deniesAccess
+              ? null
+              : request.cursor,
           error: error is BackendFailure ? error.code : 'SERVICE_UNAVAILABLE',
         ),
       );

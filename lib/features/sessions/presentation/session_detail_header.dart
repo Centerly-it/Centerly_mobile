@@ -6,7 +6,8 @@ import '../../../models/centerly_models.dart';
 import '../../../screens/teacher/teacher_shared.dart';
 import '../../dashboard/presentation/dashboard_metrics.dart';
 import '../domain/session_detail.dart';
-import 'live_session_card.dart';
+import 'design/session_info_panel.dart';
+import 'session_card_actions.dart';
 
 String detailTimestamp(DateTime value, BuildContext context) =>
     '${CairoTime.date(CairoTime.local(value))} ${CairoTime.time(value, context.locale.languageCode)}';
@@ -23,7 +24,8 @@ class SessionDetailHeader extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      LiveSessionCard(
+      SessionInfoPanel(data: detail.session.design),
+      SessionCardActions(
         session: detail.session,
         showDetails: false,
         onChanged: detail.session.endsAt.isAfter(detail.syncedAt)

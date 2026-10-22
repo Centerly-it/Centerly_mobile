@@ -1,3 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../core/presentation/paged_read_cubit.dart';
+import '../data/finance_repository.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/api/teacher_read_client.dart';
@@ -7,19 +10,22 @@ import '../../../core/di/di.dart';
 import '../../../shared/presentation/filtered_report_page.dart';
 import '../../dashboard/presentation/dashboard_metrics.dart';
 import '../domain/finance_record.dart';
-import 'finance_record_card.dart';
+import 'student_finance_record_card.dart';
 
 class TeacherFinancePage extends StatelessWidget {
   const TeacherFinancePage({
     required this.initialDate,
     this.studentId,
+    this.embedded = false,
     super.key,
   });
   final DateTime initialDate;
+  final bool embedded;
   final String? studentId;
   @override
   Widget build(BuildContext context) =>
       FilteredReportPage<FinanceRecord, FinanceSummary>(
+        embedded: embedded,
         title: 'nav_finance',
         initialDate: initialDate,
         collectorFilter: true,
@@ -57,6 +63,14 @@ class TeacherFinancePage extends StatelessWidget {
             ),
           ],
         ),
-        item: (context, r) => FinanceRecordCard(record: r),
+        item: (context, r) => StudentFinanceRecordCard(
+          record: r,
+          syncedAt: context
+              .read<PagedReadCubit<FinanceRecord, FinanceSummary>>()
+              .state
+              .page!
+              .syncedAt,
+          repository: FinanceRepository(getIt<TeacherReadClient>()),
+        ),
       );
 }

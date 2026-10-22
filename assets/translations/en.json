@@ -437,7 +437,7 @@
   "completion_exams": "Exams",
   "completion_assignments": "Assignments",
   "completion_scored": "Scored exams",
-  "completion_missing": "Missing scores",
+  "completion_missing": "Not recorded",
   "completion_below_50": "Below 50%",
   "completion_from_50_to_64": "50% to below 65%",
   "completion_from_65_to_79": "65% to below 80%",
@@ -726,5 +726,13 @@
   "finance_demo_student_10": "Karim Adel",
   "finance_dues_result": "{} invoices · Outstanding: {}",
   "dashboard_attendance_unavailable": "Current session attendance is currently unavailable",
-  "dashboard_attendance_updated": "Updated: {}"
+  "dashboard_attendance_updated": "Updated: {}",
+  "finance_original_collector": "Original collector: {}",
+  "finance_correction_receipt": "Correction receipt: {}",
+  "finance_live_filters": "Receipt dates and collector filters apply to the full server report.",
+  "finance_status_void": "Void",
+  "group_notes_unavailable": "Group notes are unavailable for this testing milestone.",
+  "student_qr_deferred": "QR cards and scanning are deferred. Use the student profile identifier below.",
+  "contact_unavailable": "Could not open the contact app. You can copy the number.",
+  "finance_selected_collector": "Selected collector"
 }

@@ -18,8 +18,11 @@ class FinanceRecord {
     this.method,
     this.reversalOf,
     this.reason,
+    this.invoiceId,
+    this.group,
   });
   final String id, invoiceNumber, student;
+  final String? invoiceId, group;
   final MoneyEgp amount;
   final String? status, dueOn, receipt, collector, method, reversalOf, reason;
   final MoneyEgp? outstanding, paid, signedAmount;
@@ -27,6 +30,8 @@ class FinanceRecord {
   factory FinanceRecord.fromJson(Map<String, dynamic> j) {
     final value = FinanceRecord(
       id: j['id'] as String,
+      invoiceId: j['invoice_id'] as String?,
+      group: j['group_name'] as String?,
       invoiceNumber: j['invoice_number'] as String,
       student: j['student_name'] as String,
       amount: MoneyEgp.parse(j['amount_egp']),

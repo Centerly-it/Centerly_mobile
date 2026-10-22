@@ -1,3 +1,4 @@
+import '../../domain/finance_overview_data.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/theme/color_manager.dart';
@@ -8,21 +9,25 @@ import 'finance_design.dart';
 
 class FinanceSecretaryRow extends StatelessWidget {
   const FinanceSecretaryRow({
-    required this.ledger,
+    this.ledger,
+    this.summary,
     required this.month,
     required this.actor,
     required this.onTap,
     super.key,
   });
-  final FinanceLedger ledger;
+  final FinanceLedger? ledger;
+  final FinanceActor? summary;
   final DateTime month;
   final String actor;
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
-    final name = 'finance_demo_secretary_$actor'.tr();
-    final rows = ledger.receivedIn(month).where((m) => m.actor == actor);
-    final net = ledger.net(month, actor: actor);
+    final name = summary == null
+        ? 'finance_demo_secretary_$actor'.tr()
+        : summary!.name ?? 'completion_missing'.tr();
+    final rows = ledger?.receivedIn(month).where((m) => m.actor == actor);
+    final net = summary?.net ?? ledger!.net(month, actor: actor);
     final amount = FinanceMoney(
       net,
       style: AppTextStyles.titleSmall.copyWith(
@@ -32,8 +37,8 @@ class FinanceSecretaryRow extends StatelessWidget {
     final counts = Text(
       'finance_entries_count'.tr(
         args: [
-          '${rows.where((m) => !m.reversed).length}',
-          '${rows.where((m) => m.reversed).length}',
+          '${summary?.collections ?? rows!.where((m) => !m.reversed).length}',
+          '${summary?.corrections ?? rows!.where((m) => m.reversed).length}',
         ],
       ),
       style: AppTextStyles.caption,
@@ -41,7 +46,7 @@ class FinanceSecretaryRow extends StatelessWidget {
     final avatar = CircleAvatar(
       backgroundColor: ColorManager.primaryBright,
       foregroundColor: ColorManager.primary,
-      child: Text(name.substring(0, 1)),
+      child: Text(name.isEmpty ? '?' : name.substring(0, 1)),
     );
     return InkWell(
       onTap: onTap,

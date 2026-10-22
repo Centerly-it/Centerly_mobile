@@ -1,3 +1,4 @@
+import 'preview_finance_movements.dart';
 import 'preview_mutations.dart';
 import '../../features/finances/preview/finance_preview_summary.dart';
 import '../format/cairo_time.dart';
@@ -69,6 +70,48 @@ class PreviewResponses {
         return data[p['p_kind'] == 'assignments' ? 'assignments' : 'exams'];
       case 'get_teacher_student_attendance':
         return data['attendance'];
+      case 'get_teacher_finance_overview':
+        final summary = data['invoices']['summary'] as Map;
+        return {
+          ...summary,
+          'invoice_count': data['invoices']['total_count'],
+          'gross_collected_egp': summary['period_net_collected_egp'],
+          'corrections_egp': '0.00',
+          'overdue_egp': summary['outstanding_egp'],
+          'due_today_egp': '0.00',
+          'future_due_egp': '0.00',
+          'actors': [
+            {
+              'actor_id': data['payments']['rows'][0]['collected_by'],
+              'actor_name': data['payments']['rows'][0]['collected_by_name'],
+              'collection_count': 1,
+              'correction_count': 0,
+              'net_egp': summary['period_net_collected_egp'],
+            },
+          ],
+          'methods': [
+            {'method': 'cash', 'net_egp': summary['period_net_collected_egp']},
+          ],
+          'as_of_date': date,
+          'synced_at': now,
+        };
+      case 'list_teacher_finance_dues':
+        return {
+          ...data['invoices'] as Map,
+          'as_of_date': date,
+          'summary': {
+            ...data['invoices']['summary'] as Map,
+            'net_paid_egp':
+                data['invoices']['summary']['paid_against_invoices_egp'],
+          },
+        };
+      case 'get_teacher_invoice_detail':
+        return {
+          ...data['payments'] as Map,
+          'invoice': data['invoices']['rows'][0],
+        };
+      case 'list_teacher_finance_movements':
+        return previewFinanceMovements(data, p);
       case 'get_teacher_finance':
         final response = Map<String, dynamic>.from(
           data[p['p_kind'] == 'payments' ? 'payments' : 'invoices'] as Map,

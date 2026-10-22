@@ -437,7 +437,7 @@
   "completion_exams": "الامتحانات",
   "completion_assignments": "الواجبات",
   "completion_scored": "امتحانات لها درجات",
-  "completion_missing": "درجات غير مسجلة",
+  "completion_missing": "غير مسجل",
   "completion_below_50": "أقل من ٥٠٪",
   "completion_from_50_to_64": "من ٥٠٪ إلى أقل من ٦٥٪",
   "completion_from_65_to_79": "من ٦٥٪ إلى أقل من ٨٠٪",
@@ -726,5 +726,13 @@
   "finance_demo_student_10": "كريم عادل",
   "finance_dues_result": "{} فاتورة · المتبقي: {}",
   "dashboard_attendance_unavailable": "بيانات حضور الحصص الجارية غير متاحة حاليًا",
-  "dashboard_attendance_updated": "آخر تحديث: {}"
+  "dashboard_attendance_updated": "آخر تحديث: {}",
+  "finance_original_collector": "مسؤول التحصيل الأصلي: {}",
+  "finance_correction_receipt": "إيصال العكس: {}",
+  "finance_live_filters": "فلاتر تاريخ الإيصال ومسؤول التحصيل تُطبّق على التقرير الكامل في الخادم.",
+  "finance_status_void": "ملغاة",
+  "group_notes_unavailable": "ملاحظات المجموعة غير متاحة في مرحلة الاختبار الحالية.",
+  "student_qr_deferred": "بطاقات ومسح QR مؤجلة. معرّف ملف الطالب موضح أدناه.",
+  "contact_unavailable": "تعذر فتح تطبيق التواصل. يمكنك نسخ الرقم.",
+  "finance_selected_collector": "مسؤول التحصيل المحدد"
 }

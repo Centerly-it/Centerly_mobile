@@ -1,3 +1,4 @@
+import 'session_design_data.dart';
 import '../../../models/centerly_models.dart' show SessionStatus;
 
 class SessionRecord {
@@ -17,6 +18,19 @@ class SessionRecord {
   final DateTime startsAt, endsAt;
   final DateTime? finalizedAt;
   final SessionStatus status;
+  SessionDesignData get design => SessionDesignData(
+    id: id,
+    date: DateTime.parse(localDate),
+    start: startsAt,
+    end: endsAt,
+    group: groupName ?? '',
+    subject: subjectName ?? '',
+    grade: '',
+    students: const [],
+    current: status == SessionStatus.ongoing,
+    completed: status == SessionStatus.completed,
+    hasAttendanceCounts: false,
+  )..cancellationReason = status == SessionStatus.cancelled ? '' : null;
   SessionRecord atServerTime(DateTime now) => SessionRecord(
     id: id,
     groupId: groupId,
