@@ -1,0 +1,9 @@
+# Student/group deletion — 23 October 2026
+
+Delete buttons appear on active student/group rows and detail screens. First warning displays the exact record name and consequences. A second warning requires an explicit acknowledgment checkbox before the final delete button enables. Canceling either screen makes no request; archived records have no further delete/edit action. The existing secretary_archive RPC provides idempotent removal from active lists while retaining historical attendance, notes and finance. Group deletion does not delete its students. This is explicitly described in both warnings; no destructive SQL DELETE is used.
+
+No backend migration or Teacher application change required: deployed baseline remains 32. Active group filtering also removes archived groups' sessions from Secretary daily work, without rewriting session/history records. Owner data was not deleted to test the new UI.
+
+Validation: 37 unit tests/lint/configured build; 20 local synthetic SQL-fixture browser scenarios across desktop/mobile, including both entity types, cancel/no request, second confirmation disabled until acknowledgment, retained payment rows and group students retained. Actual authenticated connected browser opened both warning flows and canceled them without submitting; all business writes blocked by the read-only probe. No hosted fixture mutations, cleanup, account changes or publication. Teacher archived-history reads use existing contracts; no physical/manual acceptance claimed.
+
+Website: http://127.0.0.1:5173/. Web artifacts rebuilt/inventoried/credential-scanned. Both progress ledgers updated; no account credentials enter evidence or artifacts. The owner can now test deleting a chosen synthetic student/group. Prior SEC27 histories and migration bodies remain untouched.

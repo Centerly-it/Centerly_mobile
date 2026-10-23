@@ -1,0 +1,25 @@
+{
+  "browser": {
+    "pass": true,
+    "mode": "actual authenticated connected Chromium, read-only",
+    "checks": 22,
+    "businessWrites": 0,
+    "renewalStubs": 4,
+    "deleteFormsVerifiedWithoutSubmitting": 2,
+    "allActiveGroupsShown": 2,
+    "missingSchedules": 2,
+    "requiredCreationSchedule": true,
+    "multipleDays": true,
+    "noGroupDate": true,
+    "amPmDropdown": true,
+    "financialEditing": "enabled; due save verified without submitting",
+    "paymentEdit": "unavailable: no existing current collection",
+    "physicalDeviceTested": false
+  },
+  "backendMigration": 32,
+  "backendChanges": false,
+  "unitTests": 37,
+  "syntheticBrowserTests": 20,
+  "hostedBusinessWrites": 0,
+  "retention": "Existing secretary_archive keeps records/history; active views hide archived entities"
+}

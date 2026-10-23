@@ -3,15 +3,15 @@
   "files": [
     {
       "artifact": "dist",
-      "path": "assets/index-8ju5c7cN.css",
-      "bytes": 10961,
-      "sha256": "ac82d62d907ac19be09700a47a90a373fdb6f815c30ef46e36b63c91e623b1fb"
+      "path": "assets/index-C4fBSOnY.css",
+      "bytes": 11136,
+      "sha256": "beae9c6b9c71c94f5eea2b931c42aed54e50bc055aba22348d4d451eaf319b50"
     },
     {
       "artifact": "dist",
-      "path": "assets/index-xnyRYrOx.js",
-      "bytes": 68616,
-      "sha256": "d9fb9d6e40daa8342ee4d36cf1ca04c9bf63bbf6b55c366a458d2375e9c06520"
+      "path": "assets/index-CCLTSwaM.js",
+      "bytes": 72157,
+      "sha256": "efa6b4a3d73b8e0ff2ec495bb6a8957cdec30d3e6c10d36a5c9c701250fa694d"
     },
     {
       "artifact": "dist",
@@ -59,7 +59,7 @@
       "artifact": "dist",
       "path": "index.html",
       "bytes": 805,
-      "sha256": "3955d831e95709ebea1945470e9c3f9c8e9f871efd6ac2e88c9152748c03f08d"
+      "sha256": "b8d4ab11b3517a78ad084d8790af08df9d020ec31cab969eade0eb9991416e74"
     },
     {
       "artifact": "app-debug.apk",
