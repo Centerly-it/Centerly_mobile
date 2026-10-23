@@ -27,11 +27,14 @@ export async function startPostgres({through}={}) {
     create function auth.uid() returns uuid language sql stable as
     $$ select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid $$;
     grant usage on schema auth to authenticated; grant execute on function auth.uid() to authenticated;`);
-  for(const name of (await readdir(new URL('../migrations/',import.meta.url))).sort()) {
-    if(through && name.split('_')[0]>through) continue;
-    await admin.query(await readFile(new URL('../migrations/'+name,import.meta.url),'utf8'));
-  }
+  const names=(await readdir(new URL('../migrations/',import.meta.url))).sort()
+    .filter(name=>!through || name.split('_')[0]<=through);
+  const apply=async name=>admin.query(await readFile(new URL('../migrations/'+name,import.meta.url),'utf8'));
+  // Seed only the historical baseline. New authenticated enrollment triggers must
+  // never be bypassed to make unauthenticated fixture setup work.
+  for(const name of names.filter(n=>n.split('_')[0]<='202610230001')) await apply(name);
   await admin.query(await readFile(new URL('fixtures.sql',import.meta.url),'utf8'));
+  for(const name of names.filter(n=>n.split('_')[0]>'202610230001')) await apply(name);
   return {admin,connect,close:async()=>{
     await Promise.all(clients.map(c=>c.end())); await server.stop();
     const target=resolve(databaseDir), child=relative(resolve(tmpdir()),target);

@@ -1,3 +1,5 @@
+CURRENT 23 October: owner-approved R2 deployed and verified on centerly-dev as migration 29. Connected creation/billing enabled; grade-level UI removed. All business data remains empty. Earlier pending/28-version statements below are historical. See docs/R2_ACTIVATION_ACCEPTANCE.md.
+
 # مراجعة واحدة لتفعيل مستحقات المجموعة — GP29-OWNER-20261023-R2
 
 الحالة: جاهز محليًا للمراجعة؛ **لم يُرفع تسعير المجموعات على Supabase بعد**. البيئة المستهدفة الوحيدة `centerly-dev`؛ baseline = 28، بدون تغيير أي migration منشور.

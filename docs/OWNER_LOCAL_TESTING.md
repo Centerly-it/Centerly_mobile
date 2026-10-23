@@ -1,3 +1,5 @@
+CURRENT 23 October: owner-approved R2 deployed and verified on centerly-dev as migration 29. Connected creation/billing enabled; grade-level UI removed. All business data remains empty. Earlier pending/28-version statements below are historical. See docs/R2_ACTIVATION_ACCEPTANCE.md.
+
 Current update, 23 October: owner-requested synthetic development reset completed; all business tables empty and accounts retained. Earlier fixture/installed-APK statements below are historical. Group-pricing backend is local review only, not deployed; see [current acceptance](OWNER_RESET_AND_PRICING_ACCEPTANCE.md) and [one pricing review](GROUP_PRICING_REVIEW_AR.md). Hosted baseline remains 28.
 
 Current owner-requested Arabic workflow: use the new OWNER28-AR-20261023 synthetic examples and SIMPLE_DAILY_WORK_AR.md. They were prepared under the later explicit ready-to-test request. The older OWNER28-20261023 proposal below was not executed; SEC27 remains retained and read-only. Teacher QR is removed and the refreshed app is installed on Redmi.

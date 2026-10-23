@@ -38,12 +38,13 @@
     "businessWrites": 0
   },
   "pricing": {
-    "status": "local review only",
+    "status": "deployed and verified",
     "backendChecks": 40,
     "syntheticBrowserChecks": 16,
     "transactionSha256": "f157d3aed95331ba55ec5265ac8daaed112be2fb5763cdf094fc70d501666c30",
-    "featureFlagOnConnectedSite": false,
-    "review": "R2"
+    "featureFlagOnConnectedSite": true,
+    "review": "R2",
+    "migrationVersions": 29
   },
   "teacher": {
     "analyzer": "pass",
@@ -54,11 +55,12 @@
   "manualAcceptance": "not performed",
   "production": "deferred",
   "creationR2": {
-    "actualConnectedBrowserChecks": 4,
+    "actualConnectedBrowserChecks": 6,
     "businessWrites": 0,
     "localBackendChecks": 40,
     "localSyntheticBrowserTests": 16,
     "unitTests": 31,
-    "saveGate": "awaiting reviewed backend approval"
+    "saveGate": "enabled",
+    "actualAuthenticatedSdkChecks": 7
   }
 }

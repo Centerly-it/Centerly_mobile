@@ -1,6 +1,6 @@
 {
   "package": "GP29-OWNER-20261023-R2",
-  "status": "LOCAL_REVIEW_NOT_DEPLOYED",
+  "status": "DEPLOYED_AND_VERIFIED_CENTERLY_DEV",
   "projectRef": "yfeubomyglmhuwizaqoj",
   "baselineVersions": 28,
   "transactionSha256": "f157d3aed95331ba55ec5265ac8daaed112be2fb5763cdf094fc70d501666c30",
@@ -13,9 +13,14 @@
   "materials": "once per student/group; rejoining does not repeat",
   "billingRefresh": "automatic on Secretary dues view; catches up elapsed active cycles; no background cron",
   "hostedFixtureWrites": 0,
-  "requiresOwnerReviewApproval": true,
+  "requiresOwnerReviewApproval": false,
   "localBackendChecks": 40,
   "transfer": "atomic admission, billing and withdrawal",
   "supersedesTransactionSha256": "213f604d3ca43e5cf8d8d62dbf824620441d63cf39f90e3f766fbf73b43290d7",
-  "creation": "required group; atomic student+enrollment+billing; retry-safe IDs; no user-facing capacity/year selector"
+  "creation": "required group; atomic student+enrollment+billing; retry-safe IDs; no user-facing capacity/year selector",
+  "ownerApproved": true,
+  "deployedMigration": "202610230002_group_pricing",
+  "deployedVersions": 29,
+  "actualSdkChecks": 7,
+  "actualBrowserChecks": 6
 }

@@ -9,33 +9,33 @@
     },
     {
       "artifact": "dist",
-      "path": "assets/index-BbgeLgc8.js",
-      "bytes": 58780,
-      "sha256": "d9df5c893c96d86418cc0e84b65967bbf718a9e7e44202177231f7b47047a4a4"
+      "path": "assets/index-qPKBUyhP.js",
+      "bytes": 59319,
+      "sha256": "bbe220eb3b92cf53c072cb3cdf0ad17fd17c4b22a6d28b3ca439c72a7337cc5e"
     },
     {
       "artifact": "dist",
-      "path": "assets/query-X8-Cj-P_.js",
+      "path": "assets/query-CQIpwD65.js",
       "bytes": 33100,
-      "sha256": "28938d6079e1110bbec0058f9e30bebe05dc2d45048712910a8a2d69a9878a48"
+      "sha256": "8d33f1cbb10fe5d5168195efed48eaef16a556a90835a3704975896cfd408f57"
     },
     {
       "artifact": "dist",
-      "path": "assets/supabase-DvdqVf9N.js",
+      "path": "assets/supabase-DGL6hDrb.js",
       "bytes": 217753,
-      "sha256": "779d31d1ed7b458bf1ce12e033c526e85362212d55234987c3f8cdcb32d98b98"
+      "sha256": "584d4fd8c2fbde1c6818d3101ff32c868b58276ff08d05a276ac455d5a708bb5"
     },
     {
       "artifact": "dist",
-      "path": "assets/validation-CRmOrrzf.js",
+      "path": "assets/validation-DH2dj-bN.js",
       "bytes": 94595,
-      "sha256": "77864402cf636c05042d7faccfdc9ce530f698a2bd3aa5854e1804a520a07d3c"
+      "sha256": "515ab67018b145ea7d2775b5294667685308924f058eedb8f2b1df9591dd131a"
     },
     {
       "artifact": "dist",
-      "path": "assets/vendor-fwkSymFL.js",
-      "bytes": 310222,
-      "sha256": "64f639b3820f8958fdf7e5efcdafe5930c61224ce6133190a90b0cd868401199"
+      "path": "assets/vendor-SIw2ub9x.js",
+      "bytes": 309940,
+      "sha256": "85803b1655da215e8a3e658a3dd14cf0dc163777422c248e5619d954fb30f9d9"
     },
     {
       "artifact": "dist",
@@ -59,7 +59,7 @@
       "artifact": "dist",
       "path": "index.html",
       "bytes": 805,
-      "sha256": "d71dc61ebd6849b5714d62897f3ab40273dd54f131b79892c5f2a81a2bc3de39"
+      "sha256": "d0731017c0f99e3b1b0f78591079d351cb2ffc097bf11ad39747196b7491206d"
     },
     {
       "artifact": "app-debug.apk",

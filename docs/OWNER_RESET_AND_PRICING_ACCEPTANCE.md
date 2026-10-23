@@ -1,3 +1,5 @@
+CURRENT 23 October: owner-approved R2 deployed and verified on centerly-dev as migration 29. Connected creation/billing enabled; grade-level UI removed. All business data remains empty. Earlier pending/28-version statements below are historical. See docs/R2_ACTIVATION_ACCEPTANCE.md.
+
 Creation R2 verification: 40 local SQL checks, 31 unit tests and 16 local synthetic browser tests PASS. Four actual connected Chromium checks also PASS with zero business writes: masculine instructions, group-first prompt, no capacity/year controls, and explicit pending-backend save gate. No new hosted data or migration was created.
 
 # Current owner testing state — 23 October 2026

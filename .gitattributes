@@ -12,3 +12,4 @@ supabase/proposals/controlled_pilot/*.sql -text whitespace=cr-at-eol
 supabase/proposals/202610230002_group_pricing.sql text eol=lf
 supabase/reviews/group-pricing-transaction.sql text eol=lf
 supabase/proposals/group_pricing/*.sql text eol=lf
+supabase/migrations/202610230002_group_pricing.sql text eol=lf

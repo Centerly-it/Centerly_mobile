@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {startPostgres} from './postgres.mjs';
 import {ids} from './completion_context.mjs';
-const pg=await startPostgres();let checks=0;
+const pg=await startPostgres({through:'202610230001'});let checks=0;
 const ok=(a,b)=>{assert.deepEqual(a,b);checks++;};
 try {
  await pg.admin.query(await readFile(new URL('../proposals/202610230002_group_pricing.sql',import.meta.url),'utf8'));
