@@ -3,9 +3,9 @@
   "files": [
     {
       "artifact": "dist",
-      "path": "assets/index-BrzdgGLg.js",
-      "bytes": 65871,
-      "sha256": "7c88d61cdca3eb4a52b54000731ff7b36cbd9653238eba9d9095049885858c1c"
+      "path": "assets/index-58ITg3or.js",
+      "bytes": 66911,
+      "sha256": "e5e55931f798411d053e689262d1fb988b7800478af8063f6726fc8f0c3a1c48"
     },
     {
       "artifact": "dist",
@@ -59,7 +59,7 @@
       "artifact": "dist",
       "path": "index.html",
       "bytes": 805,
-      "sha256": "ba2efa32971fcefef9d967431d0ebba0db59de0bb5f13811d3eca0e9aadfc371"
+      "sha256": "912d75b8e7cef5d067ebb9cccc4227c2a0cf6f8b631d8bef7a73dc4788057c64"
     },
     {
       "artifact": "app-debug.apk",

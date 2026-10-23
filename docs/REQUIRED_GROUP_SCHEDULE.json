@@ -1,0 +1,32 @@
+{
+  "postflight": {
+    "at": "2026-10-23T16:11:52.004Z",
+    "hostedWrites": 0,
+    "pass": true,
+    "migrations": 31,
+    "functions": 68,
+    "tables": 18,
+    "policies": 30,
+    "triggers": 24
+  },
+  "browser": {
+    "pass": true,
+    "mode": "actual authenticated connected Chromium, read-only",
+    "checks": 15,
+    "businessWrites": 0,
+    "renewalStubs": 2,
+    "allActiveGroupsShown": 2,
+    "missingSchedules": 2,
+    "requiredCreationSchedule": true,
+    "financialEditing": "enabled; due save verified without submitting",
+    "paymentEdit": "unavailable: no existing current collection",
+    "physicalDeviceTested": false
+  },
+  "allRowsAndFinancialTotalsUnchanged": true,
+  "localSQLRoleChecks": 20,
+  "teacherBaselineAssertions": 90,
+  "secretaryUnitTests": 36,
+  "syntheticBrowserTests": 16,
+  "hostedBusinessWrites": 0,
+  "finalDryRun": "up to date"
+}

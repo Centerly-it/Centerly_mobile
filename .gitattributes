@@ -19,3 +19,7 @@ supabase/proposals/202610230003_simple_finance_edit.sql text eol=lf
 supabase/reviews/simple-finance-edit-transaction.sql text eol=lf
 
 supabase/migrations/202610230003_simple_finance_edit.sql text eol=lf
+
+supabase/migrations/202610230004_required_group_schedule.sql text eol=lf
+supabase/proposals/202610230004_required_group_schedule.sql text eol=lf
+supabase/reviews/required-group-schedule-transaction.sql text eol=lf

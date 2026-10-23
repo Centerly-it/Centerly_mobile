@@ -1,0 +1,40 @@
+// Disposable PostgreSQL role simulation; never creates hosted fixtures.
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {randomUUID} from 'node:crypto';
+import {startPostgres} from './postgres.mjs';
+import {ids} from './completion_context.mjs';
+const pg=await startPostgres({through:'202610230003'});let checks=0;
+const eq=(a,b)=>{assert.deepEqual(a,b);checks++;};
+const denied=async p=>{await assert.rejects(p);checks++;};
+try{
+ const old=(await pg.admin.query('select count(*)::int n from public.groups')).rows[0].n;
+ await pg.admin.query(await readFile(new URL('../proposals/202610230004_required_group_schedule.sql',import.meta.url),'utf8'));
+ eq((await pg.admin.query('select count(*)::int n from public.groups')).rows[0].n,old);
+ const s=await pg.connect(ids.secretary),t=await pg.connect(ids.teacher),b=await pg.connect('20000000-0000-0000-0000-000000000002');
+ const day=(await pg.admin.query("select (now() at time zone 'Africa/Cairo')::date::text d")).rows[0].d;
+ const group=randomUUID();
+ const create=(c,id=group,weekday=1,start='15:00',end='16:00',name='فيزياء ٣ ث')=>c.query('select public.secretary_create_scheduled_group($1,$2,\'فيزياء\',700,300,$3,$4,$5,$6) id',[id,name,weekday,start,end,day]);
+ await denied(s.query("select public.secretary_create_group($1,'مجموعة بلا ميعاد','فيزياء',700,300)",[randomUUID()]));
+ await denied(s.query("insert into public.groups(teacher_id,grade_level_id,name,subject_name,capacity) values($1,'70000000-0000-0000-0000-000000000001','بدون ميعاد','فيزياء',20)",[ids.teacher]));
+ await denied(create(s,randomUUID(),null));await denied(create(s,randomUUID(),7));
+ await denied(create(s,randomUUID(),1,'15:00','15:00'));
+ await denied(create(t));
+ eq((await create(s)).rows[0].id,group);
+ eq((await s.query('select count(*)::int n from public.group_schedules where group_id=$1',[group])).rows[0].n,1);
+ eq((await create(s)).rows[0].id,group);
+ eq((await s.query('select count(*)::int n from public.group_schedules where group_id=$1',[group])).rows[0].n,1);
+ eq((await s.query("select count(*)::int n from public.audit_events where entity_type='scheduled_group_creation' and entity_id=$1",[group])).rows[0].n,1);
+ await denied(create(s,group,2));await denied(create(b));
+ const failed=randomUUID();
+ await pg.admin.query("create function private.reject_test_schedule() returns trigger language plpgsql as $$begin if new.local_start_time='22:00' then raise exception 'TEST';end if;return new;end $$; create trigger reject_test_schedule before insert on public.group_schedules for each row execute function private.reject_test_schedule();");
+ await denied(create(s,failed,1,'22:00','23:00'));
+ eq((await pg.admin.query('select count(*)::int n from public.groups where id=$1',[failed])).rows[0].n,0);
+ eq((await pg.admin.query('select count(*)::int n from public.audit_events where entity_id=$1',[failed])).rows[0].n,0);
+ await pg.admin.query('drop trigger reject_test_schedule on public.group_schedules;drop function private.reject_test_schedule()');
+ await s.query("select public.add_schedule($1,2,'18:00','19:00',$2)",[group,day]);
+ eq((await s.query('select count(*)::int n from public.group_schedules where group_id=$1',[group])).rows[0].n,2);
+ eq((await b.query('select count(*)::int n from public.groups where id=$1',[group])).rows[0].n,0);
+ const many=await Promise.all([create(s,randomUUID()),create(s,randomUUID())]);eq(many.length,2);
+ console.log(JSON.stringify({pass:true,checks,mode:'local PostgreSQL SQL-role simulation',hostedWrites:0}));
+}finally{await pg.close();}

@@ -1,7 +1,7 @@
 {
   "projectRef": "yfeubomyglmhuwizaqoj",
   "environment": "development",
-  "lastMigration": "202610230003",
+  "lastMigration": "202610230004",
   "migrations": [
     {
       "file": "202610180001_identity.sql",
@@ -122,6 +122,10 @@
     {
       "file": "202610230003_simple_finance_edit.sql",
       "sha256": "da8068b9da19e64b201a68491ac8ba38a6dd51fad9a69177df0f097bb0c75813"
+    },
+    {
+      "file": "202610230004_required_group_schedule.sql",
+      "sha256": "006e350c0847773da71f68af2f9d8b36d278d2d8a95f06590af38ccbb621e6c6"
     }
   ]
 }
