@@ -73,7 +73,7 @@ class FinanceInvoiceCard extends StatelessWidget {
                 ],
               ),
               Text(
-                '${invoice.localized ? invoice.groupKey.tr() : invoice.groupKey}  ·  #${invoice.id}',
+                invoice.localized ? invoice.groupKey.tr() : invoice.groupKey,
                 style: AppTextStyles.caption,
               ),
               const SizedBox(height: AppSize.s12),

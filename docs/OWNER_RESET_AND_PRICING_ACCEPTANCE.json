@@ -1,0 +1,55 @@
+{
+  "at": "2026-10-23T11:19:42.988Z",
+  "projectRef": "yfeubomyglmhuwizaqoj",
+  "businessRowsRemoved": 222,
+  "countsBefore": {
+    "grade_levels": 5,
+    "groups": 7,
+    "students": 9,
+    "group_enrollments": 7,
+    "group_schedules": 4,
+    "sessions": 12,
+    "attendance": 16,
+    "exams": 7,
+    "assignments": 4,
+    "invoices": 14,
+    "payments": 27,
+    "teacher_notes": 2,
+    "notifications": 29,
+    "secretary_removal_requests": 3,
+    "attendance_change_log": 15,
+    "audit_events": 61
+  },
+  "businessTablesEmpty": 16,
+  "existingAccountsRetained": 4,
+  "authChanges": 0,
+  "backupSha256": "998ef6feb1b3e08f2298edb7932efab2667e67d4fd25db9b7f1f0b225c303106",
+  "localRecoveryDrill": "all 16 tables restored byte-equivalent JSON under UTC; all FK constraints revalidated; disposable local transaction rolled back",
+  "postResetCatalog": {
+    "versions": 28,
+    "functions": 55,
+    "tables": 18,
+    "policies": 30,
+    "triggers": 20
+  },
+  "actualSdkAndConnectedBrowser": {
+    "pass": true,
+    "checks": 73,
+    "businessWrites": 0
+  },
+  "pricing": {
+    "status": "local review only",
+    "backendChecks": 31,
+    "syntheticBrowserChecks": 14,
+    "transactionSha256": "213f604d3ca43e5cf8d8d62dbf824620441d63cf39f90e3f766fbf73b43290d7",
+    "featureFlagOnConnectedSite": false
+  },
+  "teacher": {
+    "analyzer": "pass",
+    "targetedTests": 18,
+    "apkSha256": "8b301da2b694fbed9da1e768612f99ee3b433ec448fa59b32213127a961ca3a2",
+    "deviceInstall": "unavailable: adb devices empty"
+  },
+  "manualAcceptance": "not performed",
+  "production": "deferred"
+}

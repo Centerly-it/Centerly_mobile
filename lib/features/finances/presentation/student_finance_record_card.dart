@@ -36,7 +36,7 @@ class StudentFinanceRecordCard extends StatelessWidget {
     }
     return FinanceInvoiceCard(
       invoice: FinanceInvoice(
-        id: r.invoiceNumber,
+        id: r.id,
         studentKey: r.student,
         groupKey: r.group ?? '',
         amount: r.amount.minorUnits,

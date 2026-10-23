@@ -9,9 +9,9 @@
     },
     {
       "artifact": "dist",
-      "path": "assets/index-BtskFnJB.js",
-      "bytes": 55059,
-      "sha256": "e57c3fb5d286c58208312f150c7c7bcdad5919909a4da65b3382eb3f219e0cfc"
+      "path": "assets/index-CXIgcVth.js",
+      "bytes": 56091,
+      "sha256": "dca985116c162b13508a82481081f117d80d6f6bbdd1314bc0b7e28b50354ff6"
     },
     {
       "artifact": "dist",
@@ -59,13 +59,13 @@
       "artifact": "dist",
       "path": "index.html",
       "bytes": 805,
-      "sha256": "a833b90eeab330104e7d857b630c221dde725d91af82ed9de9f04edb4dcd850c"
+      "sha256": "28ab5a7f906eb87a862a61c6de1cc64740a6e140fc24aa68e6f5a1845120e4d7"
     },
     {
       "artifact": "app-debug.apk",
       "path": "app-debug.apk",
       "bytes": 209386703,
-      "sha256": "328fc20d9dcb9054ecdd42dcaa9b767215fdf3ffee5f82d77b8aff9b642cdfea"
+      "sha256": "8b301da2b694fbed9da1e768612f99ee3b433ec448fa59b32213127a961ca3a2"
     }
   ]
 }

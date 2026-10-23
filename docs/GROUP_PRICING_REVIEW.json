@@ -1,0 +1,19 @@
+{
+  "package": "GP29-OWNER-20261023",
+  "status": "LOCAL_REVIEW_NOT_DEPLOYED",
+  "projectRef": "yfeubomyglmhuwizaqoj",
+  "baselineVersions": 28,
+  "transactionSha256": "213f604d3ca43e5cf8d8d62dbf824620441d63cf39f90e3f766fbf73b43290d7",
+  "proposalSha256": "f6e1f927a15ac6bc5d3a95bc77328114f9090383f76de16216e5855e50acc14c",
+  "pendingMigration": "202610230002_group_pricing",
+  "recurrence": "enrollment-anniversary; clamp to last day of shorter months; preserve original anchor",
+  "monthlyMaterialExample": [700, 300],
+  "firstCharge": 1000,
+  "followingCharge": 700,
+  "materials": "once per student/group; rejoining does not repeat",
+  "billingRefresh": "automatic on Secretary dues view; catches up elapsed active cycles; no background cron",
+  "hostedFixtureWrites": 0,
+  "requiresOwnerReviewApproval": true,
+  "localBackendChecks": 31,
+  "transfer": "atomic admission, billing and withdrawal"
+}

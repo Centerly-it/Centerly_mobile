@@ -14,10 +14,7 @@ class FinanceRecordCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            '${r.invoiceNumber} · ${r.student}',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
+          Text(r.student, style: Theme.of(context).textTheme.titleMedium),
           Text(
             'completion_money'.tr(args: [(r.signedAmount ?? r.amount).decimal]),
           ),
@@ -29,8 +26,6 @@ class FinanceRecordCard extends StatelessWidget {
             Text(
               'completion_outstanding_value'.tr(args: [r.outstanding!.decimal]),
             ),
-          if (r.receipt != null)
-            SelectableText('completion_receipt'.tr(args: [r.receipt!])),
           if (r.collectedAt != null)
             Text(
               '${CairoTime.date(CairoTime.local(r.collectedAt!))} ${CairoTime.time(r.collectedAt!, context.locale.languageCode)}',
@@ -38,8 +33,7 @@ class FinanceRecordCard extends StatelessWidget {
           if (r.collector != null)
             Text('detail_actor'.tr(args: [r.collector!])),
           if (r.method != null) Text('completion_method_${r.method}'.tr()),
-          if (r.reversalOf != null)
-            Text('completion_reversal'.tr(args: [r.reversalOf!])),
+          if (r.reversalOf != null) Text('payment_correction_label'.tr()),
           if (r.reason != null) Text(r.reason!),
         ],
       ),

@@ -1,3 +1,5 @@
+Current update, 23 October: owner-requested synthetic development reset completed; all business tables empty and accounts retained. Earlier fixture/installed-APK statements below are historical. Group-pricing backend is local review only, not deployed; see [current acceptance](OWNER_RESET_AND_PRICING_ACCEPTANCE.md) and [one pricing review](GROUP_PRICING_REVIEW_AR.md). Hosted baseline remains 28.
+
 # تجربة الشغل اليومي للسكرتيرة
 
 الموقع المحلي: http://127.0.0.1:5173 — اعمل تحديث للصفحة بعد التعديلات. الحسابات التجريبية نفسها، وتطبيق المدرس المحدّث مثبت على Redmi Note 9S. لا يوجد QR في واجهة المدرس.

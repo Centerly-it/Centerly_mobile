@@ -29,7 +29,7 @@ class LiveInvoiceDetail extends StatelessWidget {
         child: PagedReadBody<Map<String, dynamic>, FinanceDue>(
           header: (_, p) => AppSurfaceSection(
             icon: const Icon(Icons.receipt_long_outlined),
-            title: 'finance_invoice_title'.tr(args: [p.summary.number]),
+            title: 'student_dues_title'.tr(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [

@@ -18,9 +18,6 @@ class LiveReceiptCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           if (row['student_name'] != null) Text(row['student_name'] as String),
-          SelectableText(
-            'completion_receipt'.tr(args: [row['receipt_number'] as String]),
-          ),
           FinanceMoney(MoneyEgp.parse(row['signed_amount_egp']).minorUnits),
           Text(
             'detail_actor'.tr(
@@ -35,14 +32,7 @@ class LiveReceiptCard extends StatelessWidget {
             '${CairoTime.date(CairoTime.local(DateTime.parse(row['collected_at'] as String)))} · ${CairoTime.time(DateTime.parse(row['collected_at'] as String), context.locale.toString())}',
           ),
           if (row['reversal_of'] != null) ...[
-            Text(
-              'completion_reversal'.tr(
-                args: [
-                  row['original_receipt_number'] as String? ??
-                      row['reversal_of'] as String,
-                ],
-              ),
-            ),
+            Text('payment_correction_label'.tr()),
             if (row['original_collected_by_name'] != null)
               Text(
                 'finance_original_collector'.tr(
@@ -51,11 +41,7 @@ class LiveReceiptCard extends StatelessWidget {
               ),
           ],
           if (row['correction_receipt_number'] != null)
-            Text(
-              'finance_correction_receipt'.tr(
-                args: [row['correction_receipt_number'] as String],
-              ),
-            ),
+            Text('payment_corrected_label'.tr()),
           if (row['reason'] != null) Text(row['reason'] as String),
         ],
       ),

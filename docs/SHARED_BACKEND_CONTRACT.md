@@ -1,3 +1,5 @@
+Current update, 23 October: owner-requested synthetic development reset completed; all business tables empty and accounts retained. Earlier fixture/installed-APK statements below are historical. Group-pricing backend is local review only, not deployed; see [current acceptance](OWNER_RESET_AND_PRICING_ACCEPTANCE.md) and [one pricing review](GROUP_PRICING_REVIEW_AR.md). Hosted baseline remains 28.
+
 # Current development contract — migration 28, 23 October 2026
 
 Canonical source: sibling Teacher repository `Centerly_mobile/supabase/migrations`; identical normalized SHA manifest in Teacher `supabase/schema-manifest.json` and Secretary `docs/backend-baseline.json`, through `202610230001_controlled_pilot_history_balances.sql`. Owner-approved raw transaction SHA256: `6651349fd37f8d4682fa4bd42bfadda664b2eab910026ee9a0bde0c111c78cc2`. Normalized migration hash is recorded separately in the manifest; approved raw bytes remain unchanged.
