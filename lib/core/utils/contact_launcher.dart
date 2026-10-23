@@ -4,11 +4,38 @@ import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 String? contactDigits(String phone) {
-  var digits = phone.replaceAll(RegExp(r'[\s()+-]'), '');
-  if (!RegExp(r'^\d{7,15}$').hasMatch(digits)) return null;
+  const arabic = '٠١٢٣٤٥٦٧٨٩', persian = '۰۱۲۳۴۵۶۷۸۹';
+  var normalized = phone;
+  for (var i = 0; i < 10; i++) {
+    normalized = normalized
+        .replaceAll(arabic[i], '$i')
+        .replaceAll(persian[i], '$i');
+  }
+  var digits = normalized.replaceAll(RegExp(r'[\s()+-]'), '');
   if (digits.startsWith('00')) digits = digits.substring(2);
+  if (!RegExp(r'^\d{7,15}$').hasMatch(digits)) return null;
   if (digits.length == 11 && digits.startsWith('01')) digits = '2$digits';
   return digits;
+}
+
+Uri? contactUri(String phone, {required bool whatsapp}) {
+  final digits = contactDigits(phone);
+  if (digits == null) return null;
+  return whatsapp
+      ? Uri(
+          scheme: 'whatsapp',
+          host: 'send',
+          queryParameters: {'phone': digits},
+        )
+      : Uri(scheme: 'tel', path: '+$digits');
+}
+
+Future<bool> _launchContact(Uri uri) async {
+  try {
+    return await launchUrl(uri, mode: LaunchMode.externalApplication);
+  } catch (_) {
+    return false;
+  }
 }
 
 Future<void> openContact(
@@ -16,18 +43,13 @@ Future<void> openContact(
   String phone, {
   required bool whatsapp,
 }) async {
-  final digits = contactDigits(phone);
+  final uri = contactUri(phone, whatsapp: whatsapp);
   var opened = false;
-  if (digits != null) {
-    try {
-      opened = await launchUrl(
-        whatsapp
-            ? Uri.https('wa.me', '/$digits')
-            : Uri(scheme: 'tel', path: '+$digits'),
-        mode: LaunchMode.externalApplication,
-      );
-    } catch (_) {
-      /* Offer a copy action without logging contact data. */
+  if (uri != null) {
+    opened = await _launchContact(uri);
+    if (!opened && whatsapp) {
+      final digits = contactDigits(phone)!;
+      opened = await _launchContact(Uri.https('wa.me', '/$digits'));
     }
   }
   if (!opened && context.mounted) {

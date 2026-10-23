@@ -1,3 +1,5 @@
+Current owner-requested Arabic workflow: use the new OWNER28-AR-20261023 synthetic examples and SIMPLE_DAILY_WORK_AR.md. They were prepared under the later explicit ready-to-test request. The older OWNER28-20261023 proposal below was not executed; SEC27 remains retained and read-only. Teacher QR is removed and the refreshed app is installed on Redmi.
+
 # Local owner testing — development Supabase only
 
 Production hosting, paid services, distribution signing, launch privacy decisions and real-customer onboarding are deferred. They do not block this milestone. Use synthetic data only.

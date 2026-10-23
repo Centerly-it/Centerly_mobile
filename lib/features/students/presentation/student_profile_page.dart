@@ -72,8 +72,6 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
                         children: [
                           StudentIdentity(record: page.summary, large: true),
                           StudentContactInfo(student: page.summary),
-                          Text('student_qr_deferred'.tr()),
-                          SelectableText(page.summary.id),
                           if (CompletionContracts.enabled)
                             StudentFeatureLinks(
                               studentId: studentId,

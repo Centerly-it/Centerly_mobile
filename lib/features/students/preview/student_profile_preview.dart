@@ -9,7 +9,6 @@ import '../presentation/design/student_profile_header.dart';
 import '../presentation/design/student_profile_tabs.dart';
 import '../presentation/design/student_contact_info.dart';
 import '../presentation/design/student_notes_info.dart';
-import '../presentation/design/student_qr_info.dart';
 import '../presentation/design/student_attendance_design.dart';
 import '../presentation/design/student_academics_design.dart';
 import '../presentation/design/student_payments_design.dart';
@@ -79,8 +78,6 @@ class _StudentProfilePreviewState extends State<StudentProfilePreview> {
             const StudentContactInfo(),
             const SizedBox(height: AppSize.s16),
             StudentNotesInfo(data: widget.data, onEdit: _edit),
-            const SizedBox(height: AppSize.s16),
-            StudentQrInfo(data: widget.data),
           ] else if (_tab == 1)
             StudentAttendanceDesign(data: widget.data)
           else if (_tab == 2)

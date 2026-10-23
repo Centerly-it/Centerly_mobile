@@ -1,0 +1,177 @@
+{
+  "at": "2026-10-23T10:29:20.558Z",
+  "namespace": "OWNER28-AR-20261023",
+  "authorization": "Direct owner request: Arabic examples and everything ready for testing",
+  "fixtureSetup": {
+    "namespace": "OWNER28-AR-20261023",
+    "at": "2026-10-23T10:29:20.558Z",
+    "authorization": "Direct owner request: Arabic examples and everything ready for testing",
+    "setup": "trusted SQL transaction; SDK identity/read verification separate",
+    "sqlSha256": "c1eefc0563479b19d7b6509d490cb2d4c02233928c921db37511facedf93bdaa",
+    "students": [
+      {
+        "id": "ce280000-0000-4000-8000-000000000001",
+        "name": "أحمد علي"
+      },
+      {
+        "id": "ce280000-0000-4000-8000-000000000002",
+        "name": "محمد حسن"
+      },
+      {
+        "id": "ce280000-0000-4000-8000-000000000003",
+        "name": "عبد الرحمن محمود"
+      }
+    ],
+    "group": "ce280200-0000-4000-8000-000000000001",
+    "transferGroup": "ce280200-0000-4000-8000-000000000002",
+    "session": "ce280300-0000-4000-8000-000000000001",
+    "sessionEndsAt": "2026-10-23T13:27:28.905446+00:00",
+    "invoices": [
+      {
+        "id": "27f56b52-02f5-4ae9-8ddf-f6c96ea920d9",
+        "student": "ce280000-0000-4000-8000-000000000002"
+      },
+      {
+        "id": "3d731ae5-3c2c-4c56-ae18-f4d55d4aecb7",
+        "student": "ce280000-0000-4000-8000-000000000003"
+      },
+      {
+        "id": "d4cbb6e4-1b8c-486a-8f72-abfe10e3231c",
+        "student": "ce280000-0000-4000-8000-000000000001"
+      }
+    ],
+    "checks": 7,
+    "pass": true,
+    "attendanceMarksByAgent": 0,
+    "paymentsByAgent": 0,
+    "notificationsByAgent": 0,
+    "sec27Rerun": false
+  },
+  "actualConnectedBrowser": {
+    "pass": true,
+    "mode": "actual connected Chromium",
+    "businessWrites": 0,
+    "checks": [
+      "daily home has named Arabic class, no teacher aggregates requested",
+      "three Arabic students visible in class attendance",
+      "attendance to exact student invoice and collection form; no payment submitted",
+      "student membership opens target-group transfer directly; no transfer submitted",
+      "student edit exposes persisted guardian phone field; no save submitted",
+      "Arabic group schedule visible",
+      "Secretary notification list reachable; no event fabricated or marked read"
+    ]
+  },
+  "actualHostedContact": {
+    "pass": true,
+    "mode": "actual authenticated SDK cross-app contact round trip",
+    "student": "ce280000-0000-4000-8000-000000000001",
+    "syntheticContactEdits": 2,
+    "reservedNumberRestored": true,
+    "messagesSent": 0
+  },
+  "existing18TablesUnchanged": true,
+  "existingTableFingerprints": [
+    {
+      "count": 3,
+      "hash": "dfea334515c32f2822d4a8439e814b59",
+      "name": "assignments"
+    },
+    {
+      "count": 13,
+      "hash": "70ccf66312b89bac4856531f97ce0c78",
+      "name": "attendance"
+    },
+    {
+      "count": 15,
+      "hash": "d01dda5adb53cd7750c4771cc1d43f58",
+      "name": "attendance_change_log"
+    },
+    {
+      "count": 56,
+      "hash": "3a54a24aa3205a92ea05914dff4e5511",
+      "name": "audit_events"
+    },
+    {
+      "count": 6,
+      "hash": "b62c3bae14760f3f37c0d537b2a8b36c",
+      "name": "exams"
+    },
+    {
+      "count": 4,
+      "hash": "b90a1d0dbf08fab10697307b2410215d",
+      "name": "grade_levels"
+    },
+    {
+      "count": 4,
+      "hash": "61440e2c81f3d8ea88fd59b09cfc8e35",
+      "name": "group_enrollments"
+    },
+    {
+      "count": 2,
+      "hash": "0fc9e0dd8e1ac65dbbbb7bcb86295e68",
+      "name": "group_schedules"
+    },
+    {
+      "count": 5,
+      "hash": "992582a56f61b3115d190c2279213763",
+      "name": "groups"
+    },
+    {
+      "count": 10,
+      "hash": "7ca1cdba33fee95ac2ccf6001387bc71",
+      "name": "invoices"
+    },
+    {
+      "count": 28,
+      "hash": "52cb7bba42e96db6c219506c397effd3",
+      "name": "notifications"
+    },
+    {
+      "count": 26,
+      "hash": "6b6e2979b2121e5093145972815e7205",
+      "name": "payments"
+    },
+    {
+      "count": 2,
+      "hash": "91179637d05fc6b124df8ac4240b81ed",
+      "name": "secretaries"
+    },
+    {
+      "count": 3,
+      "hash": "b82e335e3be264b1d584cbf54baf1faf",
+      "name": "secretary_removal_requests"
+    },
+    {
+      "count": 11,
+      "hash": "3935595781a529aea35b643f885042e4",
+      "name": "sessions"
+    },
+    {
+      "count": 5,
+      "hash": "cde2b1342be2081132a5416d147e7d76",
+      "name": "students"
+    },
+    {
+      "count": 2,
+      "hash": "d5774d219b051659ef06abe308cc5c44",
+      "name": "teacher_notes"
+    },
+    {
+      "count": 2,
+      "hash": "6ebae3f89795807d0235e0d0069767c8",
+      "name": "teachers"
+    }
+  ],
+  "secretaryUnitTests": 28,
+  "localSQLSyntheticBrowserTests": 14,
+  "targetedFlutterTests": 19,
+  "flutterAnalysis": "PASS",
+  "teacherQRRemoved": true,
+  "teacherAPKInstalledLaunched": true,
+  "teacherAPKsha256": "328fc20d9dcb9054ecdd42dcaa9b767215fdf3ffee5f82d77b8aff9b642cdfea",
+  "manualDeviceAcceptancePassed": false,
+  "schemaVersionCount": 28,
+  "sec27Rerun": false,
+  "messagesSent": 0,
+  "productionDeferred": true
+}

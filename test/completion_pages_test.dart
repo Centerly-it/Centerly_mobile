@@ -74,6 +74,10 @@ void main() {
           expect(find.byType(CircularProgressIndicator), findsNothing);
           expect(find.text('error_title'.tr()), findsNothing);
           expect(tester.takeException(), isNull);
+          if (entry.key == 'profile') {
+            expect(find.text('student_qr_deferred'.tr()), findsNothing);
+            expect(find.byIcon(Icons.qr_code_scanner_outlined), findsNothing);
+          }
           if (entry.key == 'archivedNote') {
             expect(
               tester.widget<TextField>(find.byType(TextField)).readOnly,
