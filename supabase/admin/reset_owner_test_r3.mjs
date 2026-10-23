@@ -1,0 +1,50 @@
+// Explicit owner-requested development reset. Never invoked by tests or CI.
+import assert from 'node:assert/strict';
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {querySql,projectRef,restrictSecretFile} from './trusted_cli.mjs';
+import {parseCapture,findField} from './read_capture.mjs';
+assert.equal(projectRef,'yfeubomyglmhuwizaqoj');
+assert.equal(process.argv[2],'--owner-reset-20261023-r3');
+const dir=new URL('../../build/owner-reset-20261023-r3/',import.meta.url);
+await mkdir(dir,{recursive:true});restrictSecretFile(dir);
+const receipt=new URL('completed.json',dir);
+assert.equal(await readFile(receipt).then(()=>true,()=>false),false,'Already completed; do not replay');
+const migrationSql="begin read only;select jsonb_agg(jsonb_build_object('version',version,'statements',statements) order by version) history from supabase_migrations.schema_migrations;commit;";
+const history=findField(parseCapture(await querySql(migrationSql,{output:'json'})),'history');
+const manifest=JSON.parse(await readFile(new URL('../schema-manifest.json',import.meta.url),'utf8'));
+assert.deepEqual(history.map(x=>x.version),manifest.migrations.map(x=>x.file.split('_')[0]));
+const {sqlTokens}=await import('./sql_tokens.mjs');
+for(const m of manifest.migrations){const body=(await readFile(new URL('../migrations/'+m.file,import.meta.url),'utf8')).replaceAll('\r\n','\n');assert.equal(createHash('sha256').update(body).digest('hex'),m.sha256);assert.deepEqual(sqlTokens(history.find(x=>x.version===m.file.split('_')[0]).statements.join('\n')),sqlTokens(body));}
+const tables=['grade_levels','groups','students','group_enrollments','group_schedules','sessions','attendance','exams','assignments','invoices','payments','teacher_notes','notifications','secretary_removal_requests','attendance_change_log','audit_events'];
+const ta='f9f2e35a-2bed-437f-b3ee-28eb27b847c0',tb='296a86e5-ca79-4b5c-8817-e64fe70375cc';
+const sa='bbc158ec-b660-45f6-8135-edee0c186fa4',sb='8afd0971-ee41-4a75-94ef-f26721dbed28';
+const aggregate=names=>`jsonb_build_object(${names.map(t=>`'${t}',(select coalesce(jsonb_agg(to_jsonb(x) order by id),'[]') from public.${t} x)`).join(',')})`;
+const snapshot=aggregate([...tables,'teachers','secretaries']);
+const result=findField(parseCapture(await querySql(`begin isolation level repeatable read read only;select ${snapshot} snapshot;commit;`,{output:'json'})),'snapshot');
+assert.deepEqual(result.teachers.map(r=>r.id).sort(),[ta,tb].sort());
+assert.ok(result.teachers.every(r=>r.name===`Test teacher ${r.id===ta?'A':'B'}`&&r.status==='active'));
+assert.deepEqual(result.secretaries.map(r=>r.id).sort(),[sa,sb].sort());
+assert.ok(result.secretaries.every(r=>r.status==='active'&&r.teacher_id===(r.id===sa?ta:tb)));
+for(const t of tables)assert.ok(result[t].every(r=>[ta,tb].includes(r.teacher_id)),'Outside synthetic tenant');
+assert.ok(tables.some(t=>result[t].length),'Already empty; reconcile rather than replay');
+const backup=JSON.stringify(result,null,2)+'\n';
+const backupFile=new URL('backup.json',dir);await writeFile(backupFile,backup,{flag:'wx'});restrictSecretFile(backupFile);
+const digest=createHash('sha256').update(backup).digest('hex');
+// Compare the entire locked snapshot, including account profiles, before deleting.
+const expected=JSON.stringify(result).replaceAll("'","''");
+const sql=`begin;set local lock_timeout='5s';set local statement_timeout='30s';
+lock table ${[...tables,'teachers','secretaries'].map(t=>'public.'+t).join(',')} in access exclusive mode;
+do $guard$ begin
+ if (select count(*) from supabase_migrations.schema_migrations)<>29 then raise exception 'BASELINE_DRIFT';end if;
+ if ${snapshot} is distinct from '${expected}'::jsonb then raise exception 'DATA_DRIFT';end if;
+end $guard$;
+truncate table ${tables.map(t=>'public.'+t).join(',')};
+select ${snapshot} after_reset;commit;`;
+await writeFile(new URL('executed.sql',dir),sql);restrictSecretFile(new URL('executed.sql',dir));
+const after=findField(parseCapture(await querySql(sql,{output:'json'})),'after_reset');
+for(const t of tables)assert.equal(after[t].length,0,t);
+assert.deepEqual(after.teachers,result.teachers);assert.deepEqual(after.secretaries,result.secretaries);
+const report={at:new Date().toISOString(),projectRef,backupSha256:digest,countsBefore:Object.fromEntries(tables.map(t=>[t,result[t].length])),businessTablesEmpty:16,teacherProfilesUnchanged:2,secretaryProfilesUnchanged:2,authChanges:0,fixtureSeedReplayed:false};
+await writeFile(receipt,JSON.stringify(report,null,2)+'\n');restrictSecretFile(receipt);
+console.log(JSON.stringify(report));
