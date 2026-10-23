@@ -13,3 +13,7 @@ supabase/proposals/202610230002_group_pricing.sql text eol=lf
 supabase/reviews/group-pricing-transaction.sql text eol=lf
 supabase/proposals/group_pricing/*.sql text eol=lf
 supabase/migrations/202610230002_group_pricing.sql text eol=lf
+
+supabase/proposals/finance_edit/*.sql text eol=lf
+supabase/proposals/202610230003_simple_finance_edit.sql text eol=lf
+supabase/reviews/simple-finance-edit-transaction.sql text eol=lf

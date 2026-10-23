@@ -50,6 +50,8 @@ jobs:
       - run: node supabase/tests/controlled_pilot.mjs
       - run: node supabase/admin/build_group_pricing_review.mjs --check
       - run: node supabase/tests/group_pricing.mjs
+      - run: node supabase/admin/build_finance_edit_review.mjs --check
+      - run: node supabase/tests/simple_finance_edit.mjs
       - run: flutter build apk --debug --no-pub
       - run: flutter build apk --profile --no-pub
       - uses: actions/upload-artifact@v4

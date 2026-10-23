@@ -27,14 +27,7 @@ class LiveGroupDetail extends StatelessWidget {
               children: [
                 Text(group.name, style: Theme.of(context).textTheme.titleLarge),
                 Text('${group.gradeName} · ${group.subject}'),
-                Text(
-                  'live_group_students'.tr(
-                    namedArgs: {
-                      'count': '${group.students}',
-                      'capacity': '${group.capacity}',
-                    },
-                  ),
-                ),
+                Text('group_design_count'.tr(args: ['${group.students}'])),
               ],
             ),
           ),

@@ -49,14 +49,7 @@ class LiveGroupCard extends StatelessWidget {
             alignment: AlignmentDirectional.centerStart,
             child: ActionChip(label: Text(group.gradeName), onPressed: onGrade),
           ),
-          Text(
-            'live_group_students'.tr(
-              namedArgs: {
-                'count': '${group.students}',
-                'capacity': '${group.capacity}',
-              },
-            ),
-          ),
+          Text('group_design_count'.tr(args: ['${group.students}'])),
           if (group.schedules.isEmpty) Text('live_no_schedules'.tr()),
           if (group.schedules.isNotEmpty) Text('live_cairo_time'.tr()),
           for (final schedule in group.schedules)

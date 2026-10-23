@@ -58,7 +58,10 @@ class FinanceRecord {
     final amount = value.amount.minorUnits,
         paid = value.paid?.minorUnits,
         left = value.outstanding?.minorUnits;
-    if (amount <= BigInt.zero) throw const FormatException('Invalid amount');
+    if (amount < BigInt.zero ||
+        (value.status == null && amount == BigInt.zero)) {
+      throw const FormatException('Invalid amount');
+    }
     if (value.status != null) {
       if (!{'due', 'partially_paid', 'paid', 'void'}.contains(value.status) ||
           paid == null ||

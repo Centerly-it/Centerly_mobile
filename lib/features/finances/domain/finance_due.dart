@@ -14,7 +14,7 @@ class FinanceDue {
       due = DateTime.parse(j['due_on'] as String),
       creator = j['created_by_name'] as String?,
       status = j['status'] as String? {
-    if (amount <= BigInt.zero ||
+    if (amount < BigInt.zero ||
         paid < BigInt.zero ||
         paid > amount ||
         outstanding < BigInt.zero ||

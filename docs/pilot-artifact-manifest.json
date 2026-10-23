@@ -3,39 +3,39 @@
   "files": [
     {
       "artifact": "dist",
-      "path": "assets/index-B0IoP0B6.css",
-      "bytes": 10582,
-      "sha256": "0737add2bfe0509015ae27f9cd38aaa353e76e02f726f58c7f5bd509af6a921c"
+      "path": "assets/index-C7KcRGp4.js",
+      "bytes": 65123,
+      "sha256": "a7ec7b580cdba9dfce0f6dcdc042b2b4a28e964ab08caca789e62ae7fdedef16"
     },
     {
       "artifact": "dist",
-      "path": "assets/index-Cc8yDo9q.js",
-      "bytes": 60115,
-      "sha256": "520d8afb7909b534ff0dd0d8920eec12f161177e93347695bef1c682821a9249"
+      "path": "assets/index-CZttrqe3.css",
+      "bytes": 10682,
+      "sha256": "25bf42e0fc6758ee9370b350cd2e3c227566aa7296d2152872e4a72c204f4b59"
     },
     {
       "artifact": "dist",
-      "path": "assets/query-CQIpwD65.js",
+      "path": "assets/query-Dd0mk__f.js",
       "bytes": 33100,
-      "sha256": "8d33f1cbb10fe5d5168195efed48eaef16a556a90835a3704975896cfd408f57"
+      "sha256": "2f6f2b065a2c8062fced550613be59a9d29bf9756f707e762b7c9bff0ceac9a4"
     },
     {
       "artifact": "dist",
-      "path": "assets/supabase-DGL6hDrb.js",
+      "path": "assets/supabase-Cferlbj8.js",
       "bytes": 217753,
-      "sha256": "584d4fd8c2fbde1c6818d3101ff32c868b58276ff08d05a276ac455d5a708bb5"
+      "sha256": "51f0936a203d1a88aff35b8b9707eaf217b22d722c23998cd89896546aa243c0"
     },
     {
       "artifact": "dist",
-      "path": "assets/validation-DH2dj-bN.js",
+      "path": "assets/validation-Czt48h2q.js",
       "bytes": 94595,
-      "sha256": "515ab67018b145ea7d2775b5294667685308924f058eedb8f2b1df9591dd131a"
+      "sha256": "01f34175b71ff57e6cef0f3f6a47d00574714ccf031df8d6c0a42c6d048a46b3"
     },
     {
       "artifact": "dist",
-      "path": "assets/vendor-SIw2ub9x.js",
-      "bytes": 309940,
-      "sha256": "85803b1655da215e8a3e658a3dd14cf0dc163777422c248e5619d954fb30f9d9"
+      "path": "assets/vendor-CbqriE5x.js",
+      "bytes": 309814,
+      "sha256": "e333a1ce54df0c3b17f85cf908ac183df51e7dc88762adb7f8fef3b5a844b21b"
     },
     {
       "artifact": "dist",
@@ -59,13 +59,13 @@
       "artifact": "dist",
       "path": "index.html",
       "bytes": 805,
-      "sha256": "9b411344ad4f245e15f5f92352616e478c81e1ce3794c2cf2c7d742361a4cc8f"
+      "sha256": "c17b54073626036356f20cc83a89c11962ade109ea175d962e749f73a242ec7c"
     },
     {
       "artifact": "app-debug.apk",
       "path": "app-debug.apk",
       "bytes": 209386703,
-      "sha256": "8b301da2b694fbed9da1e768612f99ee3b433ec448fa59b32213127a961ca3a2"
+      "sha256": "aefc8ec616ab204cad2d72dabc4b9ae1955f502f40316786d0a53a81a4a59fd2"
     }
   ]
 }
