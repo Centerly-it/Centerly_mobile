@@ -39,10 +39,11 @@
   },
   "pricing": {
     "status": "local review only",
-    "backendChecks": 31,
-    "syntheticBrowserChecks": 14,
-    "transactionSha256": "213f604d3ca43e5cf8d8d62dbf824620441d63cf39f90e3f766fbf73b43290d7",
-    "featureFlagOnConnectedSite": false
+    "backendChecks": 40,
+    "syntheticBrowserChecks": 16,
+    "transactionSha256": "f157d3aed95331ba55ec5265ac8daaed112be2fb5763cdf094fc70d501666c30",
+    "featureFlagOnConnectedSite": false,
+    "review": "R2"
   },
   "teacher": {
     "analyzer": "pass",
@@ -51,5 +52,13 @@
     "deviceInstall": "unavailable: adb devices empty"
   },
   "manualAcceptance": "not performed",
-  "production": "deferred"
+  "production": "deferred",
+  "creationR2": {
+    "actualConnectedBrowserChecks": 4,
+    "businessWrites": 0,
+    "localBackendChecks": 40,
+    "localSyntheticBrowserTests": 16,
+    "unitTests": 31,
+    "saveGate": "awaiting reviewed backend approval"
+  }
 }

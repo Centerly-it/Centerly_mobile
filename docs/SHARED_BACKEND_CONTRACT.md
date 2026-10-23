@@ -1,3 +1,5 @@
+Pending R2 creation contract (local review only): `secretary_create_group(uuid,text,text,numeric,numeric)` creates a group without client capacity/year inputs; `secretary_create_student(uuid,uuid,text,text,text,text)` atomically creates a student, required active same-tenant enrollment and its charge. Client-generated UUIDs make response-loss retries idempotent with exact payload checks. No automatic hosted seed. Existing hosted API/migration manifest remains at version 28 until the new R2 hash is approved and deployed.
+
 Current update, 23 October: owner-requested synthetic development reset completed; all business tables empty and accounts retained. Earlier fixture/installed-APK statements below are historical. Group-pricing backend is local review only, not deployed; see [current acceptance](OWNER_RESET_AND_PRICING_ACCEPTANCE.md) and [one pricing review](GROUP_PRICING_REVIEW_AR.md). Hosted baseline remains 28.
 
 # Current development contract — migration 28, 23 October 2026

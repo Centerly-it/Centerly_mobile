@@ -67,5 +67,21 @@ try {
  ok((await s.query('select status from public.group_enrollments where id=$1',[source])).rows[0].status,'inactive');
  ok((await s.query("select count(*)::int n from public.group_enrollments where student_id=$1 and group_id=$2 and status='active'",[older,target])).rows[0].n,1);
  ok((await s.query('select amount_egp from public.invoices where student_id=$1 and group_id=$2',[older,target])).rows[0].amount_egp,'1000.00');
+ const simpleGroup='40000000-0000-0000-0000-000000000099',newStudent='30000000-0000-0000-0000-000000000099';
+ await s.query("select public.secretary_create_group($1,'فيزياء ٣ ثانوي','فيزياء',700,300)",[simpleGroup]);
+ await s.query("select public.secretary_create_group($1,'فيزياء ٣ ثانوي','فيزياء',700,300)",[simpleGroup]);
+ ok((await s.query('select capacity from public.groups where id=$1',[simpleGroup])).rows[0].capacity,2147483647);
+ await assert.rejects(s.query("select public.secretary_create_student($1,null,'أحمد')",[newStudent]));checks++;
+ ok((await s.query('select count(*)::int n from public.students where id=$1',[newStudent])).rows[0].n,0);
+ await assert.rejects(other.query("select public.secretary_create_student($1,$2,'أحمد')",[newStudent,simpleGroup]));checks++;
+ await s.query("select public.secretary_create_student($1,$2,'أحمد','01012345678','01098765432')",[newStudent,simpleGroup]);
+ await s.query("select public.secretary_create_student($1,$2,'أحمد','01012345678','01098765432')",[newStudent,simpleGroup]);
+ ok((await s.query('select count(*)::int n from public.students where id=$1',[newStudent])).rows[0].n,1);
+ ok((await s.query('select count(*)::int n from public.group_enrollments where student_id=$1',[newStudent])).rows[0].n,1);
+ ok((await s.query('select amount_egp from public.invoices where student_id=$1',[newStudent])).rows[0].amount_egp,'1000.00');
+ const rejected='30000000-0000-0000-0000-000000000098';
+ await s.query('update public.groups set capacity=1 where id=$1',[simpleGroup]);
+ await assert.rejects(s.query("select public.secretary_create_student($1,$2,'محمد')",[rejected,simpleGroup]));checks++;
+ ok((await s.query('select count(*)::int n from public.students where id=$1',[rejected])).rows[0].n,0);
  console.log(JSON.stringify({suite:'local proposed group pricing',checks,pass:true,hostedWrites:0}));
 } finally {await pg.close();}
