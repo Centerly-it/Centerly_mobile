@@ -1,0 +1,17 @@
+# FIN30 deployed — 23 October 2026
+
+Owner approval: «انشر». Target: centerly-dev only, yfeubomyglmhuwizaqoj. Registered one Teacher-owned migration, 202610230003_simple_finance_edit.sql, unchanged from the reviewed proposal.
+
+- Exact transaction SHA256: 0ddfcdb840777bf871d75212e19552d8807604d9de6d50ea044e399f2802d092.
+- Migration body SHA256: da8068b9da19e64b201a68491ac8ba38a6dd51fad9a69177df0f097bb0c75813.
+- Preflight: all 29 history bodies/catalog matched. Guarded CLI dry run listed only this migration; push used skip-vault, no seeds/roles. Migration applied transactionally by the migration runner. Final dry run: database up to date.
+- Postflight: all 30 history bodies and catalog matched local replay: 67 functions, 18 tables, 30 policies, 24 triggers, including grants and constraints. First postflight attempt did not complete; read-only retry passed. No SQL/hash adjustment or repeated deployment.
+- Data preservation: aggregate row fingerprints across all 18 public tables and financial totals were identical before/after (the new nullable invoice column excluded from digest). Payments, attendance, account profiles and audit history preserved. No new fixtures or business writes, Auth/account changes, SEC27 replay or cleanup.
+- Actual authenticated SDK: 47 checks across teacher/secretary A/B. Three existing invoices agree on original/effective/ledger/payable amounts across four shared consumers. Existing payment rows: two historical entries, zero current collections. No zero/void invoice exists for hosted edge-case checking; those cases passed isolated local tests.
+- Actual connected Chromium: 11 read-only UI checks, including enabled due-edit fields/save. Automatic renewal RPC explicitly stubbed twice to keep this probe read-only. Payment edit UI unavailable on hosted existing data because no current collection; local synthetic browser tests cover it. No save submitted.
+- Local regression: 26 PostgreSQL SQL-role assertions; 36 Secretary unit tests plus lint/build; 16 synthetic SQL-fixture desktop/mobile browser tests passed against migration 30. These do not establish owner manual/device acceptance.
+- Additional baseline checks: 55 Secretary disposable-PGlite contract assertions and 90 Teacher authorization/business assertions passed. Teacher legacy test fixture setup was aligned with the native/browser harness: historical fixtures load before authenticated enrollment/billing triggers, then all later migrations apply unchanged. No production logic or approved SQL changed.
+
+Both manifests now pin migration 30. Connected local start/build enable VITE_FINANCE_EDIT=true after postflight. Local server: http://127.0.0.1:5173/. Web artifacts rebuilt and inventoried with credential scanning. Teacher code/APK already supports zero adjusted dues; no new Teacher application change required for deployment. APK SHA256: aefc8ec616ab204cad2d72dabc4b9ae1955f502f40316786d0a53a81a4a59fd2.
+
+Owner testing: open a student, edit remaining due, collect a payment, then edit that payment and refresh Teacher finance. Check original amount remains available and net/current balance reconcile. Existing historical records remain visible in Teacher. Development testing is ready; no production hosting/publication or real-data readiness is claimed. Device is currently absent from ADB; reconnect Redmi for installing the prepared APK. Owner manual tests remain outstanding.

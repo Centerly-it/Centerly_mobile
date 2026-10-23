@@ -3,9 +3,9 @@
   "files": [
     {
       "artifact": "dist",
-      "path": "assets/index-C7KcRGp4.js",
-      "bytes": 65123,
-      "sha256": "a7ec7b580cdba9dfce0f6dcdc042b2b4a28e964ab08caca789e62ae7fdedef16"
+      "path": "assets/index-BrzdgGLg.js",
+      "bytes": 65871,
+      "sha256": "7c88d61cdca3eb4a52b54000731ff7b36cbd9653238eba9d9095049885858c1c"
     },
     {
       "artifact": "dist",
@@ -59,7 +59,7 @@
       "artifact": "dist",
       "path": "index.html",
       "bytes": 805,
-      "sha256": "c17b54073626036356f20cc83a89c11962ade109ea175d962e749f73a242ec7c"
+      "sha256": "ba2efa32971fcefef9d967431d0ebba0db59de0bb5f13811d3eca0e9aadfc371"
     },
     {
       "artifact": "app-debug.apk",

@@ -1,0 +1,21 @@
+// Exact owner-approved package registration and CLI dry run; never deploys.
+import assert from 'node:assert/strict';
+import {readFile,writeFile,copyFile,mkdir} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {projectRef,cli} from './trusted_cli.mjs';
+assert.equal(projectRef,'yfeubomyglmhuwizaqoj');
+const root=new URL('../',import.meta.url),file='202610230003_simple_finance_edit.sql';
+const body=await readFile(new URL('proposals/'+file,root));
+const preview=await readFile(new URL('reviews/simple-finance-edit-transaction.sql',root));
+const hash=b=>createHash('sha256').update(b).digest('hex');
+assert.equal(hash(body),'da8068b9da19e64b201a68491ac8ba38a6dd51fad9a69177df0f097bb0c75813');
+assert.equal(hash(preview),'0ddfcdb840777bf871d75212e19552d8807604d9de6d50ea044e399f2802d092');
+assert.equal(preview.toString(),'begin;\n'+body+'\ncommit;\n');
+const baseline=JSON.parse(await readFile('build/pilot/baseline.json','utf8'));
+assert.equal(baseline.pass,true);assert.equal(baseline.migrations,29);
+assert.ok(Date.now()-Date.parse(baseline.at)<15*60000,'Fresh baseline required');
+await copyFile(new URL('proposals/'+file,root),new URL('migrations/'+file,root));
+await mkdir('build/fin30',{recursive:true});
+const dry=cli(['db','push','--linked','--skip-vault','--dry-run','--output','json']);
+await writeFile('build/fin30/dry-run.json',dry);
+console.log(dry);

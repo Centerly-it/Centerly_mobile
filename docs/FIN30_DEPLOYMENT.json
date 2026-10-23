@@ -1,0 +1,53 @@
+{
+  "postflight": {
+    "at": "2026-10-23T15:53:48.910Z",
+    "hostedWrites": 0,
+    "pass": true,
+    "migrations": 30,
+    "functions": 67,
+    "tables": 18,
+    "policies": 30,
+    "triggers": 24
+  },
+  "sdk": {
+    "pass": true,
+    "actualAuthenticatedSDK": true,
+    "checks": 47,
+    "invoices": 3,
+    "zeroInvoices": 0,
+    "voidInvoices": 0,
+    "paymentsByAccount": [
+      {
+        "account": "a",
+        "rows": 2,
+        "current": 0
+      },
+      {
+        "account": "b",
+        "rows": 0,
+        "current": 0
+      }
+    ],
+    "businessWrites": 0,
+    "fixtureMutations": 0,
+    "zeroOrVoidLimit": "Only existing records tested; no fixtures created"
+  },
+  "browser": {
+    "pass": true,
+    "mode": "actual authenticated connected Chromium, read-only",
+    "checks": 11,
+    "businessWrites": 0,
+    "renewalStubs": 2,
+    "financialEditing": "enabled; due save verified without submitting",
+    "paymentEdit": "unavailable: no existing current collection",
+    "physicalDeviceTested": false
+  },
+  "businessDataPreserved": true,
+  "finalDryRun": "up to date",
+  "localSQLRoleChecks": 26,
+  "secretaryContractChecks": 55,
+  "teacherBaselineAssertions": 90,
+  "secretaryUnitTests": 36,
+  "syntheticBrowserTests": 16,
+  "physicalDeviceTested": false
+}

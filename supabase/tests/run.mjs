@@ -11,11 +11,13 @@ await db.exec(`create role anon; create role authenticated;
   create function auth.uid() returns uuid language sql stable as
   $$ select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid $$;
   grant usage on schema auth to authenticated; grant execute on function auth.uid() to authenticated;`);
-for (const name of (await readdir(new URL('../migrations/', import.meta.url))).sort()) {
-  try { await db.exec(await readFile(new URL('../migrations/' + name, import.meta.url), 'utf8')); }
-  catch (error) { console.error('Migration failed:', name, error.message); process.exit(1); }
-}
-await db.exec(await readFile(new URL('./fixtures.sql', import.meta.url), 'utf8'));
+// Seed historical fixtures before authenticated billing triggers are installed.
+// Every newer migration is then applied unchanged, matching native/browser harnesses.
+const migrations=(await readdir(new URL('../migrations/',import.meta.url))).sort();
+const apply=async name=>db.exec(await readFile(new URL('../migrations/'+name,import.meta.url),'utf8'));
+for(const name of migrations.filter(n=>n.split('_')[0]<='202610230001'))await apply(name);
+await db.exec(await readFile(new URL('./fixtures.sql',import.meta.url),'utf8'));
+for(const name of migrations.filter(n=>n.split('_')[0]>'202610230001'))await apply(name);
 let count = 0;
 const scalar = async sql => Object.values((await db.query(sql)).rows[0])[0];
 const actor = async id => {

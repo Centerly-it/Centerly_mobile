@@ -1,3 +1,5 @@
+CURRENT: Owner approved and exact FIN30 deployed/verified on centerly-dev as migration 30, 23 October 2026. Connected finance editing enabled. See FIN30_DEPLOYMENT.md. Earlier pending statements below are historical review text.
+
 # FIN30-OWNER-20261023 — مراجعة التعديل المالي
 
 الحزمة جاهزة ومختبرة محليًا ولم تُنشر. قاعدة centerly-dev عند 29 migration، وآخر نسخة 202610230002. لم تتغير بياناتك الحالية أو الحسابات أو manifests.

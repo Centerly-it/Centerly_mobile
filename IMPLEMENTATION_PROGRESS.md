@@ -1,3 +1,7 @@
+## Current checkpoint — FIN30 deployed, 23 October 2026
+
+Owner-approved exact FIN30 transaction deployed once to centerly-dev as migration 30. Both manifests advanced after full history/catalog/grant/trigger verification. All 18 table row fingerprints and financial totals unchanged. Connected local financial editing enabled. Actual SDK: 47 read-only checks, 3 existing invoices; connected Chromium: 11 read-only checks with renewal stubbed. No current payment exists for hosted payment-edit UI verification; local 26 SQL-role and 16 synthetic browser tests cover financial edits, zero values and retry. Secretary 36 unit tests/lint/build pass. No business mutations, fixtures, cleanup, account changes or publication. See docs/FIN30_DEPLOYMENT.md/json. Local owner testing ready at http://127.0.0.1:5173/; phone absent, manual/device acceptance outstanding. All earlier pending FIN30/29-version checkpoint text is historical.
+
 # Simple daily workspace — 2026-10-23
 
 One schedule navigation entry with recurring group/day/time cards and per-day edits. Header shows actual teacher and secretary names. Groups use dropdowns without search; new prices start blank. Direct edit links simplify daily work. Operational payment views show current collections while preserving raw ledger history.
