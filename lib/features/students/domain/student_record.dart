@@ -6,10 +6,12 @@ class StudentRecord {
     this.phone,
     this.guardianPhone,
     this.levelTag,
+    this.archivedAt,
   });
   final String id, fullName;
   final String? phone, guardianPhone, levelTag;
   final DateTime createdAt;
+  final DateTime? archivedAt;
   factory StudentRecord.fromJson(Map<String, dynamic> json) {
     final id = json['id'],
         name = json['full_name'],
@@ -27,6 +29,9 @@ class StudentRecord {
       phone: json['phone'] as String?,
       guardianPhone: json['guardian_phone'] as String?,
       levelTag: json['level_tag'] as String?,
+      archivedAt: json['archived_at'] == null
+          ? null
+          : DateTime.parse(json['archived_at'] as String).toUtc(),
     );
   }
 }

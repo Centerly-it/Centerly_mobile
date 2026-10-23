@@ -1,0 +1,256 @@
+{
+  "at": "2026-10-23",
+  "goal": "local synthetic owner testing against centerly-dev",
+  "approvedRawSha256": "6651349fd37f8d4682fa4bd42bfadda664b2eab910026ee9a0bde0c111c78cc2",
+  "migration": "202610230001_controlled_pilot_history_balances.sql",
+  "normalizedMigrationSha256": "ee8d4686b137eab302da2a1d7e4e0d24f30f6e0dae33e350b5dd69788dc89166",
+  "preflight": {
+    "pass": true,
+    "migrations": 27,
+    "functions": 54,
+    "tables": 18,
+    "policies": 30,
+    "triggers": 13,
+    "fullCatalogGrantsAndBodiesMatch": true
+  },
+  "dryRunOnly": ["202610230001_controlled_pilot_history_balances.sql"],
+  "transactionalDeployment": true,
+  "postflight": {
+    "at": "2026-10-23T09:34:26.054Z",
+    "hostedWrites": 0,
+    "pass": true,
+    "migrations": 28,
+    "functions": 55,
+    "tables": 18,
+    "policies": 30,
+    "triggers": 20
+  },
+  "businessWrites": 0,
+  "newFixtures": 0,
+  "sec27Rerun": false,
+  "all18BusinessTableHashesUnchanged": true,
+  "tableFingerprints": [
+    {
+      "count": 3,
+      "hash": "dfea334515c32f2822d4a8439e814b59",
+      "name": "assignments"
+    },
+    {
+      "count": 13,
+      "hash": "70ccf66312b89bac4856531f97ce0c78",
+      "name": "attendance"
+    },
+    {
+      "count": 15,
+      "hash": "d01dda5adb53cd7750c4771cc1d43f58",
+      "name": "attendance_change_log"
+    },
+    {
+      "count": 56,
+      "hash": "3a54a24aa3205a92ea05914dff4e5511",
+      "name": "audit_events"
+    },
+    {
+      "count": 6,
+      "hash": "b62c3bae14760f3f37c0d537b2a8b36c",
+      "name": "exams"
+    },
+    {
+      "count": 4,
+      "hash": "b90a1d0dbf08fab10697307b2410215d",
+      "name": "grade_levels"
+    },
+    {
+      "count": 4,
+      "hash": "61440e2c81f3d8ea88fd59b09cfc8e35",
+      "name": "group_enrollments"
+    },
+    {
+      "count": 2,
+      "hash": "0fc9e0dd8e1ac65dbbbb7bcb86295e68",
+      "name": "group_schedules"
+    },
+    {
+      "count": 5,
+      "hash": "992582a56f61b3115d190c2279213763",
+      "name": "groups"
+    },
+    {
+      "count": 10,
+      "hash": "7ca1cdba33fee95ac2ccf6001387bc71",
+      "name": "invoices"
+    },
+    {
+      "count": 28,
+      "hash": "52cb7bba42e96db6c219506c397effd3",
+      "name": "notifications"
+    },
+    {
+      "count": 26,
+      "hash": "6b6e2979b2121e5093145972815e7205",
+      "name": "payments"
+    },
+    {
+      "count": 2,
+      "hash": "91179637d05fc6b124df8ac4240b81ed",
+      "name": "secretaries"
+    },
+    {
+      "count": 3,
+      "hash": "b82e335e3be264b1d584cbf54baf1faf",
+      "name": "secretary_removal_requests"
+    },
+    {
+      "count": 11,
+      "hash": "3935595781a529aea35b643f885042e4",
+      "name": "sessions"
+    },
+    {
+      "count": 5,
+      "hash": "cde2b1342be2081132a5416d147e7d76",
+      "name": "students"
+    },
+    {
+      "count": 2,
+      "hash": "d5774d219b051659ef06abe308cc5c44",
+      "name": "teacher_notes"
+    },
+    {
+      "count": 2,
+      "hash": "6ebae3f89795807d0235e0d0069767c8",
+      "name": "teachers"
+    }
+  ],
+  "financialTotals": [
+    {
+      "net": "0.00",
+      "outstanding": "0.00",
+      "teacher_id": "296a86e5-ca79-4b5c-8817-e64fe70375cc"
+    },
+    {
+      "net": "240.00",
+      "outstanding": "200.04",
+      "teacher_id": "f9f2e35a-2bed-437f-b3ee-28eb27b847c0"
+    }
+  ],
+  "pendingRemovalRequest": {
+    "id": "85bf1f3c-abd3-4220-858f-709b21bdd793",
+    "status": "pending",
+    "secretaryStatus": "active",
+    "verifiedAuthenticatedRead": true
+  },
+  "authenticatedSDK": {
+    "at": "2026-10-23T09:54:39.203Z",
+    "mode": "actual authenticated SDK",
+    "businessWrites": 0,
+    "pass": true,
+    "checks": [
+      "teacher-a exact synthetic identity",
+      "teacher-a tenant/status",
+      "teacher-b exact synthetic identity",
+      "teacher-b tenant/status",
+      "secretary-a exact synthetic identity",
+      "secretary-a tenant/status",
+      "secretary-b exact synthetic identity",
+      "secretary-b tenant/status",
+      "archived owner profile",
+      "archived directory SELECT/RLS",
+      "get_teacher_student_attendance archived history",
+      "get_teacher_student_attendance foreign tenant denied",
+      "get_teacher_student_attendance Secretary role denied",
+      "get_teacher_student_academics archived history",
+      "get_teacher_student_academics foreign tenant denied",
+      "get_teacher_student_academics Secretary role denied",
+      "get_teacher_student_academics archived history",
+      "get_teacher_student_academics foreign tenant denied",
+      "get_teacher_student_academics Secretary role denied",
+      "get_teacher_student_note archived history",
+      "get_teacher_student_note foreign tenant denied",
+      "get_teacher_student_note Secretary role denied",
+      "get_teacher_finance archived history",
+      "get_teacher_finance foreign tenant denied",
+      "get_teacher_finance Secretary role denied",
+      "original invoice amount retained",
+      "reversed ledger net zero",
+      "void payable zero",
+      "original invoice amount retained",
+      "reversed ledger net zero",
+      "void payable zero",
+      "original invoice amount retained",
+      "reversed ledger net zero",
+      "void payable zero",
+      "foreign invoice hidden",
+      "retained removal request still pending",
+      "unsupported browse stays denied"
+    ]
+  },
+  "actualSecretaryBrowser": {
+    "pass": true,
+    "mode": "actual Secretary Chromium",
+    "businessWrites": 0,
+    "login": true,
+    "retainedReads": true,
+    "logout": true
+  },
+  "actualTeacherWindowsUI": {
+    "pass": true,
+    "mode": "actual Windows Teacher UI",
+    "businessWrites": 0,
+    "archivedDirectory": true,
+    "profileNavigation": true,
+    "archivedNotesReadOnly": true
+  },
+  "localSQLRoleSimulation": {
+    "checks": 65,
+    "pass": true
+  },
+  "localSecretaryPGlite": {
+    "checks": 53,
+    "pass": true
+  },
+  "localFlutterTargetedTests": 20,
+  "secretaryTests": 25,
+  "flutterAnalyze": "PASS",
+  "flutterLockedDependencies": "PASS; SDK-pinned package versions aligned with installed Flutter 3.44.2",
+  "phone": {
+    "model": "Redmi Note 9S",
+    "android": "12",
+    "api": 31,
+    "adbAuthorized": true,
+    "installedWithReplace": true,
+    "launchStatus": "ok",
+    "activity": "com.example.centrally/.MainActivity",
+    "adbColdActivityStartMs": 8265,
+    "manualAcceptancePassed": false,
+    "performanceAcceptancePassed": false
+  },
+  "apk": {
+    "path": "D:\\ahmedtamer\\Centerly_mobile\\build\\app\\outputs\\flutter-apk\\app-debug.apk",
+    "sha256": "a7f2d490be888d34d71b7a9f35ad8a7a72422bf8e27692c28b73eb32b7227a76",
+    "backend": "centerly-dev",
+    "preview": false,
+    "financeMovementFilters": true,
+    "credentialScan": {
+      "pass": true,
+      "decompressedEntries": 679,
+      "matches": 0
+    }
+  },
+  "secretaryURL": "http://127.0.0.1:5173",
+  "secretaryMode": "connected development; SQL fixture=false",
+  "newWriteScope": {
+    "namespace": "OWNER28-20261023",
+    "status": "proposed; awaiting approval; no writes performed"
+  },
+  "deferred": [
+    "production hosting/resources/costs",
+    "distribution signing",
+    "launch privacy decisions",
+    "real-customer provisioning"
+  ],
+  "remainingOwnerActions": [
+    "Open installed Teacher app and local Secretary website; use synthetic tenant A accounts privately",
+    "Complete manual cross-app/device checklist; existing SEC27 records are read-only",
+    "Approve OWNER28 bounded scope only if fresh operational write testing is wanted"
+  ]
+}

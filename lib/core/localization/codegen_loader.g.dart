@@ -15,6 +15,7 @@ class CodegenLoader extends AssetLoader {
   }
 
   static const Map<String, dynamic> _en = {
+    "completion_archived_students": "Archived students — history only",
     "session_attendance_info": "Attendance record information",
     "teacher_remove_photo": "Remove photo",
     "dashboard_hour_unit": "h",
@@ -801,6 +802,7 @@ class CodegenLoader extends AssetLoader {
     "finance_selected_collector": "Selected collector",
   };
   static const Map<String, dynamic> _ar = {
+    "completion_archived_students": "الطلاب المؤرشفون — السجل فقط",
     "session_attendance_info": "معلومات تسجيل الحضور",
     "teacher_remove_photo": "حذف الصورة",
     "dashboard_hour_unit": "س",

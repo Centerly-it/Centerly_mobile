@@ -10,8 +10,13 @@ import 'student_note_editor.dart';
 import 'student_note_fields.dart';
 
 class StudentNotePage extends StatefulWidget {
-  const StudentNotePage({required this.studentId, super.key});
+  const StudentNotePage({
+    required this.studentId,
+    this.readOnly = false,
+    super.key,
+  });
   final String studentId;
+  final bool readOnly;
   @override
   State<StudentNotePage> createState() => _StudentNotePageState();
 }
@@ -67,6 +72,7 @@ class _StudentNotePageState extends State<StudentNotePage> {
               if (editor.saved != null)
                 StudentNoteFields(
                   editor: editor,
+                  readOnly: widget.readOnly,
                   refresh: () async {
                     if (await confirmDiscard() && mounted) await editor.load();
                   },

@@ -8,6 +8,13 @@ class StudentBrowseCubit extends Cubit<StudentBrowseState> {
     : super(const StudentBrowseState());
   final StudentRepository repository;
   String? groupId;
+  bool archived = false;
+  Future<void> showArchived(bool value) {
+    archived = value;
+    groupId = null;
+    return refresh();
+  }
+
   Future<void> filterGroup(String? id) {
     groupId = id;
     return search(state.search);
@@ -47,6 +54,7 @@ class StudentBrowseCubit extends Cubit<StudentBrowseState> {
         groupId: groupId,
         cursor: cursor,
         refresh: refresh,
+        archived: archived,
       );
       if (isClosed || generation != _generation) return;
       final rows = {

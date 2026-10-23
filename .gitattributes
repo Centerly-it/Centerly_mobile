@@ -4,3 +4,7 @@ supabase/proposals/logic_hardening/*.sql text eol=lf
 supabase/migrations/20261020*.sql text eol=lf
 supabase/proposals/teacher_owner_testing/*.sql text eol=lf
 supabase/migrations/20261022*.sql text eol=lf
+# Preserve the exact owner-approved raw-byte package and its review-source hashes.
+supabase/migrations/202610230001_controlled_pilot_history_balances.sql -text whitespace=cr-at-eol
+supabase/reviews/controlled-pilot-deployment.sql -text whitespace=cr-at-eol
+supabase/proposals/controlled_pilot/*.sql -text whitespace=cr-at-eol

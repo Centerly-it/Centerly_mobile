@@ -1,3 +1,5 @@
+23 October final local handoff: approved migration 28 deployed; all 18 business-table fingerprints unchanged; 37 actual SDK read checks and actual Secretary Chromium/Windows Teacher archived-navigation checks PASS. Final APK a7f2d490be888d34d71b7a9f35ad8a7a72422bf8e27692c28b73eb32b7227a76 installed/launched on Redmi Note 9S. Targeted Flutter 20, Secretary 25 tests and analyzer PASS. Read PILOT28_ACCEPTANCE.md/json and OWNER_LOCAL_TESTING.md. Manual/device acceptance is pending. Fresh operational mutations await OWNER28_SYNTHETIC_SCOPE.md approval; production decisions are deferred.
+
 # Cross-app acceptance matrix — actual SEC27 hosted run
 
 22 October 2026. The exact approved package completed on centerly-dev. See [detailed acceptance](SEC27_ACCEPTANCE_2026-10-22.md) and [retained records/evidence](SEC27_ACCEPTANCE_2026-10-22.json). SQL role simulation and disposable browser tests are separate from the actual modes below.
@@ -21,3 +23,5 @@
 Local regression is additional evidence: 25 Secretary tests, 14 disposable-SQL/synthetic-Auth desktop/mobile RTL checks, 256 Flutter tests (one opt-in hosted test skipped by default), 23 targeted notification/completion tests and six local PostgreSQL cleanup guard assertions. These counts are not substituted for the actual UI/SDK actions above.
 
 Unavailable release acceptance: physical Android/iOS, TalkBack/VoiceOver, low-end device performance/external handlers, signed private distribution, separate production configuration/provisioning, provider database/Auth/storage restore, monitoring/operator setup and remote CI/push/publication. No release or real-data permission is inferred from SEC27 approval.
+
+23 October 2026: SEC27 remains complete and was not rerun. Controlled-pilot preparation, physical-device limitations, local backend review and launch gates are recorded in PILOT_LAUNCH_DECISION.md. No physical Android, production/provider restore or real-data readiness is claimed.

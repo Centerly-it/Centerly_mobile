@@ -78,6 +78,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
                             StudentFeatureLinks(
                               studentId: studentId,
                               initialDate: CairoTime.local(page.syncedAt),
+                              archived: page.summary.archivedAt != null,
                             ),
                           Text('completion_memberships'.tr()),
                         ],

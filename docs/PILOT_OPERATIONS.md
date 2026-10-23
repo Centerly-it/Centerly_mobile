@@ -1,3 +1,5 @@
+23 October final local handoff: approved migration 28 deployed; all 18 business-table fingerprints unchanged; 37 actual SDK read checks and actual Secretary Chromium/Windows Teacher archived-navigation checks PASS. Final APK a7f2d490be888d34d71b7a9f35ad8a7a72422bf8e27692c28b73eb32b7227a76 installed/launched on Redmi Note 9S. Targeted Flutter 20, Secretary 25 tests and analyzer PASS. Read PILOT28_ACCEPTANCE.md/json and OWNER_LOCAL_TESTING.md. Manual/device acceptance is pending. Fresh operational mutations await OWNER28_SYNTHETIC_SCOPE.md approval; production decisions are deferred.
+
 ## Latest hosted acceptance
 
 SEC27 is approved, completed and reconciled. The synthetic removal request remains pending without deactivation. Production/device/provider-recovery gates below remain open. See [SEC27 acceptance](SEC27_ACCEPTANCE_2026-10-22.md).
@@ -76,3 +78,5 @@ For the real pilot, begin with read-only orientation. Enter real students/financ
 - Choose separate production project/region/budget and name operator/backup operator; recommend dedicated production plus an isolated restore target. Approve resource/configuration/migration work only after reviewing exact targets and costs.
 - Confirm Android app ID and keystore custody, iOS bundle/team/private distribution, web hostname/TLS host, support/privacy URLs and privacy/retention owner. Recommend private Android pilot first if iOS credentials/devices are unavailable.
 - Supply physical Android/iOS devices and owner test signoff; approve backup targets/RPO/RTO and provider restore drill. Confirm the remote push/CI/publication step separately. No production rollout, account changes or real-data entry is inferred from this preparation.
+
+23 October 2026: SEC27 remains complete and was not rerun. Controlled-pilot preparation, physical-device limitations, local backend review and launch gates are recorded in PILOT_LAUNCH_DECISION.md. No physical Android, production/provider restore or real-data readiness is claimed.

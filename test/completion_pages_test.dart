@@ -33,6 +33,7 @@ void main() {
     ),
     'invoices': TeacherFinancePage(initialDate: date),
     'note': const StudentNotePage(studentId: 'student'),
+    'archivedNote': const StudentNotePage(studentId: 'student', readOnly: true),
     'secretaries': const TeacherSecretariesPage(),
     'notifications': const TeacherNotificationsPage(),
     'profile': const StudentProfilePage(
@@ -73,6 +74,13 @@ void main() {
           expect(find.byType(CircularProgressIndicator), findsNothing);
           expect(find.text('error_title'.tr()), findsNothing);
           expect(tester.takeException(), isNull);
+          if (entry.key == 'archivedNote') {
+            expect(
+              tester.widget<TextField>(find.byType(TextField)).readOnly,
+              isTrue,
+            );
+            expect(find.byType(FilledButton), findsNothing);
+          }
           if (entry.key == 'exams' || entry.key == 'invoices') {
             final kind = entry.key == 'exams'
                 ? 'completion_assignments'

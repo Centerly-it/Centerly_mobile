@@ -47,6 +47,7 @@ jobs:
       - run: node supabase/tests/secretary_operations.mjs
       - run: node supabase/tests/secretary_concurrency.mjs
       - run: node supabase/tests/pilot_recovery.mjs
+      - run: node supabase/tests/controlled_pilot.mjs
       - run: flutter build apk --debug --no-pub
       - run: flutter build apk --profile --no-pub
       - uses: actions/upload-artifact@v4

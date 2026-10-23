@@ -9,10 +9,12 @@ class StudentFeatureLinks extends StatelessWidget {
   const StudentFeatureLinks({
     required this.studentId,
     required this.initialDate,
+    this.archived = false,
     super.key,
   });
   final String studentId;
   final DateTime initialDate;
+  final bool archived;
   @override
   Widget build(BuildContext context) => Wrap(
     children: [
@@ -29,7 +31,10 @@ class StudentFeatureLinks extends StatelessWidget {
           studentId: studentId,
           initialDate: initialDate,
         ),
-        'completion_notes': StudentNotePage(studentId: studentId),
+        'completion_notes': StudentNotePage(
+          studentId: studentId,
+          readOnly: archived,
+        ),
       }.entries)
         TextButton(
           onPressed: () => Navigator.push(

@@ -734,5 +734,6 @@
   "group_notes_unavailable": "ملاحظات المجموعة غير متاحة في مرحلة الاختبار الحالية.",
   "student_qr_deferred": "بطاقات ومسح QR مؤجلة. معرّف ملف الطالب موضح أدناه.",
   "contact_unavailable": "تعذر فتح تطبيق التواصل. يمكنك نسخ الرقم.",
-  "finance_selected_collector": "مسؤول التحصيل المحدد"
+  "finance_selected_collector": "مسؤول التحصيل المحدد",
+  "completion_archived_students": "الطلاب المؤرشفون — السجل فقط"
 }

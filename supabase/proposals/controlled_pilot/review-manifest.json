@@ -1,0 +1,44 @@
+{
+  "baselineMigrations": 27,
+  "hostedDeploymentApproved": true,
+  "files": [
+    {
+      "path": "supabase/proposals/controlled_pilot/01_history_scope.sql",
+      "sha256": "88096c34e585768580491159bc5d1dc3840d390bf08cb3fcf39eb01082ac8e77"
+    },
+    {
+      "path": "supabase/proposals/controlled_pilot/02_profile.sql",
+      "sha256": "845aa29b0061c458abea62e48d3adf50dde8fc3c9075fa8b8550e4e811225243"
+    },
+    {
+      "path": "supabase/proposals/controlled_pilot/03_secretary_invoice.sql",
+      "sha256": "6d81aa5b7b96556610430b844246173404ae6a84a8ad48ad06ce8e7d6ef687fb"
+    },
+    {
+      "path": "supabase/proposals/controlled_pilot/04_invoice_detail.sql",
+      "sha256": "90650d834a9b7fd905d1e68636b3d9f3e44e85603774e2874cf06125a90b171d"
+    },
+    {
+      "path": "supabase/proposals/controlled_pilot/05_teacher_finance.sql",
+      "sha256": "20e33851d4f0c6fa5bb572da17a967744182a49cea77c6b334a9bdb65898cd36"
+    },
+    {
+      "path": "supabase/proposals/controlled_pilot/06_teacher_dues.sql",
+      "sha256": "a53774f528a935f4300c0a0ec26ac371f2c75dad83a1e66223fee3758010b1b3"
+    },
+    {
+      "path": "supabase/proposals/controlled_pilot/07_archive_write_guard.sql",
+      "sha256": "41a1662ff3f3380cc999b9b557eb6c11acb37a9780721fdf956df1454d01bb7e"
+    },
+    {
+      "path": "supabase/proposals/controlled_pilot/08_generation_archive_scope.sql",
+      "sha256": "ecc102638ea67bfc0b46343a66ce5c848d928e89ddcda0bf25ad0a0e196aa069"
+    }
+  ],
+  "deploymentPreview": {
+    "path": "supabase/reviews/controlled-pilot-deployment.sql",
+    "sha256": "6651349fd37f8d4682fa4bd42bfadda664b2eab910026ee9a0bde0c111c78cc2"
+  },
+  "deployedVersion": "202610230001",
+  "deployedProject": "centerly-dev"
+}

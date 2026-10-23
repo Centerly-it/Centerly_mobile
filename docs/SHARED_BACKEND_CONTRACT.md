@@ -1,256 +1,33 @@
+# Current development contract — migration 28, 23 October 2026
+
+Canonical source: sibling Teacher repository `Centerly_mobile/supabase/migrations`; identical normalized SHA manifest in Teacher `supabase/schema-manifest.json` and Secretary `docs/backend-baseline.json`, through `202610230001_controlled_pilot_history_balances.sql`. Owner-approved raw transaction SHA256: `6651349fd37f8d4682fa4bd42bfadda664b2eab910026ee9a0bde0c111c78cc2`. Normalized migration hash is recorded separately in the manifest; approved raw bytes remain unchanged.
+
+Fresh preflight: 27 versions / 54 functions / 18 tables / 30 policies / 13 triggers. Dry run listed only 202610230001; transactional deployment succeeded. Fresh postflight: 28 exact migration bodies / 55 functions / 18 tables / 30 policies / 20 triggers, full local catalog/grants/RLS match, zero invalid enrollments. All 18 public business-table fingerprints remained unchanged. Existing authenticated synthetic SDK reads passed; no SEC27 mutation/cleanup was rerun.
+
+Archived ownership: active owning Teacher can read profile, attendance, exams/assignments, note and student-scoped finance. Teacher profile adds nullable archived_at. Active list_students remains active-only; Teacher archived directory uses existing SELECT/RLS restricted to the current teacher ID. Archived operational student/note/academic/invoice/collection/attendance edits are blocked by triggers; active enrollment guards remain. Reasoned existing payment reversal stays available for correction, including archived students. Generation skips archived students while retaining existing attendance. No new account/Auth/grant policy or deletion behavior.
+
+Invoice APIs: amount_egp and original_amount_egp are original face value; net_paid_egp / Secretary paid_egp and ledger_net_egp are signed original receipts minus reversals; outstanding_egp / Secretary balance_egp and payable_balance_egp are payable (zero for void). Decimal strings preserve exact cents. Dues excludes void, dashboard aggregates already exclude void, receipt movements remain signed events. Never infer payable from raw invoice amount. Teacher UI exposes archived history and read-only archived notes; physical owner acceptance remains separate.
+
+Current goal: local synthetic owner testing of connected development apps. See OWNER_LOCAL_TESTING.md and OWNER28_SYNTHETIC_SCOPE.md. Production decisions are deferred and do not block this milestone. All checkpoint text below is historical where inconsistent.
+
 # Shared pilot checkpoint — 22 October 2026
 
 Current status and stable task IDs: [SHARED_COMPLETION_CHECKLIST.md](SHARED_COMPLETION_CHECKLIST.md). Real credentials are available; real Auth/Chrome and native Windows reads passed. All 27 migration hashes/history/catalog verified. See [PILOT_EVIDENCE.json](PILOT_EVIDENCE.json), [CROSS_APP_ACCEPTANCE.md](CROSS_APP_ACCEPTANCE.md) and [PILOT_OPERATIONS.md](PILOT_OPERATIONS.md). No hosted business/schema/config changes or publication. The following checkpoint text is historical where inconsistent.
 
-# Shared backend contract — v6.1 development deployment
+# Current Secretary consumer pin — migration 27 deployed
 
-Canonical source: this repository's `supabase/migrations`, by explicit owner
-override on 2026-10-18. Twenty-six migrations are deployed to centerly-dev after explicit
-owner approval; supabase/schema-manifest.json pins their hashes. See BACKEND_COMPAT.md.
-Transfer the same versioned migrations and Supabase migration history to the
-future Secretary repo; never create/reapply a duplicate schema. Both clients
-must pin the same deployed migration version before integrating live data.
+The canonical Teacher worktree `.canonical-review` and `docs/backend-baseline.json` pin the identical 27-migration contract through 202610220002. Fresh full preflight/postflight verified the approved migration hash and exact catalog, grants, policies and guards. Original Teacher root remains untouched at its historical 26-version checkout; for local tests use `.canonical-review` or set `CENTERLY_CANONICAL_REPO` to the canonical commit checkout. The resolver verifies every pinned migration before use; it will not silently use an incomplete/stale source. Deployment evidence: SECRETARY_DEPLOYMENT_2026-10-22.md/json. Historical pre-deployment text below is superseded for baseline/gate status only.
 
-## Latest verified deployment —2026-10-22
+# Shared backend consumer contract
 
-Only approved202610220001_finance_movements.sql was applied after exact25-version
-preflight/catalog/hash comparison and a single-file dry run. All26 bodies/full
-catalog verified afterward (45 functions,18 tables,30 policies;0 enrollment
-violations); manifest pinned26. No account/finance/fixture mutation. Receipt filters
-now default enabled in Flutter. No build/restart ran. Exact evidence:
-FINANCE_MOVEMENTS_DEPLOYMENT_2026-10-22.md. Teacher implementation scope complete;
-authenticated owner acceptance remains pending original credentials.
+Canonical: `/Users/mohamedsalem/Desktop/Centerly_mobile/supabase/migrations`. Teacher GitHub: https://github.com/Centerly-it/Centerly_mobile. Checkout be94122be24a43627dac944be52f6e7aba859872. Pinned manifest `backend-baseline.json`: 26 immutable migrations, last 202610220001. Fresh local and hosted verification results belong in progress, not inferred from historical counts.
 
-`list_teacher_finance_movements(p_from date,p_to date,p_search text='',p_method
-text=null,p_kind text=null,p_secretary_id uuid=null,p_student_id uuid=null,
-p_group_id uuid=null,p_cursor uuid=null,p_limit integer=30) -> jsonb`.
-Teacher-only, <=366 inclusive Cairo dates,1..100 UUID page, search<=100 literal
-substring; methods cash/transfer/other, kinds collections/corrections or null/all.
-Response rows/total_count/next_cursor/synced_at and summary gross_egp/corrections_egp/
-net_egp (decimal strings), all totals from the full filtered set before pagination.
-Original/current collector attribution retained. Search/method/kind affect rows,
-count and totals together. Secretary/anonymous/foreign entity filters denied.
-No financial writes or table/RLS changes. Transfer identical26 history to Secretary;
-do not call this teacher-only RPC from React or broaden grants.
+Identity: get_current_profile() returns id/teacher_id/role only for active account and teacher subscription. Reject role != secretary. RLS derives tenant from Auth UUID, never editable metadata. Direct authorized writes: students, grade_levels, groups, exams, assignments; supplied tenant comes only from validated profile, with server RLS mandatory. Enrollment uses reviewed server RPC for capacity/real exit time. No direct sensitive table writes/deletes.
 
-## Previous verified deployment —2026-10-20 (historical)
+Existing RPCs: add_schedule, generate_sessions (inclusive <=62 days, idempotent), set_attendance, finalize_attendance, cancel_session, create_invoice, record_payment, reverse_payment, mark_notification_read, get_daily_collections. Teacher report functions forbidden for secretary. See canonical SHARED_BACKEND_CONTRACT.md for exact historical baseline signatures.
 
+Local extension review: secretary_browse(entity,filters,search,cursor,limit), secretary_dashboard(), secretary_enroll(group,student,enrollment?), secretary_set_attendance(session,student,status,expected_updated_at,reason), secretary_revise_schedule(id,from,weekday,start,end,to). Named API parameters carry p_ prefix. Browse uses fixed table/filter allowlists, tenant+recipient scoping, literal search, limit+1 UUID paging, count, server_date/synced_at. Invoice money/balance and payment money are decimal strings. Session status is derived on server. Dashboard cash uses receipt Cairo day, outstanding excludes void and subtracts reversals. Pending counts persisted not_marked records for noncancelled selected-day sessions, not inferred missing rows.
 
-Owner-approved202610200001..006 is now deployed to centerly-dev. Fresh remote
-history and live catalog matched all 25 managed versions;44 application functions,
-18 tables,30 policies, grants/indexes/triggers/constraints/RLS verified. Enrollment
-violations0; CHECK remains NOT VALID as approved. Hosted135 business assertions
-and1 real Flutter SDK Auth test passed using approved synthetic fixtures only.
-The local-only October20 section below is historical; exact deployment evidence
-and remaining client activation limits: HARDENING_DEPLOYMENT_VERIFICATION_2026-10-20.md.
-Finance RPCs are available; debug designs are not automatically production-wired.
-Do not replay these25 versions when migration ownership transfers to Secretary.
+Errors are localized allowlisted categories. No SQL details shown. Payments use exact payload/key replay and server invoice locks; ambiguity requires key lookup. Reversals append and keep original attribution. No UPDATE/DELETE ledger/history.
 
-## Prior pre-deployment consumer checkpoint —superseded by migration 26
-
-Fresh read-only history/catalog verification matched all 25 managed bodies,
-44 functions,18 tables,30 policies, grants/RLS/indexes/triggers/constraints; zero
-enrollment violations. Redesigned Teacher overview/dues/invoice detail now consume
-the three deployed finance reads; the older NOT DEPLOYED paragraphs retained below
-are historical, not current activation instructions. See TEACHER_OWNER_TESTING.md.
-
-One new LOCAL ONLY proposal `202610220001_finance_movements.sql` adds full-dataset
-receipt search/method/kind filtering. It is outside managed migrations, default-off
-in Flutter and requires explicit new approval. No old migration was replayed or
-changed. Review: TEACHER_OWNER_BACKEND_REVIEW.md. No group-note contract is added;
-editing is excluded by owner decision. Existing RLS teachers.name SELECT supplies
-the greeting after validated profile identity; it grants no new permissions.
-
-## Identity, authorization and provisioning
-
-Supabase Auth owns email/password and auth UUIDs. `teachers.id` is the tenant;
-`secretaries.id` references an Auth user and has exactly one `teacher_id`.
-Teachers and secretaries have independent live account status; teacher
-subscription must also be active. No role comes from editable user metadata.
-No public registration/provisioning RPC. Trusted administrators create Auth users
-then insert role records with privileged tooling outside both apps. Disable
-Supabase public signup in project configuration before pilot; this is not a SQL
-setting. Unprovisioned Auth users have no business access.
-
-All tenant tables ENABLE and FORCE RLS. Anonymous has no table/function grants.
-Authenticated users read their tenant only; notifications additionally require
-matching recipient. Secretary-only INSERT/UPDATE: grade levels, groups, students,
-enrollments, exams, assignments. No client DELETE. All other writes use RPCs.
-Account/profile, subscription and seat changes are trusted-admin-only.
-RPC definer helpers have empty search paths, qualified relations and explicit
-EXECUTE grants; migration owner must retain BYPASSRLS for identity lookup.
-
-## Tables
-
-`teachers`, `secretaries`, `grade_levels`, `groups`, `students`,
-`group_enrollments`, `group_schedules`, `sessions`, `attendance`, `exams`,
-`assignments`, `invoices`, `payments`, `teacher_notes`, `notifications`,
-`secretary_removal_requests`, `attendance_change_log`, `audit_events`.
-Exact columns, constraints and enum-like CHECK values are migration-defined.
-Composite FKs enforce same-tenant references. Business history is archived,
-never client-deleted. Update/remove operational tables with care: historical
-schedule version editing, enrollment capacity enforcement and provisioning seat
-validation still require dedicated acceptance tests and RPC extensions.
-
-## Implemented RPCs (PostgREST named arguments match SQL)
-
-| Function | Arguments | Return / authorization |
-|---|---|---|
-| get_current_profile | none | JSON id, teacher_id, role; active actor |
-| list_students | p_search text=null, p_group_id uuid=null, p_cursor uuid=null, p_limit int=30 | student rows; UUID ascending cursor; max 100 |
-| list_sessions | p_from date, p_to date, p_group_id uuid=null | session rows ordered start/id; inclusive range <=62 days |
-| get_teacher_dashboard | p_date date=server Cairo today | JSON counts, today's sessions, daily collected and all outstanding; teacher |
-| add_schedule | p_group_id uuid, p_weekday int, p_start time, p_end time, p_from date, p_to date=null | schedule UUID; secretary |
-| generate_sessions | p_from date, p_to date | inserted count; secretary, inclusive <=62 days |
-| set_attendance | p_session_id uuid, p_student_id uuid, p_status text, p_reason text=null | attendance UUID; secretary |
-| finalize_attendance | p_session_id uuid | void; secretary, repeat safe |
-| cancel_session | p_session_id uuid, p_reason text | void; either role, session not ended |
-| create_invoice | p_student_id uuid, p_amount numeric, p_due_on date, p_invoice_number text, p_group_id uuid=null | UUID; secretary |
-| record_payment | p_invoice_id uuid, p_amount numeric, p_method text, p_idempotency_key uuid | UUID; secretary, idempotent exact replay |
-| reverse_payment | p_payment_id uuid, p_reason text | reversal UUID; secretary, repeat returns same UUID |
-| save_teacher_note | p_student_id uuid, p_content text, p_expected_updated_at timestamptz=null | updated timestamp; teacher, optimistic conflict |
-| request_secretary_removal | p_secretary_id uuid | request UUID; teacher, pending duplicate returns same request |
-| mark_notification_read | p_id uuid | void; matching recipient |
-| get_daily_collections | p_date date, p_secretary_id uuid=null | JSON net EGP; either role |
-
-## Calculation and workflow rules
-
-EGP uses numeric(12,2), never binary floats. Payments >0, two decimal places,
-cash/transfer/other. Net paid = collections minus reversal rows. Outstanding =
-invoice amount minus net paid, excluding void invoices. No overpayment. Due /
-partially_paid / paid derives transactionally from ledger. Money rows and audit
-logs reject UPDATE/DELETE even for accidental privileged SQL. The invoice-void
-workflow is not yet implemented. The scoped profile read is described below.
-
-Dates use Africa/Cairo server conversion including DST; instants are timestamptz.
-Daily reports use inclusive local midnight / exclusive next local midnight.
-Weekday is PostgreSQL Sunday=0. End time earlier than start means next-day end.
-Existing generated occurrences are never overwritten. No background job required.
-Manual attendance has no time cutoff, leaves not_marked intact and audits actor/time.
-Corrections after finalization require nonblank reason; cancelled sessions retain
-marks but reject further marking. Attendance ratios must exclude not_marked from
-the marked denominator and show pending separately; no ratio RPC yet.
-
-## Errors and verification limits
-
-RPC business failures use SQLSTATE P0001 with stable MESSAGE: AUTH_REQUIRED,
-ACCOUNT_INACTIVE, SUBSCRIPTION_INACTIVE, FORBIDDEN_ROLE,
-NOT_FOUND, VALIDATION_ERROR, CONFLICT, ALREADY_CANCELLED,
-ATTENDANCE_CORRECTION_REASON_REQUIRED. Constraint/RLS failures can use native
-SQLSTATE 23503/23505/23514/42501. Clients must map to localized errors and suppress
-SQL details. Unprovisioned users receive ACCOUNT_INACTIVE without tenant access.
-
-Run `npm ci --prefix supabase/tests`, then `node supabase/tests/run.mjs`.
-Tests apply all migrations to embedded PostgreSQL with synthetic Auth schema.
-Native PostgreSQL 17 also runs 11 independent-connection race assertions. Approved
-hosted fixtures passed 36 Auth/REST/RPC assertions and the Dart SDK auth integration
-test. Public signup is disabled; email login remains enabled. Production still
-requires backups/restore, monitoring and the remaining release gates in BACKEND_REVIEW.md.
-
-## Approved read extension (deployed 2026-10-19)
-
-`202610190001_teacher_browse.sql` deploys teacher-only `get_teacher_overview(p_date)`
-(existing dashboard plus explicit manual attendance counts) and bounded
-`list_teacher_groups(p_search,p_grade_level_id,p_cursor,p_limit)` with grade,
-student count, roster and schedule previews, plus `list_teacher_sessions(p_from,
-p_to,p_group_id)` adding group/subject identity to bounded session reads. Production overview, named-session and group reads use the deployed extension.
-The original nine versions are unchanged; all ten hashes are pinned. See
-[deployment evidence](TEACHER_READ_CHANGE_REVIEW.md). No additional hosted changes
-are authorized by this milestone.
-
-Client read cache is bounded memory only (64 responses, 30 seconds), keyed by SDK
-identity/endpoint/parameters; no persistent student or finance cache. Validation,
-logout and mutations invalidate it. Session/token changes reject late responses.
-Refresh bypasses cache; offline failures never fall back to stale sensitive data.
-
-
-## Approved session detail extension (deployed 2026-10-19)
-
-`202610190002_session_detail.sql` adds teacher-only
-`get_teacher_session_detail(p_id uuid,p_status text=null,p_cursor uuid=null,
-p_limit integer=30) -> jsonb`. Status accepts present/absent/excused/not_marked;
-limit 1..100. Returns session/group/subject/cancellation actor/time/reason, counts
-of persisted attendance, filtered_count, attendance records with student/marker
-names and timestamps, accurate limit+1 next_cursor and server synced_at.
-Missing attendance is not inferred; cancelled history remains readable. Teacher
-attendance is read only. All eleven deployed hashes are pinned. See
-[actual verification and limits](SESSION_DETAIL_CHANGE_REVIEW.md).
-
-The separately approved `202610190003_student_profile.sql` is deployed and pinned:
-`get_teacher_student_profile(p_id uuid,p_cursor uuid=null,p_limit integer=30)`
-returns student contacts/timestamps and bounded membership history (including
-inactive enrollment and group archive metadata), membership_count, accurate
-next_cursor and synced_at. Other-tenant/archived students return NOT_FOUND.
-See STUDENT_PROFILE_CHANGE_REVIEW.md for evidence and acceptance limits.
-
-The seven-file completion package 202610190004..010 was separately approved and
-deployed on 2026-10-19; all nineteen exact remote SQL bodies and grants verified.
-Hosted synthetic Auth/REST/workflow tests passed 98 assertions without account/Auth
-changes. Completion reads/event triggers are live; Flutter gate defaults enabled.
-
-## Completion read contracts (deployed)
-
-All seven reads require an active teacher/subscription. Secretary/anonymous denied;
-tenant is resolved server-side. JSON monetary values below are decimal strings.
-Reports: p_from/p_to inclusive dates, <=366 days; p_cursor UUID=null and p_limit=30
-(1..100), UUID ascending pages with rows/total_count/next_cursor/synced_at.
-
-| RPC | Named arguments beyond common report/page inputs | Response notes |
-|---|---|---|
-| get_teacher_student_academics | p_id uuid, p_kind exams/assignments, p_group_id uuid=null | Missing score stays null; distribution/count/average summary |
-| get_teacher_student_attendance | p_id uuid, p_group_id uuid=null, p_status text=null | Cancelled history retained; cancelled/pending excluded from marked denominator |
-| get_teacher_finance | p_kind invoices/payments='invoices', p_student_id/p_group_id/p_secretary_id uuid=null | Invoice totals by due date; net collections by Cairo receipt date; collector affects collections only |
-| get_teacher_student_note | p_id uuid; no report/page inputs | note=null or content/updated_at; preserve exact timestamp for save_teacher_note optimistic version |
-| list_teacher_secretaries | page inputs only | Own status/contact/latest removal request; no deactivation |
-| list_teacher_notifications | page inputs only | Own recipient rows, unread_count; payload ID allowlist only |
-| get_teacher_calendar | p_from/p_to inclusive <=62 days, p_group_id uuid=null; no page inputs | sessions, server_date, synced_at; status derived from server time, cancelled preserved |
-
-Private helpers cannot be executed by clients. Six history indexes support reports.
-Future payment/reversal INSERTs notify the owning teacher exactly once per ledger
-row; replay creates no second row/event. Pending->handled removal transition notifies
-the teacher; status-only handling never deactivates a secretary. No backfill, push or
-cron. Trigger failure rolls back the corresponding business transaction. Existing
-cancellation notifications, note writes, mark-read and removal request RPCs unchanged.
-
-
-## Historical pre-deployment finance proposal record — superseded by October20 deployment
-
-The three additive teacher-only RPCs in `supabase/proposals/finance_business/`
-are local proposals, not part of the deployed nineteen-version contract. See
-[FINANCE_BACKEND_CHANGE_REVIEW.md](FINANCE_BACKEND_CHANGE_REVIEW.md) for signatures,
-exact SHA256, security/date/pagination semantics and 68 local PostgreSQL assertions.
-No hosted verification or activation is implied. Existing payment/reversal writes,
-RLS, account ownership and Secretary permissions remain unchanged. Invoice creator,
-original collector and correction recorder are distinct attribution fields, never
-an assignment of unpaid debt or a cash-custody balance. The dashboard due-cohort
-settlement card consumes `paid_against_invoices_egp`, while actual period cash uses
-`period_net_collected_egp`. Production clients must filter/search before pagination,
-and use server totals rather than summing a loaded page.
-
-
-## Historical pre-deployment hardening record — superseded by October20 deployment
-
-The unchanged nineteen-version manifest is the only managed contract confirmed
-locally; hosted claims above are historical. MAIN_HARDENING_CHANGE_REVIEW.md pins
-six local proposals202610200001..006. Revised finance001 index leads invoice_id
-and includes tenant/amount/reversal. Private settlement004 preserves void invoices.
-Enrollment005 requires active+NULL left_at or inactive+left_at>=joined_at for future
-writes; status/left_at must change atomically in Secretary. NOT VALID leaves old
-invalid rows untouched and does not authorize guessed historical exit timestamps.
-
-Overview006 attendance_counts represents marks for non-cancelled sessions with
-starts_at<=statement_timestamp()<ends_at, independent of p_date; includes overnight
-ongoing sessions. attendance_scope='ongoing_sessions' and attendance_synced_at
-identify new semantics. Selected-day sessions/financial fields stay unchanged.
-not_marked remains «لم يُسجّل», never inferred absent. Counts are per student-session
-record; overlapping sessions do not establish unique physical presence. Existing
-server without scope marker must not be shown as current attendance. Flutter shows
-update time and manual refresh; no realtime/presence transport is contracted.
-
-No new teacher write/Secretary finance-read grants, no notification/backfill/account
-changes. Exact reviewed approval, remote preflight and authenticated postflight
-must precede deployment/finance activation. Future Secretary transfers identical
-migration bodies/history; no replay. Full rollout/pilot and device acceptance
-remain separate. Client cached groups/students30s, profile/academics15s; sensitive
-reads no stored TTL. Cached copies are scoped to project/user/token, memory-only;
-server RLS and write-role checks remain authoritative.
+Local verification: `npm run verify:backend` checks hashes against canonical and applies all exact migrations plus candidate to disposable PGlite. Canonical independent PostgreSQL suites remain separate. No hosted replay/reset/push.

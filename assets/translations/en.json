@@ -734,5 +734,6 @@
   "group_notes_unavailable": "Group notes are unavailable for this testing milestone.",
   "student_qr_deferred": "QR cards and scanning are deferred. Use the student profile identifier below.",
   "contact_unavailable": "Could not open the contact app. You can copy the number.",
-  "finance_selected_collector": "Selected collector"
+  "finance_selected_collector": "Selected collector",
+  "completion_archived_students": "Archived students — history only"
 }

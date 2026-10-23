@@ -1,0 +1,71 @@
+{
+  "format": 1,
+  "files": [
+    {
+      "artifact": "dist",
+      "path": "assets/index-BpFgVl8o.css",
+      "bytes": 9676,
+      "sha256": "a8f0bd0a2d56a72f568ab98b227175ae47e8fa4659eb5014e9a85c7df295fa0e"
+    },
+    {
+      "artifact": "dist",
+      "path": "assets/index-CmSsH8Dc.js",
+      "bytes": 50215,
+      "sha256": "1864904430c1b999228957c275ebc958f21d6ff6b53cb925dfe37be1170b72e8"
+    },
+    {
+      "artifact": "dist",
+      "path": "assets/query-DREvYAuv.js",
+      "bytes": 33100,
+      "sha256": "b6b9843f1e43a429b47e24c7f37d2e06ecc806c0459603dbb75537eefcb93d63"
+    },
+    {
+      "artifact": "dist",
+      "path": "assets/supabase-E6yKU0Gd.js",
+      "bytes": 217753,
+      "sha256": "c12be5fd86877365656440cc896bda91484123f873945f07f7bd52364eae025d"
+    },
+    {
+      "artifact": "dist",
+      "path": "assets/validation-Cx_3ug75.js",
+      "bytes": 94595,
+      "sha256": "354086a97ef2bd824922e75df02882cf9f5c29b42657338d36eacdc146db7df7"
+    },
+    {
+      "artifact": "dist",
+      "path": "assets/vendor-CX5_OZv_.js",
+      "bytes": 310283,
+      "sha256": "7c7df34d6c565334d2ec4204da23002959a27911d8c8f455811529a41ede7f15"
+    },
+    {
+      "artifact": "dist",
+      "path": "fonts/Cairo-Bold.ttf",
+      "bytes": 94652,
+      "sha256": "a0e58d71b85b15902ea87914d8e31a6d22da48ac2db70213dcfd1a7dad3f198a"
+    },
+    {
+      "artifact": "dist",
+      "path": "fonts/Cairo-Regular.ttf",
+      "bytes": 94480,
+      "sha256": "44786a38e27c58262cbd65341beda4fa4f6c7085ec42e830b35ba1ae37807030"
+    },
+    {
+      "artifact": "dist",
+      "path": "fonts/Cairo-SemiBold.ttf",
+      "bytes": 94688,
+      "sha256": "3fe2e182a88a5d64a96b289fd1c518bdc9b14ec91525a03990c35e91f7863a2a"
+    },
+    {
+      "artifact": "dist",
+      "path": "index.html",
+      "bytes": 805,
+      "sha256": "b2e0acfc23238ee02db88234c2b8b6e1bd07dc6c4af988ae3829283fcbfecffb"
+    },
+    {
+      "artifact": "app-debug.apk",
+      "path": "app-debug.apk",
+      "bytes": 209386703,
+      "sha256": "a7f2d490be888d34d71b7a9f35ad8a7a72422bf8e27692c28b73eb32b7227a76"
+    }
+  ]
+}
