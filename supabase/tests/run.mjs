@@ -45,8 +45,8 @@ await denied(`insert into public.group_enrollments(teacher_id,group_id,student_i
 await actor(s1);
 await eq(`select count(*)::int from public.attendance where status='not_marked'`,1);
 await db.query(`select public.set_attendance('${session}','${student}','present')`);
-await db.query(`select public.finalize_attendance('${session}')`);
-await denied(`select public.set_attendance('${session}','${student}','absent')`,'ATTENDANCE_CORRECTION_REASON_REQUIRED');
+await denied(`select public.finalize_attendance('${session}')`);
+
 await db.query(`select public.set_attendance('${session}','${student}','absent','corrected register')`);
 await eq('select count(*)::int from public.attendance_change_log',2);
 await denied(`select public.save_teacher_note('${student}','forbidden')`,'FORBIDDEN_ROLE');

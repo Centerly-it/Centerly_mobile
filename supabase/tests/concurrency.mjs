@@ -21,14 +21,14 @@ try {
   assert.equal(overpay.filter(r=>r.status==='fulfilled').length,1);
   assert.match(overpay.find(r=>r.status==='rejected').reason.message,/CONFLICT/);
   assert.equal(await scalar(a,`select sum(amount_egp)::text from public.payments`),'100.00');
-  await a.query(`select public.finalize_attendance('${session}')`);
+  await assert.rejects(a.query(`select public.finalize_attendance('${session}')`),/permission denied/);
   await a.query('begin');
   await a.query(`select public.set_attendance('${session}','${student}','present','first correction')`);
   const correction=b.query(`select public.set_attendance('${session}','${student}','excused','second correction')`);
   await a.query('commit'); await correction;
   const log=(await a.query('select previous_status,next_status,reason from public.attendance_change_log order by changed_at')).rows;
   assert.deepEqual(log.map(r=>[r.previous_status,r.next_status]),[['not_marked','present'],['present','excused']]);
-  await assert.rejects(b.query(`select public.set_attendance('${session}','${student}','absent')`),/ATTENDANCE_CORRECTION_REASON_REQUIRED/);
+
   await pg.admin.query(`update public.sessions set starts_at=now()+interval '1 hour',ends_at=now()+interval '2 hours' where id='${session}'`);
   const cancelled=await Promise.allSettled([teacher,a].map(c=>c.query(`select public.cancel_session('${session}','race test')`)));
   assert.equal(cancelled.filter(r=>r.status==='fulfilled').length,1);

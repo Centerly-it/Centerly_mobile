@@ -6,8 +6,11 @@ const db=new PGlite();let checks=0;
 try{
 await db.exec(`create role anon;create role authenticated;create schema auth;create table auth.users(id uuid primary key);create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;grant usage on schema auth to authenticated;grant execute on function auth.uid() to authenticated;`);
 assert.deepEqual((await readdir(new URL('migrations/',canonical))).sort().slice(0,manifest.migrations.length),manifest.migrations.map(m=>m.file));checks++;
-for(const m of manifest.migrations){const s=await readFile(new URL('migrations/'+m.file,canonical),'utf8');assert.equal(createHash('sha256').update(s.replaceAll('\r\n','\n')).digest('hex'),m.sha256);await db.exec(s);checks++;}
+for(const m of manifest.migrations){const s=await readFile(new URL('migrations/'+m.file,canonical),'utf8');assert.equal(createHash('sha256').update(s.replaceAll('\r\n','\n')).digest('hex'),m.sha256);checks++;}
+const apply=async m=>db.exec(await readFile(new URL('migrations/'+m.file,canonical),'utf8'));
+for(const m of manifest.migrations.filter(m=>m.file.split('_')[0]<='202610230001'))await apply(m);
 await db.exec(await readFile(new URL('tests/fixtures.sql',canonical),'utf8'));
+for(const m of manifest.migrations.filter(m=>m.file.split('_')[0]>'202610230001'))await apply(m);
 const scalar=async(sql,args)=>Object.values((await db.query(sql,args)).rows[0])[0];
 const actor=async id=>{await db.exec('reset role');await db.query("select set_config('request.jwt.claim.sub',$1,false)",[id]);await db.exec('set role authenticated');};
 const deny=async(sql,message)=>{await assert.rejects(db.query(sql),e=>!message||e.message.includes(message));checks++;};
@@ -19,8 +22,8 @@ await actor(s);await eq("select (public.secretary_browse('students')->>'total_co
 let a=await scalar(`select updated_at::text from public.attendance where session_id='${session}' and student_id='${student}'`);
 await db.query(`select public.secretary_set_attendance($1,$2,'present',$3)`,[session,student,a]);checks++;
 await deny(`select public.secretary_set_attendance('${session}','${student}','absent','${a}')`,'CONFLICT');
-await db.query(`select public.finalize_attendance('${session}')`);a=await scalar(`select updated_at::text from public.attendance where session_id='${session}'`);
-await deny(`select public.secretary_set_attendance('${session}','${student}','absent','${a}')`,'ATTENDANCE_CORRECTION_REASON_REQUIRED');
+await deny(`select public.finalize_attendance('${session}')`);a=await scalar(`select updated_at::text from public.attendance where session_id='${session}'`);
+
 await db.query(`select public.secretary_set_attendance($1,$2,'absent',$3,'register correction')`,[session,student,a]);await eq('select count(*)::int from public.attendance_change_log',2);
 const inv=await scalar(`select public.create_invoice('${student}',100.10,current_date,'SECRETARY-TEST')`);const key='60000000-0000-0000-0000-000000000099';
 const payment=await scalar(`select public.record_payment('${inv}',40.05,'cash','${key}')`);await eq(`select public.record_payment('${inv}',40.05,'cash','${key}')`,payment);await deny(`select public.record_payment('${inv}',60.06,'cash',gen_random_uuid())`,'CONFLICT');

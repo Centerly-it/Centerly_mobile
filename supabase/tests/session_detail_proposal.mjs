@@ -30,7 +30,7 @@ try {
   const second=await detail(a,[session,null,first.next_cursor,1]);
   eq(first.attendance.length,1);eq(second.attendance.length,1);eq(second.next_cursor,null);
   assert.notEqual(first.attendance[0].id,second.attendance[0].id);count++;
-  await s.query('select public.finalize_attendance($1)',[session]);
+  await pg.admin.query('update public.sessions set attendance_finalized_at=now(),attendance_finalized_by=$2 where id=$1',[session,secretary]);
   await s.query('select public.set_attendance($1,$2,$3,$4)',[
     session,'30000000-0000-0000-0000-000000000099','excused','Audited local correction']);
   result=await detail();

@@ -32,3 +32,5 @@ supabase/migrations/202610240001_manual_sessions.sql text eol=lf
 supabase/proposals/202610240001_manual_sessions.sql text eol=lf
 supabase/proposals/manual_sessions/*.sql text eol=lf
 supabase/reviews/manual-sessions-transaction.sql text eol=lf
+
+supabase/migrations/202610240002_direct_attendance.sql text eol=lf
