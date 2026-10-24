@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/teacher_profile.dart';
 import '../../domain/repo/teacher_auth_repository.dart';
 import 'auth_session_state.dart';
+import 'auth_session_recovery.dart';
 
 class AuthSessionCubit extends Cubit<AuthSessionState> {
   AuthSessionCubit(this.repository)
@@ -12,7 +13,7 @@ class AuthSessionCubit extends Cubit<AuthSessionState> {
         if (!_busy) unawaited(restore(background: true));
       },
       onError: (_) {
-        if (!_busy) _signedOut('NETWORK_ERROR');
+        if (!_busy && !state.isAuthenticated) _signedOut('NETWORK_ERROR');
       },
     );
   }
@@ -25,8 +26,8 @@ class AuthSessionCubit extends Cubit<AuthSessionState> {
     _busy = true;
     final generation = ++_generation;
     final previous = state.profile;
-    // Foreground/resume checks gate immediately. A successful periodic/token check
-    // preserves nested navigation and unsaved drafts; any failure still signs out.
+    // Explicit access-denial checks gate immediately. Resume/token checks stay
+    // in the background; confirmed revocation still removes protected UI.
     if (!background || !state.isAuthenticated) {
       emit(const AuthSessionState(AuthSessionStatus.checking));
     }
@@ -45,7 +46,9 @@ class AuthSessionCubit extends Cubit<AuthSessionState> {
         ),
       );
     } catch (error) {
-      if (!isClosed && generation == _generation) _signedOut(_code(error));
+      if (!isClosed && generation == _generation) {
+        emit(restoreFailure(error, background: background, previous: previous));
+      }
     } finally {
       if (generation == _generation) _busy = false;
     }

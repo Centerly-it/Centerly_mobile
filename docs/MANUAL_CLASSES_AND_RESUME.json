@@ -1,0 +1,74 @@
+{
+  "postflight": {
+    "at": "2026-10-24T11:37:38.625Z",
+    "hostedWrites": 0,
+    "pass": true,
+    "migrations": 33,
+    "functions": 73,
+    "tables": 18,
+    "policies": 30,
+    "triggers": 25
+  },
+  "browser": {
+    "pass": true,
+    "mode": "actual authenticated connected Chromium, read-only",
+    "checks": 24,
+    "businessWrites": 0,
+    "renewalStubs": 4,
+    "deleteFormsVerifiedWithoutSubmitting": 2,
+    "allActiveGroupsShown": 2,
+    "missingSchedules": 0,
+    "manualSessionForm": true,
+    "billingChoices": 2,
+    "weeklyDatesHidden": true,
+    "quietFocusKeepsDraft": true,
+    "requiredCreationSchedule": true,
+    "multipleDays": true,
+    "noGroupDate": true,
+    "amPmDropdown": true,
+    "financialEditing": "enabled; due save verified without submitting",
+    "paymentEdit": "save enabled, no submission",
+    "physicalDeviceTested": false
+  },
+  "sdk": {
+    "pass": true,
+    "checks": 20,
+    "actualAuthenticatedSDK": true,
+    "mode": "Read calls plus invalid-payload guards; no successful mutation attempted",
+    "businessWrites": 0,
+    "hostedFixtureMutations": 0
+  },
+  "invoiceReads": {
+    "pass": true,
+    "actualAuthenticatedSDK": true,
+    "checks": 73,
+    "invoices": 5,
+    "zeroInvoices": 0,
+    "voidInvoices": 0,
+    "paymentsByAccount": [
+      {
+        "account": "a",
+        "rows": 4,
+        "current": 2
+      },
+      {
+        "account": "b",
+        "rows": 0,
+        "current": 0
+      }
+    ],
+    "businessWrites": 0,
+    "fixtureMutations": 0,
+    "zeroOrVoidLimit": "Only existing records tested; no fixtures created"
+  },
+  "allExistingRowsAndTotalsPreserved": true,
+  "localSQLRoleChecks": 28,
+  "baselineSQLChecks": 90,
+  "secretaryUnitTests": 38,
+  "syntheticBrowserTests": 22,
+  "teacherTargetedTests": 29,
+  "physicalDeviceTested": false,
+  "apkInstalled": false,
+  "apkSHA256": "37885912f4a488bce951d10b69179cb2df5412eb5acef55555371097ca743985",
+  "hostedBusinessWrites": 0
+}

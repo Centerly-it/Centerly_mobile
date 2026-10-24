@@ -54,8 +54,7 @@ class LiveGroupCard extends StatelessWidget {
           if (group.schedules.isNotEmpty) Text('live_cairo_time'.tr()),
           for (final schedule in group.schedules)
             Text(
-              '${_days[schedule.weekday].tr()} ${schedule.start} – ${schedule.end}\n'
-              '${schedule.from} – ${schedule.to ?? 'live_open_schedule'.tr()}',
+              '${_days[schedule.weekday].tr()} ${schedule.start} – ${schedule.end}',
             ),
           if (group.schedulesTruncated) Text('live_schedule_preview'.tr()),
           if (group.roster.isNotEmpty) ...[

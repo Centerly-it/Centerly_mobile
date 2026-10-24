@@ -54,6 +54,8 @@ jobs:
       - run: node supabase/tests/simple_finance_edit.mjs
       - run: node supabase/tests/required_group_schedule.mjs
       - run: node supabase/tests/multi_day_group.mjs
+      - run: node supabase/admin/build_manual_sessions_review.mjs --check
+      - run: node supabase/tests/manual_sessions.mjs
       - run: flutter build apk --debug --no-pub
       - run: flutter build apk --profile --no-pub
       - uses: actions/upload-artifact@v4

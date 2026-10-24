@@ -32,7 +32,7 @@ class _SessionLifecycleState extends State<SessionLifecycle>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) _check();
+    if (state == AppLifecycleState.resumed) _check(background: true);
   }
 
   @override

@@ -77,6 +77,20 @@ void main() {
     await first;
     expect(cubit.state.isAuthenticated, isTrue);
   });
+  test(
+    'background network failure keeps the verified session but revocation still closes it',
+    () async {
+      repo.saved = profile;
+      await cubit.restore();
+      repo.failure = const TeacherAuthFailure('NETWORK_ERROR');
+      await cubit.restore(background: true);
+      expect(cubit.state.isAuthenticated, isTrue);
+      expect(cubit.state.errorCode, 'NETWORK_ERROR');
+      repo.failure = const TeacherAuthFailure('SUBSCRIPTION_INACTIVE');
+      await cubit.restore(background: true);
+      expect(cubit.state.isAuthenticated, isFalse);
+    },
+  );
   test('logout wins over an in-flight login result', () async {
     repo.loginPending = Completer<TeacherProfile>();
     final login = cubit.login('a', 'b');

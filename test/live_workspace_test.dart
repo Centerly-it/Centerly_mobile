@@ -90,6 +90,13 @@ void main() {
             fixture.fail = true;
             await tester.tap(find.byIcon(Icons.home_outlined));
             await tester.pumpAndSettle();
+            expect(find.text('12'), findsOneWidget);
+            expect(fixture.calls, 1);
+            final refresh = tester
+                .state<RefreshIndicatorState>(find.byType(RefreshIndicator))
+                .show();
+            await tester.pumpAndSettle();
+            await refresh;
             expect(find.text('error_title'.tr()), findsOneWidget);
             expect(tester.takeException(), isNull);
             fixture.fail = false;
