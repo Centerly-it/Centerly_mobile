@@ -1,3 +1,4 @@
+import '../../../core/widgets/content_skeleton.dart';
 import '../../../core/theme/values_manager.dart';
 import 'live_academic_table.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -25,6 +26,7 @@ class StudentAcademicsPage extends StatelessWidget {
   Widget build(BuildContext context) =>
       FilteredReportPage<AcademicRecord, AcademicSummary>(
         embedded: embedded,
+        loadingShape: LoadingShape.table,
         title: 'completion_academics',
         initialDate: initialDate,
         kinds: const {

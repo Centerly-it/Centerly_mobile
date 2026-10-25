@@ -1,3 +1,4 @@
+import '../../../../core/constants/assets_manager.dart';
 import '../../domain/student_record.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,9 @@ class StudentIdentity extends StatelessWidget {
   Widget build(BuildContext context) => Row(
     children: [
       Image.asset(
-        'assets/figma/sessions/04ab7.png',
+        AssetsManager.studentAvatar,
+        cacheWidth: ((large ? 56 : 32) * MediaQuery.devicePixelRatioOf(context))
+            .ceil(),
         width: large ? 56 : 32,
         height: large ? 56 : 32,
       ),

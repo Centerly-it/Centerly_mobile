@@ -1,63 +1,46 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/errors/backend_failure.dart';
+import '../../../core/data/read_page.dart';
+import '../../../core/presentation/mapped_paged_cubit.dart';
 import '../data/session_detail_repository.dart';
+import '../domain/attendance_record.dart';
+import '../domain/session_detail.dart';
 import 'session_detail_state.dart';
 
-class SessionDetailCubit extends Cubit<SessionDetailState> {
+class SessionDetailCubit
+    extends
+        MappedPagedCubit<AttendanceRecord, SessionDetail, SessionDetailState> {
   SessionDetailCubit(this.repository, this.id)
-    : super(const SessionDetailState());
-  final SessionDetailRepository repository;
-  final String id;
-  int _request = 0;
-  Future<void> load({String? status, bool more = false}) async {
-    if (more && (state.loading || state.nextCursor == null)) return;
-    final previous = state;
-    final ticket = ++_request;
-    final filter = more ? previous.status : status;
-    emit(
-      SessionDetailState(
-        // Keep the current page mounted while refreshing or changing filters.
-        // Replacing it with a full-screen loader resets the scroll position.
-        detail: previous.detail,
-        rows: previous.rows,
-        status: filter,
-        loading: true,
-        nextCursor: previous.nextCursor,
+    : super(const SessionDetailState()) {
+    configure(
+      (f, c) async {
+        final detail = await repository.load(
+          id,
+          status: f['status'] as String?,
+          cursor: c,
+          refresh: true,
+        );
+        return ReadPage(
+          rows: detail.rows,
+          summary: detail,
+          total: detail.filteredCount,
+          syncedAt: detail.syncedAt,
+          cursor: detail.nextCursor,
+        );
+      },
+      (r) => r.id,
+      (s, f) => SessionDetailState(
+        detail: s.page?.summary,
+        rows: s.rows,
+        status: f['status'] as String?,
+        loading: s.loading,
+        error: s.error,
+        retryMore: s.retryMore,
+        nextCursor: s.cursor,
       ),
     );
-    try {
-      final detail = await repository.load(
-        id,
-        status: filter,
-        cursor: more ? previous.nextCursor : null,
-        refresh: true,
-      );
-      if (isClosed || ticket != _request) return;
-      final rows = [if (more) ...previous.rows, ...detail.rows];
-      if (rows.map((r) => r.id).toSet().length != rows.length) {
-        throw const BackendFailure('SERVICE_UNAVAILABLE');
-      }
-      emit(
-        SessionDetailState(
-          detail: detail,
-          rows: List.unmodifiable(rows),
-          status: filter,
-          nextCursor: detail.nextCursor,
-        ),
-      );
-    } catch (_) {
-      if (isClosed || ticket != _request) return;
-      emit(
-        SessionDetailState(
-          detail: previous.detail,
-          rows: previous.rows,
-          status: previous.status,
-          error: true,
-          nextCursor: previous.nextCursor,
-        ),
-      );
-    }
   }
-
-  Future<void> refresh() => load(status: state.status);
+  final SessionDetailRepository repository;
+  final String id;
+  Future<void> load({String? status, bool more = false}) =>
+      more ? pages.next() : pages.apply({'status': status}, retain: true);
+  Future<void> refresh() => pages.refresh();
 }

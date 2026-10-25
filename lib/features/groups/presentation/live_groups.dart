@@ -1,10 +1,9 @@
+import '../../../core/widgets/read_directory_list.dart';
+import '../../../core/widgets/content_skeleton.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/di/di.dart';
-import '../../../core/theme/values_manager.dart';
-import '../../../core/widgets/app_empty_state.dart';
-import '../../../core/widgets/app_error_state.dart';
 import '../data/group_repository.dart';
 import 'group_browse_cubit.dart';
 import 'group_browse_state.dart';
@@ -37,50 +36,27 @@ class _GroupsBody extends StatelessWidget {
                   label: Text('live_clear_grade'.tr()),
                 ),
               Expanded(
-                child: state.loading && state.groups.isEmpty
-                    ? Center(
-                        child: CircularProgressIndicator(
-                          semanticsLabel: 'loading_data'.tr(),
-                        ),
-                      )
-                    : RefreshIndicator(
-                        onRefresh: cubit.refresh,
-                        child: ListView(
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          padding: const EdgeInsets.all(AppPadding.p16),
-                          children: [
-                            for (final group in state.groups)
-                              LiveGroupCard(
-                                group: group,
-                                onGrade: () => cubit.search(
-                                  state.search,
-                                  gradeId: group.gradeId,
-                                ),
-                              ),
-                            if (state.error != null)
-                              AppErrorState(
-                                onRetry: state.groups.isEmpty
-                                    ? cubit.refresh
-                                    : cubit.next,
-                              ),
-                            if (state.groups.isEmpty && state.error == null)
-                              AppEmptyState(
-                                title: 'groups_empty_title'.tr(),
-                                subtitle: 'groups_empty_subtitle'.tr(),
-                              ),
-                            if (state.cursor != null && state.error == null)
-                              TextButton(
-                                onPressed: state.loading ? null : cubit.next,
-                                child: Text(
-                                  (state.loading
-                                          ? 'loading_data'
-                                          : 'live_load_more')
-                                      .tr(),
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
+                child: ReadDirectoryList(
+                  count: state.groups.length,
+                  loading: state.loading,
+                  error: state.error != null,
+                  hasMore: state.cursor != null,
+                  retryMore: state.retryMore,
+                  refresh: cubit.refresh,
+                  next: cubit.next,
+                  shape: LoadingShape.cards,
+                  emptyTitle: 'groups_empty_title',
+                  emptyHint: 'groups_empty_subtitle',
+                  item: (context, index) {
+                    final group = state.groups[index];
+                    return LiveGroupCard(
+                      key: ValueKey(group.id),
+                      group: group,
+                      onGrade: () =>
+                          cubit.search(state.search, gradeId: group.gradeId),
+                    );
+                  },
+                ),
               ),
             ],
           );

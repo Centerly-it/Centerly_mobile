@@ -1,3 +1,4 @@
+import '../../../../core/constants/assets_manager.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/theme/style_manager.dart';
 import '../../../../core/theme/values_manager.dart';
@@ -21,7 +22,9 @@ class GroupStudentRows extends StatelessWidget {
           child: Row(
             children: [
               Image.asset(
-                'assets/figma/sessions/04ab7.png',
+                AssetsManager.studentAvatar,
+                cacheWidth: (32 * MediaQuery.devicePixelRatioOf(context))
+                    .ceil(),
                 width: 32,
                 height: 32,
                 fit: BoxFit.cover,

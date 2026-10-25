@@ -21,3 +21,8 @@
 - Do not blindly implement.
 - Review the surrounding code and improve the solution where needed.
 - Prefer consistency, simplicity, and maintainability over quick patching.
+## Shared reads, loading and performance
+- Reuse `PagedReadCubit` for cursor request ordering, stale-response/disposal guards, duplicate/cycle validation and independent initial/refresh/more states. Feature-specific state adapters use `MappedPagedCubit`; keep endpoint ordering, limits, summaries and cursor validation in repositories.
+- Use lazy builders for growing production lists. Keep current content during same-query refresh; clear on account/access denial. Retry the failed page type without retrying mutations automatically.
+- Use `ContentSkeleton`/`LoadingPage` (Skeletonizer) for initial read geometry, never fake business records. Keep save/login/download progress meaningful; respect reduced motion, route/tab visibility, lifecycle and screen-reader semantics.
+- Retain documented cache scope/TTL/size limits and remote freshness rules. Decode images near display resolution. Measure device performance in profile mode before claiming frame-time improvements; widget construction counts are structural tests only.

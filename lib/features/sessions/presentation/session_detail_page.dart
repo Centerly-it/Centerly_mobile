@@ -1,3 +1,5 @@
+import 'session_attendance_row.dart';
+import '../../../core/widgets/content_skeleton.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +13,8 @@ import 'session_detail_cubit.dart';
 import 'session_detail_state.dart';
 import 'session_detail_header.dart';
 import 'session_attendance_list.dart';
+
+part 'session_detail_body.dart';
 
 class SessionDetailPage extends StatelessWidget {
   const SessionDetailPage({required this.sessionId, super.key});
@@ -40,41 +44,8 @@ class SessionDetailPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: BlocBuilder<SessionDetailCubit, SessionDetailState>(
-          builder: (context, state) {
-            final cubit = context.read<SessionDetailCubit>();
-            if (state.detail == null) {
-              if (state.error) {
-                return SingleChildScrollView(
-                  child: AppErrorState(onRetry: cubit.refresh),
-                );
-              }
-              return Center(
-                child: CircularProgressIndicator(
-                  semanticsLabel: 'loading_data'.tr(),
-                ),
-              );
-            }
-            return RefreshIndicator(
-              onRefresh: cubit.refresh,
-              child: ListView(
-                key: PageStorageKey<String>('session-detail-$sessionId'),
-                physics: const AlwaysScrollableScrollPhysics(),
-                padding: const EdgeInsets.all(AppPadding.p16),
-                children: [
-                  SessionDetailHeader(
-                    detail: state.detail!,
-                    onChanged: cubit.refresh,
-                  ),
-                  SessionAttendanceList(
-                    state: state,
-                    onFilter: (status) => cubit.load(status: status),
-                    onMore: () => cubit.load(more: true),
-                  ),
-                  DataUpdateFooter(updatedAt: state.detail!.syncedAt),
-                ],
-              ),
-            );
-          },
+          builder: (context, state) =>
+              _SessionDetailBody(state: state, sessionId: sessionId),
         ),
       ),
     ),

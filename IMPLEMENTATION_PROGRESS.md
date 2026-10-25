@@ -1,3 +1,9 @@
+## PERF-MOB-040 — Shared pagination, lazy content and Skeletonizer (25 October 2026)
+
+Completed the Teacher-only loading/performance pass and preserved the pending owner UI edits (unified finance scrolling, branded method menu, supplied default student avatar, archive choice inside group picker). Reused PagedReadCubit with MappedPagedCubit adapters for directories/session attendance; added refresh/more separation, cursor-cycle/duplicate/disposal guards, retained-filter recovery and lazy viewport builders. Adopted Skeletonizer with accessible/reduced-motion/background-safe presentation geometry; retained action progress and auth checking. Bounded avatar decoding and removed duplicate response encoding without changing cache scope, TTLs, backend contracts or financial rules.
+
+Evidence: full suite 293 passed/1 existing skip; final focused regressions 12 passed; final skeleton checks 3 passed; preview checks 3 passed; analyzer clean. Synthetic 1,000-row reference constructs 1,000 widgets eagerly, versus 13 initial and 20 after scrolling with the new list. Counts are not device frame timings. ADB unavailable at final audit; no application restart, installation, APK build, hosted writes or Secretary edits. See docs/PERFORMANCE_LOADING_20261025.md and docs/performance/20261025.json. Owner device/slow-network/profile measurements remain unverified. Earlier fixed-filter layout notes below are superseded by the owner's unified-scroll request.
+
 ## UI-MOB-039 — Compact centered method selector
 
 Styled the remaining all-records/payment-method selector as a centered compact control (maximum 220px) with smaller theme text, centered labels, soft brand surface, rounded border and dropdown chevron. Preserved 48px dropdown touch height and method behavior. Validation: flutter analyze PASS; two Arabic/English narrow 200%-text connected tests PASS. Next: owner Hot Reload and visual review.

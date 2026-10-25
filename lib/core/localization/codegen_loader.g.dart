@@ -799,7 +799,7 @@ class CodegenLoader extends AssetLoader {
     "contact_unavailable":
         "Could not open the contact app. You can copy the number.",
     "finance_selected_collector": "Selected collector",
-    "completion_archived_students": "Archived students — history only",
+    "completion_archived_students": "Archived students",
     "student_dues_title": "Student dues",
     "payment_correction_label": "Correction of an earlier payment",
     "payment_corrected_label": "This payment was corrected",
@@ -1582,7 +1582,7 @@ class CodegenLoader extends AssetLoader {
     "student_qr_deferred": "بطاقات ومسح QR مؤجلة. معرّف ملف الطالب موضح أدناه.",
     "contact_unavailable": "تعذر فتح تطبيق التواصل. يمكنك نسخ الرقم.",
     "finance_selected_collector": "مسؤول التحصيل المحدد",
-    "completion_archived_students": "الطلاب المؤرشفون — السجل فقط",
+    "completion_archived_students": "الطلاب المؤرشفون",
     "student_dues_title": "مستحقات الطالب",
     "payment_correction_label": "تصحيح دفعة سابقة",
     "payment_corrected_label": "تم تصحيح هذه الدفعة",

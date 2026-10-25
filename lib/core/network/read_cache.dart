@@ -56,9 +56,13 @@ class ReadCache {
     Object? value, {
     Duration ttl = const Duration(seconds: 30),
   }) {
+    putEncoded(key, jsonEncode(value), ttl: ttl);
+  }
+
+  /// Accepts only JSON already encoded by the trusted read transport.
+  void putEncoded(String key, String json, {required Duration ttl}) {
     _remove(key);
     if (ttl <= Duration.zero || maxEntries <= 0 || maxBytes <= 0) return;
-    final json = jsonEncode(value);
     final bytes = utf8.encode(json).length;
     if (bytes > maxEntryBytes || bytes > maxBytes) return;
     while (_entries.isNotEmpty &&

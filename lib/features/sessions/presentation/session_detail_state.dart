@@ -8,10 +8,11 @@ class SessionDetailState {
     this.status,
     this.loading = false,
     this.error = false,
+    this.retryMore = false,
     this.nextCursor,
   });
   final SessionDetail? detail;
   final List<AttendanceRecord> rows;
   final String? status, nextCursor;
-  final bool loading, error;
+  final bool loading, error, retryMore;
 }

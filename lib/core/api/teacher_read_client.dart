@@ -82,10 +82,11 @@ class TeacherReadClient {
         },
       );
       checkSession();
+      final encoded = jsonEncode(data);
       if (identity != null && client.auth.currentSession?.isExpired == false) {
-        cache.put(key, data, ttl: ttl);
+        cache.putEncoded(key, encoded, ttl: ttl);
       }
-      return jsonEncode(data);
+      return encoded;
     });
     checkSession();
     return jsonDecode(encoded);

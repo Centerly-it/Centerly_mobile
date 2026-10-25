@@ -7,10 +7,11 @@ class GroupBrowseState {
     this.gradeId,
     this.cursor,
     this.loading = false,
+    this.retryMore = false,
     this.error,
   });
   final List<GroupRecord> groups;
   final String search;
   final String? gradeId, cursor, error;
-  final bool loading;
+  final bool loading, retryMore;
 }

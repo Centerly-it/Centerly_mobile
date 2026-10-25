@@ -1,3 +1,4 @@
+import '../../../core/widgets/content_skeleton.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/di/di.dart';
@@ -34,7 +35,7 @@ class _LiveGroupUpcomingState extends State<LiveGroupUpcoming> {
     future: data,
     builder: (context, snapshot) {
       if (snapshot.connectionState != ConnectionState.done) {
-        return const LinearProgressIndicator();
+        return const ContentSkeleton(count: 1);
       }
       if (snapshot.hasError) return AppErrorState(onRetry: reload);
       final rows = snapshot.requireData

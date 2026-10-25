@@ -7,9 +7,10 @@ class StudentBrowseState {
     this.cursor,
     this.error,
     this.loading = false,
+    this.retryMore = false,
   });
   final List<StudentRecord> students;
   final String search;
   final String? cursor, error;
-  final bool loading;
+  final bool loading, retryMore;
 }

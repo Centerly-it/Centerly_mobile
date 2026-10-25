@@ -1,3 +1,4 @@
+import '../../../../core/constants/assets_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/theme/style_manager.dart';
@@ -21,9 +22,13 @@ class SessionStudentRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: AppPadding.p12),
       child: Row(
         children: [
-          const CircleAvatar(
+          CircleAvatar(
             radius: AppSize.s16,
-            backgroundImage: AssetImage('${SessionDesign.assets}04ab7.png'),
+            backgroundImage: ResizeImage(
+              const AssetImage(AssetsManager.studentAvatar),
+              width: (32 * MediaQuery.devicePixelRatioOf(context)).ceil(),
+              height: (32 * MediaQuery.devicePixelRatioOf(context)).ceil(),
+            ),
           ),
           const SizedBox(width: AppSize.s8),
           Expanded(

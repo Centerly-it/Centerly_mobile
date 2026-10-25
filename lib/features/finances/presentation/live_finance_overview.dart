@@ -1,3 +1,4 @@
+import '../../../core/widgets/content_skeleton.dart';
 import 'finance_overview_details.dart';
 import 'package:flutter/material.dart';
 import '../../../core/theme/values_manager.dart';
@@ -43,20 +44,21 @@ class _LiveFinanceOverviewState extends State<LiveFinanceOverview> {
   Widget build(BuildContext context) => FutureBuilder<FinanceOverviewData>(
     future: data,
     builder: (context, snapshot) {
-      final value = snapshot.connectionState == ConnectionState.done
-          ? snapshot.data
-          : null;
+      final value = snapshot.data;
       return RefreshIndicator(
         onRefresh: reload,
         child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.all(AppPadding.p16),
           children: [
-            if (snapshot.connectionState != ConnectionState.done)
-              const Center(child: CircularProgressIndicator())
+            if (snapshot.connectionState != ConnectionState.done &&
+                value == null)
+              const ContentSkeleton(shape: LoadingShape.dashboard)
             else if (snapshot.hasError)
               AppErrorState(onRetry: reload)
             else if (value != null) ...[
+              if (snapshot.connectionState != ConnectionState.done)
+                const LinearProgressIndicator(),
               FinanceCashHero(month: widget.month, summary: value),
               const SizedBox(height: AppSize.s16),
               FinanceCohortSummary(month: widget.month, summary: value),

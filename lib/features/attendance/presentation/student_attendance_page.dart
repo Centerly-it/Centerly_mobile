@@ -1,3 +1,4 @@
+import '../../../core/widgets/content_skeleton.dart';
 import '../../../core/theme/values_manager.dart';
 import 'live_attendance_table.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class StudentAttendancePage extends StatelessWidget {
   Widget build(BuildContext context) =>
       FilteredReportPage<StudentAttendanceRecord, StudentAttendanceSummary>(
         embedded: embedded,
+        loadingShape: LoadingShape.table,
         title: 'completion_attendance',
         initialDate: initialDate,
         kindKey: 'p_status',

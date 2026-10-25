@@ -52,35 +52,29 @@ class _LiveFinanceMovementsState extends State<LiveFinanceMovements> {
   @override
   Widget build(BuildContext context) => BlocProvider.value(
     value: cubit,
-    child: Column(
-      children: [
-        FinanceMovementControls(
-          actor: actor,
-          method: method,
-          onGroup: (v) {
-            group = v;
-            reload();
-          },
-          onActor: (v) {
-            setState(() => actor = v);
-            reload();
-          },
-          onSearch: (v) {
-            search = v;
-            reload();
-          },
-          onMethod: (v) {
-            setState(() => method = v);
-            reload();
-          },
-        ),
-        Expanded(
-          child: LiveMovementBody(
-            repository: repository,
-            onReturn: cubit.refresh,
-          ),
-        ),
-      ],
+    child: LiveMovementBody(
+      repository: repository,
+      onReturn: cubit.refresh,
+      leading: FinanceMovementControls(
+        actor: actor,
+        method: method,
+        onGroup: (v) {
+          group = v;
+          reload();
+        },
+        onActor: (v) {
+          setState(() => actor = v);
+          reload();
+        },
+        onSearch: (v) {
+          search = v;
+          reload();
+        },
+        onMethod: (v) {
+          setState(() => method = v);
+          reload();
+        },
+      ),
     ),
   );
 }

@@ -1,3 +1,4 @@
+import '../../core/constants/assets_manager.dart';
 import 'dart:ui' as ui;
 import 'package:centrally/core/constants/strings_manager.dart';
 import 'package:centrally/core/theme/color_manager.dart';
@@ -274,7 +275,11 @@ class StudentAvatar extends StatelessWidget {
     return CircleAvatar(
       radius: radius,
       backgroundColor: ColorManager.primaryBright,
-      child: Icon(Icons.person, color: ColorManager.primary, size: radius),
+      backgroundImage: ResizeImage(
+        const AssetImage(AssetsManager.studentAvatar),
+        width: (radius * 2 * MediaQuery.devicePixelRatioOf(context)).ceil(),
+        height: (radius * 2 * MediaQuery.devicePixelRatioOf(context)).ceil(),
+      ),
     );
   }
 }

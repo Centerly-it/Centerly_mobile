@@ -38,7 +38,10 @@ class _TeacherWorkspaceState extends State<TeacherWorkspace> {
         index: _index,
         children: List.generate(
           5,
-          (i) => _panels[i] ?? const SizedBox.shrink(),
+          (i) => TickerMode(
+            enabled: i == _index,
+            child: _panels[i] ?? const SizedBox.shrink(),
+          ),
         ),
       ),
     ),

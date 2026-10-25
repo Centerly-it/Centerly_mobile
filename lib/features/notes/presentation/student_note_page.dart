@@ -1,3 +1,4 @@
+import '../../../core/widgets/content_skeleton.dart';
 import 'confirm_note_discard.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,10 @@ class _StudentNotePageState extends State<StudentNotePage> {
           child: ListView(
             padding: const EdgeInsets.all(AppPadding.p16),
             children: [
-              if (editor.busy) const LinearProgressIndicator(),
+              if (editor.busy && editor.saved == null)
+                const ContentSkeleton(shape: LoadingShape.profile),
+              if (editor.busy && editor.saved != null)
+                const LinearProgressIndicator(),
               if (editor.failed && editor.saved == null)
                 AppErrorState(onRetry: editor.load),
               if (editor.saved != null)

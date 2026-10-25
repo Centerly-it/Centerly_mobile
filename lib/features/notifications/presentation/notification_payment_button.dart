@@ -1,3 +1,4 @@
+import '../../../core/widgets/content_skeleton.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/api/teacher_read_client.dart';
@@ -31,7 +32,7 @@ class NotificationPaymentButton extends StatelessWidget {
             builder: (_, state) {
               if (state.hasError) return const AppErrorState();
               if (!state.hasData) {
-                return const Center(child: CircularProgressIndicator());
+                return const LoadingPage(shape: LoadingShape.receipt);
               }
               final data = state.data!;
               return SingleChildScrollView(

@@ -1,3 +1,4 @@
+import '../../../core/widgets/content_skeleton.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,6 +68,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
                       embedded: true,
                     )
                   : PagedReadBody<StudentMembership, StudentRecord>(
+                      loadingShape: LoadingShape.profile,
                       header: (context, page) => Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [

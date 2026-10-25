@@ -1,88 +1,57 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/errors/backend_failure.dart';
+import '../../../core/data/read_page.dart';
+import '../../../core/presentation/mapped_paged_cubit.dart';
 import '../data/group_repository.dart';
+import '../domain/group_record.dart';
 import 'group_browse_state.dart';
 
-class GroupBrowseCubit extends Cubit<GroupBrowseState> {
-  GroupBrowseCubit(this.repository) : super(const GroupBrowseState());
-  final GroupRepository repository;
-  int _generation = 0;
-  Future<void> search(
-    String value, {
-    String? gradeId,
-    bool refresh = false,
-  }) async {
-    final generation = ++_generation;
-    emit(
-      GroupBrowseState(search: value.trim(), gradeId: gradeId, loading: true),
-    );
-    await _load(generation, refresh: refresh);
-  }
-
-  Future<void> refresh() =>
-      search(state.search, gradeId: state.gradeId, refresh: true);
-  Future<void> next() async {
-    if (state.loading || state.cursor == null) return;
-    final before = state;
-    emit(
-      GroupBrowseState(
-        groups: before.groups,
-        search: before.search,
-        gradeId: before.gradeId,
-        cursor: before.cursor,
-        loading: true,
+class GroupBrowseCubit
+    extends MappedPagedCubit<GroupRecord, NoSummary, GroupBrowseState> {
+  GroupBrowseCubit(this.repository) : super(const GroupBrowseState()) {
+    configure(
+      (f, c) => _page(f, c, false),
+      (r) => r.id,
+      (s, f) => GroupBrowseState(
+        groups: s.rows,
+        search: f['search'] as String? ?? '',
+        gradeId: f['grade'] as String?,
+        cursor: s.cursor,
+        loading: s.loading,
+        error: s.errorCode,
+        retryMore: s.retryMore,
       ),
+      freshLoader: _page,
     );
-    await _load(_generation, cursor: before.cursor);
   }
-
-  Future<void> _load(
-    int generation, {
+  final GroupRepository repository;
+  Future<ReadPage<GroupRecord, NoSummary>> _page(
+    Map<String, dynamic> f,
     String? cursor,
-    bool refresh = false,
-  }) async {
-    final request = state;
-    try {
-      final page = await repository.list(
-        search: request.search,
-        gradeId: request.gradeId,
-        cursor: cursor,
-        refresh: refresh,
-      );
-      if (isClosed || generation != _generation) return;
-      final groups = {
-        for (final group in [...request.groups, ...page.groups])
-          group.id: group,
-      };
-      emit(
-        GroupBrowseState(
-          groups: List.unmodifiable(groups.values),
-          search: request.search,
-          gradeId: request.gradeId,
-          cursor: page.nextCursor,
-        ),
-      );
-    } catch (error) {
-      if (isClosed || generation != _generation) return;
-      emit(
-        GroupBrowseState(
-          groups: error is BackendFailure && error.deniesAccess
-              ? const []
-              : request.groups,
-          search: request.search,
-          gradeId: request.gradeId,
-          cursor: error is BackendFailure && error.deniesAccess
-              ? null
-              : request.cursor,
-          error: error is BackendFailure ? error.code : 'SERVICE_UNAVAILABLE',
-        ),
-      );
-    }
+    bool refresh,
+  ) async {
+    final result = await repository.list(
+      search: f['search'] as String?,
+      gradeId: f['grade'] as String?,
+      cursor: cursor,
+      refresh: refresh,
+    );
+    // Directory endpoint has no server total or summary; neither is displayed.
+    return ReadPage(
+      rows: result.groups,
+      summary: const NoSummary(),
+      total: 0,
+      syncedAt: DateTime.now().toUtc(),
+      cursor: result.nextCursor,
+    );
   }
 
-  @override
-  Future<void> close() {
-    _generation++;
-    return super.close();
+  Future<void> search(String value, {String? gradeId, bool refresh = false}) {
+    final query = {'search': value.trim(), 'grade': gradeId};
+    if (refresh && query.toString() == pages.filters.toString()) {
+      return pages.refresh();
+    }
+    return pages.apply(query);
   }
+
+  Future<void> refresh() => pages.refresh();
+  Future<void> next() => pages.next();
 }

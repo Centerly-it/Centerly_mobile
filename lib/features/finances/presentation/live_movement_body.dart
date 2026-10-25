@@ -1,3 +1,4 @@
+import '../../../core/widgets/content_skeleton.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/widgets/paged_read_body.dart';
@@ -21,6 +22,7 @@ class LiveMovementBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       PagedReadBody<Map<String, dynamic>, FinanceMovementsSummary>(
+        loadingShape: LoadingShape.receipt,
         leading: leading,
         header: (_, p) => Column(
           children: [

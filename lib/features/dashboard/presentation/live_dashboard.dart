@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
+import '../../../core/widgets/content_skeleton.dart';
 import 'package:flutter/material.dart';
 import '../../../core/di/di.dart';
 import '../data/dashboard_repository.dart';
@@ -41,9 +41,7 @@ class _LiveDashboardState extends State<LiveDashboard> {
         );
       }
       if (!snapshot.hasData) {
-        return Center(
-          child: CircularProgressIndicator(semanticsLabel: 'loading_data'.tr()),
-        );
+        return const LoadingPage(shape: LoadingShape.dashboard);
       }
       final data = snapshot.data!;
       return RefreshIndicator(

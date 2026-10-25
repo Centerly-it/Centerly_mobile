@@ -1,0 +1,27 @@
+{
+  "mode": "Flutter widget test; structural counts, not device frame timings",
+  "records": 1000,
+  "viewport": [
+    390,
+    909
+  ],
+  "beforeEagerItemConstructions": 1000,
+  "afterInitialItemConstructions": 13,
+  "afterScrollItemConstructions": 20,
+  "date": "2026-10-25",
+  "flutter": "3.44.2",
+  "dart": "3.12.2",
+  "profileDeviceMeasurements": null,
+  "deviceAvailability": "ADB reported no connected devices at final audit; running app was not restarted or replaced",
+  "studentAvatar": {
+    "pngDimensions": [
+      1254,
+      1254
+    ],
+    "fileBytes": 1166910,
+    "estimatedFullRGBABytes": 6290064,
+    "estimated32dp3xRGBABytes": 36864
+  },
+  "hostedWrites": 0,
+  "secretaryChanges": 0
+}

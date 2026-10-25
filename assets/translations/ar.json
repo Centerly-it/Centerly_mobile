@@ -735,7 +735,7 @@
   "student_qr_deferred": "بطاقات ومسح QR مؤجلة. معرّف ملف الطالب موضح أدناه.",
   "contact_unavailable": "تعذر فتح تطبيق التواصل. يمكنك نسخ الرقم.",
   "finance_selected_collector": "مسؤول التحصيل المحدد",
-  "completion_archived_students": "الطلاب المؤرشفون — السجل فقط",
+  "completion_archived_students": "الطلاب المؤرشفون",
   "student_dues_title": "مستحقات الطالب",
   "payment_correction_label": "تصحيح دفعة سابقة",
   "payment_corrected_label": "تم تصحيح هذه الدفعة",
