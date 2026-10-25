@@ -1,0 +1,43 @@
+{
+  "projectRef": "yfeubomyglmhuwizaqoj",
+  "candidate": "202610250001_group_materials.sql",
+  "sha256": "94813e07c1f600da7f1011a6bcfe27d6347f71492a815d2ef9096eae15cbff07",
+  "preflight": {
+    "pass": true,
+    "migrations": 34,
+    "functions": 73
+  },
+  "postflight": {
+    "pass": true,
+    "at": "2026-10-25T08:31:18.572Z",
+    "migrations": 35,
+    "functions": 75,
+    "tables": 18,
+    "policies": 30,
+    "triggers": 25
+  },
+  "allBusinessRowFingerprintsUnchanged": true,
+  "dryRunOnlyApprovedVersion": true,
+  "hostedReadOnly": {
+    "pass": true,
+    "mode": "actual hosted authenticated GET-only reads",
+    "checks": 6,
+    "previewMembers": 2,
+    "notificationReasonReads": 1,
+    "hostedBusinessWrites": 0
+  },
+  "connectedBrowser": {
+    "pass": true,
+    "groupForms": 2,
+    "notificationReasonCells": 1,
+    "mode": "actual connected authenticated browser; no new API adapters",
+    "businessSubmissions": 0,
+    "blockedWrites": 0
+  },
+  "localGroupMaterialsChecks": 29,
+  "localCancellationNotificationChecks": 7,
+  "localBaselineChecks": 90,
+  "secretaryUnitComponentTests": 49,
+  "hostedFinancialMutationAcceptance": false,
+  "hostedBusinessWrites": 0
+}

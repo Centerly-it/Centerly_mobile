@@ -1,11 +1,11 @@
 # GMAT35 — group-wide additional materials review
 
-Status: implemented and locally tested; NOT deployed or accepted against hosted writes.
+Status: exact candidate deployed to centerly-dev after explicit owner approval on 25 October 2026. All 35 history bodies/catalog and unchanged business fingerprints verified. Hosted financial mutation acceptance remains pending separate approval. See GMAT35_DEPLOYMENT.json.
 Canonical baseline: Teacher main 76975a7fca04b2e57b90597982144bcd9f257fe7, 34 migrations through 202610240002_direct_attendance. Original Teacher checkout is untouched by this package. Work lives in the detached canonical review worktree.
 
 Candidate: supabase/proposals/202610250001_group_materials.sql
 SHA256: 94813e07c1f600da7f1011a6bcfe27d6347f71492a815d2ef9096eae15cbff07
-Promote unchanged to supabase/migrations/202610250001_group_materials.sql only for explicitly approved deployment. Do not change the deployed manifest until postflight passes.
+Promoted unchanged to supabase/migrations/202610250001_group_materials.sql after approval; both manifests advanced after successful postflight.
 
 ## Behavior and contracts
 
@@ -22,7 +22,7 @@ Promote unchanged to supabase/migrations/202610250001_group_materials.sql only f
 - node supabase/tests/run.mjs with candidate applied: PASS, 90 existing authorization/business assertions.
 - Secretary component tests cover review before write, same-request reconciliation after network failure and safe unavailable API state.
 - Desktop 1440px and mobile 390px Chromium: group-details action, review total, confirmation and returned success exercised with only the TWO new APIs simulated and all other business writes blocked. This is NOT hosted end-to-end acceptance.
-- Hosted GET-only availability probe returned PGRST202: new API absent. No hosted financial/fixture/Auth mutations or publication performed.
+- Before deployment, hosted GET-only availability probe returned PGRST202. After deployment, six real GET-only checks passed; connected browser preview forms worked at desktop/mobile widths. No hosted financial/fixture/Auth mutations or publication performed.
 
 ## Approval boundary
 

@@ -3,7 +3,7 @@ import {randomUUID} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {startPostgres} from './postgres.mjs';
 import {ids} from './completion_context.mjs';
-const pg=await startPostgres();let checks=0;
+const pg=await startPostgres({through:'202610240002'});let checks=0;
 const eq=(a,b)=>{assert.deepEqual(a,b);checks++;};
 const deny=async(p,message)=>{await assert.rejects(p,e=>!message||e.message.includes(message));checks++;};
 try {

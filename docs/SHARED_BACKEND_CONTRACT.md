@@ -1,3 +1,5 @@
+GMAT35 deployed 25 October 2026: shared contract now includes secretary_group_materials_preview(uuid) and secretary_add_group_materials(uuid,uuid,text,numeric,date,uuid[]), migration 202610250001. Verified 35 bodies/catalog, unchanged RLS/Teacher permissions and business fingerprints. Secretary cancellation notifications read the stored session cancel_reason without changing event payload allowlists. See docs/GMAT35_DEPLOYMENT.json; hosted financial mutation acceptance remains separate. Older checkpoints below are historical.
+
 ## 2026-10-24 — Direct attendance, development migration 34
 
 Owner-requested removal of attendance approval: Secretary has no finalize action, manual-mode notice, finalization metadata or correction-reason field. Status choices save immediately; unmarked students remain unmarked. Existing finalized sessions can be corrected without a reason. The retired finalize RPC no longer grants execute to authenticated clients; historical metadata and immutable change logs are preserved. Tenant, role, cancelled-session and optimistic-concurrency checks remain enforced.
