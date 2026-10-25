@@ -1,3 +1,7 @@
+## NOTIFY36 — Restricted Teacher operational inbox (pending deployment)
+
+Owner requests only new student, withdrawn/removed student and collections notices. Prepared 202610250002_teacher_notification_scope.sql plus 30 passing native PostgreSQL assertions. Whitelisted Teacher recipients, transactionally generated student lifecycle events and filtered existing inbox pagination/unread counts; all existing history retained and Secretary cancellation notices unaffected. No hosted action. Exact hash and deployment boundary: docs/TEACHER_NOTIFICATION_SCOPE_REVIEW.md. Next: explicit approval to deploy ONLY this candidate after 35-version drift/dry-run checks.
+
 ## GMAT35 deployed; cancellation reasons in Secretary notifications — 25 October 2026
 
 Owner explicitly approved only the group materials deployment. Published exact SHA256 94813e07c1f600da7f1011a6bcfe27d6347f71492a815d2ef9096eae15cbff07 after all 34 baseline bodies/catalog matched and dry run named only 202610250001_group_materials.sql. Postflight verified 35 migration bodies, 75 functions, 18 tables, 30 policies, 25 triggers; all business row fingerprints and existing policies/triggers/permissions unchanged. Canonical manifest and Secretary pin advanced only after verification. New group workflow is available against the real deployed preview API; no hosted financial fixtures or account changes performed.
