@@ -79,15 +79,15 @@ class _LoginViewState extends State<LoginView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: AppSize.s40),
+                  const SizedBox(height: AppSize.s64),
                   BrandLogo(
                     showTagline: false,
-                    size: (MediaQuery.sizeOf(context).width * 0.42).clamp(
+                    size: (MediaQuery.sizeOf(context).width * 0.56).clamp(
                       AppSize.s120,
-                      AppSize.s200,
+                      AppSize.s240,
                     ),
                   ),
-                  const SizedBox(height: AppSize.s48),
+                  const SizedBox(height: AppSize.s64),
                   const WelcomeHeader(),
                   const SizedBox(height: AppSize.s24),
                   EmailField(controller: _email),

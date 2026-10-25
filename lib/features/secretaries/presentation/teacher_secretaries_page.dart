@@ -7,6 +7,7 @@ import '../../../core/data/read_page.dart';
 import '../../../core/data/teacher_actions.dart';
 import '../../../core/di/di.dart';
 import '../../../core/format/cairo_time.dart';
+import '../../../core/theme/style_manager.dart';
 import '../../../core/presentation/paged_read_cubit.dart';
 import '../../../core/widgets/paged_read_body.dart';
 import '../../../core/widgets/teacher_action_button.dart';
@@ -45,12 +46,14 @@ class TeacherSecretariesPage extends StatelessWidget {
                     'completion_requested_at'.tr(
                       args: [CairoTime.date(CairoTime.local(r.requestedAt!))],
                     ),
+                    style: AppTextStyles.metadata,
                   ),
                 if (r.handledAt != null)
                   Text(
                     'completion_handled_at'.tr(
                       args: [CairoTime.date(CairoTime.local(r.handledAt!))],
                     ),
+                    style: AppTextStyles.metadata,
                   ),
                 if (r.status == 'active' && r.requestStatus != 'pending')
                   TeacherActionButton(

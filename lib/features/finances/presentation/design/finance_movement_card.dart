@@ -68,7 +68,7 @@ class FinanceMovementCard extends StatelessWidget {
                 'finance_movement_reference'.tr(
                   args: [movement.id, invoice.id],
                 ),
-                style: AppTextStyles.caption,
+                style: AppTextStyles.metadata,
               ),
               const SizedBox(height: AppSize.s8),
               FinanceMovementTags(movement: movement, color: color),

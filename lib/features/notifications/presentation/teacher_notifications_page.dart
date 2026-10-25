@@ -7,6 +7,7 @@ import '../../../core/data/read_page.dart';
 import '../../../core/data/teacher_actions.dart';
 import '../../../core/di/di.dart';
 import '../../../core/format/cairo_time.dart';
+import '../../../core/theme/style_manager.dart';
 import '../../../core/presentation/paged_read_cubit.dart';
 import '../../../core/widgets/paged_read_body.dart';
 import '../../../core/widgets/teacher_action_button.dart';
@@ -44,6 +45,7 @@ class TeacherNotificationsPage extends StatelessWidget {
                 ),
                 Text(
                   '${CairoTime.date(CairoTime.local(r.createdAt))} ${CairoTime.time(r.createdAt, context.locale.languageCode)}',
+                  style: AppTextStyles.metadata,
                 ),
                 Text(
                   (r.readAt == null

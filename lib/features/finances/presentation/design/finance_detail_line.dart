@@ -3,8 +3,9 @@ import '../../../../core/theme/style_manager.dart';
 import '../../../../core/theme/values_manager.dart';
 
 class FinanceDetailLine extends StatelessWidget {
-  const FinanceDetailLine(this.label, this.value, {super.key});
+  const FinanceDetailLine(this.label, this.value, {this.valueStyle, super.key});
   final String label, value;
+  final TextStyle? valueStyle;
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.symmetric(vertical: AppPadding.p8),
@@ -14,7 +15,7 @@ class FinanceDetailLine extends StatelessWidget {
       runSpacing: AppSize.s4,
       children: [
         Text(label, style: AppTextStyles.caption),
-        SelectableText(value, style: AppTextStyles.bodyMedium),
+        SelectableText(value, style: valueStyle ?? AppTextStyles.bodyMedium),
       ],
     ),
   );

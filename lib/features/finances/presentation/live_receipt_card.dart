@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/format/cairo_time.dart';
 import '../../../core/format/money_egp.dart';
+import '../../../core/theme/style_manager.dart';
 import '../../../core/widgets/app_surface_panel.dart';
 import 'design/finance_design.dart';
 
@@ -30,6 +31,7 @@ class LiveReceiptCard extends StatelessWidget {
           Text('completion_method_${row['method']}'.tr()),
           Text(
             '${CairoTime.date(CairoTime.local(DateTime.parse(row['collected_at'] as String)))} · ${CairoTime.time(DateTime.parse(row['collected_at'] as String), context.locale.toString())}',
+            style: AppTextStyles.metadata,
           ),
           if (row['reversal_of'] != null) ...[
             Text('payment_correction_label'.tr()),

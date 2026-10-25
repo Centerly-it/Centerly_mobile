@@ -63,6 +63,7 @@ class FinanceMovementDetail extends StatelessWidget {
             FinanceDetailLine(
               'finance_recorded_at'.tr(),
               '${DateFormat.yMMMMd(context.locale.toString()).format(CairoTime.local(movement.at))} ${CairoTime.time(movement.at, context.locale.toString())}',
+              valueStyle: AppTextStyles.metadata,
             ),
             if (original != null)
               FinanceOriginalMovement(original: original, movement: movement),

@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import '../../../core/format/cairo_time.dart';
 import '../../../core/theme/values_manager.dart';
 import '../domain/dashboard_summary.dart';
 import 'dashboard_metrics.dart';
@@ -23,17 +22,6 @@ class DashboardAttendanceSection extends StatelessWidget {
         if (synced == null)
           Text('dashboard_attendance_unavailable'.tr())
         else ...[
-          Text(
-            'dashboard_attendance_updated'.tr(
-              args: [
-                DateFormat(
-                  'h:mm a',
-                  context.locale.toString(),
-                ).format(CairoTime.local(synced)),
-              ],
-            ),
-          ),
-          const SizedBox(height: AppSize.s12),
           DashboardMetrics(
             twoColumns: true,
             values: {

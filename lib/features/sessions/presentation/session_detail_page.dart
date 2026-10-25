@@ -5,6 +5,7 @@ import '../../../core/api/teacher_read_client.dart';
 import '../../../core/di/di.dart';
 import '../../../core/theme/values_manager.dart';
 import '../../../core/widgets/app_error_state.dart';
+import '../../../core/widgets/data_update_footer.dart';
 import '../data/session_detail_repository.dart';
 import 'session_detail_cubit.dart';
 import 'session_detail_state.dart';
@@ -56,6 +57,7 @@ class SessionDetailPage extends StatelessWidget {
             return RefreshIndicator(
               onRefresh: cubit.refresh,
               child: ListView(
+                key: PageStorageKey<String>('session-detail-$sessionId'),
                 physics: const AlwaysScrollableScrollPhysics(),
                 padding: const EdgeInsets.all(AppPadding.p16),
                 children: [
@@ -68,6 +70,7 @@ class SessionDetailPage extends StatelessWidget {
                     onFilter: (status) => cubit.load(status: status),
                     onMore: () => cubit.load(more: true),
                   ),
+                  DataUpdateFooter(updatedAt: state.detail!.syncedAt),
                 ],
               ),
             );

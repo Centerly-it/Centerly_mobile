@@ -106,6 +106,12 @@ class AppTextStyles {
     FontWeightManager.regular,
     ColorManager.textSecondary,
   );
+  static final TextStyle metadata = _style(
+    FontSize.s10,
+    FontWeightManager.regular,
+    ColorManager.textSecondary,
+    1.5,
+  );
   static final TextStyle hint = _style(
     FontSize.s14,
     FontWeightManager.regular,

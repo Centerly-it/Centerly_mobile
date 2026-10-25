@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import '../../../core/format/cairo_time.dart';
 import '../../../core/widgets/app_surface_section.dart';
 import '../../students/presentation/design/student_data_table.dart';
 import '../../students/presentation/design/student_design.dart';
@@ -38,13 +37,6 @@ class LiveAttendanceTable extends StatelessWidget {
                 Text(
                   'detail_actor'.tr(
                     args: [r.actor ?? 'live_missing_value'.tr()],
-                  ),
-                ),
-                Text(
-                  'detail_updated'.tr(
-                    args: [
-                      '${CairoTime.date(CairoTime.local(r.updatedAt))} ${CairoTime.time(r.updatedAt, context.locale.toString())}',
-                    ],
                   ),
                 ),
               ],

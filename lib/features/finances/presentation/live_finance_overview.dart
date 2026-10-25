@@ -1,9 +1,8 @@
 import 'finance_overview_details.dart';
-import '../../../core/format/cairo_time.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/theme/values_manager.dart';
 import '../../../core/widgets/app_error_state.dart';
+import '../../../core/widgets/data_update_footer.dart';
 import '../data/finance_repository.dart';
 import '../domain/finance_overview_data.dart';
 import 'design/finance_cash_hero.dart';
@@ -78,15 +77,7 @@ class _LiveFinanceOverviewState extends State<LiveFinanceOverview> {
               const SizedBox(height: AppSize.s16),
               FinanceMethodsSummary(month: widget.month, summary: value),
               FinanceCalculatorLink(value: value, month: widget.month),
-              Text(
-                'detail_synced'.tr(
-                  args: [
-                    DateFormat.yMd(
-                      context.locale.toString(),
-                    ).add_Hm().format(CairoTime.local(value.syncedAt)),
-                  ],
-                ),
-              ),
+              DataUpdateFooter(updatedAt: value.syncedAt),
             ],
           ],
         ),

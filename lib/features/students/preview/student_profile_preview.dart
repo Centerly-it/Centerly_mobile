@@ -5,6 +5,7 @@ import '../../../core/format/cairo_time.dart';
 import '../../../core/theme/color_manager.dart';
 import '../../../core/theme/style_manager.dart';
 import '../../../core/theme/values_manager.dart';
+import '../../../core/widgets/data_update_footer.dart';
 import '../presentation/design/student_profile_header.dart';
 import '../presentation/design/student_profile_tabs.dart';
 import '../presentation/design/student_contact_info.dart';
@@ -78,6 +79,7 @@ class _StudentProfilePreviewState extends State<StudentProfilePreview> {
             const StudentContactInfo(),
             const SizedBox(height: AppSize.s16),
             StudentNotesInfo(data: widget.data, onEdit: _edit),
+            DataUpdateFooter(updatedAt: widget.data.noteDate),
           ] else if (_tab == 1)
             StudentAttendanceDesign(data: widget.data)
           else if (_tab == 2)

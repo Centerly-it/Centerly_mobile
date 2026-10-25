@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/format/cairo_time.dart';
+import '../../../core/theme/color_manager.dart';
+import '../../../core/theme/style_manager.dart';
 import '../../../core/theme/values_manager.dart';
 import '../../../models/centerly_models.dart';
 import '../../../screens/teacher/teacher_shared.dart';
@@ -32,48 +34,52 @@ class SessionDetailHeader extends StatelessWidget {
             ? onChanged
             : null,
       ),
-      TeacherCard(
-        padding: const EdgeInsets.all(AppPadding.p8),
-        child: Material(
-          color: Colors.transparent,
-          child: ExpansionTile(
-            title: Text('session_attendance_info'.tr()),
-            subtitle: Text(
-              'detail_synced'.tr(
-                args: [detailTimestamp(detail.syncedAt, context)],
-              ),
-            ),
-            childrenPadding: const EdgeInsets.all(AppPadding.p12),
-            expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text('detail_manual_read_only'.tr()),
-              if (detail.session.finalizedAt != null)
-                Text(
-                  'detail_finalized'.tr(
-                    args: [
-                      detailTimestamp(detail.session.finalizedAt!, context),
-                    ],
-                  ),
-                ),
-            ],
-          ),
-        ),
-      ),
       if (detail.session.status == SessionStatus.cancelled) ...[
         const SizedBox(height: AppSize.s12),
         TeacherCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text('detail_cancel_history'.tr()),
-              Text(detail.cancelReason ?? 'detail_not_recorded'.tr()),
-              Text(
-                'detail_actor'.tr(
+              Row(
+                children: [
+                  const Icon(
+                    Icons.event_busy_outlined,
+                    size: AppSize.s20,
+                    color: ColorManager.error,
+                  ),
+                  const SizedBox(width: AppSize.s8),
+                  Expanded(
+                    child: Text(
+                      'detail_cancel_history'.tr(),
+                      style: AppTextStyles.titleSmall,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppSize.s8),
+              Container(
+                padding: const EdgeInsets.all(AppPadding.p8),
+                decoration: BoxDecoration(
+                  color: ColorManager.grey200,
+                  borderRadius: BorderRadius.circular(AppRadius.r8),
+                ),
+                child: Text(
+                  detail.cancelReason ?? 'detail_not_recorded'.tr(),
+                  style: AppTextStyles.bodySmall,
+                ),
+              ),
+              const SizedBox(height: AppSize.s8),
+              _DetailMetadataRow(
+                icon: Icons.person_outline,
+                text: 'detail_actor'.tr(
                   args: [detail.cancelledBy ?? 'detail_not_recorded'.tr()],
                 ),
               ),
               if (detail.cancelledAt != null)
-                Text(detailTimestamp(detail.cancelledAt!, context)),
+                _DetailMetadataRow(
+                  icon: Icons.schedule_outlined,
+                  text: detailTimestamp(detail.cancelledAt!, context),
+                ),
             ],
           ),
         ),
@@ -89,5 +95,24 @@ class SessionDetailHeader extends StatelessWidget {
         },
       ),
     ],
+  );
+}
+
+class _DetailMetadataRow extends StatelessWidget {
+  const _DetailMetadataRow({required this.icon, required this.text});
+
+  final IconData icon;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(top: AppPadding.p4),
+    child: Row(
+      children: [
+        Icon(icon, size: AppSize.s12, color: ColorManager.textSecondary),
+        const SizedBox(width: AppSize.s4),
+        Expanded(child: Text(text, style: AppTextStyles.metadata)),
+      ],
+    ),
   );
 }

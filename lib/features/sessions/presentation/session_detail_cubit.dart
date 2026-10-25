@@ -16,11 +16,13 @@ class SessionDetailCubit extends Cubit<SessionDetailState> {
     final filter = more ? previous.status : status;
     emit(
       SessionDetailState(
-        detail: more ? previous.detail : null,
-        rows: more ? previous.rows : const [],
+        // Keep the current page mounted while refreshing or changing filters.
+        // Replacing it with a full-screen loader resets the scroll position.
+        detail: previous.detail,
+        rows: previous.rows,
         status: filter,
         loading: true,
-        nextCursor: more ? previous.nextCursor : null,
+        nextCursor: previous.nextCursor,
       ),
     );
     try {
@@ -47,11 +49,11 @@ class SessionDetailCubit extends Cubit<SessionDetailState> {
       if (isClosed || ticket != _request) return;
       emit(
         SessionDetailState(
-          detail: more ? previous.detail : null,
-          rows: more ? previous.rows : const [],
-          status: filter,
+          detail: previous.detail,
+          rows: previous.rows,
+          status: previous.status,
           error: true,
-          nextCursor: more ? previous.nextCursor : null,
+          nextCursor: previous.nextCursor,
         ),
       );
     }

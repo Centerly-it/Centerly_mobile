@@ -36,6 +36,45 @@ void main() {
     expect(cubit.state.rows, isEmpty);
   });
   test(
+    'filtering keeps the current page mounted until results arrive',
+    () async {
+      final gate = Completer<void>();
+      final fixture = SessionDetailFixture();
+      final client = readFixture((r) async {
+        final p = jsonDecode(r.body) as Map;
+        if (p['p_status'] == 'absent') await gate.future;
+        return jsonResponse(
+          r,
+          fixture.response(status: p['p_status'] as String?),
+        );
+      });
+      final cubit = SessionDetailCubit(
+        SessionDetailRepository(TeacherReadClient(client)),
+        'session-a',
+      );
+      addTearDown(() async {
+        await cubit.close();
+        await client.dispose();
+      });
+
+      await cubit.load();
+      final existingDetail = cubit.state.detail;
+      final existingRows = cubit.state.rows;
+      final filtering = cubit.load(status: 'absent');
+      await Future<void>.delayed(Duration.zero);
+
+      expect(cubit.state.loading, isTrue);
+      expect(cubit.state.detail, same(existingDetail));
+      expect(cubit.state.rows, same(existingRows));
+      expect(cubit.state.status, 'absent');
+
+      gate.complete();
+      await filtering;
+      expect(cubit.state.loading, isFalse);
+      expect(cubit.state.status, 'absent');
+    },
+  );
+  test(
     'duplicate page fails safely and refresh replaces accumulated rows',
     () async {
       final fixture = SessionDetailFixture();

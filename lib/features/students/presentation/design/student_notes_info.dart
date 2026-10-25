@@ -29,51 +29,33 @@ class StudentNotesInfo extends StatelessWidget {
             style: AppTextStyles.caption.copyWith(height: 20 / 12),
           ),
           const SizedBox(height: AppSize.s12),
-          Wrap(
-            alignment: WrapAlignment.spaceBetween,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            runSpacing: AppSize.s8,
-            children: [
-              OutlinedButton(
-                onPressed: onEdit,
-                style: OutlinedButton.styleFrom(
-                  minimumSize: const Size(0, 32),
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppPadding.p8,
-                  ),
-                  side: const BorderSide(color: ColorManager.primary),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppRadius.r12),
-                  ),
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: OutlinedButton(
+              onPressed: onEdit,
+              style: OutlinedButton.styleFrom(
+                minimumSize: const Size(0, 32),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8),
+                side: const BorderSide(color: ColorManager.primary),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppRadius.r12),
                 ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const StudentAsset('083ac.svg'),
-                    const SizedBox(width: AppSize.s8),
-                    Text(
-                      'student_design_edit_note'.tr(),
-                      style: AppTextStyles.caption.copyWith(
-                        color: ColorManager.primary,
-                      ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const StudentAsset('083ac.svg'),
+                  const SizedBox(width: AppSize.s8),
+                  Text(
+                    'student_design_edit_note'.tr(),
+                    style: AppTextStyles.caption.copyWith(
+                      color: ColorManager.primary,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Text(
-                'student_design_last_update'.tr(
-                  args: [
-                    DateFormat.MMMMd(
-                      context.locale.toString(),
-                    ).format(data.noteDate),
-                  ],
-                ),
-                style: AppTextStyles.caption.copyWith(
-                  color: ColorManager.textSecondary,
-                ),
-              ),
-            ],
+            ),
           ),
         ],
       ),

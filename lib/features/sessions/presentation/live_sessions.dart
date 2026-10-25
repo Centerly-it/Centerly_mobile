@@ -97,6 +97,8 @@ class _LiveSessionsState extends State<LiveSessions> {
                       s.status == SessionStatus.cancelled,
                 ),
               ),
+            if (_period != SessionPeriod.day)
+              const SizedBox(height: AppSize.s12),
             if (sessions.isEmpty)
               AppEmptyState(
                 title: 'sessions_no_sessions_title'.tr(),

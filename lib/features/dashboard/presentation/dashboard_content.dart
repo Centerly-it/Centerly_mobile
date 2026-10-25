@@ -13,6 +13,7 @@ import 'dashboard_payment_progress.dart';
 import '../../../core/format/money_egp.dart';
 import '../../../screens/teacher/teacher_shared.dart';
 import '../../../core/theme/color_manager.dart';
+import '../../../core/widgets/data_update_footer.dart';
 import 'dashboard_day_section.dart';
 import '../domain/dashboard_summary.dart';
 
@@ -70,12 +71,12 @@ class DashboardContent extends StatelessWidget {
           outstanding: data.outstandingEgp,
         ),
       ],
-      const SizedBox(height: AppSize.s24),
+      const SizedBox(height: AppSize.s12),
       if (PreviewMode.enabled) ...[
         const PreviewUnpaidStudents(),
         const SizedBox(height: AppSize.s24),
       ],
-      if (!PreviewMode.enabled)
+      if (!PreviewMode.enabled) ...[
         TextButton.icon(
           icon: const Icon(Icons.receipt_long_outlined),
           label: Text('finance_view_dues'.tr()),
@@ -91,7 +92,11 @@ class DashboardContent extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(height: AppSize.s18),
+      ],
       DashboardAttendanceSection(data: data),
+      if (data.attendanceSyncedAt != null)
+        DataUpdateFooter(updatedAt: data.attendanceSyncedAt!),
     ],
   );
 }

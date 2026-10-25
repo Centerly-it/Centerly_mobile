@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/theme/values_manager.dart';
+import '../../../core/theme/style_manager.dart';
 import '../../../core/widgets/app_empty_state.dart';
 import '../../../core/widgets/app_error_state.dart';
 import '../../../core/widgets/app_status_badge.dart';
@@ -33,10 +34,19 @@ class SessionAttendanceList extends StatelessWidget {
                 (value == null ? 'detail_all' : 'attendance_$value').tr(),
               ),
               selected: state.status == value,
-              onSelected: (_) => onFilter(value),
+              onSelected: (selected) {
+                if (selected && state.status != value && !state.loading) {
+                  onFilter(value);
+                }
+              },
             ),
         ],
       ),
+      if (state.loading && state.detail != null)
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: AppPadding.p8),
+          child: LinearProgressIndicator(minHeight: AppSize.s2),
+        ),
       Text(
         'detail_filtered_count'.tr(args: ['${state.detail!.filteredCount}']),
       ),
@@ -73,24 +83,22 @@ class SessionAttendanceList extends StatelessWidget {
                   'detail_actor'.tr(
                     args: [row.marker ?? 'detail_not_recorded'.tr()],
                   ),
+                  style: AppTextStyles.metadata,
                 ),
                 if (row.markedAt != null)
                   Text(
                     'detail_marked'.tr(
                       args: [detailTimestamp(row.markedAt!, context)],
                     ),
+                    style: AppTextStyles.metadata,
                   ),
-                Text(
-                  'detail_updated'.tr(
-                    args: [detailTimestamp(row.updatedAt, context)],
-                  ),
-                ),
               ],
             ),
           ),
         ),
       if (state.error) AppErrorState(onRetry: onMore),
-      if (state.loading) const Center(child: CircularProgressIndicator()),
+      if (state.loading && state.detail == null)
+        const Center(child: CircularProgressIndicator()),
       if (state.nextCursor != null && !state.loading && !state.error)
         TextButton(onPressed: onMore, child: Text('detail_more'.tr())),
     ],

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/format/cairo_time.dart';
+import '../../../core/theme/style_manager.dart';
 import '../../../screens/teacher/teacher_shared.dart';
 import '../domain/student_membership.dart';
 
@@ -19,12 +20,14 @@ class StudentMembershipCard extends StatelessWidget {
           'completion_joined'.tr(
             args: [CairoTime.date(CairoTime.local(row.joinedAt))],
           ),
+          style: AppTextStyles.metadata,
         ),
         if (row.leftAt != null)
           Text(
             'completion_left'.tr(
               args: [CairoTime.date(CairoTime.local(row.leftAt!))],
             ),
+            style: AppTextStyles.metadata,
           ),
         if (row.archivedAt != null) Text('completion_archived_group'.tr()),
       ],

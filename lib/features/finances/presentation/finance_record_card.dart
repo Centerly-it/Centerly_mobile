@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/format/cairo_time.dart';
+import '../../../core/theme/style_manager.dart';
 import '../../../core/widgets/app_surface_panel.dart';
 import '../domain/finance_record.dart';
 
@@ -29,6 +30,7 @@ class FinanceRecordCard extends StatelessWidget {
           if (r.collectedAt != null)
             Text(
               '${CairoTime.date(CairoTime.local(r.collectedAt!))} ${CairoTime.time(r.collectedAt!, context.locale.languageCode)}',
+              style: AppTextStyles.metadata,
             ),
           if (r.collector != null)
             Text('detail_actor'.tr(args: [r.collector!])),

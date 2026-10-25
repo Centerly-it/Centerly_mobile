@@ -52,3 +52,6 @@ app.*.map.json
 
 # Android Gradle generated reports and intermediates
 android/build/
+# Local development configuration and credentials
+/env.development-accounts.json
+/env.local.json

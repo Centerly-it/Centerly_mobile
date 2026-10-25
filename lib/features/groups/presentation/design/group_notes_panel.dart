@@ -81,7 +81,7 @@ class GroupNoteTile extends StatelessWidget {
       children: [
         Text(
           DateFormat.yMMMMd(context.locale.toString()).format(note.createdAt),
-          style: AppTextStyles.caption.copyWith(
+          style: AppTextStyles.metadata.copyWith(
             color: ColorManager.primaryDark,
           ),
         ),

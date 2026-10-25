@@ -15,7 +15,6 @@ class CodegenLoader extends AssetLoader {
   }
 
   static const Map<String, dynamic> _en = {
-    "completion_archived_students": "Archived students — history only",
     "session_attendance_info": "Attendance record information",
     "teacher_remove_photo": "Remove photo",
     "dashboard_hour_unit": "h",
@@ -411,7 +410,7 @@ class CodegenLoader extends AssetLoader {
     "live_total_groups": "Total groups",
     "live_collected": "Collected on selected date (EGP)",
     "live_outstanding": "Outstanding balance (EGP)",
-    "live_cairo_time": "Cairo time",
+    "live_cairo_time": "Local time",
     "live_attendance_pending": "Attendance in progress",
     "live_attendance_finalized": "Attendance recorded",
     "live_session_count": "Sessions",
@@ -450,15 +449,15 @@ class CodegenLoader extends AssetLoader {
     "live_work_duration": "Scheduled work hours",
     "live_finance_snapshot": "This month’s payment summary",
     "live_attendance_summary": "Attendance at the center now",
-    "detail_synced": "Last synced (Cairo): {}",
+    "detail_synced": "Last updated: {}",
     "detail_manual_read_only":
         "Manual attendance. Teacher view is read only. Missing records are not counted as absent or not marked.",
-    "detail_finalized": "Manually finalized (Cairo): {}",
+    "detail_finalized": "Manually finalized: {}",
     "detail_cancel_history": "Cancelled session — attendance history retained",
     "detail_not_recorded": "Not recorded",
     "detail_actor": "Recorded by: {}",
-    "detail_marked": "Marked (Cairo): {}",
-    "detail_updated": "Updated (Cairo): {}",
+    "detail_marked": "Marked: {}",
+    "detail_updated": "Last updated: {}",
     "detail_all": "All records",
     "detail_filtered_count": "Matching records: {}",
     "detail_empty_title": "No attendance records",
@@ -501,7 +500,7 @@ class CodegenLoader extends AssetLoader {
     "completion_invoices": "Invoices",
     "completion_payments": "Receipts and reversals",
     "completion_finance_basis":
-        "Invoice totals use due dates and all-time net payments. Collections use receipt dates in Cairo. Collector filter affects collections only.",
+        "Invoice totals use due dates and all-time net payments. Collections use local receipt dates. Collector filter affects collections only.",
     "completion_invoiced_egp": "Invoiced (EGP)",
     "completion_paid_against_invoices_egp": "Net paid against invoices (EGP)",
     "completion_outstanding_egp": "Outstanding on invoices (EGP)",
@@ -800,9 +799,12 @@ class CodegenLoader extends AssetLoader {
     "contact_unavailable":
         "Could not open the contact app. You can copy the number.",
     "finance_selected_collector": "Selected collector",
+    "completion_archived_students": "Archived students — history only",
+    "student_dues_title": "Student dues",
+    "payment_correction_label": "Correction of an earlier payment",
+    "payment_corrected_label": "This payment was corrected",
   };
   static const Map<String, dynamic> _ar = {
-    "completion_archived_students": "الطلاب المؤرشفون — السجل فقط",
     "session_attendance_info": "معلومات تسجيل الحضور",
     "teacher_remove_photo": "حذف الصورة",
     "dashboard_hour_unit": "س",
@@ -1191,7 +1193,7 @@ class CodegenLoader extends AssetLoader {
     "live_total_groups": "إجمالي المجموعات",
     "live_collected": "المحصل في التاريخ المحدد (ج.م)",
     "live_outstanding": "الرصيد المستحق (ج.م)",
-    "live_cairo_time": "بتوقيت القاهرة",
+    "live_cairo_time": "التوقيت المحلي",
     "live_attendance_pending": "الحضور قيد التسجيل",
     "live_attendance_finalized": "اكتمل تسجيل الحضور",
     "live_session_count": "الحصص",
@@ -1227,15 +1229,15 @@ class CodegenLoader extends AssetLoader {
     "live_work_duration": "ساعات العمل المجدولة",
     "live_finance_snapshot": "ملخص المدفوعات لهذا الشهر",
     "live_attendance_summary": "الحضور في السنتر الآن",
-    "detail_synced": "آخر مزامنة (القاهرة): {}",
+    "detail_synced": "آخر تحديث: {}",
     "detail_manual_read_only":
         "الحضور يدوي، وعرض المعلم للقراءة فقط. السجلات غير الموجودة لا تُحسب غيابًا أو غير مسجلة.",
-    "detail_finalized": "تم الاعتماد يدويًا (القاهرة): {}",
+    "detail_finalized": "تم الاعتماد يدويًا: {}",
     "detail_cancel_history": "حصة ملغاة — سجل الحضور محفوظ",
     "detail_not_recorded": "غير مسجل",
     "detail_actor": "سُجل بواسطة: {}",
-    "detail_marked": "وقت التسجيل (القاهرة): {}",
-    "detail_updated": "آخر تحديث (القاهرة): {}",
+    "detail_marked": "وقت التسجيل: {}",
+    "detail_updated": "آخر تحديث: {}",
     "detail_all": "كل السجلات",
     "detail_filtered_count": "السجلات المطابقة: {}",
     "detail_empty_title": "لا توجد سجلات حضور",
@@ -1277,7 +1279,7 @@ class CodegenLoader extends AssetLoader {
     "completion_invoices": "الفواتير",
     "completion_payments": "التحصيلات والعكوس",
     "completion_finance_basis":
-        "إجماليات الفواتير حسب تاريخ الاستحقاق وصافي السداد طوال الوقت. التحصيلات حسب تاريخ الإيصال بتوقيت القاهرة. فلتر المحصل يخص التحصيلات فقط.",
+        "إجماليات الفواتير حسب تاريخ الاستحقاق وصافي السداد طوال الوقت. التحصيلات حسب تاريخ الإيصال المحلي. فلتر المحصل يخص التحصيلات فقط.",
     "completion_invoiced_egp": "قيمة الفواتير (ج.م)",
     "completion_paid_against_invoices_egp": "صافي سداد الفواتير (ج.م)",
     "completion_outstanding_egp": "المتبقي على الفواتير (ج.م)",
@@ -1568,6 +1570,10 @@ class CodegenLoader extends AssetLoader {
     "student_qr_deferred": "بطاقات ومسح QR مؤجلة. معرّف ملف الطالب موضح أدناه.",
     "contact_unavailable": "تعذر فتح تطبيق التواصل. يمكنك نسخ الرقم.",
     "finance_selected_collector": "مسؤول التحصيل المحدد",
+    "completion_archived_students": "الطلاب المؤرشفون — السجل فقط",
+    "student_dues_title": "مستحقات الطالب",
+    "payment_correction_label": "تصحيح دفعة سابقة",
+    "payment_corrected_label": "تم تصحيح هذه الدفعة",
   };
   static const Map<String, Map<String, dynamic>> mapLocales = {
     "en": _en,
