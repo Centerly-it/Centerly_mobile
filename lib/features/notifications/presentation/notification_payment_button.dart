@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../core/api/teacher_read_client.dart';
 import '../../../core/di/di.dart';
 import '../../../core/widgets/app_error_state.dart';
+import '../../../core/widgets/app_info_row.dart';
+import '../../../core/theme/values_manager.dart';
+import '../../../core/widgets/app_surface_section.dart';
 import '../../finances/data/finance_repository.dart';
 import '../../finances/presentation/live_invoice_detail.dart';
 import '../data/notification_payment_repository.dart';
@@ -31,29 +34,43 @@ class NotificationPaymentButton extends StatelessWidget {
                 return const Center(child: CircularProgressIndicator());
               }
               final data = state.data!;
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'detail_actor'.tr(
-                      args: [data.actor ?? 'live_missing_value'.tr()],
-                    ),
+              return SingleChildScrollView(
+                padding: const EdgeInsets.all(AppPadding.p16),
+                child: AppSurfaceSection(
+                  title:
+                      (reversed
+                              ? 'finance_correction_detail'
+                              : 'finance_collection_detail')
+                          .tr(),
+                  icon: Icon(
+                    reversed
+                        ? Icons.undo_outlined
+                        : Icons.receipt_long_outlined,
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(sheet);
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (_) => LiveInvoiceDetail(
-                            repository: FinanceRepository(api),
-                            id: data.invoiceId,
-                          ),
-                        ),
-                      );
-                    },
-                    child: Text('completion_invoices'.tr()),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      AppInfoRow(
+                        label: 'finance_actor'.tr(),
+                        value: data.actor ?? 'live_missing_value'.tr(),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(sheet);
+                          Navigator.of(context).push(
+                            MaterialPageRoute<void>(
+                              builder: (_) => LiveInvoiceDetail(
+                                repository: FinanceRepository(api),
+                                id: data.invoiceId,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Text('completion_invoices'.tr()),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               );
             },
           ),

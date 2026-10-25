@@ -6,8 +6,6 @@ import '../../../core/data/completion_reads.dart';
 import '../../../core/data/read_page.dart';
 import '../../../core/data/teacher_actions.dart';
 import '../../../core/di/di.dart';
-import '../../../core/format/cairo_time.dart';
-import '../../../core/theme/style_manager.dart';
 import '../../../core/presentation/paged_read_cubit.dart';
 import '../../../core/widgets/paged_read_body.dart';
 import '../../../core/widgets/teacher_action_button.dart';
@@ -15,6 +13,7 @@ import '../../../screens/teacher/teacher_shared.dart';
 import '../../sessions/presentation/session_detail_page.dart';
 import '../domain/notification_record.dart';
 import 'notification_payment_button.dart';
+import 'notification_summary.dart';
 
 class TeacherNotificationsPage extends StatelessWidget {
   const TeacherNotificationsPage({super.key});
@@ -39,20 +38,8 @@ class TeacherNotificationsPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
-                  r.labelKey.tr(),
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                Text(
-                  '${CairoTime.date(CairoTime.local(r.createdAt))} ${CairoTime.time(r.createdAt, context.locale.languageCode)}',
-                  style: AppTextStyles.metadata,
-                ),
-                Text(
-                  (r.readAt == null
-                          ? 'completion_unread_label'
-                          : 'completion_read_label')
-                      .tr(),
-                ),
+                NotificationSummary(record: r),
+                const Divider(),
                 if (r.sessionId != null)
                   TextButton(
                     onPressed: () =>

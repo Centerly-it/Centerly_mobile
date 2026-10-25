@@ -452,7 +452,7 @@
   "completion_all_groups": "All groups",
   "completion_all_collectors": "All collectors",
   "completion_invoices": "Invoices",
-  "completion_payments": "Receipts and reversals",
+  "completion_payments": "Collections",
   "completion_finance_basis": "Invoice totals use due dates and all-time net payments. Collections use local receipt dates. Collector filter affects collections only.",
   "completion_invoiced_egp": "Invoiced (EGP)",
   "completion_paid_against_invoices_egp": "Net paid against invoices (EGP)",
@@ -738,5 +738,17 @@
   "completion_archived_students": "Archived students — history only",
   "student_dues_title": "Student dues",
   "payment_correction_label": "Correction of an earlier payment",
-  "payment_corrected_label": "This payment was corrected"
+  "payment_corrected_label": "This payment was corrected",
+  "ui_due_date": "Due date",
+  "ui_invoice_creator": "Invoice created by",
+  "ui_payment": "Payment recorded",
+  "ui_reason": "Reason",
+  "ui_subject": "Subject",
+  "ui_students_count": "Students",
+  "notification_student_added": "New student added",
+  "notification_student_withdrawn": "Student withdrawn from a group",
+  "notification_student_removed": "Student removed",
+  "membership_joined_on": "Joined on",
+  "membership_left_on": "Withdrawn on",
+  "ui_recorded_by": "Recorded by"
 }

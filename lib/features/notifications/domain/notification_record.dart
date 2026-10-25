@@ -6,16 +6,18 @@ class NotificationRecord {
     this.readAt,
     this.sessionId,
     this.paymentId,
+    this.studentName,
   });
   final String id, type;
   final DateTime createdAt;
   final DateTime? readAt;
-  final String? sessionId, paymentId;
+  final String? sessionId, paymentId, studentName;
   factory NotificationRecord.fromJson(Map<String, dynamic> j) {
     final session = (j['payload'] as Map?)?['session_id'];
     final payment = (j['payload'] as Map?)?['payment_id'];
     return NotificationRecord(
       id: j['id'] as String,
+      studentName: j['student_name'] as String?,
       type: j['type'] as String,
       createdAt: DateTime.parse(j['created_at'] as String),
       readAt: j['read_at'] == null
@@ -32,6 +34,9 @@ class NotificationRecord {
     );
   }
   String get labelKey => switch (type) {
+    'student_added' => 'notification_student_added',
+    'student_withdrawn' => 'notification_student_withdrawn',
+    'student_removed' => 'notification_student_removed',
     'session_cancelled' => 'completion_event_cancelled',
     'payment_collected' => 'completion_event_payment',
     'payment_reversed' => 'completion_event_reversed',

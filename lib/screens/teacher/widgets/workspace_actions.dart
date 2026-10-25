@@ -1,13 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'workspace_action_button.dart';
 import '../../../core/di/di.dart';
 import '../../../core/theme/color_manager.dart';
 import '../../../core/theme/values_manager.dart';
 import '../../../core/data/completion_contracts.dart';
 import '../../../features/secretaries/presentation/teacher_secretaries_page.dart';
-import '../../../features/notifications/presentation/teacher_notifications_page.dart';
+import '../../../features/notifications/presentation/notification_bell.dart';
 import '../../../features/auth/presentation/view_models/auth_session_cubit.dart';
 
 class WorkspaceActions extends StatelessWidget {
@@ -16,17 +14,7 @@ class WorkspaceActions extends StatelessWidget {
   Widget build(BuildContext context) => Row(
     mainAxisSize: MainAxisSize.min,
     children: [
-      if (CompletionContracts.enabled)
-        WorkspaceActionButton(
-          boxed: true,
-          tooltip: 'completion_notifications'.tr(),
-          icon: SvgPicture.asset('assets/icons/home_notification.svg'),
-          onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute<void>(
-              builder: (_) => const TeacherNotificationsPage(),
-            ),
-          ),
-        ),
+      if (CompletionContracts.enabled) const NotificationBell(),
       PopupMenuButton<String>(
         tooltip: 'completion_more'.tr(),
         itemBuilder: (_) => [

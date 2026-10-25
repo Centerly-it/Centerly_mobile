@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/presentation/paged_read_cubit.dart';
 import '../../../core/widgets/paged_read_body.dart';
-import '../../../core/widgets/app_surface_section.dart';
 import '../data/finance_repository.dart';
 import '../domain/finance_due.dart';
-import 'design/finance_design.dart';
+import '../../../core/theme/values_manager.dart';
+import 'live_invoice_summary.dart';
 import 'live_receipt_card.dart';
 
 class LiveInvoiceDetail extends StatelessWidget {
@@ -27,38 +27,9 @@ class LiveInvoiceDetail extends StatelessWidget {
       appBar: AppBar(title: Text('completion_invoices'.tr())),
       body: SafeArea(
         child: PagedReadBody<Map<String, dynamic>, FinanceDue>(
-          header: (_, p) => AppSurfaceSection(
-            icon: const Icon(Icons.receipt_long_outlined),
-            title: 'student_dues_title'.tr(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(p.summary.student),
-                Text(p.summary.group),
-                Text('completion_invoice_${p.summary.status}'.tr()),
-                Text(
-                  'completion_due'.tr(
-                    args: [p.summary.due.toIso8601String().substring(0, 10)],
-                  ),
-                ),
-                Text(
-                  'finance_created_by'.tr(
-                    args: [p.summary.creator ?? 'completion_missing'.tr()],
-                  ),
-                ),
-                FinanceMoney(p.summary.amount),
-                Text(
-                  'completion_paid_value'.tr(
-                    args: [financeMoney(p.summary.paid)],
-                  ),
-                ),
-                Text(
-                  'completion_outstanding_value'.tr(
-                    args: [financeMoney(p.summary.outstanding)],
-                  ),
-                ),
-              ],
-            ),
+          header: (_, p) => Padding(
+            padding: const EdgeInsets.only(bottom: AppPadding.p16),
+            child: LiveInvoiceSummary(invoice: p.summary),
           ),
           item: (_, r) => LiveReceiptCard(row: r),
         ),

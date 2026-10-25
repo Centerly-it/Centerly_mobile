@@ -1,5 +1,5 @@
+import '../../../core/theme/values_manager.dart';
 import 'live_attendance_table.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/api/teacher_read_client.dart';
 import '../../../core/data/completion_reads.dart';
@@ -56,23 +56,7 @@ class StudentAttendancePage extends StatelessWidget {
                   'attendance_${e.key}': '${e.value}',
               },
             ),
-            Text(
-              'completion_denominator'.tr(
-                args: ['${p.summary.denominator}', '${p.summary.cancelled}'],
-              ),
-            ),
-            Text(
-              'completion_attendance_ratio'.tr(
-                args: [
-                  p.summary.denominator == 0
-                      ? 'live_missing_value'.tr()
-                      : (100 *
-                                p.summary.counts['present']! /
-                                p.summary.denominator)
-                            .toStringAsFixed(1),
-                ],
-              ),
-            ),
+            const SizedBox(height: AppSize.s16),
           ],
         ),
         items: (context, rows) => LiveAttendanceTable(rows: rows),

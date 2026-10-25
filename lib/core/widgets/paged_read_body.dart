@@ -10,7 +10,14 @@ import 'app_error_state.dart';
 import 'data_update_footer.dart';
 
 class PagedReadBody<T, S> extends StatelessWidget {
-  const PagedReadBody({required this.item, this.header, this.items, super.key});
+  const PagedReadBody({
+    required this.item,
+    this.header,
+    this.items,
+    this.leading,
+    super.key,
+  });
+  final Widget? leading;
   final Widget Function(BuildContext, T) item;
   final Widget Function(BuildContext, List<T>)? items;
   final Widget Function(BuildContext, ReadPage<T, S>)? header;
@@ -25,6 +32,7 @@ class PagedReadBody<T, S> extends StatelessWidget {
               physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.all(AppPadding.p16),
               children: [
+                ?leading,
                 if (state.page != null) ...[
                   if (header != null) header!(context, state.page!),
                 ],

@@ -452,7 +452,7 @@
   "completion_all_groups": "كل المجموعات",
   "completion_all_collectors": "كل المحصلين",
   "completion_invoices": "الفواتير",
-  "completion_payments": "التحصيلات والعكوس",
+  "completion_payments": "التحصيلات",
   "completion_finance_basis": "إجماليات الفواتير حسب تاريخ الاستحقاق وصافي السداد طوال الوقت. التحصيلات حسب تاريخ الإيصال المحلي. فلتر المحصل يخص التحصيلات فقط.",
   "completion_invoiced_egp": "قيمة الفواتير (ج.م)",
   "completion_paid_against_invoices_egp": "صافي سداد الفواتير (ج.م)",
@@ -738,5 +738,17 @@
   "completion_archived_students": "الطلاب المؤرشفون — السجل فقط",
   "student_dues_title": "مستحقات الطالب",
   "payment_correction_label": "تصحيح دفعة سابقة",
-  "payment_corrected_label": "تم تصحيح هذه الدفعة"
+  "payment_corrected_label": "تم تصحيح هذه الدفعة",
+  "ui_due_date": "تاريخ الاستحقاق",
+  "ui_invoice_creator": "أنشأ الفاتورة",
+  "ui_payment": "دفعة مسجلة",
+  "ui_reason": "السبب",
+  "ui_subject": "المادة",
+  "ui_students_count": "عدد الطلاب",
+  "notification_student_added": "تمت إضافة طالب جديد",
+  "notification_student_withdrawn": "انسحب طالب من المجموعة",
+  "notification_student_removed": "تم حذف طالب",
+  "membership_joined_on": "تاريخ الانضمام",
+  "membership_left_on": "تاريخ الانسحاب",
+  "ui_recorded_by": "سجّل بواسطة"
 }

@@ -112,15 +112,28 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byType(LiveFinanceMovements), findsOneWidget);
       expect(find.byType(AppErrorState), findsNothing);
+      final fixedFilters = find.byType(LiveMovementFilterChips);
+      final headerY = tester.getTopLeft(fixedFilters).dy;
+      await tester.drag(
+        find
+            .descendant(
+              of: find.byType(LiveFinanceMovements),
+              matching: find.byType(ListView),
+            )
+            .last,
+        const Offset(0, -200),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.getTopLeft(fixedFilters).dy, headerY);
+      expect(tester.takeException(), isNull);
       tester
           .widget<LiveMovementFilterChips>(find.byType(LiveMovementFilterChips))
-          .onKind('corrections');
+          .onMethod('cash');
       await tester.pumpAndSettle();
-      expect(find.byType(AppEmptyState), findsOneWidget);
       expect(find.byType(AppErrorState), findsNothing);
       tester
           .widget<LiveMovementFilterChips>(find.byType(LiveMovementFilterChips))
-          .onKind(null);
+          .onMethod(null);
       await tester.pumpAndSettle();
       expect(find.byType(AppEmptyState), findsNothing);
       expect(tester.takeException(), isNull);

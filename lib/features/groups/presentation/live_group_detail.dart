@@ -1,3 +1,4 @@
+import '../../../core/widgets/app_info_row.dart';
 import 'live_group_upcoming.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +27,19 @@ class LiveGroupDetail extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(group.name, style: Theme.of(context).textTheme.titleLarge),
-                Text('${group.gradeName} · ${group.subject}'),
-                Text('group_design_count'.tr(args: ['${group.students}'])),
+                AppInfoRow(
+                  label: 'ui_subject'.tr(),
+                  value: [
+                    group.gradeName,
+                    group.subject,
+                  ].where((v) => v.isNotEmpty).join(' · '),
+                  icon: Icons.menu_book_outlined,
+                ),
+                AppInfoRow(
+                  label: 'ui_students_count'.tr(),
+                  value: '${group.students}',
+                  icon: Icons.groups_outlined,
+                ),
               ],
             ),
           ),

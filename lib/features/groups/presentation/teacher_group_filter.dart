@@ -36,7 +36,8 @@ class _TeacherGroupFilterState extends State<TeacherGroupFilter> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       ServerSearchField(
-                        label: 'live_group_search'.tr(),
+                        label: 'groups_search_hint'.tr(),
+                        showLabel: false,
                         onSubmitted: cubit.search,
                       ),
                       TextButton(

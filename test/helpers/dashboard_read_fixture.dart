@@ -45,6 +45,9 @@ class DashboardReadFixture {
         },
       });
     }
+    if (request.url.path.endsWith('list_teacher_notifications')) {
+      return jsonResponse(request, {'unread_count': 0});
+    }
     calls++;
     return jsonResponse(
       request,

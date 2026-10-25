@@ -11,6 +11,8 @@ import '../../../shared/presentation/filtered_report_page.dart';
 import '../../dashboard/presentation/dashboard_metrics.dart';
 import '../domain/finance_record.dart';
 import 'student_finance_record_card.dart';
+import '../../../core/theme/values_manager.dart';
+import '../../../core/widgets/app_info_row.dart';
 
 class TeacherFinancePage extends StatelessWidget {
   const TeacherFinancePage({
@@ -48,12 +50,11 @@ class TeacherFinancePage extends StatelessWidget {
         identity: (r) => r.id,
         header: (context, p) => Column(
           children: [
-            Text('completion_finance_basis'.tr()),
             for (final e in p.summary.daily.entries)
-              Text(
-                'completion_daily_collection'.tr(
-                  args: [e.key, e.value.decimal],
-                ),
+              AppInfoRow(
+                label: e.key,
+                value: 'completion_money'.tr(args: [e.value.decimal]),
+                icon: Icons.calendar_today_outlined,
               ),
             DashboardMetrics(
               values: {
@@ -61,6 +62,7 @@ class TeacherFinancePage extends StatelessWidget {
                   'completion_${e.key}': e.value.decimal,
               },
             ),
+            const SizedBox(height: AppSize.s16),
           ],
         ),
         item: (context, r) => StudentFinanceRecordCard(

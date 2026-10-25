@@ -1,3 +1,4 @@
+import '../../../core/theme/values_manager.dart';
 import 'live_academic_table.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +52,7 @@ class StudentAcademicsPage extends StatelessWidget {
                   'completion_${e.key}': '${e.value}',
               },
             ),
+            const SizedBox(height: AppSize.s16),
             if (page.summary.values.containsKey('scored'))
               Text(
                 'completion_average'.tr(

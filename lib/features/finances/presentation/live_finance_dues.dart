@@ -56,42 +56,36 @@ class _LiveFinanceDuesState extends State<LiveFinanceDues> {
   @override
   Widget build(BuildContext context) => BlocProvider.value(
     value: cubit,
-    child: Column(
-      children: [
-        FinanceDuesControls(
-          status: status,
-          onSearch: (v) {
-            search = v.trim();
-            reload();
-          },
-          onGroup: (v) {
-            group = v;
-            reload();
-          },
-          onStatus: (v) {
-            setState(() => status = v);
-            reload();
-          },
+    child: PagedReadBody<FinanceDue, FinanceDuesSummary>(
+      leading: FinanceDuesControls(
+        status: status,
+        onSearch: (v) {
+          search = v.trim();
+          reload();
+        },
+        onGroup: (v) {
+          group = v;
+          reload();
+        },
+        onStatus: (v) {
+          setState(() => status = v);
+          reload();
+        },
+      ),
+      header: (_, p) => Text(
+        'finance_dues_result'.tr(
+          args: [
+            '${p.total}',
+            financeMoney(p.summary.amount('outstanding_egp')),
+          ],
         ),
-        Expanded(
-          child: PagedReadBody<FinanceDue, FinanceDuesSummary>(
-            header: (_, p) => Text(
-              'finance_dues_result'.tr(
-                args: [
-                  '${p.total}',
-                  financeMoney(p.summary.amount('outstanding_egp')),
-                ],
-              ),
-            ),
-            item: (context, row) => LiveDueCard(
-              row: row,
-              asOf: cubit.state.page!.summary.asOf,
-              repository: widget.repository,
-              onReturn: cubit.refresh,
-            ),
-          ),
-        ),
-      ],
+      ),
+      item: (context, row) => LiveDueCard(
+        row: row,
+        asOf: cubit.state.page!.summary.asOf,
+        repository: widget.repository,
+        onReturn: cubit.refresh,
+      ),
     ),
   );
 }

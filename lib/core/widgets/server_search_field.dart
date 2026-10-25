@@ -7,22 +7,27 @@ class ServerSearchField extends StatelessWidget {
     required this.label,
     required this.onSubmitted,
     this.maxLength = 200,
+    this.showLabel = true,
     super.key,
   });
   final String label;
+  final bool showLabel;
   final int maxLength;
   final ValueChanged<String> onSubmitted;
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.all(AppPadding.p16),
-    child: TextField(
-      maxLength: maxLength,
-      textInputAction: TextInputAction.search,
-      decoration: InputDecoration(
-        labelText: label,
-        prefixIcon: const Icon(Icons.search),
+    child: Semantics(
+      label: showLabel ? null : label,
+      child: TextField(
+        maxLength: maxLength,
+        textInputAction: TextInputAction.search,
+        decoration: InputDecoration(
+          labelText: showLabel ? label : null,
+          prefixIcon: const Icon(Icons.search),
+        ),
+        onSubmitted: onSubmitted,
       ),
-      onSubmitted: onSubmitted,
     ),
   );
 }

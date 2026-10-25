@@ -7,6 +7,7 @@ import '../../../core/data/completion_contracts.dart';
 import '../../../core/presentation/paged_read_cubit.dart';
 import '../../../core/widgets/paged_read_body.dart';
 import '../../../core/format/cairo_time.dart';
+import '../../../core/theme/values_manager.dart';
 import 'student_membership_card.dart';
 import '../data/student_profile_repository.dart';
 import '../domain/student_membership.dart';
@@ -17,7 +18,6 @@ import 'design/student_profile_tabs.dart';
 import '../../academics/presentation/student_academics_page.dart';
 import '../../attendance/presentation/student_attendance_page.dart';
 import '../../finances/presentation/teacher_finance_page.dart';
-import 'student_feature_links.dart';
 
 class StudentProfilePage extends StatefulWidget {
   const StudentProfilePage({required this.studentId, super.key});
@@ -72,13 +72,12 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
                         children: [
                           StudentIdentity(record: page.summary, large: true),
                           StudentContactInfo(student: page.summary),
-                          if (CompletionContracts.enabled)
-                            StudentFeatureLinks(
-                              studentId: studentId,
-                              initialDate: CairoTime.local(page.syncedAt),
-                              archived: page.summary.archivedAt != null,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: AppPadding.p16,
                             ),
-                          Text('completion_memberships'.tr()),
+                            child: Text('completion_memberships'.tr()),
+                          ),
                         ],
                       ),
                       item: (context, row) => StudentMembershipCard(row: row),

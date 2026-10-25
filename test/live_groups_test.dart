@@ -21,7 +21,7 @@ void main() {
   });
   for (final locale in ['ar', 'en']) {
     testWidgets(
-      'live groups search, grade filter and empty state $locale at 200%',
+      'live groups search and empty state without grade controls $locale at 200%',
       (tester) async {
         tester.view.physicalSize = const Size(320, 844);
         tester.view.devicePixelRatio = 1;
@@ -64,12 +64,7 @@ void main() {
         await tester.pumpAndSettle();
         expect(find.text('مجموعة one'), findsOneWidget);
         expect(tester.takeException(), isNull);
-        await tester.ensureVisible(find.byType(ActionChip));
-        await tester.tap(find.byType(ActionChip));
-        await tester.pumpAndSettle();
-        expect(requests.last['p_grade_level_id'], 'grade');
-        await tester.tap(find.byIcon(Icons.filter_alt_off_outlined));
-        await tester.pumpAndSettle();
+        expect(find.byType(ActionChip), findsNothing);
         expect(requests.last['p_grade_level_id'], isNull);
         await tester.enterText(find.byType(TextField), 'missing');
         await tester.testTextInput.receiveAction(TextInputAction.search);

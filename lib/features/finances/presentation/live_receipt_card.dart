@@ -2,51 +2,99 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../core/format/cairo_time.dart';
 import '../../../core/format/money_egp.dart';
+import '../../../core/theme/color_manager.dart';
 import '../../../core/theme/style_manager.dart';
+import '../../../core/theme/values_manager.dart';
+import '../../../core/widgets/app_info_row.dart';
 import '../../../core/widgets/app_surface_panel.dart';
 import 'design/finance_design.dart';
 
-/// Attribution is supplied by the server, including original and correcting actors.
+/// Attribution always comes from the server, including original/correcting actors.
 class LiveReceiptCard extends StatelessWidget {
   const LiveReceiptCard({required this.row, this.onTap, super.key});
   final Map<String, dynamic> row;
   final VoidCallback? onTap;
   @override
-  Widget build(BuildContext context) => InkWell(
-    onTap: onTap,
-    child: AppSurfacePanel(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (row['student_name'] != null) Text(row['student_name'] as String),
-          FinanceMoney(MoneyEgp.parse(row['signed_amount_egp']).minorUnits),
-          Text(
-            'detail_actor'.tr(
-              args: [
-                row['collected_by_name'] as String? ??
-                    'completion_missing'.tr(),
+  Widget build(BuildContext context) {
+    final reversed = row['reversal_of'] != null;
+    final amount = MoneyEgp.parse(row['signed_amount_egp']).minorUnits;
+    final at = DateTime.parse(row['collected_at'] as String);
+    return InkWell(
+      onTap: onTap,
+      child: AppSurfacePanel(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  reversed ? Icons.undo_outlined : Icons.payments_outlined,
+                  color: reversed ? ColorManager.error : ColorManager.success,
+                ),
+                const SizedBox(width: AppSize.s12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (row['student_name'] != null)
+                        Text(
+                          row['student_name'] as String,
+                          style: AppTextStyles.bodySemiBold,
+                        ),
+                      Text(
+                        (reversed ? 'payment_correction_label' : 'ui_payment')
+                            .tr(),
+                        style: AppTextStyles.caption,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: AppSize.s8),
+                Expanded(
+                  child: Align(
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: FinanceMoney(amount),
+                  ),
+                ),
               ],
             ),
-          ),
-          Text('completion_method_${row['method']}'.tr()),
-          Text(
-            '${CairoTime.date(CairoTime.local(DateTime.parse(row['collected_at'] as String)))} · ${CairoTime.time(DateTime.parse(row['collected_at'] as String), context.locale.toString())}',
-            style: AppTextStyles.metadata,
-          ),
-          if (row['reversal_of'] != null) ...[
-            Text('payment_correction_label'.tr()),
-            if (row['original_collected_by_name'] != null)
-              Text(
-                'finance_original_collector'.tr(
-                  args: [row['original_collected_by_name'] as String],
-                ),
+            const SizedBox(height: AppSize.s12),
+            const Divider(height: AppSize.s1),
+            AppInfoRow(
+              label: 'finance_actor'.tr(),
+              value:
+                  row['collected_by_name'] as String? ??
+                  'completion_missing'.tr(),
+            ),
+            AppInfoRow(
+              label: 'finance_method'.tr(),
+              value: 'completion_method_${row['method']}'.tr(),
+            ),
+            AppInfoRow(
+              label: 'finance_recorded_at'.tr(),
+              value:
+                  '${CairoTime.date(CairoTime.local(at))} · ${CairoTime.time(at, context.locale.toString())}',
+              valueStyle: AppTextStyles.caption,
+            ),
+            if (reversed && row['original_collected_by_name'] != null)
+              AppInfoRow(
+                label: 'finance_original_actor'.tr(),
+                value: row['original_collected_by_name'] as String,
+              ),
+            if (row['correction_receipt_number'] != null)
+              FinancePill(
+                'payment_corrected_label'.tr(),
+                color: ColorManager.warning,
+              ),
+            if (row['reason'] != null)
+              AppInfoRow(
+                label: 'ui_reason'.tr(),
+                value: row['reason'] as String,
               ),
           ],
-          if (row['correction_receipt_number'] != null)
-            Text('payment_corrected_label'.tr()),
-          if (row['reason'] != null) Text(row['reason'] as String),
-        ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

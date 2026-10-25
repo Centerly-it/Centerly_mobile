@@ -1,3 +1,89 @@
+## UI-MOB-039 — Compact centered method selector
+
+Styled the remaining all-records/payment-method selector as a centered compact control (maximum 220px) with smaller theme text, centered labels, soft brand surface, rounded border and dropdown chevron. Preserved 48px dropdown touch height and method behavior. Validation: flutter analyze PASS; two Arabic/English narrow 200%-text connected tests PASS. Next: owner Hot Reload and visual review.
+
+## UI-MOB-038 — Remove record-kind dropdown
+
+Removed the left all-records/collections dropdown from money activity. Method filter remains; requests explicitly use no kind restriction so hidden filtering cannot persist. Removed unused kind callback/state plumbing. Validation: flutter analyze PASS; both Arabic/English connected narrow layout/navigation tests PASS, including fixed-header drag and method-filter changes. No backend or hosted changes. Next: owner Hot Reload.
+
+## UI-MOB-037 — Movement summary spacing
+
+Added 8px below the movement-count/net-results summary before receipt cards, using existing spacing tokens. Validation: dart format and flutter analyze PASS. Next: owner Hot Reload and review.
+
+## UI-MOB-036 — Fixed compact money-activity header
+
+Owner revised UI-MOB-034: month/tabs and money-activity controls are fixed; only the results list scrolls. Group and collector selectors share a row; method and record-kind filters use side-by-side dropdowns, preserving all/collections choices without the removed corrections option. Removed the nested independently scrollable filter panel. Existing server filtering, history, totals and navigation preserved.
+
+Validation: flutter analyze PASS; six connected Arabic/English narrow 200%-text and invoice-layout tests PASS. Connected tests assert filter Y position remains unchanged after dragging results and exercise collections selection (removed obsolete programmatic corrections selection). Evidence: /tmp/centerly-fixed-finance-tests.log. No hosted actions. Next: owner Hot Reload and visual acceptance of fixed finance header.
+
+## UI-MOB-035 — Hide deducted-corrections filter
+
+Removed the deducted-corrections choice chip from live money activity filters at owner request. All-records and collections filters remain; ledger history and exact server totals unchanged. Validation: flutter analyze PASS; both Arabic/English connected navigation tests PASS. Evidence: /tmp/centerly-hide-corrections-tests.log. Next: owner Hot Reload and review.
+
+## UI-MOB-034 — Unified finance scrolling
+
+Finance month/tabs now use a coordinated NestedScrollView header. Movement and dues filters are leading content in the same PagedReadBody list as results, so dragging receipts scrolls controls and the month header instead of trapping movement inside a short results pane. Bottom navigation and shared app bar remain stable. Pagination, refresh, filter state and server totals unchanged.
+
+Validation: flutter analyze PASS; eight targeted scroll, Arabic/English narrow connected navigation, invoice layout and movement adapter tests PASS. Added a drag regression proving outer-header and inner-filter movement; adapted connected navigation to reveal the now-scrollable tabs before tapping. Evidence: /tmp/centerly-scroll-tests.log. No hosted actions. Next: owner Hot Reload and actual device scroll review.
+
+## UI-MOB-033 — Membership heading breathing room
+
+Added 16px vertical padding above and below the student profile membership heading using existing spacing tokens. Presentation-only change. Validation: dart format and flutter analyze PASS. Next: owner hot reload and visual review.
+
+## UI-MOB-032 — Arabic membership and attendance card labels
+
+Refined membership and attendance cards with anchored status chips, compact icon-labeled date/actor rows, localized month dates and a separate subdued cancelled-session history notice. Added translatedLabel fallback to the compiled locale dictionary when hot reload retains an older EasyLocalization dictionary, preventing raw membership_joined_on/ui_recorded_by keys from appearing. Actual saved actor names remain unchanged; no account identity is invented or edited.
+
+Validation: flutter analyze PASS; 11 targeted localization, history, finance layout and connected-design tests PASS, including Arabic/English narrow 200% text layouts and deliberately stale dictionaries. git diff --check PASS. Visually inspected synthetic Arabic widget preview build/ui-review/student-history-ar.png. Evidence: build/ui-review/history-arabic-tests.log. No hosted mutations or backend changes. Next: owner Hot Restart and visual acceptance against their actual records; an English saved account name requires its correct Arabic display name through the authorized account workflow.
+
+## UI-MOB-031 — Student membership/history cleanup and receipt alignment
+
+Implemented requested student-info cleanup: structured membership identity/status and labeled join/withdrawal dates, no internal grade/year label, and removal of duplicate feature shortcut buttons while retaining the four actual profile tabs. Attendance removes denominator/ratio explanation text while preserving server counts/calculation models; history uses compact 12–14px aligned rows with actor names, cancellation history and session-detail access. Added 16px space after academic metrics and finance metrics, removed the finance-basis paragraph, and renamed the payments tab to Collections (including its retained correction history).
+
+Follow-up receipt change: header amount expands to its own end-aligned area (left in Arabic), centered vertically alongside student/payment identity. Existing invoice amounts, signed corrections, collectors and all business rules unchanged. Added exact edge/vertical geometry assertions to all four existing Arabic/English receipt layout cases and two narrow 200%-text membership/history cases.
+
+Validation: full flutter test PASS (281 passed, 1 skipped); flutter analyze PASS. Full run also uncovered older workspace fixtures that did not handle the new unread-count request: added the explicit notification mock response and kept the notification tooltip stable, preserving full-count screen-reader semantics in the badge. No hosted actions, data deletions or migration. Evidence: build/ui-review/student-polish-tests.log, receipt-alignment-tests.log, history-layout-tests.log. Next: owner hot-reloads and reviews all requested student and receipt presentation changes.
+
+## UI-MOB-030 — Teacher unread notification badge
+
+Added NotificationBell to the shared workspace header: red badge uses exact server unread_count from list_teacher_notifications with p_limit=1, hides for zero/unknown, caps visual text at 99+ and preserves the full count in its tooltip. Refreshes on initial mount, return from notifications, app resume and every 30 seconds while foreground; timer stops on pause/disposal. Failed/revoked reads clear the displayed count and existing TeacherReadClient session guards reject stale identities. Existing scoped migration-36 inbox remains the source; no new backend or hosted mutations.
+
+Validation: flutter analyze PASS; five targeted tests PASS (zero/positive/99+ badge and polling-to-zero cases plus connected Arabic/English narrow 200% navigation). Files: notifications/presentation/notification_bell.dart, screens/teacher/widgets/workspace_actions.dart, test/notification_bell_test.dart. Next: owner reloads and checks unread/read transitions in normal use.
+
+## NOTIFY36 deployed and verified — 25 October 2026
+
+Owner approved deployment of only 202610250002_teacher_notification_scope.sql (SHA256 823946e86d5326c23b47adf4b13a4cbd1513a95793abe4c1199bbd6a1b04f17c). All 35 baseline bodies/catalog matched; dry run named only this file. Postflight verified all 36 migration bodies, 78 functions, 18 tables, 30 policies and 29 triggers. Existing business rows, tables, RLS and previous triggers preserved. Canonical manifest and Secretary baseline advanced after successful verification.
+
+Teacher inbox now receives/reads only student_added, student_withdrawn, student_removed and payment_collected; filtered unread/total/page counts agree. Other new Teacher notifications are suppressed; historical rows remain unchanged. Secretary recipients retain existing event behavior, including session cancellation. No notification backfill or ledger/history edits.
+
+Evidence: 30 local native event-scope assertions PASS; 90 baseline local authorization/business assertions PASS with all 36 migrations; 36 manifest hashes PASS; 11 actual hosted authenticated GET-only read/count/permission checks PASS for both Teacher tenants and Secretary. No hosted fixture, payment, student, cancellation or Auth/account changes. New-event hosted mutation acceptance remains pending separately approved scope. See docs/NOTIFY36_DEPLOYMENT.json. Next: owner restarts the Flutter debug app to load labels/spacing and checks future notifications during normal use.
+
+## UI-MOB-029 / NOTIFY36 — Notification spacing and focused event categories
+
+Added 12px under notification read/unread status; added localized new-student, group-withdrawal and removed-student labels and trusted optional student name plus contextual icons. Generated Arabic/English loader updated. flutter analyze and 23 targeted notification/page/label tests pass. Scoped Teacher inbox backend is prepared in canonical review commit 570a4d0: 30 native PostgreSQL checks pass. No hosted deployment. Current inbox still follows the deployed migration-35 behavior until explicit approval of 202610250002_teacher_notification_scope.sql. Review: docs/TEACHER_NOTIFICATION_SCOPE_REVIEW.md. Next: obtain approval for the exact candidate, then verify 35-version hosted baseline and one-version dry run before deployment. No fixture/Auth/production changes authorized.
+
+## UI-MOB-028 — Compact group card spacing
+
+Reduced card padding, header icon size and vertical gaps, count-chip padding and schedule padding; kept text sizes and student-action touch target. flutter analyze passed; three Arabic/English narrow/200%-text group-card layout tests passed. Next: owner hot-reloads to review the smaller card.
+
+## UI-MOB-027 — Refreshed group cards
+
+Redesigned connected group cards with a subtle brand-gradient accent, book icon and clearer identity header, compact member-count pill, separate calendar/time area and prominent filled student-navigation action. Preserved real server counts, grouped weekday/time previews (including effective-window grouping), truncation/empty states, detail navigation and student roster navigation. Extracted focused header, count badge, schedule display and label-formatting widgets; no added dependency, image asset or backend change. Time ranges use an en dash rather than an ambiguous colon.
+
+Validation: flutter analyze PASS; 7 targeted widget/navigation tests PASS (three new Arabic/English 320/390-width 100/200% text layouts, live group search tests and existing connected design routes). RTL chevron direction is explicit to avoid double mirroring. Synthetic design screenshot: build/ui-review/group-card-ar.png. No hosted mutations or install. Next: owner hot-reloads and reviews the refreshed group list.
+
+## UI-MOB-026 — Remove raw group-search label
+
+Removed visible live_group_search from the group picker search field. Search icon, keyboard submission and localized screen-reader label remain; other search fields retain their labels. Changed server_search_field.dart and teacher_group_filter.dart. Validation: dart format and flutter analyze passed. Next: owner reloads the current Flutter session.
+
+## UI-MOB-025 — Organized invoice and connected detail presentation
+
+Implemented in the actual current Teacher checkout: shared AppInfoRow; invoice identity/status, outstanding hero and paired amount/paid summary; organized receipt/correction cards, student financial records, daily collection rows, group details, notification summaries and payment notification sheets. Reused ColorManager/StyleManager/AppSurface components and Material icons; Arabic/English labels regenerated. Existing structured attendance/academic tables, session panels and contact/note sections retained. No backend or finance logic changed.
+
+Changed files: core/widgets/app_info_row.dart; finances/presentation live_invoice_detail, live_invoice_summary, finance_amount_summary, live_receipt_card, finance_record_card, teacher_finance_page and design/finance_detail_line; groups/presentation/live_group_detail; notifications/presentation teacher_notifications_page, notification_summary and notification_payment_button; both locale sources and generated loader; organized_finance_layout_test with synthetic fixture helper. Existing live_groups_test had obsolete ActionChip expectations against the already-removed UI; updated search/empty/no-grade-control coverage.
+
+Checks: flutter analyze PASS; full flutter test PASS (270 passed, 1 skipped). Four new narrow/large-text Arabic/English layout cases; visual inspection of build/ui-review/invoice-ar.png; all connected navigation/finance regressions pass. No hosted operations, account changes, publication or install. See docs/MOBILE_INFORMATION_LAYOUT.md. Next: owner reloads current Flutter debug session and reviews invoice/receipt and supporting detail layouts on their device.
+
 ## 2026-10-24 — Direct attendance, development migration 34
 
 Owner-requested removal of attendance approval: Secretary has no finalize action, manual-mode notice, finalization metadata or correction-reason field. Status choices save immediately; unmarked students remain unmarked. Existing finalized sessions can be corrected without a reason. The retired finalize RPC no longer grants execute to authenticated clients; historical metadata and immutable change logs are preserved. Tenant, role, cancelled-session and optimistic-concurrency checks remain enforced.

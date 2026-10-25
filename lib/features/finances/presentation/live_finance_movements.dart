@@ -25,7 +25,7 @@ class _LiveFinanceMovementsState extends State<LiveFinanceMovements> {
         (r) => r['id'] as String,
       );
   late String? actor = widget.actor;
-  String? group, method, kind;
+  String? group, method;
   String search = '';
   void reload() => cubit.apply({
     ...financeDates(widget.month),
@@ -34,7 +34,7 @@ class _LiveFinanceMovementsState extends State<LiveFinanceMovements> {
     if (FinanceRepository.movementFilters) ...{
       'p_search': search,
       'p_method': method,
-      'p_kind': kind,
+      'p_kind': null,
     },
   });
   @override
@@ -57,7 +57,6 @@ class _LiveFinanceMovementsState extends State<LiveFinanceMovements> {
         FinanceMovementControls(
           actor: actor,
           method: method,
-          kind: kind,
           onGroup: (v) {
             group = v;
             reload();
@@ -72,10 +71,6 @@ class _LiveFinanceMovementsState extends State<LiveFinanceMovements> {
           },
           onMethod: (v) {
             setState(() => method = v);
-            reload();
-          },
-          onKind: (v) {
-            setState(() => kind = v);
             reload();
           },
         ),
