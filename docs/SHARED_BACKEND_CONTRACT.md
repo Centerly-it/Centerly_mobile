@@ -1,3 +1,5 @@
+NOTIFY36 deployed 25 October 2026: canonical contract is migration 202610250002 (36 total). Teacher inbox and exact unread counts allow only student addition/withdrawal/removal and payment collection. Existing Teacher read signature and Secretary notifications preserved; no business history mutated. Evidence: docs/NOTIFY36_DEPLOYMENT.json. Older checkpoints below are historical.
+
 GMAT35 deployed 25 October 2026: shared contract now includes secretary_group_materials_preview(uuid) and secretary_add_group_materials(uuid,uuid,text,numeric,date,uuid[]), migration 202610250001. Verified 35 bodies/catalog, unchanged RLS/Teacher permissions and business fingerprints. Secretary cancellation notifications read the stored session cancel_reason without changing event payload allowlists. See docs/GMAT35_DEPLOYMENT.json; hosted financial mutation acceptance remains separate. Older checkpoints below are historical.
 
 ## 2026-10-24 — Direct attendance, development migration 34

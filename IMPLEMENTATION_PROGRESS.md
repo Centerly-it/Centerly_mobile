@@ -1,3 +1,11 @@
+## NOTIFY36 deployed and verified — 25 October 2026
+
+Owner approved deployment of only 202610250002_teacher_notification_scope.sql (SHA256 823946e86d5326c23b47adf4b13a4cbd1513a95793abe4c1199bbd6a1b04f17c). All 35 baseline bodies/catalog matched; dry run named only this file. Postflight verified all 36 migration bodies, 78 functions, 18 tables, 30 policies and 29 triggers. Existing business rows, tables, RLS and previous triggers preserved. Canonical manifest and Secretary baseline advanced after successful verification.
+
+Teacher inbox now receives/reads only student_added, student_withdrawn, student_removed and payment_collected; filtered unread/total/page counts agree. Other new Teacher notifications are suppressed; historical rows remain unchanged. Secretary recipients retain existing event behavior, including session cancellation. No notification backfill or ledger/history edits.
+
+Evidence: 30 local native event-scope assertions PASS; 90 baseline local authorization/business assertions PASS with all 36 migrations; 36 manifest hashes PASS; 11 actual hosted authenticated GET-only read/count/permission checks PASS for both Teacher tenants and Secretary. No hosted fixture, payment, student, cancellation or Auth/account changes. New-event hosted mutation acceptance remains pending separately approved scope. See docs/NOTIFY36_DEPLOYMENT.json. Next: owner restarts the Flutter debug app to load labels/spacing and checks future notifications during normal use.
+
 ## NOTIFY36 — Restricted Teacher operational inbox (pending deployment)
 
 Owner requests only new student, withdrawn/removed student and collections notices. Prepared 202610250002_teacher_notification_scope.sql plus 30 passing native PostgreSQL assertions. Whitelisted Teacher recipients, transactionally generated student lifecycle events and filtered existing inbox pagination/unread counts; all existing history retained and Secretary cancellation notices unaffected. No hosted action. Exact hash and deployment boundary: docs/TEACHER_NOTIFICATION_SCOPE_REVIEW.md. Next: explicit approval to deploy ONLY this candidate after 35-version drift/dry-run checks.
