@@ -1,3 +1,11 @@
+## GMAT35 — Group-wide additional materials, 25 October 2026
+
+Implemented and locally tested; hosted activation pending explicit migration approval. Canonical proposal 202610250001_group_materials.sql adds preview and atomic/idempotent group issuance APIs. Secretary group details offers roster review, per-student amount and total, explicit confirmation, retained retry identity and a separate invoice per active student. Existing collection/reversal and Teacher reads remain authoritative. Future joiners are not retrospectively charged.
+
+Evidence: native disposable PostgreSQL 29 new assertions PASS; existing 90 backend assertions PASS with candidate; Secretary npm run check PASS (45 tests, formatting/lint/TypeScript/build); synthetic new-API desktop/mobile browser flow PASS, not hosted acceptance. Hosted GET probe confirms API absent (PGRST202). No hosted mutations. See docs/GROUP_MATERIALS_REVIEW.md for exact SHA256, deployment boundary and separate synthetic acceptance proposal.
+
+Next task: obtain approval for ONLY candidate deployment to centerly-dev, verify unchanged 34-version baseline/catalog and single-version dry run, then postflight migration 35 and permissions. Do not deploy or run hosted financial fixtures without their separate authorizations.
+
 ## 2026-10-24 — Direct attendance, development migration 34
 
 Owner-requested removal of attendance approval: Secretary has no finalize action, manual-mode notice, finalization metadata or correction-reason field. Status choices save immediately; unmarked students remain unmarked. Existing finalized sessions can be corrected without a reason. The retired finalize RPC no longer grants execute to authenticated clients; historical metadata and immutable change logs are preserved. Tenant, role, cancelled-session and optimistic-concurrency checks remain enforced.
