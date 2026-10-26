@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Centerly (UI preview — offline)",
+      "name": "Centerly (UI preview \u2014 offline)",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
@@ -21,6 +21,17 @@
         "--dart-define-from-file=.env.local.json",
         "--dart-define=CENTERLY_UI_PREVIEW=false",
         "--dart-define=CENTERLY_FINANCE_MOVEMENT_FILTERS=true"
+      ]
+    },
+    {
+      "name": "Centerly (approved shared production)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "toolArgs": [
+        "--dart-define-from-file=env.production.json",
+        "--dart-define=CENTERLY_UI_PREVIEW=false"
       ]
     }
   ]

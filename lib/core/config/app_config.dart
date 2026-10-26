@@ -23,9 +23,7 @@ class AppConfig {
     if (kReleaseMode && environment != 'production') return false;
     final uri = Uri.tryParse(url);
     if (!['development', 'production'].contains(environment) ||
-        (environment == 'production' &&
-            (uri?.host == 'yfeubomyglmhuwizaqoj.supabase.co' ||
-                publishableKey.contains('fixture')))) {
+        (environment == 'production' && publishableKey.contains('fixture'))) {
       return false;
     }
     if (uri == null ||

@@ -55,3 +55,6 @@ android/build/
 # Local development configuration and credentials
 /env.development-accounts.json
 /env.local.json
+
+# Public production build configuration, kept local.
+/env.production.json

@@ -46,14 +46,14 @@ void main() {
       expect(
         const AppConfig(
           url: 'http://remote.example',
-          publishableKey: 'sb_publishable_test',
+          publishableKey: 'sb_publishable_fixture_test',
         ).isValid,
         isFalse,
       );
       expect(
         const AppConfig(
           url: 'https://test.supabase.co',
-          publishableKey: 'sb_publishable_test',
+          publishableKey: 'sb_publishable_fixture_test',
         ).isValid,
         isTrue,
       );
@@ -84,8 +84,16 @@ void main() {
     () {
       const config = AppConfig(
         url: 'https://yfeubomyglmhuwizaqoj.supabase.co',
-        publishableKey: 'sb_publishable_test',
+        publishableKey: 'sb_publishable_fixture_test',
         environment: 'production',
+      );
+      expect(
+        const AppConfig(
+          url: 'https://yfeubomyglmhuwizaqoj.supabase.co',
+          publishableKey: 'sb_publishable_live',
+          environment: 'production',
+        ).isValid,
+        isTrue,
       );
       expect(config.isValid, isFalse);
       expect(config.supportUri, isNull);
