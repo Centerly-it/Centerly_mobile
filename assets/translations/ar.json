@@ -1,8 +1,9 @@
 {
+  "secretary_phone_missing": "رقم الهاتف غير مضاف",
   "session_attendance_info": "معلومات تسجيل الحضور",
   "teacher_remove_photo": "حذف الصورة",
   "dashboard_hour_unit": "س",
-  "teacher_change_photo": "تغيير صورة المدرس",
+  "teacher_change_photo": "تغيير الصورة",
   "teacher_photo_failed": "تعذّر حفظ الصورة. اختر صورة بحجم أقل من ٢ ميجابايت وتأكد من سماح الوصول للمعرض.",
   "dashboard_attendance_title": "الحضور في السنتر الآن",
   "dashboard_attendance_waiting": "لم يُسجّل",

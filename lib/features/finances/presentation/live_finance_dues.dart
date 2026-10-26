@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/presentation/paged_read_cubit.dart';
 import '../../../core/widgets/paged_read_body.dart';
+import '../../../core/theme/values_manager.dart';
 import '../data/finance_repository.dart';
 import '../domain/finance_due.dart';
 import 'design/finance_design.dart';
@@ -72,12 +73,15 @@ class _LiveFinanceDuesState extends State<LiveFinanceDues> {
           reload();
         },
       ),
-      header: (_, p) => Text(
-        'finance_dues_result'.tr(
-          args: [
-            '${p.total}',
-            financeMoney(p.summary.amount('outstanding_egp')),
-          ],
+      header: (_, p) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: AppPadding.p12),
+        child: Text(
+          'finance_dues_result'.tr(
+            args: [
+              '${p.total}',
+              financeMoney(p.summary.amount('outstanding_egp')),
+            ],
+          ),
         ),
       ),
       item: (context, row) => LiveDueCard(

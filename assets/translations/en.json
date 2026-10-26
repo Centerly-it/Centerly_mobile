@@ -1,8 +1,9 @@
 {
+  "secretary_phone_missing": "Phone number not added",
   "session_attendance_info": "Attendance record information",
   "teacher_remove_photo": "Remove photo",
   "dashboard_hour_unit": "h",
-  "teacher_change_photo": "Change teacher photo",
+  "teacher_change_photo": "Change photo",
   "teacher_photo_failed": "Could not save photo. Choose an image under 2 MB and allow gallery access.",
   "dashboard_attendance_title": "Attendance at the center now",
   "dashboard_attendance_waiting": "Not recorded",

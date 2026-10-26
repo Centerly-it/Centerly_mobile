@@ -1,3 +1,21 @@
+## UI-MOB-043 — Dues summary vertical spacing
+
+Added 12px above and below the invoice-count/outstanding summary using existing padding tokens. Presentation only; totals unchanged. Validation: dart format and flutter analyze PASS. Next: owner Hot Reload and review.
+
+## UI-MOB-042 — Organized secretary account cards
+
+Changed photo action label to Change photo / تغيير الصورة. Extracted SecretaryCard with identity/avatar, account-status badge, labeled selectable email/phone rows and separate removal-request information/action. Replaced generic missing-phone fallback with explicit Phone number not added; status remains the actual server account state. Existing removal confirmation/action and reconciliation preserved. No account edits or backend changes.
+
+Validation: flutter analyze PASS; two Arabic/English 320px 200%-text card tests PASS; locale loader regenerated; git diff --check PASS. Evidence: /tmp/centerly-secretary-card-tests.log. Next: owner Hot Restart for updated locale labels and visual review.
+
+## BRAND-041 — Approved Centerly launcher artwork
+
+Owner approved generated proposal. Saved original at assets/branding/centerly-launcher-approved.png and generated all 15 unique iOS AppIcon images plus five Android density icons. Existing splash and in-app logo retained. Android/iOS display name is Centerly; bundle IDs unchanged. Verified all 20 generated files match expected square dimensions and contain no alpha; plist lint and git diff --check PASS. iOS simulator debug build PASS (28.9s). Android debug build validation running; device launcher acceptance pending rebuild/install. No publishing or hosted actions; pre-existing pubspec.lock edits preserved.
+
+## BRAND-040 — Centerly mobile display name and icon proposal
+
+Changed Android application label and iOS bundle display/name to Centerly; package/bundle identifiers unchanged. Existing owner pubspec.lock modification left untouched. Icon generation is a preview proposal only; launcher assets remain unchanged pending owner approval. Validation: iOS plist lint and git diff --check PASS. Next: owner approves icon proposal, then generate platform launcher sizes and verify rebuild.
+
 ## PERF-MOB-040 — Shared pagination, lazy content and Skeletonizer (25 October 2026)
 
 Completed the Teacher-only loading/performance pass and preserved the pending owner UI edits (unified finance scrolling, branded method menu, supplied default student avatar, archive choice inside group picker). Reused PagedReadCubit with MappedPagedCubit adapters for directories/session attendance; added refresh/more separation, cursor-cycle/duplicate/disposal guards, retained-filter recovery and lazy viewport builders. Adopted Skeletonizer with accessible/reduced-motion/background-safe presentation geometry; retained action progress and auth checking. Bounded avatar decoding and removed duplicate response encoding without changing cache scope, TTLs, backend contracts or financial rules.

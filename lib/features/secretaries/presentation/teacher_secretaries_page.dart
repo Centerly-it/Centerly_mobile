@@ -7,12 +7,10 @@ import '../../../core/data/completion_reads.dart';
 import '../../../core/data/read_page.dart';
 import '../../../core/data/teacher_actions.dart';
 import '../../../core/di/di.dart';
-import '../../../core/format/cairo_time.dart';
-import '../../../core/theme/style_manager.dart';
 import '../../../core/presentation/paged_read_cubit.dart';
 import '../../../core/widgets/paged_read_body.dart';
 import '../../../core/widgets/teacher_action_button.dart';
-import '../../../screens/teacher/teacher_shared.dart';
+import 'secretary_card.dart';
 import '../domain/secretary_record.dart';
 
 class TeacherSecretariesPage extends StatelessWidget {
@@ -33,32 +31,10 @@ class TeacherSecretariesPage extends StatelessWidget {
       body: SafeArea(
         child: PagedReadBody<SecretaryRecord, NoSummary>(
           loadingShape: LoadingShape.cards,
-          item: (context, r) => TeacherCard(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(r.name, style: Theme.of(context).textTheme.titleMedium),
-                SelectableText(r.email),
-                Text(r.phone ?? 'live_missing_value'.tr()),
-                Text('completion_${r.status}'.tr()),
-                if (r.requestStatus != null)
-                  Text('completion_removal_${r.requestStatus}'.tr()),
-                if (r.requestedAt != null)
-                  Text(
-                    'completion_requested_at'.tr(
-                      args: [CairoTime.date(CairoTime.local(r.requestedAt!))],
-                    ),
-                    style: AppTextStyles.metadata,
-                  ),
-                if (r.handledAt != null)
-                  Text(
-                    'completion_handled_at'.tr(
-                      args: [CairoTime.date(CairoTime.local(r.handledAt!))],
-                    ),
-                    style: AppTextStyles.metadata,
-                  ),
-                if (r.status == 'active' && r.requestStatus != 'pending')
-                  TeacherActionButton(
+          item: (context, r) => SecretaryCard(
+            record: r,
+            action: r.status == 'active' && r.requestStatus != 'pending'
+                ? TeacherActionButton(
                     label: 'completion_request_removal'.tr(),
                     confirmation: 'completion_removal_confirm'.tr(
                       args: [r.name],
@@ -69,9 +45,8 @@ class TeacherSecretariesPage extends StatelessWidget {
                     onReconcile: context
                         .read<PagedReadCubit<SecretaryRecord, NoSummary>>()
                         .refresh,
-                  ),
-              ],
-            ),
+                  )
+                : null,
           ),
         ),
       ),
