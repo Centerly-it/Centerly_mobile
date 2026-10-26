@@ -38,16 +38,8 @@ class NotificationPaymentButton extends StatelessWidget {
               return SingleChildScrollView(
                 padding: const EdgeInsets.all(AppPadding.p16),
                 child: AppSurfaceSection(
-                  title:
-                      (reversed
-                              ? 'finance_correction_detail'
-                              : 'finance_collection_detail')
-                          .tr(),
-                  icon: Icon(
-                    reversed
-                        ? Icons.undo_outlined
-                        : Icons.receipt_long_outlined,
-                  ),
+                  title: 'finance_collection_detail'.tr(),
+                  icon: const Icon(Icons.receipt_long_outlined),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -78,9 +70,6 @@ class NotificationPaymentButton extends StatelessWidget {
         ),
       );
     },
-    child: Text(
-      (reversed ? 'finance_correction_detail' : 'finance_collection_detail')
-          .tr(),
-    ),
+    child: Text('finance_collection_detail'.tr()),
   );
 }

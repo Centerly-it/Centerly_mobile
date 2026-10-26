@@ -1,3 +1,19 @@
+## QA-20261026 — Cross-app business/security/readiness review
+
+Current source base 273cb1b plus existing terminology and QA working-tree changes; canonical migration ownership remains Secretary .canonical-review / Teacher commit 36c0bc9 at migration 36. Original Teacher migration-34 manifest remains untouched and matches the canonical prefix. Shared actionable report/business-flow matrix and owner choices: /Users/mohamedsalem/Desktop/Centerly_secretary/docs/qa/2026-10-26/READINESS.md and PRODUCT_DECISIONS_AR.md.
+
+Fresh Flutter: analyzer PASS; 297 tests PASS, one opt-in hosted test SKIP. Corrected stale Arabic finance preview selector to current localized key. Android debug/profile and iOS simulator debug builds PASS; normal connected debug APK restored on Redmi after profile test attempt. Physical profile run did not complete while device slept, so no frame/startup improvement or native hosted UI acceptance claimed. macOS Auth integration failed before login on secure-storage entitlement -34018; no security fallback/signing change. Added isolated synthetic profile harness/driver with bounded timeout for future unlocked-device runs, not a claimed passing test.
+
+Secretary fixes use existing approved backend: full signed payment history/invoice links, reasoned archived reversal, session-history entry, persisted timetable recovery, safe support entry, release flags and full-payment uncertain-result recovery when invoice becomes paid. No permissions/calculations, migration, hosted fixtures/account settings or publishing changed. Local canonical 90/61 authorization suites, native races and 30 desktop/mobile browser journeys pass; 19 existing-account SDK/four actual Secretary browser read-only checks pass. 10k-student realistic cohort data, mixed local load/paced endurance and 18-table recovery measured separately from hosted readiness. Web/Android artifact credential scans pass.
+
+Product conflicts remain bundled for owner: direct attendance versus optional finalization/reason, manual dated sessions versus recurring generation, simplified grade/capacity/level fields, restoration/archive collection, cancellation fee policy and official support. Large-tenant client finance filtering, device/accessibility acceptance, production/provider recovery/monitoring and current remote CI remain open. Next: owner decisions; do not delete historical data/migrations when removing a UI feature.
+
+## UI-MOB-044 — Clear student fee and teacher earnings terminology
+
+Replaced Arabic مستحقات throughout locale labels/help with الرسوم for student amounts owed. Teacher cash-period earnings labels use أرباح (صافي التحصيل) while retaining exact existing server collection-minus-reversal calculations; invoice-month payment coverage remains a fee statistic. Regenerated localization loader. Secretary general fees reuse existing canonical invoices and were reconciled with Teacher finance reads in disposable SQL browser scenarios, without changing backend or hosted records.
+
+Validation: flutter analyze PASS; six organized finance/connected Arabic-English layout/navigation tests PASS. Cross-app evidence: four Secretary desktop/mobile SQL-browser scenarios passed including new fees, uncertain response reconciliation, partial collection and correction history. Actual Teacher device acceptance pending Hot Restart. No hosted financial writes or migrations.
+
 ## UI-MOB-043 — Dues summary vertical spacing
 
 Added 12px above and below the invoice-count/outstanding summary using existing padding tokens. Presentation only; totals unchanged. Validation: dart format and flutter analyze PASS. Next: owner Hot Reload and review.

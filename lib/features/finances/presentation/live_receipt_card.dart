@@ -16,7 +16,11 @@ class LiveReceiptCard extends StatelessWidget {
   final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
-    final reversed = row['reversal_of'] != null;
+    if (row['reversal_of'] != null ||
+        row['correction_receipt_number'] != null ||
+        row['reversed_by_payment_id'] != null) {
+      return const SizedBox.shrink();
+    }
     final amount = MoneyEgp.parse(row['signed_amount_egp']).minorUnits;
     final at = DateTime.parse(row['collected_at'] as String);
     return InkWell(
@@ -28,9 +32,9 @@ class LiveReceiptCard extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(
-                  reversed ? Icons.undo_outlined : Icons.payments_outlined,
-                  color: reversed ? ColorManager.error : ColorManager.success,
+                const Icon(
+                  Icons.payments_outlined,
+                  color: ColorManager.success,
                 ),
                 const SizedBox(width: AppSize.s12),
                 Expanded(
@@ -42,11 +46,7 @@ class LiveReceiptCard extends StatelessWidget {
                           row['student_name'] as String,
                           style: AppTextStyles.bodySemiBold,
                         ),
-                      Text(
-                        (reversed ? 'payment_correction_label' : 'ui_payment')
-                            .tr(),
-                        style: AppTextStyles.caption,
-                      ),
+                      Text('ui_payment'.tr(), style: AppTextStyles.caption),
                     ],
                   ),
                 ),
@@ -77,21 +77,6 @@ class LiveReceiptCard extends StatelessWidget {
                   '${CairoTime.date(CairoTime.local(at))} · ${CairoTime.time(at, context.locale.toString())}',
               valueStyle: AppTextStyles.caption,
             ),
-            if (reversed && row['original_collected_by_name'] != null)
-              AppInfoRow(
-                label: 'finance_original_actor'.tr(),
-                value: row['original_collected_by_name'] as String,
-              ),
-            if (row['correction_receipt_number'] != null)
-              FinancePill(
-                'payment_corrected_label'.tr(),
-                color: ColorManager.warning,
-              ),
-            if (row['reason'] != null)
-              AppInfoRow(
-                label: 'ui_reason'.tr(),
-                value: row['reason'] as String,
-              ),
           ],
         ),
       ),

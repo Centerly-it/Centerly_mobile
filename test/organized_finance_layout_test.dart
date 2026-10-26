@@ -82,8 +82,9 @@ void main() {
       await tester.drag(find.byType(ListView), const Offset(0, -800));
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
-      expect(find.text('سكرتير التحصيل الأصلي'), findsOneWidget);
-      expect(find.text('سكرتير التصحيح'), findsOneWidget);
+      expect(find.text('سكرتير التحصيل الأصلي'), findsNothing);
+      expect(find.text('سكرتير التصحيح'), findsNothing);
+      expect(find.text('سكرتير التحصيل'), findsOneWidget);
     });
   }
 }

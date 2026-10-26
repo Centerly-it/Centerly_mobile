@@ -10,6 +10,10 @@ import '../domain/finance_overview_data.dart';
 class FinanceRepository {
   const FinanceRepository(this.api);
   final TeacherReadClient api;
+  static const currentPayments = bool.fromEnvironment(
+    'CENTERLY_CURRENT_FINANCE_READS',
+    defaultValue: false,
+  );
   // Approved migration 202610220001 deployed and verified on centerly-dev.
   static const movementFilters = bool.fromEnvironment(
     'CENTERLY_FINANCE_MOVEMENT_FILTERS',
@@ -19,7 +23,11 @@ class FinanceRepository {
     Map<String, dynamic> filters,
     String? cursor,
   ) => CompletionReads(api).page(
-    movementFilters ? TeacherRead.financeMovements : TeacherRead.finance,
+    currentPayments
+        ? TeacherRead.currentPayments
+        : movementFilters
+        ? TeacherRead.financeMovements
+        : TeacherRead.finance,
     params: {
       ...filters,
       if (!movementFilters) 'p_kind': 'payments',
@@ -58,7 +66,7 @@ class FinanceRepository {
     String id,
     String? cursor,
   ) => CompletionReads(api).page(
-    TeacherRead.invoiceDetail,
+    currentPayments ? TeacherRead.currentInvoice : TeacherRead.invoiceDetail,
     params: {'p_id': id, 'p_cursor': cursor, 'p_limit': 30},
     row: (j) {
       final row = validatedReceipt(j);

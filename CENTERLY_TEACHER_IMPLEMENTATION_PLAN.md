@@ -1,3 +1,7 @@
+# Current QA/ownership checkpoint — 26 October 2026
+
+The current cross-app readiness/business-flow matrix is in the Secretary repository at `docs/qa/2026-10-26/READINESS.md`. Teacher canonical migration owner remains the isolated `.canonical-review` worktree at migration 36; the original Teacher checkout consumes a compatible unchanged 34-version manifest prefix. Older schema-ownership/finalization/generation assertions below are historical where inconsistent. Direct audited attendance and manual dated sessions are the current deployed simplified contract; restoring older workflows awaits bundled owner decisions. Native/device/provider production gates are not satisfied by local tests.
+
 # Centerly Teacher Mobile — Production Implementation Plan
 **Document:** `IMPLEMENTATION_PLAN_TEACHER.md`  
 **Version:** 1.0 (Centerly product decisions v6.1) — 2026-10-18  

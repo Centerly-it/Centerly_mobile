@@ -1,3 +1,4 @@
+import '../../../core/format/calendar_month.dart';
 import 'package:flutter/material.dart';
 import '../../../core/api/teacher_read_client.dart';
 import '../../../core/di/di.dart';
@@ -78,7 +79,4 @@ class _LiveFinanceState extends State<LiveFinance> {
   );
 }
 
-Map<String, dynamic> financeDates(DateTime month) => {
-  'p_from': CairoTime.date(DateTime(month.year, month.month)),
-  'p_to': CairoTime.date(DateTime(month.year, month.month + 1, 0)),
-};
+Map<String, dynamic> financeDates(DateTime month) => calendarMonthDates(month);

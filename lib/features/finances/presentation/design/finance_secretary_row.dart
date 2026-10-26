@@ -26,22 +26,12 @@ class FinanceSecretaryRow extends StatelessWidget {
     final name = summary == null
         ? 'finance_demo_secretary_$actor'.tr()
         : summary!.name ?? 'completion_missing'.tr();
-    final rows = ledger?.receivedIn(month).where((m) => m.actor == actor);
     final net = summary?.net ?? ledger!.net(month, actor: actor);
     final amount = FinanceMoney(
       net,
       style: AppTextStyles.titleSmall.copyWith(
         color: net.isNegative ? ColorManager.error : ColorManager.success,
       ),
-    );
-    final counts = Text(
-      'finance_entries_count'.tr(
-        args: [
-          '${summary?.collections ?? rows!.where((m) => !m.reversed).length}',
-          '${summary?.corrections ?? rows!.where((m) => m.reversed).length}',
-        ],
-      ),
-      style: AppTextStyles.caption,
     );
     final avatar = CircleAvatar(
       backgroundColor: ColorManager.primaryBright,
@@ -70,7 +60,6 @@ class FinanceSecretaryRow extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: AppSize.s8),
-                      counts,
                       const SizedBox(height: AppSize.s8),
                       amount,
                     ],
@@ -82,7 +71,7 @@ class FinanceSecretaryRow extends StatelessWidget {
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [title, counts],
+                          children: [title],
                         ),
                       ),
                       const SizedBox(width: AppSize.s8),

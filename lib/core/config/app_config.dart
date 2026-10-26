@@ -11,7 +11,10 @@ class AppConfig {
   factory AppConfig.fromEnvironment() => const AppConfig(
     url: String.fromEnvironment('SUPABASE_URL'),
     publishableKey: String.fromEnvironment('SUPABASE_PUBLISHABLE_KEY'),
-    supportUrl: String.fromEnvironment('CENTERLY_SUPPORT_URL'),
+    supportUrl: String.fromEnvironment(
+      'CENTERLY_SUPPORT_URL',
+      defaultValue: 'https://wa.me/201028684980',
+    ),
     environment: String.fromEnvironment('APP_ENV', defaultValue: 'development'),
   );
   final String url, publishableKey, supportUrl, environment;

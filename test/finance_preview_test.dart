@@ -94,7 +94,7 @@ void main() {
         scale: 2,
       );
       expect(tester.takeException(), isNull);
-      await tester.tap(find.text(locale == 'ar' ? 'المستحقات' : 'Dues'));
+      await tester.tap(find.text('finance_tab_dues'.tr()));
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
     });
