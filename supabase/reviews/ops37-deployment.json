@@ -1,0 +1,20 @@
+{
+  "pass": true,
+  "projectRef": "yfeubomyglmhuwizaqoj",
+  "at": "2026-10-26T11:56:52.796Z",
+  "migration": "202610260001",
+  "sha256": "c49b0e5ec90c51a7031d8ba9ebc86d6c6c62a6c85c7e8bd4c6e44bc637962049",
+  "baselineMigrations": 36,
+  "deployedMigrations": 37,
+  "functions": 85,
+  "tables": 18,
+  "policies": 30,
+  "triggers": 30,
+  "fullCatalogMatchesDisposableCanonical": true,
+  "allBusinessTableFingerprintsUnchanged": true,
+  "hostedReadOnlyChecks": 21,
+  "hostedBusinessWrites": 0,
+  "scope": "Exact approved migration only; no fixtures, Auth/admin, production or website publishing",
+  "activation": "Local Secretary environment and public Teacher define files only",
+  "hostedMutationAcceptance": "Pending separate scope approval"
+}
