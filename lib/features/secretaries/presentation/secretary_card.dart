@@ -79,7 +79,7 @@ class SecretaryCard extends StatelessWidget {
         if (action != null) ...[
           const SizedBox(height: AppSize.s12),
           const Divider(),
-          Align(alignment: AlignmentDirectional.centerEnd, child: action!),
+          Center(child: action!),
         ],
       ],
     ),
