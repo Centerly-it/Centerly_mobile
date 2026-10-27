@@ -168,3 +168,6 @@ remote CI/device/iOS/signing/cross-app acceptance were not rerun.
 Next eligible T-030 read proposal is prepared and locally tested (21 assertions),
 not copied into managed migrations/deployed/called by production. Separate review:
 STUDENT_PROFILE_CHANGE_REVIEW.md. All existing user edits remain preserved.
+
+
+2026-10-27 website publication: Secretary https://centerly-secretary.pages.dev deployed at application revision 1d39c8eae108dc22e70274b649f9d3c7ca8090c1 (Cloudflare deployment 7825d770). Verified live HTTP 200, matching build identity and six entry assets; CSP points only to centerly-prod. Teacher environment/UI revision b00ef9f pushed to main. Both backend datasets unchanged; production accounts remain empty. Owner requests validated pushes after future edits and direct website publication for website changes. No native install or manual-device pass claimed.

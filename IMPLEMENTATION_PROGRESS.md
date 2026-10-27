@@ -2879,3 +2879,6 @@ SEC27 remains complete; no mutations/cleanup were rerun and no hosted reads or w
 
 
 Final local verification: Secretary npm run check PASS (format, lint, 25 tests, configured web build); monitoring hook test PASS; three negative build release gates PASS; refreshed web/APK inventory and credential scan PASS (679 decompressed APK entries). Teacher proposal 65 checks PASS; 27 deployed hashes unchanged. No Flutter application code changed this milestone; prior Flutter results are historical, not rerun Android evidence.
+
+
+2026-10-27 website publication: Secretary https://centerly-secretary.pages.dev deployed at application revision 1d39c8eae108dc22e70274b649f9d3c7ca8090c1 (Cloudflare deployment 7825d770). Verified live HTTP 200, matching build identity and six entry assets; CSP points only to centerly-prod. Teacher environment/UI revision b00ef9f pushed to main. Both backend datasets unchanged; production accounts remain empty. Owner requests validated pushes after future edits and direct website publication for website changes. No native install or manual-device pass claimed.
