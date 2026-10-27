@@ -1,8 +1,12 @@
+import 'dart:ui' as ui;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/theme/color_manager.dart';
 import '../../../../core/theme/style_manager.dart';
 import '../../../../core/theme/values_manager.dart';
+import '../../../../core/config/preview_mode.dart';
+import '../../../../core/di/di.dart';
+import '../../../auth/presentation/view_models/auth_session_cubit.dart';
 import 'finance_design.dart';
 
 class FinanceCreditCardContent extends StatelessWidget {
@@ -13,18 +17,47 @@ class FinanceCreditCardContent extends StatelessWidget {
   });
   final BigInt amount;
   final DateTime month;
+  String get _teacherName {
+    final name = getIt.isRegistered<AuthSessionCubit>()
+        ? getIt<AuthSessionCubit>().state.profile?.displayName
+        : null;
+    return name ??
+        (PreviewMode.enabled
+                ? 'home_preview_teacher_name'
+                : 'home_teacher_name_fallback')
+            .tr();
+  }
+
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.all(AppPadding.p24),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          'app_name'.tr(),
-          style: AppTextStyles.titleMedium.copyWith(
-            color: ColorManager.white,
-            fontWeight: FontWeight.bold,
-          ),
+        Row(
+          textDirection: ui.TextDirection.rtl,
+          children: [
+            Expanded(
+              child: Text(
+                _teacherName,
+                textAlign: TextAlign.right,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyles.titleMedium.copyWith(
+                  color: ColorManager.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(width: AppSize.s12),
+            Text(
+              'app_name'.tr(),
+              style: AppTextStyles.titleMedium.copyWith(
+                color: ColorManager.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: AppSize.s24),
         Text(
