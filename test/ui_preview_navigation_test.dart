@@ -3,6 +3,7 @@ import 'package:centrally/core/localization/codegen_loader.g.dart';
 import 'package:centrally/core/config/app_config.dart';
 import 'package:centrally/core/di/di.dart';
 import 'package:centrally/screens/teacher/teacher_workspace.dart';
+import 'package:centrally/screens/teacher/workspace_selection.dart';
 import 'package:centrally/features/dashboard/presentation/dashboard_unpaid_card.dart';
 import 'package:centrally/core/config/preview_mode.dart';
 import 'package:centrally/core/theme/color_manager.dart';
@@ -22,6 +23,7 @@ import 'helpers/load_test_fonts.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  setUp(WorkspaceSelection.startAppSession);
   setUpAll(() async {
     SharedPreferences.setMockInitialValues({});
     await EasyLocalization.ensureInitialized();

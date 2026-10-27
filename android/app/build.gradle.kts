@@ -45,6 +45,20 @@ android {
         versionName = flutter.versionName
     }
 
+    flavorDimensions += "environment"
+    productFlavors {
+        create("dev") {
+            dimension = "environment"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+            resValue("string", "app_name", "Centerly Dev")
+        }
+        create("prod") {
+            dimension = "environment"
+            resValue("string", "app_name", "Centerly")
+        }
+    }
+
     signingConfigs {
         if (pilotSigningFile.exists()) {
             create("pilot") {

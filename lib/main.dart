@@ -6,6 +6,9 @@ import 'core/config/preview_mode.dart';
 import 'core/localization/codegen_loader.g.dart';
 import 'app/session_lifecycle.dart';
 import 'screens/teacher/workspace_selection.dart';
+import 'core/diagnostics/production_telemetry.dart';
+import 'core/diagnostics/app_diagnostics.dart';
+import 'app/diagnostic_error_handlers.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:centrally/core/di/di.dart';
@@ -23,6 +26,8 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 Future<void> main() async {
   WorkspaceSelection.startAppSession();
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  await initializeDiagnostics();
+  installDiagnosticErrorHandlers();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   await Future.wait([
@@ -32,7 +37,17 @@ Future<void> main() async {
   ]);
 
   configureDependencies();
-  await bootstrapAuth(restoreSession: false);
+  try {
+    await bootstrapAuth(restoreSession: false);
+  } catch (error, stack) {
+    AppDiagnostics.current.failure(
+      'app.bootstrap',
+      'UNHANDLED_ERROR',
+      stack,
+      error,
+    );
+    rethrow;
+  }
   Bloc.observer = const MyBlocObserver();
 
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);

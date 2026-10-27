@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart' show appFlavor;
 import 'backend_projects.dart';
 
 class AppConfig {
@@ -9,6 +10,7 @@ class AppConfig {
     required this.publishableKey,
     this.supportUrl = '',
     this.environment = 'development',
+    this.flavor,
   });
   factory AppConfig.fromEnvironment() => const AppConfig(
     url: String.fromEnvironment('SUPABASE_URL'),
@@ -18,10 +20,13 @@ class AppConfig {
       defaultValue: defaultSupportUrl,
     ),
     environment: String.fromEnvironment('APP_ENV', defaultValue: 'development'),
+    flavor: appFlavor,
   );
   final String url, publishableKey, supportUrl, environment;
+  final String? flavor;
   bool get isConfigured => url.isNotEmpty && publishableKey.isNotEmpty;
   bool get isValid {
+    if (!matchesFlavor(flavor, environment)) return false;
     if (kReleaseMode && environment != 'production') return false;
     final uri = Uri.tryParse(url);
     if (uri != null && !BackendProjects.accepts(environment, uri.host)) {
@@ -53,6 +58,11 @@ class AppConfig {
       return false;
     }
   }
+
+  static bool matchesFlavor(String? flavor, String environment) =>
+      flavor == null ||
+      (flavor == 'dev' && environment == 'development') ||
+      (flavor == 'prod' && environment == 'production');
 
   Uri? get supportUri {
     final configured = supportUrl.trim();

@@ -60,13 +60,13 @@ jobs:
       - run: node supabase/admin/build_manual_sessions_review.mjs --check
       - run: node supabase/tests/manual_sessions.mjs
       - run: node supabase/tests/direct_attendance.mjs
-      - run: flutter build apk --debug --no-pub
-      - run: flutter build apk --profile --no-pub
+      - run: flutter build apk --flavor dev --debug --no-pub
+      - run: flutter build apk --flavor dev --profile --no-pub
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: verification-artifacts
           path: |
-            build/app/outputs/flutter-apk/app-debug.apk
-            build/app/outputs/flutter-apk/app-profile.apk
+            build/app/outputs/flutter-apk/app-dev-debug.apk
+            build/app/outputs/flutter-apk/app-dev-profile.apk
             docs/screenshots/

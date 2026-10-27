@@ -1,0 +1,39 @@
+{
+  "androidFlavors": {
+    "dev": {
+      "applicationId": "com.example.centrally.dev",
+      "label": "Centerly Dev"
+    },
+    "prod": {
+      "applicationId": "com.example.centrally",
+      "label": "Centerly"
+    }
+  },
+  "artifacts": {
+    "dev": {
+      "filename": "app-dev-debug.apk",
+      "sha256": "844d7ae78c02a52e7b54c3f1ae0382ec4b63ef5d371aa531a47f7bb70da3e6b8"
+    },
+    "prod": {
+      "filename": "app-prod-debug.apk",
+      "sha256": "2cf6370a54acc9334c3745680b6c39f04403f74eceb26c0f4ea47325a873e822"
+    }
+  },
+  "remoteTelemetryConfigured": false,
+  "deviceInstalled": false,
+  "backendMutations": 0,
+  "diagnosticChecks": 6,
+  "fullFlutterPassed": 321,
+  "fullFlutterSkipped": 2,
+  "selectedEnvironmentChecks": {
+    "dev": 2,
+    "prod": 2
+  },
+  "analyzer": "passed",
+  "flavorBuilds": [
+    "devDebug",
+    "prodDebug"
+  ],
+  "productionConsole": "disabled",
+  "externalTelemetryDeliveryVerified": false
+}

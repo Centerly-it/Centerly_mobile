@@ -14,8 +14,8 @@ In VS Code Run and Debug, choose `dev` or `prod`, then Run. Stop an existing run
 Terminal equivalents:
 
 ```powershell
-flutter run --dart-define-from-file=.env.dev.json
-flutter run --dart-define-from-file=.env.prod.json
+flutter run --flavor dev --dart-define-from-file=.env.dev.json
+flutter run --flavor prod --dart-define-from-file=.env.prod.json
 ```
 
 The old shared production launch entry was removed. `env.production.json` is no longer read by the run/build configurations; the unavailable file from the other computer is not needed. `.env.local.json` is retained as a legacy development source, including existing local test tools. No test credential file was renamed, removed or copied to production. Templates without keys live in `config/env.dev.example.json` and `config/env.prod.example.json`.

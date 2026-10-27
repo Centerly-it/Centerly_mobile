@@ -1,5 +1,8 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../core/config/preview_mode.dart';
+import 'package:http/http.dart' as http;
+import '../core/diagnostics/diagnostic_http_client.dart';
+import '../core/diagnostics/app_diagnostics.dart';
 import 'bootstrap_preview.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/auth/secure_auth_storage.dart';
@@ -51,6 +54,7 @@ Future<void> bootstrapAuth({bool restoreSession = true}) async {
         url: config.url,
         publishableKey: config.publishableKey,
         debug: false,
+        httpClient: DiagnosticHttpClient(http.Client()),
         authOptions: FlutterAuthClientOptions(
           localStorage: storage,
           detectSessionInUri: false,
@@ -71,9 +75,18 @@ Future<void> bootstrapAuth({bool restoreSession = true}) async {
       getIt.registerSingleton<GroupRepository>(GroupRepository(readApi));
       getIt.registerSingleton<StudentRepository>(StudentRepository(readApi));
       getIt.registerSingleton<SessionRepository>(SessionRepository(readApi));
-    } catch (_) {
+    } catch (error, stack) {
+      AppDiagnostics.current.failure(
+        'app.bootstrap',
+        'UNHANDLED_ERROR',
+        stack,
+        error,
+      );
       /* Fail closed; configuration/login screen remains usable. */
     }
+  }
+  if (!config.isConfigured || !config.isValid) {
+    AppDiagnostics.current.failure('app.config', 'CONFIG_INVALID');
   }
   getIt.registerSingleton<TeacherAuthRepository>(repository);
   final session = AuthSessionCubit(repository);

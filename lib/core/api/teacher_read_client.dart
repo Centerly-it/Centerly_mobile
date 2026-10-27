@@ -8,6 +8,7 @@ import 'teacher_read_policy.dart';
 import 'teacher_read_request.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../errors/backend_failure.dart';
+import '../diagnostics/app_diagnostics.dart';
 
 class TeacherReadClient {
   TeacherReadClient(this.client, {this.onAccessDenied, ReadCache? cache})
@@ -66,6 +67,12 @@ class TeacherReadClient {
         client.auth.currentSession?.isExpired == false) {
       final cached = cache.get(key);
       if (cached != null) {
+        AppDiagnostics.current.record(
+          DiagnosticRecord(
+            operation: 'GET /rest/v1/rpc/${teacherReadNames[endpoint]}',
+            outcome: 'cache_hit',
+          ),
+        );
         checkSession();
         return cached;
       }

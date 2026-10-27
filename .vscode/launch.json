@@ -8,6 +8,8 @@
       "program": "lib/main.dart",
       "flutterMode": "debug",
       "toolArgs": [
+        "--flavor",
+        "dev",
         "--dart-define=CENTERLY_UI_PREVIEW=true"
       ]
     },
@@ -18,6 +20,8 @@
       "program": "lib/main.dart",
       "flutterMode": "debug",
       "toolArgs": [
+        "--flavor",
+        "dev",
         "--dart-define-from-file=.env.dev.json",
         "--dart-define=CENTERLY_UI_PREVIEW=false",
         "--dart-define=CENTERLY_FINANCE_MOVEMENT_FILTERS=true"
@@ -30,6 +34,8 @@
       "program": "lib/main.dart",
       "flutterMode": "debug",
       "toolArgs": [
+        "--flavor",
+        "prod",
         "--dart-define-from-file=.env.prod.json",
         "--dart-define=CENTERLY_UI_PREVIEW=false",
         "--dart-define=CENTERLY_FINANCE_MOVEMENT_FILTERS=true"
