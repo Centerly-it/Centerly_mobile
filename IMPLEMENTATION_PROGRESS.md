@@ -2916,3 +2916,6 @@ Reactivation release delivered: Teacher b567a23 pushed, Secretary 4bb4947 deploy
 ## 2026-10-27 — home on cold launch, retain background navigation
 
 Workspace tab selection now lives only in process memory, scoped to the authenticated teacher. main clears that in-memory selection on a new app run; legacy persisted tab values are ignored. A cold launch starts at Home after session validation, while ordinary pause/resume keeps the current tab, nested route and widget state. No lifecycle-resume navigation reset, backend, website or account changes. Verification: 12 session/auth tests, including legacy saved-tab rejection, new app-session reset and unchanged background tab. Manual physical-device testing remains owner-run.
+
+
+2026-10-27: Added a branded support-agent entry to the authenticated workspace More menu, above logout. Both pre-login and in-app contact reuse the same configured external support URL, localized draft message and failure notice. No messages are sent automatically, no credentials/account data included, no backend or website changes. Targeted analyzer and formatting passed; actual external handler remains device-dependent.

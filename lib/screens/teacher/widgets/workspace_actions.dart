@@ -7,6 +7,7 @@ import '../../../core/data/completion_contracts.dart';
 import '../../../features/secretaries/presentation/teacher_secretaries_page.dart';
 import '../../../features/notifications/presentation/notification_bell.dart';
 import '../../../features/auth/presentation/view_models/auth_session_cubit.dart';
+import '../../../features/auth/presentation/widgets/contact_support_button.dart';
 
 class WorkspaceActions extends StatelessWidget {
   const WorkspaceActions({super.key});
@@ -25,6 +26,19 @@ class WorkspaceActions extends StatelessWidget {
             ),
           ],
           PopupMenuItem(
+            value: 'support',
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.support_agent_rounded,
+                  color: ColorManager.primary,
+                ),
+                const SizedBox(width: AppSize.s12),
+                Text('auth_contact_support'.tr()),
+              ],
+            ),
+          ),
+          PopupMenuItem(
             value: 'logout',
             child: Row(
               children: [
@@ -36,6 +50,10 @@ class WorkspaceActions extends StatelessWidget {
           ),
         ],
         onSelected: (value) {
+          if (value == 'support') {
+            ContactSupportButton.contact(context);
+            return;
+          }
           if (value == 'logout') {
             getIt<AuthSessionCubit>().logout();
             return;
