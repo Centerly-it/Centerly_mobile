@@ -47,7 +47,25 @@ class AuthSessionCubit extends Cubit<AuthSessionState> {
       );
     } catch (error) {
       if (!isClosed && generation == _generation) {
-        emit(restoreFailure(error, background: background, previous: previous));
+        final failure = restoreFailure(
+          error,
+          background: background,
+          previous: previous,
+        );
+        emit(failure); // Hide protected UI before clearing the SDK session.
+        if ({
+          'SUBSCRIPTION_INACTIVE',
+          'ACCOUNT_INACTIVE',
+          'AUTH_REQUIRED',
+          'FORBIDDEN_ROLE',
+        }.contains(failure.errorCode)) {
+          try {
+            await repository.logout();
+          } catch (_) {
+            // Confirmed server denial remains authoritative while offline.
+          }
+          if (!isClosed && generation == _generation) emit(failure);
+        }
       }
     } finally {
       if (generation == _generation) _busy = false;

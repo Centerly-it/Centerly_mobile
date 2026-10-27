@@ -89,6 +89,30 @@ void main() {
       repo.failure = const TeacherAuthFailure('SUBSCRIPTION_INACTIVE');
       await cubit.restore(background: true);
       expect(cubit.state.isAuthenticated, isFalse);
+      expect(cubit.state.errorCode, 'SUBSCRIPTION_INACTIVE');
+      expect(repo.logouts, 1);
+      expect(repo.saved, isNull);
+    },
+  );
+  test(
+    'subscription denial survives session cleanup and permits paid login later',
+    () async {
+      repo.saved = profile;
+      await cubit.restore();
+      repo.logoutPending = Completer<void>();
+      repo.failure = const TeacherAuthFailure('SUBSCRIPTION_INACTIVE');
+      final check = cubit.restore(background: true);
+      await Future<void>.delayed(Duration.zero);
+      expect(cubit.state.isAuthenticated, isFalse);
+      expect(cubit.state.errorCode, 'SUBSCRIPTION_INACTIVE');
+      await cubit.login('teacher@example.test', 'password');
+      expect(repo.logins, 0);
+      repo.logoutPending!.complete();
+      await check;
+      expect(cubit.state.errorCode, 'SUBSCRIPTION_INACTIVE');
+      repo.failure = null;
+      await cubit.login('teacher@example.test', 'password');
+      expect(cubit.state.isAuthenticated, isTrue);
     },
   );
   test('logout wins over an in-flight login result', () async {
