@@ -6,3 +6,6 @@ Generated with the built-in image generation tool; references were the C icon co
 Regenerate Android density PNGs using `powershell -NoProfile -File tools/generate_android_launcher.ps1` from the repository. The script only resamples artwork to 48/72/96/144/192 pixels. The existing AndroidManifest references @mipmap/ic_launcher. Source remains outside Flutter runtime asset bundles.
 
 Reviewed the generated 192px icon visually and verified all five output dimensions. No native installation, device launcher acceptance, release build, distribution or website changes performed. Hot Reload cannot replace the OS launcher icon: the next normal Android build/install picks up these resources; some launchers may cache the old icon.
+
+
+Android splash follow-up: values/values-night and Android 12 values-v31/values-night-v31 explicitly use light themes, forceDarkAllowed=false and white colorBackground. Android 12 additionally pins the native splash background, icon backing and launch window. Legacy launch drawables reference the constant @android:color/white rather than an image. Six regression checks cover both day/night paths. Native changes require a rebuild/run, not Hot Reload. Device mode was only queried (Android API 31 / MIUI); no device setting was changed.

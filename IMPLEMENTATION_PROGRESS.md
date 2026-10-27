@@ -2925,3 +2925,6 @@ Workspace tab selection now lives only in process memory, scoped to the authenti
 
 
 2026-10-27: Owner approved the second generated icon with original Centerly cap/books/green check on blue. Saved source as assets/branding/centerly-launcher-v2-approved.png, generated all five Android launcher densities, verified dimensions and visually inspected 192px result. Reproducible packaging and provenance: docs/APP_ICON.md, tools/generate_android_launcher.ps1. No device install or website change. Native launcher change requires a subsequent build/install; Hot Reload alone cannot apply it.
+
+
+2026-10-27 Android splash: explicit light/white launch and normal window backgrounds across values, values-night, values-v31 and values-night-v31, with forced dark rendering disabled. Android 12 splash/icon backgrounds white; legacy launch drawables use constant white. Six regression tests and targeted analyzer passed. Configured development debug APK built successfully; SHA256 fd6a4e722c800a28b76215aa4e199dccc5f0ed79b3b3db180bd46408a2d9829c. Approved new launcher icon included. No installation, device setting change or physical dark-mode acceptance performed; owner must rebuild/run to apply native resources (Hot Reload is insufficient).
