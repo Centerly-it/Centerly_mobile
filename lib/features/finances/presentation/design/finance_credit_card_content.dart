@@ -50,11 +50,14 @@ class FinanceCreditCardContent extends StatelessWidget {
               ),
             ),
             const SizedBox(width: AppSize.s12),
-            Text(
-              'app_name'.tr(),
-              style: AppTextStyles.titleMedium.copyWith(
-                color: ColorManager.white,
-                fontWeight: FontWeight.bold,
+            Transform.translate(
+              offset: const Offset(-AppSize.s8, 0),
+              child: Text(
+                'app_name'.tr(),
+                style: AppTextStyles.titleMedium.copyWith(
+                  color: ColorManager.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],
