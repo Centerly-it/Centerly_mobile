@@ -5,6 +5,7 @@ import 'app/bootstrap_auth.dart';
 import 'core/config/preview_mode.dart';
 import 'core/localization/codegen_loader.g.dart';
 import 'app/session_lifecycle.dart';
+import 'screens/teacher/workspace_selection.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:centrally/core/di/di.dart';
@@ -20,6 +21,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 Future<void> main() async {
+  WorkspaceSelection.startAppSession();
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 

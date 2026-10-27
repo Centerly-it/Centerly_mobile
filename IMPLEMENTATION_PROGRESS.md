@@ -2911,3 +2911,8 @@ Both environments deployed exactly one migration after unchanged 38-version base
 
 
 Reactivation release delivered: Teacher b567a23 pushed, Secretary 4bb4947 deployed (b122d846); live build/production CSP/six assets match, all 39 migration hashes retained. Secretary full suite 79 tests passed. No hosted account reactivation or device acceptance performed.
+
+
+## 2026-10-27 — home on cold launch, retain background navigation
+
+Workspace tab selection now lives only in process memory, scoped to the authenticated teacher. main clears that in-memory selection on a new app run; legacy persisted tab values are ignored. A cold launch starts at Home after session validation, while ordinary pause/resume keeps the current tab, nested route and widget state. No lifecycle-resume navigation reset, backend, website or account changes. Verification: 12 session/auth tests, including legacy saved-tab rejection, new app-session reset and unchanged background tab. Manual physical-device testing remains owner-run.
