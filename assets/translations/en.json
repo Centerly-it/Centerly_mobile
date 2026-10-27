@@ -483,6 +483,8 @@
   "completion_removal_handled": "Removal request handled",
   "completion_requested_at": "Requested: {}",
   "completion_handled_at": "Handled: {}",
+  "completion_reactivate": "Reactivate access",
+  "completion_reactivate_confirm": "Reactivate {}? They will be able to sign in and work again.",
   "completion_request_removal": "Deactivate access",
   "completion_removal_confirm": "Deactivate {} immediately? Access to your data will stop. Existing attendance and payment history will be preserved.",
   "completion_notifications": "Notifications",

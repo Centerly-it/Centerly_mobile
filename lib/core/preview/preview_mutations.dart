@@ -6,6 +6,11 @@ dynamic previewMutation(
   String now,
 ) {
   switch (rpc) {
+    case 'reactivate_secretary':
+      for (final row in data['secretaries']['rows']) {
+        if (row['id'] == p['p_secretary_id']) row['status'] = 'active';
+      }
+      return p['p_secretary_id'];
     case 'deactivate_secretary':
       for (final row in data['secretaries']['rows']) {
         if (row['id'] == p['p_secretary_id']) {

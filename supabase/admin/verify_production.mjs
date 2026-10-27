@@ -5,7 +5,7 @@ import {environmentQuery} from './environment_database.mjs';
 import {sqlTokens} from './sql_tokens.mjs';
 const dev='yfeubomyglmhuwizaqoj',prod='ohhwccwwwxfmwpfypfyf';
 const manifest=JSON.parse(await readFile('supabase/schema-manifest.json','utf8'));
-assert.equal(manifest.migrations.length,38);
+assert.equal(manifest.migrations.length,39);
 const history=await environmentQuery(prod,'select version,name,statements from supabase_migrations.schema_migrations order by version');
 assert.deepEqual(history.map(m=>m.version),manifest.migrations.map(m=>m.file.split('_')[0]));
 for(const m of manifest.migrations){

@@ -41,6 +41,7 @@ jobs:
       - run: node supabase/tests/student_profile_proposal.mjs
       - run: node supabase/tests/teacher_completion_package.mjs
       - run: node supabase/tests/subscription_access.mjs
+      - run: node supabase/tests/secretary_reactivation.mjs
       - run: node supabase/tests/secretary_deactivation.mjs
       - run: node supabase/tests/completion_integrity.mjs
       - run: node supabase/tests/finance_business.mjs

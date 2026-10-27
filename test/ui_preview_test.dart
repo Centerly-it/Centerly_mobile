@@ -84,6 +84,11 @@ void main() {
       transport.responses.data['secretaries']['rows'][0]['status'],
       'inactive',
     );
+    await TeacherActions(api).reactivateSecretary(secretary.id);
+    expect(
+      transport.responses.data['secretaries']['rows'][0]['status'],
+      'active',
+    );
     final notifications = await api.read(TeacherRead.notifications);
     final notification = NotificationRecord.fromJson(
       Map<String, dynamic>.from(notifications['rows'][0]),

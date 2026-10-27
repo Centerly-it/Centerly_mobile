@@ -46,7 +46,18 @@ class TeacherSecretariesPage extends StatelessWidget {
                         .read<PagedReadCubit<SecretaryRecord, NoSummary>>()
                         .refresh,
                   )
-                : null,
+                : TeacherActionButton(
+                    label: 'completion_reactivate'.tr(),
+                    confirmation: 'completion_reactivate_confirm'.tr(
+                      args: [r.name],
+                    ),
+                    action: () => TeacherActions(
+                      getIt<TeacherReadClient>(),
+                    ).reactivateSecretary(r.id),
+                    onReconcile: context
+                        .read<PagedReadCubit<SecretaryRecord, NoSummary>>()
+                        .refresh,
+                  ),
           ),
         ),
       ),

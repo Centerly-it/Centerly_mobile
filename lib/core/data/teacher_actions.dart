@@ -6,6 +6,8 @@ class TeacherActions {
   final TeacherReadClient api;
   Future<void> deactivateSecretary(String id) =>
       _write('deactivate_secretary', {'p_secretary_id': id});
+  Future<void> reactivateSecretary(String id) =>
+      _write('reactivate_secretary', {'p_secretary_id': id});
   Future<void> markRead(String id) =>
       _write('mark_notification_read', {'p_id': id});
   Future<void> _write(String rpc, Map<String, dynamic> params) async {

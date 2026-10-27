@@ -2901,3 +2901,10 @@ Owner selected manual subscription suspension by administration. Existing subscr
 
 
 Subscription release delivered: Teacher 262990a pushed; Secretary dcc9271 published at https://centerly-secretary.pages.dev (deployment 77f218ce). Live build/CSP/six assets verified. All 38 backend migration hashes unchanged, zero pending; no hosted account changes.
+
+
+## 2026-10-27 — restore secretary access from the same card
+
+Teacher secretary cards now show Reactivate access for inactive secretaries with explicit confirmation and server reconciliation. reactivate_secretary(uuid) requires an active owning teacher and subscription, serializes seat allocation on the teacher row, respects secretary_seats, locks the target and appends one audit event atomically. Duplicate/concurrent requests are idempotent; no Auth/password changes or historical-row deletion. A reactivated secretary signs in again with existing credentials; old removal history stays handled.
+
+Both environments deployed exactly one migration after unchanged 38-version baselines; all 18 public-table fingerprints unchanged. Current catalogs match at 39 versions / 87 functions / 30 policies / 30 triggers. Production remains empty. Evidence: docs/secretary-reactivation-acceptance.json. Verification: 15 isolated native PostgreSQL checks including cross-tenant/role denial, subscription/seat limits, rollback and competing seat allocations; 90 baseline SQL checks; 4 Flutter checks; clean analyzer; 2 actual authenticated hosted denied REST calls. Existing inactive synthetic secretary is accepted as ACCOUNT_INACTIVE, rather than assuming every retained account is active. No hosted account was reactivated for testing; no manual device pass claimed.
