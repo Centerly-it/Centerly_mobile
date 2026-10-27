@@ -79,12 +79,10 @@ void main() {
     final secretary = SecretaryRecord.fromJson(
       Map<String, dynamic>.from(secretaries['rows'][0]),
     );
-    await TeacherActions(api).requestRemoval(secretary.id);
+    await TeacherActions(api).deactivateSecretary(secretary.id);
     expect(
-      transport
-          .responses
-          .data['secretaries']['rows'][0]['removal_request']['status'],
-      'pending',
+      transport.responses.data['secretaries']['rows'][0]['status'],
+      'inactive',
     );
     final notifications = await api.read(TeacherRead.notifications);
     final notification = NotificationRecord.fromJson(

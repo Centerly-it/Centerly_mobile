@@ -2882,3 +2882,11 @@ Final local verification: Secretary npm run check PASS (format, lint, 25 tests, 
 
 
 2026-10-27 website publication: Secretary https://centerly-secretary.pages.dev deployed at application revision 1d39c8eae108dc22e70274b649f9d3c7ca8090c1 (Cloudflare deployment 7825d770). Verified live HTTP 200, matching build identity and six entry assets; CSP points only to centerly-prod. Teacher environment/UI revision b00ef9f pushed to main. Both backend datasets unchanged; production accounts remain empty. Owner requests validated pushes after future edits and direct website publication for website changes. No native install or manual-device pass claimed.
+
+
+## 2026-10-27 — immediate secretary access deactivation
+
+- Teacher-only deactivate_secretary(uuid) requires an active owning teacher, locks the secretary row, changes application status to inactive, resolves any pending removal request and appends one audit event in a single transaction. Repeated/concurrent calls are idempotent. Auth users, passwords and historical attendance/payment/academic records are preserved. Legacy request RPC remains compatible; current Teacher UI uses immediate deactivation, including previously pending requests, after explicit confirmation. Legacy navigation delegates to the same authenticated flow.
+- Both dev and prod now have 38 migrations; exact 37-version baseline checked and each dry run listed only the new migration. All 18 business-table fingerprints unchanged during deployment. Full catalogs match: 86 functions, 30 policies, 30 triggers. Production still has zero users/rows.
+- Evidence: docs/secretary-deactivation-acceptance.json. Tests: 19 isolated native PostgreSQL role checks (including tenant isolation, existing-session denial, concurrent idempotency, audit-failure rollback and history preservation), 90 baseline SQL checks, 4 Flutter checks, 6 Secretary auth checks and 2 actual authenticated hosted REST denied calls without deactivating any hosted account. No physical-device acceptance claimed.
+- Access is denied on subsequent server requests; already-rendered browser data clears on profile polling (60 seconds), focus or access-denied response. No claim to retract previously downloaded information or abort operations already in flight. No reactivation UI added.

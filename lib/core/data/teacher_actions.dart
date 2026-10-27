@@ -4,8 +4,8 @@ import '../errors/backend_failure.dart';
 class TeacherActions {
   const TeacherActions(this.api);
   final TeacherReadClient api;
-  Future<void> requestRemoval(String id) =>
-      _write('request_secretary_removal', {'p_secretary_id': id});
+  Future<void> deactivateSecretary(String id) =>
+      _write('deactivate_secretary', {'p_secretary_id': id});
   Future<void> markRead(String id) =>
       _write('mark_notification_read', {'p_id': id});
   Future<void> _write(String rpc, Map<String, dynamic> params) async {

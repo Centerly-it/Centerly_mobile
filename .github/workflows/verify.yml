@@ -40,6 +40,7 @@ jobs:
       - run: node supabase/tests/session_detail_proposal.mjs
       - run: node supabase/tests/student_profile_proposal.mjs
       - run: node supabase/tests/teacher_completion_package.mjs
+      - run: node supabase/tests/secretary_deactivation.mjs
       - run: node supabase/tests/completion_integrity.mjs
       - run: node supabase/tests/finance_business.mjs
       - run: node supabase/tests/logic_hardening.mjs

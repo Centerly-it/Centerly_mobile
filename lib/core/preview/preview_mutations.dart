@@ -6,6 +6,18 @@ dynamic previewMutation(
   String now,
 ) {
   switch (rpc) {
+    case 'deactivate_secretary':
+      for (final row in data['secretaries']['rows']) {
+        if (row['id'] == p['p_secretary_id']) {
+          row['status'] = 'inactive';
+          final request = row['removal_request'];
+          if (request != null && request['status'] == 'pending') {
+            request['status'] = 'handled';
+            request['handled_at'] = now;
+          }
+        }
+      }
+      return p['p_secretary_id'];
     case 'save_teacher_note':
       data['note'] = {
         'note': {'content': p['p_content'], 'updated_at': now},

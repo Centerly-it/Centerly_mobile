@@ -40,3 +40,5 @@ supabase/migrations/202610250001_group_materials.sql text eol=lf
 supabase/migrations/202610250002_teacher_notification_scope.sql text eol=lf
 
 supabase/migrations/202610260001_daily_operations.sql text eol=lf
+
+supabase/migrations/202610270001_secretary_deactivation.sql text eol=lf

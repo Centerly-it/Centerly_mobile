@@ -75,7 +75,7 @@ void main() {
       try {
         final generation = api.cache.generation;
         await expectLater(
-          TeacherActions(api).requestRemoval('secretary'),
+          TeacherActions(api).deactivateSecretary('secretary'),
           throwsA(isA<BackendFailure>()),
         );
         expect(calls, 1);

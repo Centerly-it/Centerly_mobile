@@ -33,7 +33,7 @@ class TeacherSecretariesPage extends StatelessWidget {
           loadingShape: LoadingShape.cards,
           item: (context, r) => SecretaryCard(
             record: r,
-            action: r.status == 'active' && r.requestStatus != 'pending'
+            action: r.status == 'active'
                 ? TeacherActionButton(
                     label: 'completion_request_removal'.tr(),
                     confirmation: 'completion_removal_confirm'.tr(
@@ -41,7 +41,7 @@ class TeacherSecretariesPage extends StatelessWidget {
                     ),
                     action: () => TeacherActions(
                       getIt<TeacherReadClient>(),
-                    ).requestRemoval(r.id),
+                    ).deactivateSecretary(r.id),
                     onReconcile: context
                         .read<PagedReadCubit<SecretaryRecord, NoSummary>>()
                         .refresh,
