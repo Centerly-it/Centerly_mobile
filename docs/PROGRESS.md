@@ -211,3 +211,6 @@ Workspace tab selection now lives only in process memory, scoped to the authenti
 
 
 2026-10-27 support fix: local dev/prod/legacy JSONs explicitly contained an empty CENTERLY_SUPPORT_URL, overriding String.fromEnvironment default. AppConfig now resolves empty/whitespace support values to the established public WhatsApp URL; explicit valid overrides remain supported and invalid schemes rejected. Corrected ignored local configuration files and environment-generation fallback, plus public example. Six targeted config checks passed, one define-file-only check skipped without its define flag; analyzer clean. Connected Android resolves the HTTPS support link through MIUI resolver (read-only check only; no app install, launch or message sent). Existing in-memory config benefits on Hot Reload because supportUri fallback is computed on access.
+
+
+2026-10-27: Owner approved the second generated icon with original Centerly cap/books/green check on blue. Saved source as assets/branding/centerly-launcher-v2-approved.png, generated all five Android launcher densities, verified dimensions and visually inspected 192px result. Reproducible packaging and provenance: docs/APP_ICON.md, tools/generate_android_launcher.ps1. No device install or website change. Native launcher change requires a subsequent build/install; Hot Reload alone cannot apply it.
