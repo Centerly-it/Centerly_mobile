@@ -23,7 +23,7 @@ report.hostedAuthenticatedDeniedChecks=checks;
 report.hostedSecretaryActuallyReactivated=false;
 report.localPostgresRoleChecks=15;
 report.flutterChecks=4;
-report.secretaryAuthChecks=6;
+report.secretaryUnitTests=79;
 report.manualDeviceTested=false;
 await writeFile(path,JSON.stringify(report,null,2)+'\n');
 console.log('PASS: 2 actual authenticated development REST denial checks; no account status or business data writes.');
