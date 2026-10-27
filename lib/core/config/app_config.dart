@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'backend_projects.dart';
 
 class AppConfig {
+  static const defaultSupportUrl = 'https://wa.me/201028684980';
   const AppConfig({
     required this.url,
     required this.publishableKey,
@@ -14,7 +15,7 @@ class AppConfig {
     publishableKey: String.fromEnvironment('SUPABASE_PUBLISHABLE_KEY'),
     supportUrl: String.fromEnvironment(
       'CENTERLY_SUPPORT_URL',
-      defaultValue: 'https://wa.me/201028684980',
+      defaultValue: defaultSupportUrl,
     ),
     environment: String.fromEnvironment('APP_ENV', defaultValue: 'development'),
   );
@@ -54,8 +55,10 @@ class AppConfig {
   }
 
   Uri? get supportUri {
-    if (supportUrl.isEmpty) return null;
-    final uri = Uri.tryParse(supportUrl);
+    final configured = supportUrl.trim();
+    final uri = Uri.tryParse(
+      configured.isEmpty ? defaultSupportUrl : configured,
+    );
     return uri != null &&
             ['https', 'tel', 'mailto'].contains(uri.scheme) &&
             (uri.scheme != 'https' || uri.host.isNotEmpty)

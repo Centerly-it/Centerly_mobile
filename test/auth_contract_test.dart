@@ -6,6 +6,33 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() {
+  test(
+    'blank support overrides use the public default; explicit links are respected',
+    () {
+      for (final value in ['', '   ']) {
+        expect(
+          AppConfig(url: '', publishableKey: '', supportUrl: value).supportUri,
+          Uri.parse(AppConfig.defaultSupportUrl),
+        );
+      }
+      expect(
+        const AppConfig(
+          url: '',
+          publishableKey: '',
+          supportUrl: 'https://support.example.com',
+        ).supportUri,
+        Uri.parse('https://support.example.com'),
+      );
+      expect(
+        const AppConfig(
+          url: '',
+          publishableKey: '',
+          supportUrl: 'javascript:alert(1)',
+        ).supportUri,
+        isNull,
+      );
+    },
+  );
   const id = '10000000-0000-0000-0000-000000000001';
   test(
     'only verified teacher identity matching Auth UID and tenant is accepted',
@@ -96,7 +123,7 @@ void main() {
         isFalse,
       );
       expect(config.isValid, isFalse);
-      expect(config.supportUri, isNull);
+      expect(config.supportUri, Uri.parse(AppConfig.defaultSupportUrl));
       expect(
         const AppConfig(
           url: 'https://ohhwccwwwxfmwpfypfyf.supabase.co',

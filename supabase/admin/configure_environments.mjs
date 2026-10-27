@@ -23,6 +23,7 @@ const publicKey=keys.find(k=>k.type==='publishable')?.api_key??keys.find(k=>k.na
 assert.ok(publicKey);assert.ok(!publicKey.startsWith('sb_secret_'));
 if(!publicKey.startsWith('sb_publishable_'))assert.equal(JSON.parse(Buffer.from(publicKey.split('.')[1],'base64url')).role,'anon');
 const common=Object.fromEntries(Object.entries(source).filter(([k])=>k.startsWith('CENTERLY_')));
+if(!common.CENTERLY_SUPPORT_URL?.trim())common.CENTERLY_SUPPORT_URL='https://wa.me/201028684980';
 const configurations={dev:{...common,APP_ENV:'development',SUPABASE_URL:source.SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY:source.SUPABASE_PUBLISHABLE_KEY},prod:{...common,APP_ENV:'production',SUPABASE_URL:'https://'+prod+'.supabase.co',SUPABASE_PUBLISHABLE_KEY:publicKey}};
 for(const [name,c] of Object.entries(configurations)){
  c.CENTERLY_UI_PREVIEW=false;c.CENTERLY_FINANCE_MOVEMENT_FILTERS=true;

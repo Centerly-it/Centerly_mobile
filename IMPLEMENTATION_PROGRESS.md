@@ -2919,3 +2919,6 @@ Workspace tab selection now lives only in process memory, scoped to the authenti
 
 
 2026-10-27: Added a branded support-agent entry to the authenticated workspace More menu, above logout. Both pre-login and in-app contact reuse the same configured external support URL, localized draft message and failure notice. No messages are sent automatically, no credentials/account data included, no backend or website changes. Targeted analyzer and formatting passed; actual external handler remains device-dependent.
+
+
+2026-10-27 support fix: local dev/prod/legacy JSONs explicitly contained an empty CENTERLY_SUPPORT_URL, overriding String.fromEnvironment default. AppConfig now resolves empty/whitespace support values to the established public WhatsApp URL; explicit valid overrides remain supported and invalid schemes rejected. Corrected ignored local configuration files and environment-generation fallback, plus public example. Six targeted config checks passed, one define-file-only check skipped without its define flag; analyzer clean. Connected Android resolves the HTTPS support link through MIUI resolver (read-only check only; no app install, launch or message sent). Existing in-memory config benefits on Hot Reload because supportUri fallback is computed on access.
