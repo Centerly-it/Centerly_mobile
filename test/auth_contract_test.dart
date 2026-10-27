@@ -93,13 +93,13 @@ void main() {
           publishableKey: 'sb_publishable_live',
           environment: 'production',
         ).isValid,
-        isTrue,
+        isFalse,
       );
       expect(config.isValid, isFalse);
       expect(config.supportUri, isNull);
       expect(
         const AppConfig(
-          url: 'https://production.supabase.co',
+          url: 'https://ohhwccwwwxfmwpfypfyf.supabase.co',
           publishableKey: 'sb_publishable_live',
           environment: 'production',
           supportUrl: 'https://support.example.com',

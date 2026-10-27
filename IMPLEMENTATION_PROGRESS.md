@@ -1,3 +1,13 @@
+## Separate dev/prod environments — 27 October 2026
+
+Owner-authorized creation of one new Free centerly-prod project (ohhwccwwwxfmwpfypfyf), retaining centerly-dev (yfeubomyglmhuwizaqoj) and all test records. Reconciled 3 missing canonical migrations from commit 6f86568; verified 37-version development catalog before copying the unchanged schema to a proven empty production project. Postflight: 85 functions, 18 tables, 30 policies, 30 triggers, matching grants/indexes/constraints. All 18 production tables and Auth users empty; development row fingerprints and financial totals unchanged. No paid resources, fixture replay, account creation, app restart/install/build or website publication.
+
+Teacher VS Code modes dev/prod use ignored .env.dev.json/.env.prod.json; shared production configuration removed and cross-environment guards restored. Secretary mode files, public build guards and host-scoped sessions prepared. Config tests: 7 dev and 6 prod; 77 web tests; 90 isolated SQL-role checks; actual anonymous REST guards passed. Production authenticated/manual acceptance is unavailable until owner provisions real accounts. See docs/ENVIRONMENTS.md and docs/environment-acceptance.json; empty production/config readiness does not claim public launch or backup readiness.
+
+## Dashboard day scope and monthly collection wording — 27 October 2026
+
+The dashboard group tile counts distinct groups with noncancelled sessions on the server-selected date, instead of the teacher-wide group total. Multiple lessons in one group count once; no lessons count zero. The backend total is retained unchanged. Dashboard and finance headings now describe the monthly amount expected for collection; removed the invoice-count subtitle without changing any balances, financial formulas or backend requests. Arabic/English and compiled locale resources updated together. Validation: 22 targeted dashboard/finance and layout tests passed; targeted analyzer clean. No app restart/install, hosted writes or unrelated lockfile changes.
+
 ## QA-20261026 — Cross-app business/security/readiness review
 
 Current source base 273cb1b plus existing terminology and QA working-tree changes; canonical migration ownership remains Secretary .canonical-review / Teacher commit 36c0bc9 at migration 36. Original Teacher migration-34 manifest remains untouched and matches the canonical prefix. Shared actionable report/business-flow matrix and owner choices: /Users/mohamedsalem/Desktop/Centerly_secretary/docs/qa/2026-10-26/READINESS.md and PRODUCT_DECISIONS_AR.md.

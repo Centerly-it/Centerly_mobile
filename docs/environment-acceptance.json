@@ -1,0 +1,143 @@
+{
+  "at": "2026-10-27T07:59:18.611Z",
+  "pass": true,
+  "productionRef": "ohhwccwwwxfmwpfypfyf",
+  "developmentRef": "yfeubomyglmhuwizaqoj",
+  "migrations": 37,
+  "functions": 85,
+  "tables": 18,
+  "policies": 30,
+  "triggers": 30,
+  "empty": {
+    "auth_users": 0,
+    "storage_objects": 0,
+    "storage_buckets": 0
+  },
+  "businessCounts": [
+    {
+      "name": "assignments",
+      "rows": 0
+    },
+    {
+      "name": "attendance",
+      "rows": 0
+    },
+    {
+      "name": "attendance_change_log",
+      "rows": 0
+    },
+    {
+      "name": "audit_events",
+      "rows": 0
+    },
+    {
+      "name": "exams",
+      "rows": 0
+    },
+    {
+      "name": "grade_levels",
+      "rows": 0
+    },
+    {
+      "name": "group_enrollments",
+      "rows": 0
+    },
+    {
+      "name": "group_schedules",
+      "rows": 0
+    },
+    {
+      "name": "groups",
+      "rows": 0
+    },
+    {
+      "name": "invoices",
+      "rows": 0
+    },
+    {
+      "name": "notifications",
+      "rows": 0
+    },
+    {
+      "name": "payments",
+      "rows": 0
+    },
+    {
+      "name": "secretaries",
+      "rows": 0
+    },
+    {
+      "name": "secretary_removal_requests",
+      "rows": 0
+    },
+    {
+      "name": "sessions",
+      "rows": 0
+    },
+    {
+      "name": "students",
+      "rows": 0
+    },
+    {
+      "name": "teacher_notes",
+      "rows": 0
+    },
+    {
+      "name": "teachers",
+      "rows": 0
+    }
+  ],
+  "devBusinessWrites": 0,
+  "configuration": {
+    "at": "2026-10-27T08:00:09.866Z",
+    "pass": true,
+    "authFieldsMatched": [
+      "disable_signup",
+      "external_email_enabled",
+      "external_anonymous_users_enabled",
+      "password_min_length",
+      "mailer_autoconfirm",
+      "jwt_exp",
+      "security_refresh_token_reuse_interval",
+      "site_url",
+      "uri_allow_list"
+    ],
+    "selfSignup": false,
+    "anonymousSignup": false,
+    "projectRefs": {
+      "dev": "yfeubomyglmhuwizaqoj",
+      "prod": "ohhwccwwwxfmwpfypfyf"
+    },
+    "publicConfigsWritten": [
+      ".env.dev.json",
+      ".env.prod.json"
+    ],
+    "accountsCreated": 0,
+    "businessRowsCopied": 0,
+    "storageBuckets": 0,
+    "edgeFunctions": 0
+  },
+  "restSmoke": {
+    "at": "2026-10-27T08:03:34.969Z",
+    "pass": true,
+    "checks": 6,
+    "mode": "actual hosted anonymous REST guards; no user accounts created",
+    "businessWrites": 0,
+    "authenticatedProductionChecks": "unavailable until the owner provisions a real account"
+  },
+  "developmentRowsAndFinancialTotalsUnchanged": true,
+  "tests": {
+    "flutterDev": 7,
+    "flutterProd": 6,
+    "secretary": 77,
+    "sqlRoleSimulation": 90,
+    "migrationHashes": 37
+  },
+  "allHostedAuthSettingsIdentical": true,
+  "webProductionBuild": {
+    "pass": true,
+    "filesScanned": 14,
+    "credentialMatches": 0,
+    "published": false
+  }
+}

@@ -19,6 +19,13 @@ class DashboardSummary {
   final AttendanceCounts attendance;
   final DateTime? attendanceSyncedAt;
   final List<SessionRecord> sessions;
+  int get scheduledGroups => sessions
+      .where(
+        (s) => s.localDate == localDate && s.status != SessionStatus.cancelled,
+      )
+      .map((s) => s.groupId)
+      .toSet()
+      .length;
   int get scheduledMinutes => sessions
       .where((s) => s.status != SessionStatus.cancelled)
       .fold(0, (total, s) => total + s.endsAt.difference(s.startsAt).inMinutes);

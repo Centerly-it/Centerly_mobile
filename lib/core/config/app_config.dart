@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'backend_projects.dart';
 
 class AppConfig {
   const AppConfig({
@@ -22,6 +23,9 @@ class AppConfig {
   bool get isValid {
     if (kReleaseMode && environment != 'production') return false;
     final uri = Uri.tryParse(url);
+    if (uri != null && !BackendProjects.accepts(environment, uri.host)) {
+      return false;
+    }
     if (!['development', 'production'].contains(environment) ||
         (environment == 'production' && publishableKey.contains('fixture'))) {
       return false;

@@ -1,3 +1,7 @@
+## Separate hosted environments — 27 October 2026
+
+Development remains centerly-dev (yfeubomyglmhuwizaqoj) with its retained synthetic records. Production is the newly created empty Free centerly-prod (ohhwccwwwxfmwpfypfyf), on the same canonical 37 migrations through 202610260001. The 3 missing local files were recovered unchanged from commit 6f86568 and matched development history/catalog before replication. All 85 functions, 18 tables, 30 policies, 30 triggers and grants/indexes/constraints match; production has no Auth users or business records. All hosted Auth settings match. Client configurations and token namespaces are separated; public/self signup remains disabled. No test fixtures or data were copied, and no published client was redeployed. See ENVIRONMENTS.md and environment-acceptance.json for the verified setup and later real-account provisioning steps.
+
 ## 2026-10-24 — Direct attendance, development migration 34
 
 Owner-requested removal of attendance approval: Secretary has no finalize action, manual-mode notice, finalization metadata or correction-reason field. Status choices save immediately; unmarked students remain unmarked. Existing finalized sessions can be corrected without a reason. The retired finalize RPC no longer grants execute to authenticated clients; historical metadata and immutable change logs are preserved. Tenant, role, cancelled-session and optimistic-concurrency checks remain enforced.

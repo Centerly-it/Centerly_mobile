@@ -9,10 +9,12 @@ class AppSurfaceSection extends StatelessWidget {
     required this.title,
     required this.icon,
     required this.child,
+    this.headerSpacing = AppSize.s12,
     super.key,
   });
   final String title;
   final Widget icon, child;
+  final double headerSpacing;
   @override
   Widget build(BuildContext context) => AppSurfacePanel(
     child: Column(
@@ -32,7 +34,7 @@ class AppSurfaceSection extends StatelessWidget {
             Expanded(child: Text(title, style: AppTextStyles.bodySemiBold)),
           ],
         ),
-        const SizedBox(height: AppSize.s12),
+        SizedBox(height: headerSpacing),
         child,
       ],
     ),

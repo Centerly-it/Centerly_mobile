@@ -1,0 +1,155 @@
+{
+  "projectRef": "ohhwccwwwxfmwpfypfyf",
+  "environment": "production",
+  "lastMigration": "202610260001",
+  "migrations": [
+    {
+      "file": "202610180001_identity.sql",
+      "sha256": "fa4fe6f808b040f910a209736fb16664ede828978b8ffe3ce7f83f14f5cfcef8"
+    },
+    {
+      "file": "202610180002_students_groups.sql",
+      "sha256": "0ede19e0c2e36b1283a82d26474a86ec87cfe9c39e9eec038a4566381065177d"
+    },
+    {
+      "file": "202610180003_records.sql",
+      "sha256": "f5d28f86306f6d6de6cd35db1cbbc113cedcb99c89e79a6fcc252aca1de8ad66"
+    },
+    {
+      "file": "202610180004_authorization.sql",
+      "sha256": "63906dd09f663d694016e9543e271ba1d2fac037277b12c69418c2b5b89a71a6"
+    },
+    {
+      "file": "202610180005_attendance.sql",
+      "sha256": "c4fd4cc06302ea030a3afdd82a35e67f44b58dc684e49157f9c84455232d267d"
+    },
+    {
+      "file": "202610180006_finance.sql",
+      "sha256": "1828a9f0f4de8501c1ecda1ee9c2eb7576ec58b3dfdb7e723d86f39e9c3400f6"
+    },
+    {
+      "file": "202610180007_teacher_actions.sql",
+      "sha256": "f7048938c77b8cd17e89060948ef5e8dc263ef1b8df6bc57db1d5cbfc57527d7"
+    },
+    {
+      "file": "202610180008_schedule_generation.sql",
+      "sha256": "b288c204f2dab34d4855c1ff5ba24c2e4cd1232528730f97ed9d71e836f5b8e1"
+    },
+    {
+      "file": "202610180009_read_contract.sql",
+      "sha256": "b03c5b4fff1455b6e1fe50ce63edc173e7a74c9f785f87eec1e44a609d53047c"
+    },
+    {
+      "file": "202610190001_teacher_browse.sql",
+      "sha256": "6830529e9cc9bbd9812f406bd7ce272492e199807e0126d5cc45ae2271f817b8"
+    },
+    {
+      "file": "202610190002_session_detail.sql",
+      "sha256": "7a93684737cab4be2b9b0a281c000c139271770532131533f92c54615f7d8273"
+    },
+    {
+      "file": "202610190003_student_profile.sql",
+      "sha256": "760740f7d4ea2c59cbaa645619fcf8f22375d73eadd115c12277c4ff3ce291e5"
+    },
+    {
+      "file": "202610190004_teacher_read_helpers.sql",
+      "sha256": "5de720f00f265769fcf58f67ba6644c10b740d54499b27ab4ce5c7c72826fadb"
+    },
+    {
+      "file": "202610190005_teacher_academics.sql",
+      "sha256": "cfbf4289a59cd0be201350a41a0b1e9bdc82d14b554d66d9e48a5c434885e1d6"
+    },
+    {
+      "file": "202610190006_teacher_student_attendance.sql",
+      "sha256": "7d89703812852eeab26e9a72238f4e918a37f97a351d3319962243b37e25813d"
+    },
+    {
+      "file": "202610190007_teacher_finance.sql",
+      "sha256": "e1b5255ef353e58d56fb53a01270297028c36535d680e1bb58e610271515a83f"
+    },
+    {
+      "file": "202610190008_teacher_people_events.sql",
+      "sha256": "7fc3629a20a59ece96af8b6d5a2ecdc245538c18164df3e770070326920e4b64"
+    },
+    {
+      "file": "202610190009_teacher_calendar.sql",
+      "sha256": "c8ae664ccb31dd439068927ac2cd761dcd8a6fa7965ca7914ddb7aa986b8a503"
+    },
+    {
+      "file": "202610190010_teacher_event_producers.sql",
+      "sha256": "988718aa10559528fda4b47f55a8803059492c4177257bbc2007973214dc02b0"
+    },
+    {
+      "file": "202610200001_finance_overview.sql",
+      "sha256": "a678fa4f06d43b8dc28439d5a0723bcc05c2b508906481c3aa70447dcec19206"
+    },
+    {
+      "file": "202610200002_invoice_detail.sql",
+      "sha256": "dfc4e1ab01a986b818caa366976ee163406997424348f8a9999d1a987d8219df"
+    },
+    {
+      "file": "202610200003_finance_dues.sql",
+      "sha256": "47f0467802e6a10f67c7ea7d2943d5e450acac6bec1bf626a26a652cfd17ae60"
+    },
+    {
+      "file": "202610200004_preserve_void_invoices.sql",
+      "sha256": "6ceb7a1b9c3fc331cf186a2e95783a742626a3357deaae2bbbd1fa2126717b20"
+    },
+    {
+      "file": "202610200005_enrollment_timeline.sql",
+      "sha256": "6cb0278715d11f4278130616a633ccc9e88b351a3a09b7d68c0eb6166507839b"
+    },
+    {
+      "file": "202610200006_ongoing_attendance.sql",
+      "sha256": "133967844480b543e3ba6611ea334825d5289652a242d5ba203fca268792333b"
+    },
+    {
+      "file": "202610220001_finance_movements.sql",
+      "sha256": "e59af624e58ddb7875fc59c6f02278806fcdb8eb8c93ec8b0765a17848e2eedf"
+    },
+    {
+      "file": "202610220002_secretary_operations.sql",
+      "sha256": "b23fbfcc0ad6a55c21a03c4c4d1a85e42f3234cab63ef970ad72343633d6ff43"
+    },
+    {
+      "file": "202610230001_controlled_pilot_history_balances.sql",
+      "sha256": "ee8d4686b137eab302da2a1d7e4e0d24f30f6e0dae33e350b5dd69788dc89166"
+    },
+    {
+      "file": "202610230002_group_pricing.sql",
+      "sha256": "d3cf4a30a25cf6bf2d5d06f5c0c9fde905b3dff0a31c6a72dd893fc69ae51786"
+    },
+    {
+      "file": "202610230003_simple_finance_edit.sql",
+      "sha256": "da8068b9da19e64b201a68491ac8ba38a6dd51fad9a69177df0f097bb0c75813"
+    },
+    {
+      "file": "202610230004_required_group_schedule.sql",
+      "sha256": "006e350c0847773da71f68af2f9d8b36d278d2d8a95f06590af38ccbb621e6c6"
+    },
+    {
+      "file": "202610230005_multi_day_group.sql",
+      "sha256": "58ba6ca8b771040d0e6e7bfa2216cf0e654c706a2301ea4b929d92f8ff3817a5"
+    },
+    {
+      "file": "202610240001_manual_sessions.sql",
+      "sha256": "2fdf329a8abae1545c4e08e2a9cc6c7c8daf695a4845f3e4ac61496c4af76da4"
+    },
+    {
+      "file": "202610240002_direct_attendance.sql",
+      "sha256": "41cd3a6a9b06250e721a477579f6575d9e771f8646f13e8687ec190df44d16cb"
+    },
+    {
+      "file": "202610250001_group_materials.sql",
+      "sha256": "94813e07c1f600da7f1011a6bcfe27d6347f71492a815d2ef9096eae15cbff07"
+    },
+    {
+      "file": "202610250002_teacher_notification_scope.sql",
+      "sha256": "823946e86d5326c23b47adf4b13a4cbd1513a95793abe4c1199bbd6a1b04f17c"
+    },
+    {
+      "file": "202610260001_daily_operations.sql",
+      "sha256": "c49b0e5ec90c51a7031d8ba9ebc86d6c6c62a6c85c7e8bd4c6e44bc637962049"
+    }
+  ]
+}

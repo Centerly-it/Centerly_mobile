@@ -28,6 +28,7 @@ class FinanceCohortSummary extends StatelessWidget {
         : (paid * BigInt.from(100) ~/ total).toInt();
     return AppSurfaceSection(
       title: 'finance_month_dues'.tr(),
+      headerSpacing: AppSize.s4,
       icon: const Icon(
         Icons.receipt_long_outlined,
         size: 18,
@@ -36,20 +37,19 @@ class FinanceCohortSummary extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          FinanceMoney(
-            total,
-            style: AppTextStyles.headlineLarge.copyWith(
-              color: ColorManager.primaryDark,
-              fontWeight: FontWeight.bold,
+          Padding(
+            padding: const EdgeInsetsDirectional.only(
+              start: AppSize.s18 + AppPadding.p8 * 2 + AppSize.s12,
+            ),
+            child: FinanceMoney(
+              total,
+              style: AppTextStyles.headlineLarge.copyWith(
+                color: ColorManager.primaryDark,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-          Text(
-            'finance_invoice_count'.tr(
-              args: ['${summary?.invoiceCount ?? ledger!.dueIn(month).length}'],
-            ),
-            style: AppTextStyles.caption,
-          ),
-          const SizedBox(height: AppSize.s16),
+          const SizedBox(height: AppSize.s24),
           FinanceCohortAmounts(
             paid: paid,
             remaining: summary?.outstanding ?? ledger!.outstanding(month),

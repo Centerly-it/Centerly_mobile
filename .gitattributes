@@ -34,3 +34,9 @@ supabase/proposals/manual_sessions/*.sql text eol=lf
 supabase/reviews/manual-sessions-transaction.sql text eol=lf
 
 supabase/migrations/202610240002_direct_attendance.sql text eol=lf
+
+supabase/migrations/202610250001_group_materials.sql text eol=lf
+
+supabase/migrations/202610250002_teacher_notification_scope.sql text eol=lf
+
+supabase/migrations/202610260001_daily_operations.sql text eol=lf

@@ -12,26 +12,27 @@
       ]
     },
     {
-      "name": "Centerly (connected development)",
+      "name": "dev",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
       "flutterMode": "debug",
       "toolArgs": [
-        "--dart-define-from-file=.env.local.json",
+        "--dart-define-from-file=.env.dev.json",
         "--dart-define=CENTERLY_UI_PREVIEW=false",
         "--dart-define=CENTERLY_FINANCE_MOVEMENT_FILTERS=true"
       ]
     },
     {
-      "name": "Centerly (approved shared production)",
+      "name": "prod",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
       "flutterMode": "debug",
       "toolArgs": [
-        "--dart-define-from-file=env.production.json",
-        "--dart-define=CENTERLY_UI_PREVIEW=false"
+        "--dart-define-from-file=.env.prod.json",
+        "--dart-define=CENTERLY_UI_PREVIEW=false",
+        "--dart-define=CENTERLY_FINANCE_MOVEMENT_FILTERS=true"
       ]
     }
   ]

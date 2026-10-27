@@ -64,7 +64,7 @@ class DashboardDaySection extends StatelessWidget {
                 'live_work_duration':
                     '${data.scheduledMinutes ~/ 60}:${(data.scheduledMinutes % 60).toString().padLeft(2, '0')}',
                 'live_total_students': '${data.students}',
-                'live_total_groups': '${data.groups}',
+                'live_total_groups': '${data.scheduledGroups}',
               },
             ),
             const SizedBox(height: AppSize.s24),
