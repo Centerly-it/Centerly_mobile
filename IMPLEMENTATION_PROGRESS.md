@@ -2898,3 +2898,6 @@ Delivery verified: Teacher feature f7f8913 pushed; Secretary application 3e32a1e
 ## 2026-10-27 — manually suspended subscriptions
 
 Owner selected manual subscription suspension by administration. Existing subscription_status/RLS protection blocks teacher and attached secretaries; no new migration or hosted account mutations. Teacher now clears the stored SDK session after confirmed access denial while retaining the actionable subscription reason. Both clients show the payment-administration guidance; Secretary clears local auth storage and tenant caches, preserves the denial message through sign-out events and permits deliberate login after renewal. Network-only errors do not revoke access. See docs/SUBSCRIPTION_ADMIN.md for exact Dashboard actions and 60-second/foreground/offline limits. Verification: 16 isolated native PostgreSQL checks, 18 Flutter auth tests, analyzer clean, 79 Secretary tests plus format/lint/type/build. No hosted suspension or physical-device acceptance claimed.
+
+
+Subscription release delivered: Teacher 262990a pushed; Secretary dcc9271 published at https://centerly-secretary.pages.dev (deployment 77f218ce). Live build/CSP/six assets verified. All 38 backend migration hashes unchanged, zero pending; no hosted account changes.
