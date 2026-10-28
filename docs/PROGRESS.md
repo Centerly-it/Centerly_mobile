@@ -235,3 +235,6 @@ Verification: 354 Flutter tests passed / 2 conditional skipped, analyzer clean, 
 
 
 APK publication verified: Centerly 1.0.0+1 (com.centerly.teacher), public GitHub asset SHA256 562d36ed8700132bdc00aa04e7e20c8f1523b4906c7e2226e0d47d52ad94630e. Anonymous complete download matches local size/hash. Approved certificate pinned in config/android-release-identity.json and release Gradle/artifact checks; setup refuses silent regeneration on another computer. Website baseline check passed (82 tests), plus 3 policy guards. Metadata starts latest=1/minimum=1, dev disabled. Website rollout follows. Native installer/upgrade preservation remains owner device acceptance; no install performed.
+
+
+Final delivery verified: GitHub production APK public download matches SHA256/size; website deployment 095cd122 at https://centerly-secretary.pages.dev serves matching prod/dev policies with no-store, matching build identity and six matching entry assets. Initial policy latest=1/minimum=1; dev disabled. No live mandatory promotion, native device install or physical upgrade acceptance performed. Owner must securely back up signing material and confirm a one-device upgrade before using --owner-tested to force a higher minimum. Evidence: docs/android-updates-live.json.

@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-28T19:21:25.551Z",
+  "url": "https://centerly-secretary.pages.dev",
+  "deploymentUrl": "https://095cd122.centerly-secretary.pages.dev",
+  "commit": "5a5584ba133990939246ba364d8edfe1dc4507f1",
+  "builtAt": "2026-10-28T19:17:32.385Z",
+  "environment": "production",
+  "supabaseProject": "centerly-prod",
+  "projectRef": "ohhwccwwwxfmwpfypfyf",
+  "migration": "202610280001",
+  "fixtureMode": false,
+  "sessionBillingEnabled": true,
+  "productionPolicyMatched": true,
+  "developmentPolicyMatched": true,
+  "policyCacheControl": "no-store",
+  "entryAssetsMatched": 6,
+  "publicApkPreviouslyHashVerified": true
+}
