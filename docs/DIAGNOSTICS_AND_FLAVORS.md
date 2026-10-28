@@ -9,7 +9,7 @@ flutter run --flavor prod --dart-define-from-file=.env.prod.json
 
 VS Code launch configurations `dev` and `prod` already pass these options. The offline preview uses the dev flavor. Stop and Run after switching: Hot Reload does not switch compile-time configuration, package identity or native resources.
 
-Android `dev` is **Centerly Dev**, application ID `<configured base>.dev`; `prod` remains **Centerly** with the configured base ID. The current local base is the existing `com.example.centrally`; no public application identity or distribution signing decision is made here. Existing release signing/identity guards remain. The apps have separate Android sandboxes and their Supabase storage keys are also backend-specific. Old pre-flavor development installations are not migrated or removed automatically.
+Android `dev` is **Centerly Dev**, application ID `com.centerly.teacher.dev`; `prod` is **Centerly**, application ID `com.centerly.teacher`. The approved production signing identity is pinned in config/android-release-identity.json; restore the existing key instead of generating another. The apps have separate Android sandboxes and backend-specific Supabase storage keys. Old pre-flavor development installations are not migrated or removed automatically.
 
 The runtime configuration rejects mismatched native flavor / APP_ENV and mismatched backend projects before initializing Supabase. CI builds the dev flavor explicitly and uploads its correctly named artifacts.
 

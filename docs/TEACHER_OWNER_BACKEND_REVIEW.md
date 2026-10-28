@@ -4,7 +4,7 @@ The exact reviewed file below is now deployed to centerly-dev as migration26.
 SHA256 unchanged. All26 bodies/catalog and read-only pagination/filter/tenant/role
 checks passed before manifest pinning and client activation. No account or data
 mutations, build or restart occurred. Evidence:
-[FINANCE_MOVEMENTS_DEPLOYMENT_2026-10-22.md](FINANCE_MOVEMENTS_DEPLOYMENT_2026-10-22.md).
+FINANCE_MOVEMENTS_DEPLOYMENT_2026-10-22.md (historical Git reference: `FINANCE_MOVEMENTS_DEPLOYMENT_2026-10-22.md`).
 
 The original pre-approval review below is retained verbatim as historical context;
 its LOCAL ONLY/default-off statements no longer describe current activation.

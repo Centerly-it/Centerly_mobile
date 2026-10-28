@@ -1,15 +1,11 @@
-# Centerly Teacher Mobile
+# Centerly — Teacher Mobile
 
-Arabic-first Flutter teacher application with a shared Supabase backend.
-The existing Cairo/blue design and assets are preserved while prototype flows
-are replaced incrementally with secure live data.
+Start with [CODEX_HANDOFF.md](CODEX_HANDOFF.md) for current knowledge of both projects, product decisions, secure setup, environments, tests, deployments, APK updates and owner acceptance.
 
-Start on a new computer with [the complete project handoff](PROJECT_HANDOFF.md).
+- Teacher/backend: https://github.com/Centerly-it/Centerly_mobile
+- Secretary: https://github.com/atamer7112002/Centerly_secretary
+- Website: https://centerly-secretary.pages.dev — prod; synthetic accounts use local dev.
+- Signed APKs: https://github.com/Centerly-it/Centerly-releases/releases
+- Backend: 40 immutable migrations through `202610280001_group_billing_modes.sql`; physically separate dev/prod.
 
-Start with [setup](docs/SETUP.md), [progress](IMPLEMENTATION_PROGRESS.md),
-[shared backend contract](docs/SHARED_BACKEND_CONTRACT.md) and
-[backend review](docs/BACKEND_REVIEW.md).
-
-Development Supabase migrations and synthetic test accounts were deployed only
-after explicit owner approval. No production/store release is claimed.
-Never commit local environment or development credential files.
+See [documentation map](docs/README.md) and [current checkpoint](IMPLEMENTATION_PROGRESS.md). Old evidence is not a setup checklist. Credentials, environments and signing secrets are intentionally absent from Git. A new account does not inherit chat history or secret files.

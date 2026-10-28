@@ -1,3 +1,5 @@
-# Canonical development contract
+# Canonical shared backend contract
 
-28 versions deployed through 202610230001 on centerly-dev. See [shared backend contract](../docs/SHARED_BACKEND_CONTRACT.md), schema-manifest.json and docs/PILOT28_ACCEPTANCE.json for exact package approval, verified catalog/grants and read-only acceptance. Teacher owns migrations; existing histories remain immutable. Production is deferred.
+Teacher owns the40-version migration chain through `202610280001_group_billing_modes.sql`. Exact hashes live in schema-manifest.json; current behavior and deployment protocol are in [the shared contract](../docs/SHARED_BACKEND_CONTRACT.md). Development and production are separate projects; see [environments](../docs/ENVIRONMENTS.md).
+
+Preserve tenant isolation, immutable financial/audit history and existing data. Do not replay historical acceptance/reset packages. Source changes require fresh exact-baseline/catalog verification and a candidate-only dry run before authorized hosted deployment.

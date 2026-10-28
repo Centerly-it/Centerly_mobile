@@ -7,7 +7,7 @@ Current update, 23 October: owner-requested synthetic development reset complete
 
 # Cross-app acceptance matrix — actual SEC27 hosted run
 
-22 October 2026. The exact approved package completed on centerly-dev. See [detailed acceptance](SEC27_ACCEPTANCE_2026-10-22.md) and [retained records/evidence](SEC27_ACCEPTANCE_2026-10-22.json). SQL role simulation and disposable browser tests are separate from the actual modes below.
+22 October 2026. The exact approved package completed on centerly-dev. See detailed acceptance (historical Git reference: `SEC27_ACCEPTANCE_2026-10-22.md`) and retained records/evidence (historical Git reference: `SEC27_ACCEPTANCE_2026-10-22.json`). SQL role simulation and disposable browser tests are separate from the actual modes below.
 
 | Workflow                                            | Secretary actual execution                                                                         | Teacher actual execution                                                     | Result / remaining limit                                                                                                                                    |
 | --------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |

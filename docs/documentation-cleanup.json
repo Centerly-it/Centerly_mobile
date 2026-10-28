@@ -1,0 +1,258 @@
+{
+  "date": "2026-10-28",
+  "scope": "Documentation only. No runtime, SQL, hosted records, accounts or signing changes.",
+  "restoreFromCommit": "51c994c",
+  "deleted": [
+    "docs/ANDROID_PILOT_ACCEPTANCE.md",
+    "docs/BACKEND_COMPAT.md",
+    "docs/CENTERLY_PRD_SYSTEM_DESIGN (1).md",
+    "docs/CONTROLLED_PILOT_REVIEW.md",
+    "docs/DECISIONS.md",
+    "docs/DEVELOPMENT_ACCOUNTS.md",
+    "docs/DIRECT_ATTENDANCE.md",
+    "docs/FINANCE_BUSINESS_DESIGN.md",
+    "docs/FINANCE_MOVEMENTS_DEPLOYMENT_2026-10-22.md",
+    "docs/HARDENING_DEPLOYMENT_VERIFICATION_2026-10-20.md",
+    "docs/HOSTED_CHANGE_REVIEW.md",
+    "docs/HOSTED_FIXTURE_ACCEPTANCE_SCOPE.md",
+    "docs/MOBILE_INFORMATION_LAYOUT.md",
+    "docs/NOTIFY36_DEPLOYMENT.json",
+    "docs/OWNER28_SYNTHETIC_SCOPE.md",
+    "docs/OWNER_RESET_R3.json",
+    "docs/OWNER_RESET_R3.md",
+    "docs/PILOT28_ACCEPTANCE.md",
+    "docs/PILOT_EVIDENCE.json",
+    "docs/PILOT_LAUNCH_DECISION.md",
+    "docs/PILOT_MONITORING_RECOVERY.md",
+    "docs/PILOT_OPERATIONS.md",
+    "docs/PILOT_RELEASE_GATES.md",
+    "docs/PRE_PUSH_REVIEW_2026-10-20.md",
+    "docs/SCREEN_MAP.md",
+    "docs/SEC27_ACCEPTANCE_2026-10-22.json",
+    "docs/SEC27_ACCEPTANCE_2026-10-22.md",
+    "docs/SECRETARY_DEPLOYMENT_2026-10-22.json",
+    "docs/SECRETARY_DEPLOYMENT_2026-10-22.md",
+    "docs/SECRETARY_HANDOFF.md",
+    "docs/SESSION_DETAIL_CHANGE_REVIEW.md",
+    "docs/SESSION_DETAIL_VERIFICATION.json",
+    "docs/SIMPLE_FLOWS_ACCEPTANCE.json",
+    "docs/SIMPLE_FLOWS_ACCEPTANCE.md",
+    "docs/STUDENT_PROFILE_CHANGE_REVIEW.md",
+    "docs/STUDENT_PROFILE_VERIFICATION.json",
+    "docs/TEACHER_COMPLETION_CHANGE_REVIEW.md",
+    "docs/TEACHER_COMPLETION_ROADMAP.md",
+    "docs/TEACHER_COMPLETION_VERIFICATION.json",
+    "docs/TEACHER_MVP_TESTING.md",
+    "docs/TEACHER_NOTIFICATION_SCOPE_REVIEW.md",
+    "docs/TEACHER_OWNER_TESTING.md",
+    "docs/TEACHER_READ_CHANGE_REVIEW.md",
+    "docs/verification/teacher_read_20261019.json",
+    "docs/VISUAL_PRESERVATION.md",
+    "CENTERLY_TEACHER_IMPLEMENTATION_PLAN.md"
+  ],
+  "retainedSourceDependencies": [
+    {
+      "path": "docs/BACKEND_REVIEW.md",
+      "referencedBySource": [
+        "Centerly_mobile/supabase/tests/finance_movements.mjs"
+      ]
+    },
+    {
+      "path": "docs/CROSS_APP_ACCEPTANCE.md",
+      "referencedBySource": [
+        "Centerly_secretary/scripts/record-r2-activation.mjs"
+      ]
+    },
+    {
+      "path": "docs/FIGMA_GROUP_ASSETS.json",
+      "referencedBySource": [
+        "Centerly_mobile/test/helpers/verify_group_assets.dart"
+      ]
+    },
+    {
+      "path": "docs/FIGMA_STUDENT_ASSETS.json",
+      "referencedBySource": [
+        "Centerly_mobile/test/figma_students_design_test.dart"
+      ]
+    },
+    {
+      "path": "docs/FIN30_DEPLOYMENT.json",
+      "referencedBySource": ["Centerly_secretary/scripts/record-fin30.mjs"]
+    },
+    {
+      "path": "docs/FIN30_DEPLOYMENT.md",
+      "referencedBySource": ["Centerly_secretary/scripts/record-fin30.mjs"]
+    },
+    {
+      "path": "docs/FINANCE_BACKEND_CHANGE_REVIEW.md",
+      "referencedBySource": [
+        "Centerly_mobile/supabase/tests/finance_review_manifest.mjs"
+      ]
+    },
+    {
+      "path": "docs/GROUP_PRICING_REVIEW.json",
+      "referencedBySource": [
+        "Centerly_secretary/scripts/record-r2-activation.mjs"
+      ]
+    },
+    {
+      "path": "docs/GROUP_PRICING_REVIEW_AR.md",
+      "referencedBySource": [
+        "Centerly_secretary/scripts/record-r2-activation.mjs"
+      ]
+    },
+    {
+      "path": "docs/LOGIC_HARDENING_CHANGE_REVIEW.md",
+      "referencedBySource": [
+        "Centerly_mobile/supabase/tests/logic_hardening.mjs"
+      ]
+    },
+    {
+      "path": "docs/MAIN_HARDENING_CHANGE_REVIEW.md",
+      "referencedBySource": [
+        "Centerly_mobile/supabase/admin/hardening_preflight.mjs"
+      ]
+    },
+    {
+      "path": "docs/MANUAL_CLASSES_AND_RESUME.json",
+      "referencedBySource": ["Centerly_secretary/scripts/record-manual33.mjs"]
+    },
+    {
+      "path": "docs/MANUAL_CLASSES_AND_RESUME.md",
+      "referencedBySource": ["Centerly_secretary/scripts/record-manual33.mjs"]
+    },
+    {
+      "path": "docs/MULTI_DAY_GROUP.json",
+      "referencedBySource": ["Centerly_secretary/scripts/record-schedule32.mjs"]
+    },
+    {
+      "path": "docs/MULTI_DAY_GROUP.md",
+      "referencedBySource": ["Centerly_secretary/scripts/record-schedule32.mjs"]
+    },
+    {
+      "path": "docs/OWNER_LOCAL_TESTING.md",
+      "referencedBySource": [
+        "Centerly_secretary/scripts/record-r2-activation.mjs"
+      ]
+    },
+    {
+      "path": "docs/OWNER_RESET_AND_PRICING_ACCEPTANCE.json",
+      "referencedBySource": [
+        "Centerly_secretary/scripts/record-r2-activation.mjs"
+      ]
+    },
+    {
+      "path": "docs/OWNER_RESET_AND_PRICING_ACCEPTANCE.md",
+      "referencedBySource": [
+        "Centerly_secretary/scripts/record-r2-activation.mjs"
+      ]
+    },
+    {
+      "path": "docs/pilot-artifact-manifest.json",
+      "referencedBySource": [
+        "Centerly_secretary/scripts/record-simple-workspace.mjs"
+      ]
+    },
+    {
+      "path": "docs/PILOT28_ACCEPTANCE.json",
+      "referencedBySource": ["Centerly_mobile/supabase/contracts.md"]
+    },
+    {
+      "path": "docs/PROGRESS.md",
+      "referencedBySource": [
+        "Centerly_secretary/scripts/record-fin30.mjs",
+        "Centerly_secretary/scripts/record-manual33.mjs",
+        "Centerly_secretary/scripts/record-r2-activation.mjs",
+        "Centerly_secretary/scripts/record-safe-delete.mjs",
+        "Centerly_secretary/scripts/record-schedule31.mjs",
+        "Centerly_secretary/scripts/record-schedule32.mjs",
+        "Centerly_secretary/scripts/record-simple-workspace.mjs"
+      ]
+    },
+    {
+      "path": "docs/R2_ACTIVATION_ACCEPTANCE.md",
+      "referencedBySource": [
+        "Centerly_secretary/scripts/record-r2-activation.mjs"
+      ]
+    },
+    {
+      "path": "docs/REQUIRED_GROUP_SCHEDULE.json",
+      "referencedBySource": ["Centerly_secretary/scripts/record-schedule31.mjs"]
+    },
+    {
+      "path": "docs/REQUIRED_GROUP_SCHEDULE.md",
+      "referencedBySource": ["Centerly_secretary/scripts/record-schedule31.mjs"]
+    },
+    {
+      "path": "docs/SAFE_DELETE.json",
+      "referencedBySource": [
+        "Centerly_secretary/scripts/record-safe-delete.mjs"
+      ]
+    },
+    {
+      "path": "docs/SAFE_DELETE.md",
+      "referencedBySource": [
+        "Centerly_secretary/scripts/record-safe-delete.mjs"
+      ]
+    },
+    {
+      "path": "docs/secretary-deactivation-acceptance.json",
+      "referencedBySource": [
+        "Centerly_mobile/supabase/admin/deploy_secretary_deactivation.mjs",
+        "Centerly_mobile/supabase/admin/verify_secretary_deactivation_readonly.mjs"
+      ]
+    },
+    {
+      "path": "docs/secretary-reactivation-acceptance.json",
+      "referencedBySource": [
+        "Centerly_mobile/supabase/admin/deploy_secretary_reactivation.mjs",
+        "Centerly_mobile/supabase/admin/verify_secretary_reactivation_readonly.mjs"
+      ]
+    },
+    {
+      "path": "docs/SHARED_BACKEND_CONTRACT.md",
+      "referencedBySource": [
+        "Centerly_mobile/supabase/README.md",
+        "Centerly_mobile/supabase/contracts.md",
+        "Centerly_secretary/scripts/record-fin30.mjs",
+        "Centerly_secretary/scripts/record-manual33.mjs",
+        "Centerly_secretary/scripts/record-r2-activation.mjs",
+        "Centerly_secretary/scripts/record-safe-delete.mjs",
+        "Centerly_secretary/scripts/record-schedule31.mjs",
+        "Centerly_secretary/scripts/record-schedule32.mjs",
+        "Centerly_secretary/scripts/record-simple-workspace.mjs"
+      ]
+    },
+    {
+      "path": "docs/SHARED_COMPLETION_CHECKLIST.md",
+      "referencedBySource": [
+        "Centerly_secretary/scripts/record-r2-activation.mjs"
+      ]
+    },
+    {
+      "path": "docs/SIMPLE_DAILY_WORK_AR.md",
+      "referencedBySource": [
+        "Centerly_secretary/scripts/record-r2-activation.mjs"
+      ]
+    },
+    {
+      "path": "docs/SIMPLE_FINANCE_EDIT_REVIEW.md",
+      "referencedBySource": [
+        "Centerly_secretary/scripts/record-fin30.mjs",
+        "Centerly_secretary/scripts/record-simple-workspace.mjs"
+      ]
+    },
+    {
+      "path": "docs/SIMPLE_WORKSPACE_CHECKPOINT.md",
+      "referencedBySource": [
+        "Centerly_secretary/scripts/record-simple-workspace.mjs"
+      ]
+    },
+    {
+      "path": "docs/TEACHER_OWNER_BACKEND_REVIEW.md",
+      "referencedBySource": [
+        "Centerly_mobile/supabase/tests/finance_movements.mjs"
+      ]
+    }
+  ]
+}

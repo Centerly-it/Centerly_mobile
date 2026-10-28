@@ -1,7 +1,7 @@
 # Local shared backend
 
-This directory is temporarily canonical for both Flutter and future React clients.
-Never deploy to hosted Supabase without owner approval.
+This directory is canonical for both the Flutter Teacher and React Secretary clients.
+The current chain contains40 migrations through202610280001. Read ../CODEX_HANDOFF.md and ../docs/SHARED_BACKEND_CONTRACT.md before backend work. Hosted changes require applicable owner authorization and the documented exact-baseline/hash/catalog checks.
 
 Run SQL tests without Docker:
 
