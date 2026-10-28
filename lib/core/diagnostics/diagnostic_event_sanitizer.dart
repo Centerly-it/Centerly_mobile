@@ -29,6 +29,7 @@ SentryEvent? sanitizedDiagnosticEvent(SentryEvent event) {
         'dart.unhandled',
         'bloc.error',
         'support.contact',
+        'app.update',
       };
       final parts = value.split(' ');
       final http =
@@ -51,6 +52,13 @@ SentryEvent? sanitizedDiagnosticEvent(SentryEvent event) {
         'UNHANDLED_ERROR',
         'CONFIG_INVALID',
         'SUPPORT_UNAVAILABLE',
+        'UPDATE_CHECK_FAILED',
+        'UPDATE_SPACE',
+        'UPDATE_CHECKSUM',
+        'UPDATE_SIGNATURE',
+        'UPDATE_INCOMPATIBLE',
+        'UPDATE_PERMISSION',
+        'UPDATE_NETWORK',
       }.contains(entry.value)) {
         continue;
       }

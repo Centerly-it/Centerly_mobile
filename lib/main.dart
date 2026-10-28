@@ -9,6 +9,7 @@ import 'screens/teacher/workspace_selection.dart';
 import 'core/diagnostics/production_telemetry.dart';
 import 'core/diagnostics/app_diagnostics.dart';
 import 'app/diagnostic_error_handlers.dart';
+import 'features/updates/presentation/update_gate.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:centrally/core/di/di.dart';
@@ -86,13 +87,15 @@ class Centrally extends StatelessWidget {
   Widget build(BuildContext context) => SessionLifecycle(
     child: MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      builder: (_, child) => PreviewMode.enabled
-          ? Banner(
-              message: 'ui_preview_mode'.tr(),
-              location: BannerLocation.topEnd,
-              child: child!,
-            )
-          : child!,
+      builder: (_, child) => UpdateGate(
+        child: PreviewMode.enabled
+            ? Banner(
+                message: 'ui_preview_mode'.tr(),
+                location: BannerLocation.topEnd,
+                child: child!,
+              )
+            : child!,
+      ),
       onGenerateTitle: (context) => StringsManager.appName.tr(),
       routerConfig: AppRouter.router,
       localizationsDelegates: context.localizationDelegates,

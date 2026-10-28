@@ -1,4 +1,5 @@
 import java.util.Properties
+import java.util.Base64
 
 plugins {
     id("com.android.application")
@@ -10,10 +11,18 @@ plugins {
 val pilotSigning = Properties()
 val pilotSigningFile = rootProject.file("key.properties")
 if (pilotSigningFile.exists()) pilotSigningFile.inputStream().use { pilotSigning.load(it) }
-val pilotApplicationId = providers.gradleProperty("CENTERLY_APPLICATION_ID").orElse("com.example.centrally").get()
+val pilotApplicationId = providers.gradleProperty("CENTERLY_APPLICATION_ID").orElse("com.centerly.teacher").get()
 gradle.taskGraph.whenReady {
-    if (allTasks.any { it.name.contains("Release") }) {
-        check(pilotApplicationId != "com.example.centrally") { "Set CENTERLY_APPLICATION_ID before a release build" }
+    if (allTasks.any { it.project.path == ":app" && (it.name.contains("ProdRelease") || it.name.contains("DevRelease")) }) {
+        check(pilotApplicationId == "com.centerly.teacher") { "Release application ID must match the owner-approved com.centerly.teacher" }
+        check(allTasks.none { it.project.path == ":app" && it.name.contains("DevRelease") }) { "Use prod for distribution; dev is for debug/profile testing" }
+        val defines = (project.findProperty("dart-defines") as? String).orEmpty().split(",")
+            .filter { it.isNotBlank() }.map { String(Base64.getDecoder().decode(it)) }
+            .associate { it.substringBefore("=") to it.substringAfter("=", "") }
+        check(defines["APP_ENV"] == "production" && defines["CENTERLY_UI_PREVIEW"] == "false") {
+            "Release requires explicit production configuration and preview=false"
+        }
+        check(defines["SUPABASE_URL"] == "https://ohhwccwwwxfmwpfypfyf.supabase.co") { "Release backend must be centerly-prod" }
         check(pilotSigningFile.exists() && listOf("storeFile", "storePassword", "keyAlias", "keyPassword").all { !pilotSigning.getProperty(it).isNullOrBlank() }) {
             "Release signing requires the private android/key.properties file"
         }
@@ -78,4 +87,8 @@ android {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    testImplementation("junit:junit:4.13.2")
 }
