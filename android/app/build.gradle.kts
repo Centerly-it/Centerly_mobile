@@ -1,5 +1,7 @@
 import java.util.Properties
 import java.util.Base64
+import java.security.KeyStore
+import java.security.MessageDigest
 
 plugins {
     id("com.android.application")
@@ -26,6 +28,15 @@ gradle.taskGraph.whenReady {
         check(pilotSigningFile.exists() && listOf("storeFile", "storePassword", "keyAlias", "keyPassword").all { !pilotSigning.getProperty(it).isNullOrBlank() }) {
             "Release signing requires the private android/key.properties file"
         }
+        val registry = rootProject.file("../config/android-release-identity.json").readText()
+        val expected = Regex("\"signing_sha256\"\\s*:\\s*\"([a-f0-9]{64})\"").find(registry)?.groupValues?.get(1)
+        val keyStore = KeyStore.getInstance("JKS")
+        rootProject.file(pilotSigning.getProperty("storeFile")).inputStream().use {
+            keyStore.load(it, pilotSigning.getProperty("storePassword").toCharArray())
+        }
+        val certificate = keyStore.getCertificate(pilotSigning.getProperty("keyAlias")).encoded
+        val actual = MessageDigest.getInstance("SHA-256").digest(certificate).joinToString("") { "%02x".format(it) }
+        check(expected != null && actual == expected) { "Restore the approved signing key; changing it breaks teacher updates" }
     }
 }
 

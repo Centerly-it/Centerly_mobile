@@ -10,6 +10,8 @@ if(await exists(key)||await exists(properties)){
  assert.ok(await exists(key)&&await exists(properties),'Partial signing setup; reconcile securely');
  console.log('Existing signing material retained; no key replacement.');
 }else{
+ assert.ok(!await exists('config/android-release-identity.json'),
+  'An approved signing identity already exists. Restore its private backup; never generate a replacement on another machine.');
  await mkdir('android/keystore',{recursive:true});
  const password=randomBytes(32).toString('hex');
  try{

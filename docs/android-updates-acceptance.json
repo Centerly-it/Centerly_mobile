@@ -1,0 +1,47 @@
+{
+  "at": "2026-10-28T19:16:36.422893+00:00",
+  "runtimeSourceCommit": "a12f1ca8d75b857e89586832f06c6c47d47493ec",
+  "artifact": {
+    "apk": "build/app/outputs/flutter-apk/app-prod-release.apk",
+    "packageId": "com.centerly.teacher",
+    "build": 1,
+    "version": "1.0.0",
+    "minSdk": 24,
+    "size": 73377268,
+    "sha256": "562d36ed8700132bdc00aa04e7e20c8f1523b4906c7e2226e0d47d52ad94630e",
+    "fingerprint": "00ce36634be7cd72ec0feab2c068e0b9ed35b468580c3a2de3da539884eb2b4f",
+    "name": "centerly-1.0.0-1.apk",
+    "tag": "v1.0.0-build.1",
+    "url": "https://github.com/Centerly-it/Centerly-releases/releases/download/v1.0.0-build.1/centerly-1.0.0-1.apk",
+    "scan": {
+      "pass": true,
+      "apkEntries": 550,
+      "credentialMatches": 0,
+      "previewAssets": 0
+    }
+  },
+  "release": "https://github.com/Centerly-it/Centerly-releases/releases/tag/v1.0.0-build.1",
+  "anonymousPublicApkHashVerified": true,
+  "flutter": {
+    "passed": 354,
+    "conditionalSkipped": 2
+  },
+  "androidJvm": {
+    "passed": 8,
+    "failed": 0
+  },
+  "websiteBaselineTests": 82,
+  "websitePolicyTests": 3,
+  "releaseSigningGuard": "passed",
+  "credentialScan": "passed",
+  "productionPolicy": {
+    "latest": 1,
+    "minimum": 1
+  },
+  "deviceInstalledByAgent": false,
+  "physicalUpgradeValidated": false,
+  "privateSigningBackupCreated": true,
+  "privateSigningBackupUploaded": false,
+  "backendMutations": 0,
+  "authChanges": 0
+}

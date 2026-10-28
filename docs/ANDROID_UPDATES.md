@@ -18,7 +18,7 @@ The manifest is not an authentication/security boundary against modified clients
 - `android/key.properties`
 - `build/release-private/centerly-signing-backup.zip`
 
-These local files have owner/SYSTEM-only Windows ACLs and are ignored by Git. The backup ZIP is private, not a public release asset; store a copy securely outside this computer. Do not send it through the app repository, chat or public releases. The ZIP contains the JKS and properties; restore the JKS under `android/keystore/` and properties under `android/` on the other trusted build machine. Losing this key prevents ordinary updates to already distributed installations. No password appears in this document or chat.
+These local files have owner/SYSTEM-only Windows ACLs and are ignored by Git. The backup ZIP is private, not a public release asset; store a copy securely outside this computer. Do not send it through the app repository, chat or public releases. The ZIP contains the JKS and properties; restore the JKS under `android/keystore/` and properties under `android/` on the other trusted build machine. The public config/android-release-identity.json pins the approved certificate fingerprint. Signing setup refuses to create another key once that pin exists; restore the private backup on another machine. Artifact inspection rejects any different signer. Losing this key prevents ordinary updates to already distributed installations. No password appears in this document or chat.
 
 ## Build and publish a future version
 

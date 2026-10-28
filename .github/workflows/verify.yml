@@ -62,6 +62,8 @@ jobs:
       - run: node supabase/tests/direct_attendance.mjs
       - run: node supabase/tests/billing_modes.mjs
       - run: flutter build apk --flavor dev --debug --no-pub
+      - run: .\gradlew.bat :app:testDevDebugUnitTest --console=plain
+        working-directory: android
       - run: flutter build apk --flavor dev --profile --no-pub
       - uses: actions/upload-artifact@v4
         if: always()

@@ -16,6 +16,8 @@ export async function inspectArtifact(){
  const signature=execFileSync('java',['-jar',tools+'lib/apksigner.jar','verify','--print-certs',apk],{encoding:'utf8'});
  const fingerprint=signature.match(/Signer #1 certificate SHA-256 digest: ([a-fA-F0-9:]+)/)?.[1].replaceAll(':','').toLowerCase();
  assert.ok(fingerprint);assert.ok(!signature.includes('Android Debug'));
+ const identity=JSON.parse(await readFile('config/android-release-identity.json','utf8'));
+ assert.equal(identity.package_id,match[1]);assert.equal(identity.signing_sha256,fingerprint,'Signing identity changed; restore the approved key');
  const signing=Object.fromEntries((await readFile('android/key.properties','utf8')).trim().split(/\r?\n/).map(l=>[l.slice(0,l.indexOf('=')),l.slice(l.indexOf('=')+1)]));
  const certificate=execFileSync('keytool',['-exportcert','-alias',signing.keyAlias,'-keystore',resolve('android',signing.storeFile),'-storepass:env','CENTERLY_SIGNING_PASSWORD'],
   {env:{...process.env,CENTERLY_SIGNING_PASSWORD:signing.storePassword},stdio:['ignore','pipe','pipe']});
