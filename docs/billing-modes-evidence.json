@@ -15,7 +15,9 @@
       "triggers": 30,
       "candidate": "202610280001_group_billing_modes.sql",
       "candidateSha256": "60b0f251ef16a91b1da737cac8fc5ffd37b13c5e74d3a14533c2baa421e45702",
-      "dryRunOnly": ["202610280001_group_billing_modes.sql"],
+      "dryRunOnly": [
+        "202610280001_group_billing_modes.sql"
+      ],
       "hostedBusinessWrites": 0,
       "deployed": false
     },
@@ -30,7 +32,9 @@
       "triggers": 30,
       "candidate": "202610280001_group_billing_modes.sql",
       "candidateSha256": "60b0f251ef16a91b1da737cac8fc5ffd37b13c5e74d3a14533c2baa421e45702",
-      "dryRunOnly": ["202610280001_group_billing_modes.sql"],
+      "dryRunOnly": [
+        "202610280001_group_billing_modes.sql"
+      ],
       "hostedBusinessWrites": 0,
       "deployed": false
     }
@@ -42,7 +46,10 @@
     "browserCases": 34,
     "flutterTestsPassed": 325,
     "flutterTestsSkipped": 2,
-    "flutterDebugBuilds": ["dev", "prod"],
+    "flutterDebugBuilds": [
+      "dev",
+      "prod"
+    ],
     "hostedAcceptance": false
   },
   "deployedAt": "2026-10-28",
@@ -113,5 +120,27 @@
   },
   "productionAccounts": 0,
   "newApkBuiltThisRelease": false,
-  "websitePublication": "pending"
+  "websitePublication": {
+    "url": "https://centerly-secretary.pages.dev",
+    "deploymentUrl": "https://6adc0d00.centerly-secretary.pages.dev",
+    "build": {
+      "commit": "ee5728f6f30ae7650fe03deb13f5ed88d18dd422",
+      "builtAt": "2026-10-28T12:17:25.139Z",
+      "environment": "production",
+      "supabaseProject": "centerly-prod",
+      "projectRef": "ohhwccwwwxfmwpfypfyf",
+      "migration": "202610280001",
+      "fixtureMode": false,
+      "sessionBillingEnabled": true,
+      "files": 14,
+      "credentialMatches": 0,
+      "artifactSha256": "f0a47b374eaffe42d5effdc5169ce8b64f8881bcdb3c7418c68369738d3f10ba"
+    },
+    "publicVerification": {
+      "checks": 96,
+      "pass": true,
+      "hostedBusinessWrites": 0,
+      "authenticatedProductionAcceptance": false
+    }
+  }
 }

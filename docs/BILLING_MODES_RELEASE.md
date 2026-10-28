@@ -1,6 +1,6 @@
 # Monthly/per-session billing — release review
 
-2026-10-28. **Backend deployed and verified on dev/prod, migration 40.** Owner explicitly approved exact-hash deployment dev then prod and website activation. No new APK is built in this release. Existing monthly groups are unchanged. Website publication follows the verified production pin; hosted mutation/device acceptance remains pending.
+2026-10-28. **Backend deployed and verified on dev/prod, migration 40.** Owner explicitly approved exact-hash deployment dev then prod and website activation. No new APK is built in this release. Existing monthly groups are unchanged. Website published at https://centerly-secretary.pages.dev from source `ee5728f6f30ae7650fe03deb13f5ed88d18dd422` (deployment `6adc0d00`). Actual public verification passed 96 checks; hosted mutation/device acceptance remains pending.
 
 ## Canonical package
 
@@ -19,7 +19,7 @@ The identical approved file is now in canonical deployed migrations. Both canoni
 
 | Journey                          | Implementation and local evidence                                                                                                                                     | Hosted/device acceptance                                        |
 | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| New group → enrollment → session | Choice monthly/per-session only on new groups; scheduled and manual creation snapshot exact price; enrollment adds only eligible sessions; one-time initial materials | Pending approved migration/fixtures                             |
+| New group → enrollment → session | Choice monthly/per-session only on new groups; scheduled and manual creation snapshot exact price; enrollment adds only eligible sessions; one-time initial materials | Contract deployed; mutation fixtures pending                             |
 | Existing monthly group           | Legacy implementation retained, 120.00 monthly/materials control and baseline compatibility suite                                                                     | Baseline only verified read-only                                |
 | Attendance → financial review    | Direct attendance; financial preview/version check; present retained, other statuses exempt; no attendance finalization                                               | Pending                                                         |
 | Paid then exempt                 | Unpaid part removed; actual cash retained and settlement flagged; explicit manual payment edit; immutable historical ledger                                           | Pending                                                         |
