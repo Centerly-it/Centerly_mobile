@@ -13,6 +13,7 @@ class FinanceDue {
       outstanding = MoneyEgp.parse(j['outstanding_egp']).minorUnits,
       due = DateTime.parse(j['due_on'] as String),
       creator = j['created_by_name'] as String?,
+      settlementRequired = j['attendance_settlement_required'] == true,
       status = j['status'] as String? {
     if (amount < BigInt.zero ||
         paid < BigInt.zero ||
@@ -26,6 +27,7 @@ class FinanceDue {
   }
   final String id, number, student, group;
   final String? creator, status;
+  final bool settlementRequired;
   final BigInt amount, paid, outstanding;
   final DateTime due;
   FinanceInvoice get design => FinanceInvoice(

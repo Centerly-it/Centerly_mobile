@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import '../../../core/theme/values_manager.dart';
 import '../../../core/theme/style_manager.dart';
 import '../../../core/theme/color_manager.dart';
@@ -44,6 +45,10 @@ class GroupCardHeader extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSize.s4),
                 Text(group.subject, style: AppTextStyles.bodySmall),
+                Text(
+                  'billing_mode_${group.billingMode}'.tr(),
+                  style: AppTextStyles.caption,
+                ),
               ],
             ),
           ),

@@ -753,5 +753,13 @@
   "notification_student_removed": "Student removed",
   "membership_joined_on": "Joined on",
   "membership_left_on": "Withdrawn on",
-  "ui_recorded_by": "Recorded by"
+  "ui_recorded_by": "Recorded by",
+  "billing_mode": "Billing mode",
+  "billing_mode_monthly": "Monthly",
+  "billing_mode_per_session": "Per session",
+  "billing_price": "Price",
+  "billing_session_summary": "Session billing",
+  "billing_settlement_required": "Paid amount needs manual settlement",
+  "billing_charged": "Issued amount",
+  "billing_paid": "Paid"
 }

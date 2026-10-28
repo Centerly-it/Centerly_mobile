@@ -24,9 +24,17 @@ class _SessionDetailBody extends StatelessWidget {
         itemCount: state.rows.length + 3,
         itemBuilder: (context, i) {
           if (i == 0) {
-            return SessionDetailHeader(
-              detail: state.detail!,
-              onChanged: cubit.refresh,
+            return Column(
+              children: [
+                SessionDetailHeader(
+                  detail: state.detail!,
+                  onChanged: cubit.refresh,
+                ),
+                SessionBillingPanel(
+                  key: ValueKey('billing-$sessionId-${state.detail!.syncedAt}'),
+                  sessionId: sessionId,
+                ),
+              ],
             );
           }
           if (i == 1) {

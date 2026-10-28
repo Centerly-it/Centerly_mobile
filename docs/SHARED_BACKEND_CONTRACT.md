@@ -1,3 +1,7 @@
+## Pending billing-mode extension — migration 40 is NOT deployed
+
+Canonical proposal `supabase/proposals/202610280001_group_billing_modes.sql` supports monthly/per-session groups without altering existing monthly history. See [BILLING_MODES_RELEASE.md](BILLING_MODES_RELEASE.md) and billing-modes-evidence.json for exact hash, API behavior, tests, approval and activation gates. Manifest remains 39 until deployment verification. No Teacher write permissions are added.
+
 ## Separate hosted environments — 27 October 2026
 
 Development remains centerly-dev (yfeubomyglmhuwizaqoj) with its retained synthetic records. Production is the newly created empty Free centerly-prod (ohhwccwwwxfmwpfypfyf), on the same canonical 37 migrations through 202610260001. The 3 missing local files were recovered unchanged from commit 6f86568 and matched development history/catalog before replication. All 85 functions, 18 tables, 30 policies, 30 triggers and grants/indexes/constraints match; production has no Auth users or business records. All hosted Auth settings match. Client configurations and token namespaces are separated; public/self signup remains disabled. No test fixtures or data were copied, and no published client was redeployed. See ENVIRONMENTS.md and environment-acceptance.json for the verified setup and later real-account provisioning steps.

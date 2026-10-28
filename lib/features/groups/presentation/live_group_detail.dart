@@ -28,6 +28,15 @@ class LiveGroupDetail extends StatelessWidget {
               children: [
                 Text(group.name, style: Theme.of(context).textTheme.titleLarge),
                 AppInfoRow(
+                  label: 'billing_mode'.tr(),
+                  value: 'billing_mode_${group.billingMode}'.tr(),
+                ),
+                if (group.billingPrice != null)
+                  AppInfoRow(
+                    label: 'billing_price'.tr(),
+                    value: group.billingPrice!,
+                  ),
+                AppInfoRow(
                   label: 'ui_subject'.tr(),
                   value: [
                     group.gradeName,

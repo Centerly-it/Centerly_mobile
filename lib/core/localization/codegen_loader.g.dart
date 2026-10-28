@@ -769,7 +769,15 @@ class CodegenLoader extends AssetLoader{
   "notification_student_removed": "Student removed",
   "membership_joined_on": "Joined on",
   "membership_left_on": "Withdrawn on",
-  "ui_recorded_by": "Recorded by"
+  "ui_recorded_by": "Recorded by",
+  "billing_mode": "Billing mode",
+  "billing_mode_monthly": "Monthly",
+  "billing_mode_per_session": "Per session",
+  "billing_price": "Price",
+  "billing_session_summary": "Session billing",
+  "billing_settlement_required": "Paid amount needs manual settlement",
+  "billing_charged": "Issued amount",
+  "billing_paid": "Paid"
 };
 static const Map<String,dynamic> _ar = {
   "secretary_phone_missing": "رقم الهاتف غير مضاف",
@@ -1526,7 +1534,15 @@ static const Map<String,dynamic> _ar = {
   "notification_student_removed": "تم حذف طالب",
   "membership_joined_on": "تاريخ الانضمام",
   "membership_left_on": "تاريخ الانسحاب",
-  "ui_recorded_by": "سجّل بواسطة"
+  "ui_recorded_by": "سجّل بواسطة",
+  "billing_mode": "نظام الحساب",
+  "billing_mode_monthly": "بالشهر",
+  "billing_mode_per_session": "بالحصة",
+  "billing_price": "السعر",
+  "billing_session_summary": "مدفوعات الحصة",
+  "billing_settlement_required": "مبلغ مدفوع يحتاج تسوية يدوية",
+  "billing_charged": "المبلغ المسجل",
+  "billing_paid": "المدفوع"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": _en, "ar": _ar};
 }

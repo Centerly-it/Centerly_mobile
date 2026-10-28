@@ -19,6 +19,11 @@ class LiveInvoiceSummary extends StatelessWidget {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        if (invoice.settlementRequired)
+          Text(
+            'billing_settlement_required'.tr(),
+            style: AppTextStyles.bodyMedium,
+          ),
         Wrap(
           alignment: WrapAlignment.spaceBetween,
           spacing: AppSize.s12,

@@ -1,0 +1,103 @@
+// Real disposable PostgreSQL; never hosted fixtures.
+import assert from 'node:assert/strict';
+import {randomUUID,createHash} from 'node:crypto';
+import {readFile} from 'node:fs/promises';
+import {startPostgres} from './postgres.mjs';
+const pg=await startPostgres({through:"202610270002"});let checks=0;
+const secretary='20000000-0000-0000-0000-000000000001',teacher='10000000-0000-0000-0000-000000000001',student='30000000-0000-0000-0000-000000000001';
+const scalar=async(c,s,p=[])=>Object.values((await c.query(s,p)).rows[0])[0];
+const eq=(a,b)=>{assert.deepEqual(a,b);checks++;};
+const deny=async(p,pattern)=>{await assert.rejects(p,pattern);checks++;};
+try{
+ const a=await pg.connect(secretary),b=await pg.connect(secretary),t=await pg.connect(teacher),foreign=await pg.connect('20000000-0000-0000-0000-000000000002');
+ const policies=await scalar(pg.admin,"select jsonb_agg(to_jsonb(p) order by tablename,policyname) from pg_policies p where schemaname='public'");
+ const privateGrantsSQL="select jsonb_agg(p.oid::regprocedure::text order by p.oid::regprocedure::text) from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='private' and has_function_privilege('authenticated',p.oid,'execute')";
+ const baselinePrivateGrants=await scalar(pg.admin,privateGrantsSQL);
+ const body=await readFile(new URL('../proposals/202610280001_group_billing_modes.sql',import.meta.url),'utf8');await pg.admin.query(body);
+ eq(await scalar(pg.admin,"select jsonb_agg(to_jsonb(p) order by tablename,policyname) from pg_policies p where schemaname='public'"),policies);
+ const group=randomUUID();await a.query("select public.secretary_create_billing_group($1,'BILL-SESSION','Math','per_session',50,20,array[1],'15:00','16:00')",[group]);checks++;
+ await a.query("select public.secretary_create_billing_group($1,'BILL-SESSION','Math','per_session',50,20,array[1],'15:00','16:00')",[group]);eq(await scalar(pg.admin,'select count(*)::int from public.groups where id=$1',[group]),1);
+ await deny(t.query("select public.secretary_create_billing_group($1,'BILL','Math','per_session',50,0,array[1],'15:00','16:00')",[randomUUID()]),/FORBIDDEN_ROLE/);
+ await a.query('select public.secretary_enroll($1,$2)',[group,student]);
+ eq(await scalar(pg.admin,"select count(*)::int from public.invoices where group_id=$1 and billing_origin='session_group_materials'",[group]),1);
+ eq(await scalar(pg.admin,'select count(*)::int from public.invoices where group_id=$1 and billing_period_start is not null',[group]),0);
+ const other=randomUUID();await a.query("select public.secretary_create_student($1,$2,'Billing second',null,null,null)",[other,group]);
+ const session=randomUUID();const day=await scalar(pg.admin,"select ((now() at time zone 'Africa/Cairo')::date+1)::text");
+ await a.query("select public.secretary_create_session($1,$2,$3,'15:00','16:00',0)",[session,group,day]);
+ eq(await scalar(pg.admin,'select fee_egp::text from public.sessions where id=$1',[session]),'50.00');
+ eq(await scalar(pg.admin,"select count(*)::int from public.invoices where session_id=$1 and billing_origin='group_session'",[session]),2);
+ const initial=await scalar(a,'select public.get_session_billing($1)',[session]);eq(initial.rows.length,2);eq(initial.rows[0].amount_egp,'50.00');
+ await deny(foreign.query('select public.get_session_billing($1)',[session]),/NOT_FOUND/);
+ await deny(a.query("update public.groups set billing_mode='monthly' where id=$1",[group]),/CONFLICT/);
+ await deny(a.query('update public.groups set session_fee_egp=75 where id=$1',[group]),/CONFLICT/);await a.query('select public.secretary_set_session_tariff($1,75,50,$2)',[group,randomUUID()]);eq(await scalar(pg.admin,'select fee_egp::text from public.sessions where id=$1',[session]),'50.00');
+ const att=(await pg.admin.query('select student_id,updated_at::text from public.attendance where session_id=$1',[session])).rows;
+ for(const row of att)await a.query("select public.secretary_set_attendance($1,$2,$3,$4,null)",[session,row.student_id,row.student_id===student?'present':'absent',row.updated_at]);
+ const before=await scalar(a,'select public.get_session_billing($1)',[session]);
+ await deny(a.query('select public.secretary_review_session_billing($1,$2,$3)',[session,initial.version,randomUUID()]),/CONFLICT/);
+ const request=randomUUID();const reviewed=await scalar(a,'select public.secretary_review_session_billing($1,$2,$3)',[session,before.version,request]);eq(reviewed.rows.find(r=>r.student_id===student).amount_egp,'50.00');eq(reviewed.rows.find(r=>r.student_id===other).amount_egp,'0.00');
+ eq(await scalar(b,'select public.secretary_review_session_billing($1,$2,$3)',[session,before.version,request]),reviewed);
+ eq((await scalar(t,'select public.get_session_billing($1)',[session])).version,reviewed.version);
+ await deny(t.query('select public.secretary_review_session_billing($1,$2,$3)',[session,reviewed.version,randomUUID()]),/FORBIDDEN_ROLE/);
+ const invoice=reviewed.rows.find(r=>r.student_id===student).invoice_id;
+ const paymentKey=randomUUID();const payment=await scalar(a,"select public.record_payment($1,20,'cash',$2)",[invoice,paymentKey]);
+ const currentAtt=await scalar(pg.admin,'select updated_at::text from public.attendance where session_id=$1 and student_id=$2',[session,student]);await a.query("select public.secretary_set_attendance($1,$2,'excused',$3,null)",[session,student,currentAtt]);
+ const paidBefore=await scalar(a,'select public.get_session_billing($1)',[session]);const result=await scalar(a,'select public.secretary_review_session_billing($1,$2,$3)',[session,paidBefore.version,randomUUID()]);
+ const pending=result.rows.find(r=>r.student_id===student);eq(pending.amount_egp,'20.00');eq(pending.paid_egp,'20.00');eq(pending.attendance_settlement_required,true);eq(pending.attendance_status,'excused');
+ await deny(a.query("select public.record_payment($1,1,'cash',$2)",[invoice,randomUUID()]),/BILLING_SETTLEMENT_REQUIRED/);
+ eq(await scalar(a,"select public.record_payment($1,20,'cash',$2)",[invoice,paymentKey]),payment);
+ await a.query("select public.secretary_edit_finance('payment',$1,10,20,$2,null,'cash')",[payment,randomUUID()]);
+ let pendingState=await scalar(a,'select public.get_session_billing($1)',[session]);eq(pendingState.rows.find(r=>r.student_id===student).paid_egp,'10.00');eq(pendingState.rows.find(r=>r.student_id===student).amount_egp,'10.00');
+ const remainingPayment=await scalar(pg.admin,'select id from public.payments p where invoice_id=$1 and reversal_of is null and not exists(select 1 from public.payments r where r.reversal_of=p.id)',[invoice]);
+ await a.query("select public.secretary_edit_finance('payment',$1,0,10,$2,null,'cash')",[remainingPayment,randomUUID()]);
+ pendingState=await scalar(a,'select public.get_session_billing($1)',[session]);eq(pendingState.rows.find(r=>r.student_id===student).amount_egp,'0.00');eq(pendingState.rows.find(r=>r.student_id===student).attendance_settlement_required,false);
+ eq(await scalar(pg.admin,'select count(*)::int from public.payments where invoice_id=$1',[invoice]),4);
+ // Monthly control keeps its normal initial monthly + materials invoice.
+ const monthly=randomUUID();await a.query("select public.secretary_create_billing_group($1,'BILL-MONTH','Math','monthly',100,20,array[2],'15:00','16:00')",[monthly]);await a.query('select public.secretary_enroll($1,$2)',[monthly,student]);
+ eq(await scalar(pg.admin,'select amount_egp::text from public.invoices where group_id=$1 and billing_period_start is not null',[monthly]),'120.00');
+ // Concurrent manual creation remains one invoice per student/session.
+ const retryId=randomUUID();await Promise.all([a,b].map(c=>c.query("select public.secretary_create_session($1,$2,$3,'17:00','18:00',0)",[retryId,group,day])));eq(await scalar(pg.admin,'select count(*)::int from public.invoices where session_id=$1',[retryId]),2);
+ // Generated sessions charge from creation; reruns preserve price/invoice uniqueness.
+ const nextMonday=await scalar(pg.admin,"select ((now() at time zone 'Africa/Cairo')::date + ((8-extract(dow from now() at time zone 'Africa/Cairo')::int)%7))::text");
+ await a.query('select public.generate_sessions($1,$1)',[nextMonday]);await a.query('select public.generate_sessions($1,$1)',[nextMonday]);
+ const generated=await scalar(pg.admin,"select id from public.sessions where group_id=$1 and local_date=$2 and schedule_id is not null",[group,nextMonday]);
+ eq(await scalar(pg.admin,'select count(*)::int from public.invoices where session_id=$1',[generated]),2);
+ eq(await scalar(pg.admin,'select fee_egp::text from public.sessions where id=$1',[generated]),'75.00');
+ const preview=await scalar(a,'select public.get_session_billing($1)',[generated]);const targetInvoice=preview.rows[0].invoice_id;
+ const race=await Promise.allSettled([a.query('select public.secretary_review_session_billing($1,$2,$3)',[generated,preview.version,randomUUID()]),b.query("select public.record_payment($1,25,'cash',$2)",[targetInvoice,randomUUID()])]);
+ eq(race.filter(r=>r.status==='fulfilled').length,1);assert.ok(race.filter(r=>r.status==='rejected').every(r=>/CONFLICT|VALIDATION_ERROR|BILLING_SETTLEMENT_REQUIRED/.test(r.reason.message)));checks++;
+ await a.query("select public.cancel_session($1,'Billing cancellation')",[generated]);
+ const cancelled=await scalar(a,'select public.get_session_billing($1)',[generated]);eq(cancelled.rows.every(r=>r.target_egp==='0.00'),true);
+ const cancelledFinal=await scalar(a,'select public.secretary_review_session_billing($1,$2,$3)',[generated,cancelled.version,randomUUID()]);eq(cancelledFinal.rows.every(r=>r.amount_egp===r.paid_egp),true);
+ eq(await scalar(pg.admin,'select count(*)::int from public.attendance where session_id=$1',[generated]),2);
+ const teacherBilling=await scalar(t,'select public.get_teacher_session_billing($1)',[generated]);eq(teacherBilling.rows,undefined);eq(teacherBilling.summary.charged_egp,teacherBilling.summary.paid_egp);
+ await deny(a.query('select public.get_teacher_session_billing($1)',[generated]),/FORBIDDEN_ROLE/);
+ // New helpers remain inaccessible, inactive identities remain denied.
+ eq(await scalar(pg.admin,privateGrantsSQL),baselinePrivateGrants);
+ await pg.admin.query("update public.secretaries set status='inactive' where id=$1",[secretary]);
+ await deny(a.query('select public.get_session_billing($1)',[session]),/ACCOUNT_INACTIVE/);
+ await pg.admin.query("update public.secretaries set status='active' where id=$1",[secretary]);
+ await deny(a.query("select public.secretary_set_session_tariff($1,1.001,75,$2)",[group,randomUUID()]),/VALIDATION_ERROR/);
+  await a.query("select public.secretary_archive('students',$1)",[other]);
+ const afterArchive=await scalar(a,'select public.get_session_billing($1)',[retryId]);
+ await a.query('select public.secretary_review_session_billing($1,$2,$3)',[retryId,afterArchive.version,randomUUID()]);
+ eq(await scalar(pg.admin,'select amount_egp::text from public.invoices where session_id=$1 and student_id=$2',[retryId,other]),'0.00');
+ // The historical reversal RPC also serializes and clears manual settlement safely.
+ const reverseSession=randomUUID();await a.query("select public.secretary_create_session($1,$2,$3,'19:00','20:00',0)",[reverseSession,group,day]);
+ const reverseInvoice=await scalar(pg.admin,'select id from public.invoices where session_id=$1 and student_id=$2',[reverseSession,student]);
+ const reversePayment=await scalar(a,"select public.record_payment($1,10,'cash',$2)",[reverseInvoice,randomUUID()]);
+ const reversePreview=await scalar(a,'select public.get_session_billing($1)',[reverseSession]);await a.query('select public.secretary_review_session_billing($1,$2,$3)',[reverseSession,reversePreview.version,randomUUID()]);
+ await a.query("select public.reverse_payment($1,'Explicit manual settlement')",[reversePayment]);
+ eq(await scalar(pg.admin,'select amount_egp::text from public.invoices where id=$1',[reverseInvoice]),'0.00');eq(await scalar(pg.admin,'select attendance_settlement_required from public.invoices where id=$1',[reverseInvoice]),false);
+ // Bounded cohort: create once, generate 3 daily sessions, late enrollment adds only 3 bills.
+ const scaleGroup=randomUUID();await a.query("select public.secretary_create_billing_group($1,'BILL-SCALE','Math','per_session',0.01,0,array[0,1,2,3,4,5,6],'06:00','07:00')",[scaleGroup]);
+ for(let n=0;n<100;n++)await a.query("select public.secretary_create_student($1,$2,$3,null,null,null)",[randomUUID(),scaleGroup,'BILL-SCALE-'+n]);
+ const from=await scalar(pg.admin,"select ((now() at time zone 'Africa/Cairo')::date+20)::text"),to=await scalar(pg.admin,'select ($1::date+2)::text',[from]);
+ const started=Date.now();await a.query('select public.generate_sessions($1,$2)',[from,to]);const generationMs=Date.now()-started;
+ eq(await scalar(pg.admin,'select count(*)::int from public.invoices where group_id=$1',[scaleGroup]),300);
+ await a.query("select public.secretary_create_student($1,$2,'BILL-SCALE-LATE',null,null,null)",[randomUUID(),scaleGroup]);
+ eq(await scalar(pg.admin,'select count(*)::int from public.invoices where group_id=$1',[scaleGroup]),303);
+ eq(await scalar(pg.admin,'select sum(amount_egp)::numeric(20,2)::text from public.invoices where group_id=$1',[scaleGroup]),'3.03');
+ await a.query('select public.generate_sessions($1,$2)',[from,to]);eq(await scalar(pg.admin,'select count(*)::int from public.invoices where group_id=$1',[scaleGroup]),303);
+ eq(await scalar(pg.admin,'select count(*)::int from public.invoices where group_id=$1 and billing_period_start is not null',[scaleGroup]),0);
+ console.log(JSON.stringify({pass:true,checks,baseline:39,generationMs,candidateSha256:createHash('sha256').update(body).digest('hex'),hosted:false}));
+}finally{await pg.close();}

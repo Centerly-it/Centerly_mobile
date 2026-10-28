@@ -1,3 +1,4 @@
+import 'session_billing_panel.dart';
 import 'session_attendance_row.dart';
 import '../../../core/widgets/content_skeleton.dart';
 import 'package:easy_localization/easy_localization.dart';

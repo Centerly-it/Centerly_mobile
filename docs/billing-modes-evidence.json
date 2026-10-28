@@ -1,0 +1,55 @@
+{
+  "candidate": "202610280001_group_billing_modes.sql",
+  "sha256": "60b0f251ef16a91b1da737cac8fc5ffd37b13c5e74d3a14533c2baa421e45702",
+  "deployed": false,
+  "hostedBusinessWrites": 0,
+  "preflight": [
+    {
+      "pass": true,
+      "at": "2026-10-28T12:04:30.605Z",
+      "ref": "yfeubomyglmhuwizaqoj",
+      "baselineMigrations": 39,
+      "functions": 87,
+      "tables": 18,
+      "policies": 30,
+      "triggers": 30,
+      "candidate": "202610280001_group_billing_modes.sql",
+      "candidateSha256": "60b0f251ef16a91b1da737cac8fc5ffd37b13c5e74d3a14533c2baa421e45702",
+      "dryRunOnly": [
+        "202610280001_group_billing_modes.sql"
+      ],
+      "hostedBusinessWrites": 0,
+      "deployed": false
+    },
+    {
+      "pass": true,
+      "at": "2026-10-28T12:04:42.297Z",
+      "ref": "ohhwccwwwxfmwpfypfyf",
+      "baselineMigrations": 39,
+      "functions": 87,
+      "tables": 18,
+      "policies": 30,
+      "triggers": 30,
+      "candidate": "202610280001_group_billing_modes.sql",
+      "candidateSha256": "60b0f251ef16a91b1da737cac8fc5ffd37b13c5e74d3a14533c2baa421e45702",
+      "dryRunOnly": [
+        "202610280001_group_billing_modes.sql"
+      ],
+      "hostedBusinessWrites": 0,
+      "deployed": false
+    }
+  ],
+  "local": {
+    "nativeBillingAssertions": 54,
+    "baselineWithCandidateAssertions": 90,
+    "webUnitTests": 82,
+    "browserCases": 34,
+    "flutterTestsPassed": 325,
+    "flutterTestsSkipped": 2,
+    "flutterDebugBuilds": [
+      "dev",
+      "prod"
+    ],
+    "hostedAcceptance": false
+  }
+}

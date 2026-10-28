@@ -1,3 +1,5 @@
+import '../../../core/format/money_egp.dart';
+
 class GroupRecord {
   const GroupRecord({
     required this.id,
@@ -10,9 +12,13 @@ class GroupRecord {
     required this.roster,
     required this.schedules,
     required this.schedulesTruncated,
+    this.billingMode = 'monthly',
+    this.billingPrice,
   });
   final String id, name, subject, gradeId, gradeName;
   final int capacity, students;
+  final String billingMode;
+  final String? billingPrice;
   final List<({String id, String name})> roster;
   final List<GroupSchedulePreview> schedules;
   final bool schedulesTruncated;
@@ -22,7 +28,18 @@ class GroupRecord {
     if (capacity < 1 || students < 0) {
       throw const FormatException('Invalid group counts');
     }
+    final mode = json['billing_mode'] as String? ?? 'monthly';
+    if (!{'monthly', 'per_session'}.contains(mode)) {
+      throw const FormatException('Invalid billing mode');
+    }
+    if (mode == 'per_session') {
+      MoneyEgp.parse(json['session_fee_egp']);
+    }
     return GroupRecord(
+      billingMode: mode,
+      billingPrice:
+          json[mode == 'per_session' ? 'session_fee_egp' : 'monthly_fee_egp']
+              ?.toString(),
       id: json['id'] as String,
       name: json['name'] as String,
       subject: json['subject_name'] as String,
