@@ -1,6 +1,6 @@
-## Pending billing-mode extension — migration 40 is NOT deployed
+## Billing modes — deployed migration40
 
-Canonical proposal `supabase/proposals/202610280001_group_billing_modes.sql` supports monthly/per-session groups without altering existing monthly history. See [BILLING_MODES_RELEASE.md](BILLING_MODES_RELEASE.md) and billing-modes-evidence.json for exact hash, API behavior, tests, approval and activation gates. Manifest remains 39 until deployment verification. No Teacher write permissions are added.
+Canonical `202610280001_group_billing_modes.sql` deployed sequentially and verified on dev/prod after exact-hash approval. All40 bodies and full catalog match; Teacher permissions/RLS/original business values unchanged. Public client templates enable verified billing reads for next run; no new APK built. Valid production-account/hosted mutation/device acceptance remains pending. See [BILLING_MODES_RELEASE.md](BILLING_MODES_RELEASE.md) and billing-modes-evidence.json.
 
 ## Separate hosted environments — 27 October 2026
 

@@ -1,12 +1,12 @@
 {
   "candidate": "202610280001_group_billing_modes.sql",
   "sha256": "60b0f251ef16a91b1da737cac8fc5ffd37b13c5e74d3a14533c2baa421e45702",
-  "deployed": false,
+  "deployed": true,
   "hostedBusinessWrites": 0,
   "preflight": [
     {
       "pass": true,
-      "at": "2026-10-28T12:04:30.605Z",
+      "at": "2026-10-28T12:09:45.115Z",
       "ref": "yfeubomyglmhuwizaqoj",
       "baselineMigrations": 39,
       "functions": 87,
@@ -15,15 +15,13 @@
       "triggers": 30,
       "candidate": "202610280001_group_billing_modes.sql",
       "candidateSha256": "60b0f251ef16a91b1da737cac8fc5ffd37b13c5e74d3a14533c2baa421e45702",
-      "dryRunOnly": [
-        "202610280001_group_billing_modes.sql"
-      ],
+      "dryRunOnly": ["202610280001_group_billing_modes.sql"],
       "hostedBusinessWrites": 0,
       "deployed": false
     },
     {
       "pass": true,
-      "at": "2026-10-28T12:04:42.297Z",
+      "at": "2026-10-28T12:11:34.861Z",
       "ref": "ohhwccwwwxfmwpfypfyf",
       "baselineMigrations": 39,
       "functions": 87,
@@ -32,9 +30,7 @@
       "triggers": 30,
       "candidate": "202610280001_group_billing_modes.sql",
       "candidateSha256": "60b0f251ef16a91b1da737cac8fc5ffd37b13c5e74d3a14533c2baa421e45702",
-      "dryRunOnly": [
-        "202610280001_group_billing_modes.sql"
-      ],
+      "dryRunOnly": ["202610280001_group_billing_modes.sql"],
       "hostedBusinessWrites": 0,
       "deployed": false
     }
@@ -46,10 +42,76 @@
     "browserCases": 34,
     "flutterTestsPassed": 325,
     "flutterTestsSkipped": 2,
-    "flutterDebugBuilds": [
-      "dev",
-      "prod"
-    ],
+    "flutterDebugBuilds": ["dev", "prod"],
     "hostedAcceptance": false
-  }
+  },
+  "deployedAt": "2026-10-28",
+  "postflight": [
+    {
+      "pass": true,
+      "at": "2026-10-28T12:10:38.820Z",
+      "ref": "yfeubomyglmhuwizaqoj",
+      "migrations": 40,
+      "exactBodies": 40,
+      "functions": 119,
+      "tables": 18,
+      "policies": 30,
+      "triggers": 35,
+      "candidate": "202610280001_group_billing_modes.sql",
+      "candidateSha256": "60b0f251ef16a91b1da737cac8fc5ffd37b13c5e74d3a14533c2baa421e45702",
+      "fullCatalogMatched": true,
+      "existingBusinessValuesUnchanged": true,
+      "tablePermissionsAndRlsUnchanged": true,
+      "hostedBusinessWrites": 0
+    },
+    {
+      "pass": true,
+      "at": "2026-10-28T12:11:59.412Z",
+      "ref": "ohhwccwwwxfmwpfypfyf",
+      "migrations": 40,
+      "exactBodies": 40,
+      "functions": 119,
+      "tables": 18,
+      "policies": 30,
+      "triggers": 35,
+      "candidate": "202610280001_group_billing_modes.sql",
+      "candidateSha256": "60b0f251ef16a91b1da737cac8fc5ffd37b13c5e74d3a14533c2baa421e45702",
+      "fullCatalogMatched": true,
+      "existingBusinessValuesUnchanged": true,
+      "tablePermissionsAndRlsUnchanged": true,
+      "hostedBusinessWrites": 0
+    }
+  ],
+  "readOnlyAcceptance": {
+    "at": "2026-10-28T12:12:16.851Z",
+    "ref": "yfeubomyglmhuwizaqoj",
+    "checks": [
+      "existing Auth/profile secretary-a",
+      "existing Auth/profile secretary-b",
+      "existing Auth/profile teacher-a",
+      "existing Auth/profile teacher-b",
+      "Secretary read students",
+      "Secretary read groups",
+      "Secretary read sessions",
+      "Secretary read attendance",
+      "Secretary finance read",
+      "deployed billing read existing monthly session",
+      "Teacher server billing summary",
+      "foreign tenant billing denied",
+      "Secretary denied Teacher-only summary",
+      "Teacher denied Secretary finance",
+      "dev anonymous denied get_current_profile",
+      "dev anonymous denied get_session_billing",
+      "dev anonymous denied get_teacher_session_billing",
+      "prod anonymous denied get_current_profile",
+      "prod anonymous denied get_session_billing",
+      "prod anonymous denied get_teacher_session_billing"
+    ],
+    "unavailable": [],
+    "hostedBusinessWrites": 0,
+    "pass": true
+  },
+  "productionAccounts": 0,
+  "newApkBuiltThisRelease": false,
+  "websitePublication": "pending"
 }
