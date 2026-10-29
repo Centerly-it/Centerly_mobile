@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-29",
+  "purpose": "Owner-requested signed production upgrade trial; version-only change",
+  "sourceCommit": "1fcfe37",
+  "version": "1.0.1",
+  "build": 2,
+  "previousBuild": 1,
+  "packageId": "com.centerly.teacher",
+  "signerSha256": "00ce36634be7cd72ec0feab2c068e0b9ed35b468580c3a2de3da539884eb2b4f",
+  "apkSha256": "96b23ea3c96ef3d99cc340461b8c40896a87ec07d46cf534d7e90284f9ece37a",
+  "size": 73377272,
+  "url": "https://github.com/Centerly-it/Centerly-releases/releases/download/v1.0.1-build.2/centerly-1.0.1-2.apk",
+  "anonymousPublicApkHashVerified": true,
+  "analyzer": "passed",
+  "flutter": {
+    "passed": 354,
+    "conditionalSkipped": 2
+  },
+  "androidJvm": {
+    "passed": 8,
+    "task": "successful; existing tests up-to-date"
+  },
+  "scan": {
+    "apkEntries": 550,
+    "credentialMatches": 0,
+    "previewAssets": 0
+  },
+  "productionPolicy": {
+    "latest": 2,
+    "minimum": 1,
+    "optional": true
+  },
+  "policyDeployment": {
+    "url": "https://ad8bd195.centerly-secretary.pages.dev",
+    "productionUrl": "https://centerly-secretary.pages.dev",
+    "sourceCommit": "17562632c3aa9a4a8069d1c0dbb43b945b04881f",
+    "verifiedAt": "2026-10-29T12:40:43.441Z",
+    "policyMatched": true,
+    "devDisabled": true,
+    "noStore": true,
+    "entryAssetsMatched": 6
+  },
+  "ownerReportsPreviousVersionInstalled": true,
+  "physicalUpgradeValidated": false,
+  "backendMutations": 0,
+  "authChanges": 0,
+  "deviceInstalledByAgent": false,
+  "websiteTests": 85,
+  "websiteBuild": "passed; production configuration and public artifact scan passed"
+}

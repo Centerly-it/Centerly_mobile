@@ -25,8 +25,8 @@ The former shared-dev-as-production decision was replaced on 27 October by this 
 
 - Public Secretary site: https://centerly-secretary.pages.dev — targets **prod**. Dev synthetic accounts belong on the local dev site, not this public login.
 - Cloudflare Pages project `centerly-secretary`, production branch `main`, **direct upload**. Git push alone does not deploy.
-- Current signed prod APK: **1.0.0+1**, application ID **com.centerly.teacher**. Download: https://github.com/Centerly-it/Centerly-releases/releases/download/v1.0.0-build.1/centerly-1.0.0-1.apk . SHA256 `562d36ed8700132bdc00aa04e7e20c8f1523b4906c7e2226e0d47d52ad94630e`.
-- Last update-policy site deployment `095cd122` matched live JSON/no-store headers/build identity/six entry assets. Subsequent docs-only commits do not imply new binaries or web deployments.
+- Current signed prod APK: **1.0.1+2**, application ID **com.centerly.teacher**. Download: https://github.com/Centerly-it/Centerly-releases/releases/download/v1.0.1-build.2/centerly-1.0.1-2.apk . SHA256 `96b23ea3c96ef3d99cc340461b8c40896a87ec07d46cf534d7e90284f9ece37a`. Previous signed1.0.0+1 remains available for the owner's upgrade test.
+- Last update-policy site deployment `ad8bd195` (2026-10-29, source1756263) matched live latest2/minimum1 JSON/no-store headers/build identity/six entry assets. Subsequent docs-only commits do not imply new binaries or web deployments.
 
 Prod was created empty without copying test accounts/business rows. Migration-40 evidence still reported zero production accounts/rows. **Do not assume it remains empty after owner provisioning without a read-only check.** A downloadable prod APK does not create real accounts or prove real-data acceptance.
 
@@ -84,7 +84,7 @@ Subscription suspension is **manual admin**, not automatic monthly expiry. Chang
 
 ## 6. Signed APK updates — critical continuity
 
-Full runbook: `docs/ANDROID_UPDATES.md`. Secretary hosts `/updates/android-prod.json` and `/updates/android-dev.json` with no-store. Prod initially latest=1/minimum=1; dev disabled. First APK does not request an update to itself. No higher-version forced rollout or real-device upgrade was claimed.
+Full runbook: `docs/ANDROID_UPDATES.md`. Secretary hosts `/updates/android-prod.json` and `/updates/android-dev.json` with no-store. Version1.0.1+2 was published on2026-10-29 for the owner-requested upgrade test; target prod policy latest=2/minimum=1 (optional), dev disabled. Public APK bytes/signing were verified. Policy deployment verification is recorded in docs/android-update-build2.json. Do not raise the minimum or claim a successful physical upgrade until the owner confirms it.
 
 `lib/features/updates/` checks startup/resume with a 15-minute cooldown. A known required cached policy blocks offline; an unknown policy-service outage alone does not block. Optional offers allow Later; mandatory blocks Back/outside dismissal. User initiates bounded private-cache Range download, with safe restart when needed. Dart/native SHA256/size checks, package, signer, exact advertised/higher build and SDK checks precede the Android installer. User still confirms installation and may need Install Unknown Apps permission. Installer launch is NOT success proof; cancellation retains retry/gate. No update-related sign-out or data reset.
 

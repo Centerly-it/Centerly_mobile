@@ -1,5 +1,7 @@
 # Direct APK updates — owner-approved distribution
 
+Current owner trial (2026-10-29): signed1.0.1+2 is published with the original package/signing key; policy latest2/minimum1 offers an optional upgrade from1.0.0+1. See android-update-build2.json for deployment evidence. The owner confirmed the old app runs on their phone; upgrade/preserved-login acceptance is still pending. Do not assert owner-tested or raise the minimum before confirmation.
+
 Approved 2026-10-28: production application ID `com.centerly.teacher`, first teacher distribution, a new fixed signing key, and a separate public binary-only GitHub repository. Production is `Centerly`; development remains a separate `.dev` app. Neither signing material nor development data is copied into the public repository.
 
 ## Teacher experience

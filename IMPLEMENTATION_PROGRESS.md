@@ -1,5 +1,7 @@
 # Current checkpoint — 2026-10-28
 
+Android upgrade trial — 2026-10-29: owner reports installing/opening signed1.0.0+1, and authorized a new version. Signed1.0.1+2 is published with the same package/key, verified anonymous APK hash and clean550-entry scan. Analyzer/354 Flutter tests passed (2 conditional skips); Android JVM task successful (8 cached tests). Policy latest2/minimum1 is optional; live publication evidence belongs in docs/android-update-build2.json. Owner's actual upgrade/preserved-login result remains pending. No backend/account/data changes for this release.
+
 Owner provisioning update — 2026-10-29: explicit owner request authorized one production teacher account for Release/update testing. Auth account and active teacher/subscription profile were created; actual password Auth and tenant-scoped get_current_profile passed; verification session signed out. No secretary or business fixtures were created. Private identity registry remains ignored in Teacher .env.production-owner-account.json; do not duplicate credentials into docs. Physical-device/update acceptance remains pending.
 
 Read [CODEX_HANDOFF.md](CODEX_HANDOFF.md) for both projects. Old verbose ledgers remain in Git; historical acceptance/reset commands are not new authorization.
@@ -8,7 +10,7 @@ Read [CODEX_HANDOFF.md](CODEX_HANDOFF.md) for both projects. Old verbose ledgers
 - Secretary website targets prod; synthetic testing is local dev at 127.0.0.1:5173.
 - Monthly/per-session billing migration 40 deployed dev/prod; hosted per-session write acceptance and real onboarding remain owner actions.
 - Immediate secretary stop/reactivate, manual subscription suspension/sign-out, archived history, cold-start Home/background retention, support, approved icon/white splash, safe diagnostics and native flavors implemented.
-- Signed APK 1.0.0+1 / com.centerly.teacher published; prod policy latest=1/minimum=1, dev disabled. Signer pinned; private backup ignored. Never regenerate on another computer.
+- Signed APK 1.0.1+2 / com.centerly.teacher published; prod policy latest=2/minimum=1 (optional), dev disabled. Deployment ad8bd195 verified live with six matching assets. Signer pinned; private backup ignored. Never regenerate on another computer.
 - Updater checkpoint: 354 Flutter passed / 2 conditional skipped; analyzer clean; 8 JVM tests; APK signer/credential scan and anonymous public hash passed; website 82 baseline + 3 policy tests; live policy/cache/build/six assets matched. Dated evidence, not device/hosted mutation acceptance.
 - Owner still needs physical upgrade acceptance, secure off-computer signing backup, authorized onboarding and provider recovery/monitoring/notice acceptance. See docs/OPERATIONS_AND_RECOVERY.md.
 - This cleanup changes docs only, consolidates current knowledge and retains source-dependent evidence. Recovery/validation map: docs/documentation-cleanup.json. No app/backend/account/fixture/device changes.
