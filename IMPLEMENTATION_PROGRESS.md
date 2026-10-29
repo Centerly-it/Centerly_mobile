@@ -1,5 +1,7 @@
 # Current checkpoint — 2026-10-28
 
+Owner acceptance — 2026-10-29: after the published build2 upgrade trial, the owner approved the result in chat. This is owner-reported acceptance of the normal update experience; the agent did not operate the phone or independently verify individual preserved-login, permission, cancellation, network or storage scenarios. Keep latest2/minimum1 optional; no mandatory-policy increase was requested. Documentation only for this follow-up.
+
 Android upgrade trial — 2026-10-29: owner reports installing/opening signed1.0.0+1, and authorized a new version. Signed1.0.1+2 is published with the same package/key, verified anonymous APK hash and clean550-entry scan. Analyzer/354 Flutter tests passed (2 conditional skips); Android JVM task successful (8 cached tests). Policy latest2/minimum1 is optional; live publication evidence belongs in docs/android-update-build2.json. Owner's actual upgrade/preserved-login result remains pending. No backend/account/data changes for this release.
 
 Owner provisioning update — 2026-10-29: explicit owner request authorized one production teacher account for Release/update testing. Auth account and active teacher/subscription profile were created; actual password Auth and tenant-scoped get_current_profile passed; verification session signed out. No secretary or business fixtures were created. Private identity registry remains ignored in Teacher .env.production-owner-account.json; do not duplicate credentials into docs. Physical-device/update acceptance remains pending.

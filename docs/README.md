@@ -8,7 +8,7 @@ Start with [CODEX_HANDOFF.md](../CODEX_HANDOFF.md), [AGENTS.md](../AGENTS.md) an
 - [Shared backend contract](SHARED_BACKEND_CONTRACT.md): schema40, tenant authorization and financial invariants.
 - [Operations and recovery](OPERATIONS_AND_RECOVERY.md): safe recovery and remaining owner actions.
 - [Android updates](ANDROID_UPDATES.md): signed release and update policy.
-- [Build2 upgrade-trial evidence](android-update-build2.json): current optional update; owner device result remains pending.
+- [Build2 upgrade-trial evidence](android-update-build2.json): optional update accepted by the owner; individual edge-case/device checks remain separate.
 - [Billing modes](BILLING_MODES_RELEASE.md): monthly/per-session release evidence.
 - [Subscription administration](SUBSCRIPTION_ADMIN.md): manual account access controls.
 - [Privacy/support draft](PRIVACY_SUPPORT_DRAFT.md): draft, not approved launch policy.

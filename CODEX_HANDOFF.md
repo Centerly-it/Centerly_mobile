@@ -84,6 +84,8 @@ Subscription suspension is **manual admin**, not automatic monthly expiry. Chang
 
 ## 6. Signed APK updates — critical continuity
 
+Owner acceptance (2026-10-29): the owner approved the build2 upgrade experience after the trial. Record this as owner-reported acceptance, not agent-observed/device-instrumented testing. Individual preserved-login, cancellation, weak-network and storage scenarios were not separately reported. Current policy remains latest2/minimum1 optional; this approval does not request a mandatory threshold increase.
+
 Full runbook: `docs/ANDROID_UPDATES.md`. Secretary hosts `/updates/android-prod.json` and `/updates/android-dev.json` with no-store. Version1.0.1+2 was published on2026-10-29 for the owner-requested upgrade test; target prod policy latest=2/minimum=1 (optional), dev disabled. Public APK bytes/signing were verified. Policy deployment verification is recorded in docs/android-update-build2.json. Do not raise the minimum or claim a successful physical upgrade until the owner confirms it.
 
 `lib/features/updates/` checks startup/resume with a 15-minute cooldown. A known required cached policy blocks offline; an unknown policy-service outage alone does not block. Optional offers allow Later; mandatory blocks Back/outside dismissal. User initiates bounded private-cache Range download, with safe restart when needed. Dart/native SHA256/size checks, package, signer, exact advertised/higher build and SDK checks precede the Android installer. User still confirms installation and may need Install Unknown Apps permission. Installer launch is NOT success proof; cancellation retains retry/gate. No update-related sign-out or data reset.
