@@ -32,6 +32,8 @@ Prod was created empty without copying test accounts/business rows. Migration-40
 
 ## 3. Owner working preferences and authorization boundaries
 
+Production account update (2026-10-29): the owner explicitly authorized one Teacher account for Release/update testing. Auth creation plus an active Teacher/subscription profile completed and actual password Auth/get_current_profile verified the same teacher/tenant. The verification session was signed out. Private identity registry: Teacher ignored .env.production-owner-account.json. No secretary/business fixtures were created. Earlier empty-production observations are historical; do not recreate/reset this account or assume production is empty. Physical-device/update acceptance remains pending.
+
 - Use concise Egyptian Arabic, implement requested work and verify it. Give meaningful progress on long tasks. Ask only for a material missing decision/authorization, not repeated routine confirmation.
 - Preserve clean Arabic-first/RTL, Cairo typography and blue/green Centerly identity. Reuse existing widgets/helpers/architecture. Do not redesign or add optional features unprompted. Localize AR/EN. Secretary instructions use masculine Arabic: اختر، افتح، تقدر، راجع. Synthetic examples use clear Arabic names أحمد/محمد/عبد الرحمن.
 - Standing delivery instruction: commit/push validated own changes to **main** in affected repositories; deploy actual website/runtime/public-policy changes to the existing Pages project after checks. Docs-only cleanup does not require an unchanged website redeploy.

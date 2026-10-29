@@ -1,5 +1,7 @@
 # Current checkpoint — 2026-10-28
 
+Owner provisioning update — 2026-10-29: explicit owner request authorized one production teacher account for Release/update testing. Auth account and active teacher/subscription profile were created; actual password Auth and tenant-scoped get_current_profile passed; verification session signed out. No secretary or business fixtures were created. Private identity registry remains ignored in Teacher .env.production-owner-account.json; do not duplicate credentials into docs. Physical-device/update acceptance remains pending.
+
 Read [CODEX_HANDOFF.md](CODEX_HANDOFF.md) for both projects. Old verbose ledgers remain in Git; historical acceptance/reset commands are not new authorization.
 
 - Main in both repositories; Teacher owns 40 deployed immutable migrations through 202610280001. Separate dev/prod refs are in handoff/manifests.
